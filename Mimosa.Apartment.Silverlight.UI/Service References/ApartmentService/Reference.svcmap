@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="26b55121-9865-47ed-b2ee-2853b6a4ee72" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>false</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies>
+      <ReferencedAssembly AssemblyName="Mimosa.Apartment.SL.Common" />
+    </ReferencedAssemblies>
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:49555/Services/ApartmentService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ApartmentService.xsd" MetadataType="Schema" ID="1fbf91e3-b0bf-4ae5-a82e-5e03225dde5e" SourceId="1" SourceUrl="http://localhost:49555/Services/ApartmentService.svc?xsd=xsd0" />
+    <MetadataFile FileName="ApartmentService1.xsd" MetadataType="Schema" ID="3a6c2829-010b-44af-aba5-8d39a5c301d8" SourceId="1" SourceUrl="http://localhost:49555/Services/ApartmentService.svc?xsd=xsd1" />
+    <MetadataFile FileName="ApartmentService2.xsd" MetadataType="Schema" ID="20aa1751-e72b-436b-8bea-5f3a8a9071bb" SourceId="1" SourceUrl="http://localhost:49555/Services/ApartmentService.svc?xsd=xsd2" />
+    <MetadataFile FileName="ApartmentService3.xsd" MetadataType="Schema" ID="c30d324a-c430-4a57-bd51-bcb1663acd2a" SourceId="1" SourceUrl="http://localhost:49555/Services/ApartmentService.svc?xsd=xsd3" />
+    <MetadataFile FileName="ApartmentService.wsdl" MetadataType="Wsdl" ID="c09bcec7-5212-4d07-bcd9-bdbb16e4fbc4" SourceId="1" SourceUrl="http://localhost:49555/Services/ApartmentService.svc?wsdl" />
+    <MetadataFile FileName="ApartmentService1.wsdl" MetadataType="Wsdl" ID="2dc2a3fe-d72e-4926-bc8e-532cac1c5868" SourceId="1" SourceUrl="http://localhost:49555/Services/ApartmentService.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="ApartmentService.disco" MetadataType="Disco" ID="fa6ff840-7af2-4b04-a677-ce44060448a5" SourceId="1" SourceUrl="http://localhost:49555/Services/ApartmentService.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Mimosa.Apartment.Web.UI.ApartmentService" CodeBehind="ApartmentService.svc.cs" %>
