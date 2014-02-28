@@ -9,6 +9,7 @@ using System.Web.Security;
 using System.Web;
 using Mimosa.Apartment.Common;
 using Mimosa.Apartment.Business;
+using Mimosa.Apartment.Web.UI.code;
 
 namespace Mimosa.Apartment.Web.UI
 {
@@ -17,6 +18,7 @@ namespace Mimosa.Apartment.Web.UI
     public class ApartmentService
     {
         #region Common
+
         [OperationContract]
         public string SelectSessionId()
         {
@@ -26,16 +28,53 @@ namespace Mimosa.Apartment.Web.UI
             return result;
         }
 
+
         [OperationContract]
-        public GlobalVariable GetGlobalVariable()
+        public UserLogin GetUserLogin()
         {
-            GlobalVariable result = new GlobalVariable();
+            MembershipUser loginUser = Membership.GetUser();
+            UserLogin settings = new UserLogin();
+            if (loginUser != null)
+            {
+                settings.UserName = loginUser.UserName;
+                settings.UserUserId = Utilities.ToGuid(loginUser.ProviderUserKey);
+                //settings.UserSiteId = SiteMethods.GetSiteIdForEmployee(settings.UserUserId);
+                //settings.UserLicenseKeys = General.ListLicenseKeyByUserId(settings.UserUserId);
 
-            result.AppSettings = GetAppSettings();
-            result.UserLogin = GetUserLogin();
-            result.ApplicationCurrentDateTime = DateTime.Now;
+                OrganisationSettings orgSetting = new OrganisationSettings();
+                settings.UserOrganisationId = Convert.ToInt32(orgSetting.OrganisationId);
 
-            return result;
+                settings.UserOrganisation = ApartmentMethods.GetOrganisation(settings.UserOrganisationId);
+                //settings.UserSite = settings.UserSiteId.HasValue ? SiteMethods.GetSite(settings.UserSiteId.Value) : null;
+
+
+                //settings.ActiveModules = Role.ListActiveModules();
+                settings.AspUser = GetAspUser(settings.UserUserId);
+                //settings.UserEmployeeId = EmployeeMethods.GetEmployeeId(settings.UserUserId);
+
+                //settings.RoleComponentPermissions = SecurityMethods.ListRoleComponentPermissionByUser(settings.UserUserId);
+                //if (!settings.AspUser.OrganisationId.HasValue)
+                //{
+                //    settings.UserRoleAuths = SecurityMethods.ListUserRoleAuth(null, settings.UserUserId, null);
+                //}
+                //else
+                //{
+                //    settings.UserRoleAuths = SecurityMethods.ListUserRoleAuth(settings.UserOrganisationId, settings.UserUserId, null);
+                //}
+
+                //if (settings.UserSite == null && settings.UserRoleAuths != null && settings.UserRoleAuths.Count > 0
+                //    && settings.UserRoleAuths.Count(i => i.SiteId.HasValue) > 0)
+                //{
+                //    settings.UserSiteId = settings.UserRoleAuths.FirstOrDefault(i => i.SiteId.HasValue).SiteId.Value;
+                //    settings.UserSite = SiteMethods.GetSite(settings.UserSiteId.Value);
+                //}
+            }
+            return settings;
+        }
+
+        private bool HasRole(List<UserRoleAuth> userRoleAuths, Guid roleId)
+        {
+            return userRoleAuths != null && userRoleAuths.Count(i => i.RoleId.Equals(roleId)) > 0;
         }
 
         [OperationContract]
@@ -47,34 +86,57 @@ namespace Mimosa.Apartment.Web.UI
         }
 
         [OperationContract]
-        public UserLogin GetUserLogin()
+        public GlobalVariable GetGlobalVariable()
         {
-            MembershipUser loginUser = Membership.GetUser();
-            UserLogin settings = new UserLogin();
-            settings.UserName = loginUser.UserName;
-            settings.UserUserId = Utilities.ToGuid(loginUser.ProviderUserKey);
-            
-            //settings.ActiveModules = Role.ListActiveModules();
-            settings.AspUser = GetAspUser(settings.UserUserId);
-            settings.UserCustomerId = 123; //TODO :
+            GlobalVariable result = new GlobalVariable();
 
-            return settings;
+            result.AppSettings = GetAppSettings();
+            result.UserLogin = GetUserLogin();
+            result.TagVersion = ApartmentMethods.GetLatestTagVersion();
+            //result.Licenses = General.ListLicense(null);
+            //result.UserLogin.UserModuleTypes = new List<ModuleTypes>();           
+
+
+            return result;
         }
+
+        [OperationContract]
+        public int ChangePassword(string oldPassword, string newPassword)
+        {
+            MembershipUser user = Membership.GetUser(HttpContext.Current.User.Identity.Name);
+
+            try
+            {
+                if (user.ChangePassword(oldPassword, newPassword))
+                    return 0; // Password changed
+                else
+                    return 1; // Password change failed. Please re-enter your values and try again
+            }
+            catch
+            {
+                return 3; // An exception occurred. Please re-enter your values and try again
+            }
+        }
+
 
         [OperationContract]
         public AspUser GetAspUser(Guid userId)
         {
-            List<AspUser> result = ApartmentMethods.ListAspUser(null, userId, null);
-            if (result != null && result.Count > 0)
-                return result[0];
-            return null;
+            AspUser result = null;
+            List<AspUser> list = ListAspUser(null, userId, null);
+            if (list != null && list.Count > 0)
+                result = list[0];
+            return result;
+
         }
 
         [OperationContract]
-        public List<AspUser> ListAspUser(int? orgId, Guid? userId, bool? isLegacy)
-        {            
-            return ApartmentMethods.ListAspUser(orgId, userId, isLegacy);
+        public bool DeleteAspUser(AspUser aspUser, long? employeeId)
+        {
+            bool userDeleted = Membership.DeleteUser(aspUser.UserName);            
+            return userDeleted;
         }
+
 
         [OperationContract]
         public AspUser UnlockAspUser(AspUser oldUser)
@@ -209,24 +271,6 @@ namespace Mimosa.Apartment.Web.UI
         }
 
         [OperationContract]
-        public int ChangePassword(string oldPassword, string newPassword)
-        {
-            MembershipUser user = Membership.GetUser(HttpContext.Current.User.Identity.Name);
-
-            try
-            {
-                if (user.ChangePassword(oldPassword, newPassword))
-                    return 0; // Password changed
-                else
-                    return 1; // Password change failed. Please re-enter your values and try again
-            }
-            catch
-            {
-                return 3; // An exception occurred. Please re-enter your values and try again
-            }
-        }
-
-        [OperationContract]
         public List<Country> ListCountry(int? countryId)
         {
             return ApartmentMethods.ListCountry(countryId);
@@ -247,6 +291,40 @@ namespace Mimosa.Apartment.Web.UI
         }
         #endregion
 
+        
+        #region Organisation
+        [OperationContract]
+        public List<Organisation> ListOrganisation(Guid? roleId)
+        {
+            return ApartmentMethods.ListOrganisation(roleId);
+        }
+
+        [OperationContract]
+        public List<AspUser> ListOrgAdminAspUser(int orgId, Guid roleId)
+        {
+            return ApartmentMethods.ListOrgAdminAspUser(orgId, roleId);
+        }
+
+        [OperationContract]
+        public void SaveOrganisations(List<Organisation> saveList)
+        {
+            ApartmentMethods.SaveOrganisations(saveList);
+        }
+
+        [OperationContract]
+        public Organisation GetOrganisation(int organisationId)
+        {
+            return ApartmentMethods.GetOrganisation(organisationId);
+        }
+
+        [OperationContract]
+        public Organisation GetOrganisationByCode(string authorisationCode)
+        {
+            return ApartmentMethods.GetOrganisation(authorisationCode);
+        }
+
+        #endregion
+
         #region Customer
         [OperationContract]
         public List<Customer> ListCustomer(int? customerId, string name, bool includeLegacy)
@@ -261,7 +339,27 @@ namespace Mimosa.Apartment.Web.UI
         }
         #endregion
 
-        
+        #region UserAccount
+        [OperationContract]
+        public List<AspUser> ListAspUser(int? orgId, Guid? userId, bool? isLegacy)
+        {
+            return ApartmentMethods.ListAspUser(orgId, userId, isLegacy);
+        }
+
+        [OperationContract]
+        public List<string> ListUserName(string applicationName, int? orgId, string startsWith)
+        {
+            return ApartmentMethods.ListUserName(applicationName, orgId, startsWith);
+        }
+
+        [OperationContract]
+        public int? UpdateMembershipUserName(string applicationName, string userName, string newUserName)
+        {
+            return ApartmentMethods.UpdateMembershipUserName(applicationName, userName, newUserName);
+        }
+
+        #endregion
+
     }
 
     /// <summary>
@@ -270,27 +368,51 @@ namespace Mimosa.Apartment.Web.UI
     /// </summary>
     [DataContract]
     public class UserLogin
-    {        
+    {
         [DataMember]
-        public int? UserCustomerId { set; get; }
+        public int UserOrganisationId { set; get; }
+
+        [DataMember]
+        public int? UserSiteId { set; get; }
+
+        [DataMember]
+        public int? UserEmployeeId { set; get; }
 
         [DataMember]
         public string UserName { set; get; }
-
-        [DataMember]
-        public bool IsUserCustomer { set; get; }
         
         [DataMember]
-        public bool IsUserAdministrator { set; get; }
-
+        public bool IsUserOrganisationAdministrator { set; get; }
+        [DataMember]
+        public bool IsUserSiteAdministrator { set; get; }
+        [DataMember]
+        public bool IsUserPortalAdministrator { set; get; }
+        [DataMember]
+        public bool IsUserSecurityAdministrator { set; get; }
+        
+        
         [DataMember]
         public Guid UserUserId { get; set; }
 
         [DataMember]
-        public string UserOrganisationWeekday { set; get; }
+        public Organisation UserOrganisation { set; get; }
+
+        [DataMember]
+        public Site UserSite { set; get; }
 
         [DataMember]
         public AspUser AspUser { get; set; }
+
+        [DataMember]
+        public List<RoleComponentPermission> RoleComponentPermissions { get; set; }
+
+        [DataMember]
+        public List<UserRoleAuth> UserRoleAuths { get; set; }
+
+        [DataMember]
+        public List<Guid> UserLicenseKeys { get; set; }
+
+
     }
 
     /// <summary>
@@ -316,6 +438,6 @@ namespace Mimosa.Apartment.Web.UI
         public UserLogin UserLogin { set; get; }
 
         [DataMember]
-        public DateTime? ApplicationCurrentDateTime { set; get; }
+        public TagVersion TagVersion { set; get; }
     }
 }

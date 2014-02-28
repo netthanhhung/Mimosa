@@ -118,6 +118,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administration\LayoutComponentType.cs" />
+    <Compile Include="Administration\PortalAdminPage.xaml.cs">
+      <DependentUpon>PortalAdminPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Administration\UserAccountPage.xaml.cs">
       <DependentUpon>UserAccountPage.xaml</DependentUpon>
     </Compile>
@@ -131,6 +135,8 @@
     <Compile Include="Code\ExtensionsTelerikSilverlight.cs" />
     <Compile Include="Code\FontHelper.cs" />
     <Compile Include="Code\Globals.cs" />
+    <Compile Include="Code\MembershipServiceHelper.cs" />
+    <Compile Include="Code\SecurityHelper.cs" />
     <Compile Include="Code\Silverlight.Controls.ToolTips.cs" />
     <Compile Include="Code\SiteMapHelper.cs" />
     <Compile Include="Code\UiHelper.cs" />
@@ -138,6 +144,12 @@
     <Compile Include="Common\SiteMapMenuItem.cs" />
     <Compile Include="Controls\ClippedBottomGrid.cs" />
     <Compile Include="Controls\ClippedGrid.cs" />
+    <Compile Include="Controls\ContactInformationPanel.xaml.cs">
+      <DependentUpon>ContactInformationPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CountryPicker.xaml.cs">
+      <DependentUpon>CountryPicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Highlighter.xaml.cs">
       <DependentUpon>Highlighter.xaml</DependentUpon>
     </Compile>
@@ -255,7 +267,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Administration\PortalAdminPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Administration\UserAccountPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ContactInformationPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\CountryPicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -313,6 +337,11 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\DataSources\Mimosa.Apartment.Common.AspUser.datasource" />
+    <None Include="Properties\DataSources\Mimosa.Apartment.Common.ContactInformation.datasource" />
+    <None Include="Properties\DataSources\Mimosa.Apartment.Common.Country.datasource" />
+    <None Include="Properties\DataSources\Mimosa.Apartment.Common.Customer.datasource" />
+    <None Include="Properties\DataSources\Mimosa.Apartment.Common.Organisation.datasource" />
     <None Include="Service References\ApartmentService\ApartmentService.wsdl" />
     <None Include="Service References\ApartmentService\ApartmentService.xsd">
       <SubType>Designer</SubType>
@@ -325,6 +354,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ApartmentService\ApartmentService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ApartmentService\ApartmentService4.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ApartmentService\Mimosa.Apartment.Silverlight.UI.ApartmentService.AppSettings.datasource">
@@ -415,9 +447,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\DataSources\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

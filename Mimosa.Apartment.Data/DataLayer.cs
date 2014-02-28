@@ -284,5 +284,25 @@ namespace Mimosa.Apartment.Data
         }
         #endregion
 
+        #region TagVersion
+        public TagVersion GetLatestTagVersion()
+        {
+            List<TagVersion> result = new List<TagVersion>();
+
+            using (IDataReader reader = _db.ExecuteReader("procGetLatestTagVersion"))
+            {
+                Factory.PopulateTagVersionsList(result, reader);
+            }
+
+            if (result.Count > 0)
+            {
+                return result[0];
+            }
+            else
+            {
+                return null;
+            }
+        }
+        #endregion
     }
 }

@@ -46,29 +46,30 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="AspUser" nillable="true" type="tns:AspUser" />
-  <xs:complexType name="ArrayOfAspUser">
+  <xs:complexType name="ArrayOfRoleComponentPermission">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="AspUser" nillable="true" type="tns:AspUser" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RoleComponentPermission" nillable="true" type="tns:RoleComponentPermission" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfAspUser" nillable="true" type="tns:ArrayOfAspUser" />
-  <xs:complexType name="ArrayOfCountry">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Country" nillable="true" type="tns:Country" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfCountry" nillable="true" type="tns:ArrayOfCountry" />
-  <xs:complexType name="Country">
+  <xs:element name="ArrayOfRoleComponentPermission" nillable="true" type="tns:ArrayOfRoleComponentPermission" />
+  <xs:complexType name="RoleComponentPermission">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:Record">
         <xs:sequence>
-          <xs:element minOccurs="0" name="CountryId" type="xs:int" />
-          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ComponentId" type="xs:int" />
+          <xs:element minOccurs="0" name="ComponentName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IsChanged" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsCustom" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsDeleted" type="xs:boolean" />
+          <xs:element minOccurs="0" name="RoleComponentPermissionId" type="xs:int" />
+          <xs:element minOccurs="0" name="RoleId" type="ser:guid" />
+          <xs:element minOccurs="0" name="RoleName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="WriteRight" nillable="true" type="xs:boolean" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="Country" nillable="true" type="tns:Country" />
+  <xs:element name="RoleComponentPermission" nillable="true" type="tns:RoleComponentPermission" />
   <xs:complexType name="Record">
     <xs:sequence>
       <xs:element minOccurs="0" name="CanDelete" type="xs:boolean" />
@@ -86,12 +87,26 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Record" nillable="true" type="tns:Record" />
-  <xs:complexType name="ArrayOfContactInformation">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="ContactInformation" nillable="true" type="tns:ContactInformation" />
-    </xs:sequence>
+  <xs:complexType name="Organisation">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Record">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AuthorisationCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CanDelete" type="xs:boolean" />
+          <xs:element minOccurs="0" name="ContactInformation" nillable="true" type="tns:ContactInformation" />
+          <xs:element minOccurs="0" name="ContactInformationId" type="xs:int" />
+          <xs:element minOccurs="0" name="DisplayIndex" type="xs:int" />
+          <xs:element minOccurs="0" name="IsChanged" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsDeleted" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsLegacy" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="OrgAdminUsers" nillable="true" type="tns:ArrayOfUserRoleAuth" />
+          <xs:element minOccurs="0" name="OrganisationId" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
-  <xs:element name="ArrayOfContactInformation" nillable="true" type="tns:ArrayOfContactInformation" />
+  <xs:element name="Organisation" nillable="true" type="tns:Organisation" />
   <xs:complexType name="ContactInformation">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:Record">
@@ -114,6 +129,104 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="ContactInformation" nillable="true" type="tns:ContactInformation" />
+  <xs:complexType name="ArrayOfUserRoleAuth">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserRoleAuth" nillable="true" type="tns:UserRoleAuth" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserRoleAuth" nillable="true" type="tns:ArrayOfUserRoleAuth" />
+  <xs:complexType name="UserRoleAuth">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Record">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="IsChanged" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsCustom" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsDeleted" type="xs:boolean" />
+          <xs:element minOccurs="0" name="RoleId" type="ser:guid" />
+          <xs:element minOccurs="0" name="RoleName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Site" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SiteGroup" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SiteGroupId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="SiteId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="UserId" type="ser:guid" />
+          <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="UserRoleAuthId" type="xs:int" />
+          <xs:element minOccurs="0" name="WholeOrg" nillable="true" type="xs:boolean" />
+          <xs:element minOccurs="0" name="WriteRight" nillable="true" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="UserRoleAuth" nillable="true" type="tns:UserRoleAuth" />
+  <xs:complexType name="Site">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Record">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AbbreviatedName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Availability" type="xs:int" />
+          <xs:element minOccurs="0" name="CanDelete" type="xs:boolean" />
+          <xs:element minOccurs="0" name="ContactInformationID" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="DisplayIndex" type="xs:int" />
+          <xs:element minOccurs="0" name="HotelId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="IsChanged" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsChecked" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsLegacy" type="xs:boolean" />
+          <xs:element minOccurs="0" name="LicenseKey" type="ser:guid" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="OrganisationId" type="xs:int" />
+          <xs:element minOccurs="0" name="PropCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SiteId" type="xs:int" />
+          <xs:element minOccurs="0" name="StarRating" nillable="true" type="xs:decimal" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Site" nillable="true" type="tns:Site" />
+  <xs:complexType name="TagVersion">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreatedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DateCreated" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="TagName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TagVersionID" type="xs:int" />
+      <xs:element minOccurs="0" name="Version" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TagVersion" nillable="true" type="tns:TagVersion" />
+  <xs:complexType name="ArrayOfCountry">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Country" nillable="true" type="tns:Country" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCountry" nillable="true" type="tns:ArrayOfCountry" />
+  <xs:complexType name="Country">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Record">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CountryId" type="xs:int" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Country" nillable="true" type="tns:Country" />
+  <xs:complexType name="ArrayOfContactInformation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ContactInformation" nillable="true" type="tns:ContactInformation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfContactInformation" nillable="true" type="tns:ArrayOfContactInformation" />
+  <xs:complexType name="ArrayOfOrganisation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Organisation" nillable="true" type="tns:Organisation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrganisation" nillable="true" type="tns:ArrayOfOrganisation" />
+  <xs:complexType name="ArrayOfAspUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AspUser" nillable="true" type="tns:AspUser" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAspUser" nillable="true" type="tns:ArrayOfAspUser" />
   <xs:complexType name="ArrayOfCustomer">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Customer" nillable="true" type="tns:Customer" />

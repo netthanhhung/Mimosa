@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <xsd:schema targetNamespace="/Imports">
       <xsd:import schemaLocation="http://localhost:49555/Services/ApartmentService.svc?xsd=xsd0" />
       <xsd:import schemaLocation="http://localhost:49555/Services/ApartmentService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:49555/Services/ApartmentService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Web.UI" />
       <xsd:import schemaLocation="http://localhost:49555/Services/ApartmentService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" />
+      <xsd:import schemaLocation="http://localhost:49555/Services/ApartmentService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ApartmentService_SelectSessionId_InputMessage">
@@ -14,11 +15,11 @@
   <wsdl:message name="ApartmentService_SelectSessionId_OutputMessage">
     <wsdl:part name="parameters" element="SelectSessionIdResponse" />
   </wsdl:message>
-  <wsdl:message name="ApartmentService_GetGlobalVariable_InputMessage">
-    <wsdl:part name="parameters" element="GetGlobalVariable" />
+  <wsdl:message name="ApartmentService_GetUserLogin_InputMessage">
+    <wsdl:part name="parameters" element="GetUserLogin" />
   </wsdl:message>
-  <wsdl:message name="ApartmentService_GetGlobalVariable_OutputMessage">
-    <wsdl:part name="parameters" element="GetGlobalVariableResponse" />
+  <wsdl:message name="ApartmentService_GetUserLogin_OutputMessage">
+    <wsdl:part name="parameters" element="GetUserLoginResponse" />
   </wsdl:message>
   <wsdl:message name="ApartmentService_GetAppSettings_InputMessage">
     <wsdl:part name="parameters" element="GetAppSettings" />
@@ -26,11 +27,17 @@
   <wsdl:message name="ApartmentService_GetAppSettings_OutputMessage">
     <wsdl:part name="parameters" element="GetAppSettingsResponse" />
   </wsdl:message>
-  <wsdl:message name="ApartmentService_GetUserLogin_InputMessage">
-    <wsdl:part name="parameters" element="GetUserLogin" />
+  <wsdl:message name="ApartmentService_GetGlobalVariable_InputMessage">
+    <wsdl:part name="parameters" element="GetGlobalVariable" />
   </wsdl:message>
-  <wsdl:message name="ApartmentService_GetUserLogin_OutputMessage">
-    <wsdl:part name="parameters" element="GetUserLoginResponse" />
+  <wsdl:message name="ApartmentService_GetGlobalVariable_OutputMessage">
+    <wsdl:part name="parameters" element="GetGlobalVariableResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ChangePassword_InputMessage">
+    <wsdl:part name="parameters" element="ChangePassword" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ChangePassword_OutputMessage">
+    <wsdl:part name="parameters" element="ChangePasswordResponse" />
   </wsdl:message>
   <wsdl:message name="ApartmentService_GetAspUser_InputMessage">
     <wsdl:part name="parameters" element="GetAspUser" />
@@ -38,11 +45,11 @@
   <wsdl:message name="ApartmentService_GetAspUser_OutputMessage">
     <wsdl:part name="parameters" element="GetAspUserResponse" />
   </wsdl:message>
-  <wsdl:message name="ApartmentService_ListAspUser_InputMessage">
-    <wsdl:part name="parameters" element="ListAspUser" />
+  <wsdl:message name="ApartmentService_DeleteAspUser_InputMessage">
+    <wsdl:part name="parameters" element="DeleteAspUser" />
   </wsdl:message>
-  <wsdl:message name="ApartmentService_ListAspUser_OutputMessage">
-    <wsdl:part name="parameters" element="ListAspUserResponse" />
+  <wsdl:message name="ApartmentService_DeleteAspUser_OutputMessage">
+    <wsdl:part name="parameters" element="DeleteAspUserResponse" />
   </wsdl:message>
   <wsdl:message name="ApartmentService_UnlockAspUser_InputMessage">
     <wsdl:part name="parameters" element="UnlockAspUser" />
@@ -55,12 +62,6 @@
   </wsdl:message>
   <wsdl:message name="ApartmentService_SaveAspUser_OutputMessage">
     <wsdl:part name="parameters" element="SaveAspUserResponse" />
-  </wsdl:message>
-  <wsdl:message name="ApartmentService_ChangePassword_InputMessage">
-    <wsdl:part name="parameters" element="ChangePassword" />
-  </wsdl:message>
-  <wsdl:message name="ApartmentService_ChangePassword_OutputMessage">
-    <wsdl:part name="parameters" element="ChangePasswordResponse" />
   </wsdl:message>
   <wsdl:message name="ApartmentService_ListCountry_InputMessage">
     <wsdl:part name="parameters" element="ListCountry" />
@@ -80,6 +81,36 @@
   <wsdl:message name="ApartmentService_SaveContactInformation_OutputMessage">
     <wsdl:part name="parameters" element="SaveContactInformationResponse" />
   </wsdl:message>
+  <wsdl:message name="ApartmentService_ListOrganisation_InputMessage">
+    <wsdl:part name="parameters" element="ListOrganisation" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListOrganisation_OutputMessage">
+    <wsdl:part name="parameters" element="ListOrganisationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListOrgAdminAspUser_InputMessage">
+    <wsdl:part name="parameters" element="ListOrgAdminAspUser" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListOrgAdminAspUser_OutputMessage">
+    <wsdl:part name="parameters" element="ListOrgAdminAspUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_SaveOrganisations_InputMessage">
+    <wsdl:part name="parameters" element="SaveOrganisations" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_SaveOrganisations_OutputMessage">
+    <wsdl:part name="parameters" element="SaveOrganisationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_GetOrganisation_InputMessage">
+    <wsdl:part name="parameters" element="GetOrganisation" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_GetOrganisation_OutputMessage">
+    <wsdl:part name="parameters" element="GetOrganisationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_GetOrganisationByCode_InputMessage">
+    <wsdl:part name="parameters" element="GetOrganisationByCode" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_GetOrganisationByCode_OutputMessage">
+    <wsdl:part name="parameters" element="GetOrganisationByCodeResponse" />
+  </wsdl:message>
   <wsdl:message name="ApartmentService_ListCustomer_InputMessage">
     <wsdl:part name="parameters" element="ListCustomer" />
   </wsdl:message>
@@ -92,30 +123,52 @@
   <wsdl:message name="ApartmentService_SaveCustomer_OutputMessage">
     <wsdl:part name="parameters" element="SaveCustomerResponse" />
   </wsdl:message>
+  <wsdl:message name="ApartmentService_ListAspUser_InputMessage">
+    <wsdl:part name="parameters" element="ListAspUser" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListAspUser_OutputMessage">
+    <wsdl:part name="parameters" element="ListAspUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListUserName_InputMessage">
+    <wsdl:part name="parameters" element="ListUserName" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListUserName_OutputMessage">
+    <wsdl:part name="parameters" element="ListUserNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_UpdateMembershipUserName_InputMessage">
+    <wsdl:part name="parameters" element="UpdateMembershipUserName" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_UpdateMembershipUserName_OutputMessage">
+    <wsdl:part name="parameters" element="UpdateMembershipUserNameResponse" />
+  </wsdl:message>
   <wsdl:portType name="ApartmentService">
     <wsdl:operation name="SelectSessionId">
       <wsdl:input wsaw:Action="urn:ApartmentService/SelectSessionId" message="ApartmentService_SelectSessionId_InputMessage" />
       <wsdl:output wsaw:Action="urn:ApartmentService/SelectSessionIdResponse" message="ApartmentService_SelectSessionId_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetGlobalVariable">
-      <wsdl:input wsaw:Action="urn:ApartmentService/GetGlobalVariable" message="ApartmentService_GetGlobalVariable_InputMessage" />
-      <wsdl:output wsaw:Action="urn:ApartmentService/GetGlobalVariableResponse" message="ApartmentService_GetGlobalVariable_OutputMessage" />
+    <wsdl:operation name="GetUserLogin">
+      <wsdl:input wsaw:Action="urn:ApartmentService/GetUserLogin" message="ApartmentService_GetUserLogin_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/GetUserLoginResponse" message="ApartmentService_GetUserLogin_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetAppSettings">
       <wsdl:input wsaw:Action="urn:ApartmentService/GetAppSettings" message="ApartmentService_GetAppSettings_InputMessage" />
       <wsdl:output wsaw:Action="urn:ApartmentService/GetAppSettingsResponse" message="ApartmentService_GetAppSettings_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetUserLogin">
-      <wsdl:input wsaw:Action="urn:ApartmentService/GetUserLogin" message="ApartmentService_GetUserLogin_InputMessage" />
-      <wsdl:output wsaw:Action="urn:ApartmentService/GetUserLoginResponse" message="ApartmentService_GetUserLogin_OutputMessage" />
+    <wsdl:operation name="GetGlobalVariable">
+      <wsdl:input wsaw:Action="urn:ApartmentService/GetGlobalVariable" message="ApartmentService_GetGlobalVariable_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/GetGlobalVariableResponse" message="ApartmentService_GetGlobalVariable_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangePassword">
+      <wsdl:input wsaw:Action="urn:ApartmentService/ChangePassword" message="ApartmentService_ChangePassword_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/ChangePasswordResponse" message="ApartmentService_ChangePassword_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetAspUser">
       <wsdl:input wsaw:Action="urn:ApartmentService/GetAspUser" message="ApartmentService_GetAspUser_InputMessage" />
       <wsdl:output wsaw:Action="urn:ApartmentService/GetAspUserResponse" message="ApartmentService_GetAspUser_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="ListAspUser">
-      <wsdl:input wsaw:Action="urn:ApartmentService/ListAspUser" message="ApartmentService_ListAspUser_InputMessage" />
-      <wsdl:output wsaw:Action="urn:ApartmentService/ListAspUserResponse" message="ApartmentService_ListAspUser_OutputMessage" />
+    <wsdl:operation name="DeleteAspUser">
+      <wsdl:input wsaw:Action="urn:ApartmentService/DeleteAspUser" message="ApartmentService_DeleteAspUser_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/DeleteAspUserResponse" message="ApartmentService_DeleteAspUser_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UnlockAspUser">
       <wsdl:input wsaw:Action="urn:ApartmentService/UnlockAspUser" message="ApartmentService_UnlockAspUser_InputMessage" />
@@ -124,10 +177,6 @@
     <wsdl:operation name="SaveAspUser">
       <wsdl:input wsaw:Action="urn:ApartmentService/SaveAspUser" message="ApartmentService_SaveAspUser_InputMessage" />
       <wsdl:output wsaw:Action="urn:ApartmentService/SaveAspUserResponse" message="ApartmentService_SaveAspUser_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="ChangePassword">
-      <wsdl:input wsaw:Action="urn:ApartmentService/ChangePassword" message="ApartmentService_ChangePassword_InputMessage" />
-      <wsdl:output wsaw:Action="urn:ApartmentService/ChangePasswordResponse" message="ApartmentService_ChangePassword_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ListCountry">
       <wsdl:input wsaw:Action="urn:ApartmentService/ListCountry" message="ApartmentService_ListCountry_InputMessage" />
@@ -141,6 +190,26 @@
       <wsdl:input wsaw:Action="urn:ApartmentService/SaveContactInformation" message="ApartmentService_SaveContactInformation_InputMessage" />
       <wsdl:output wsaw:Action="urn:ApartmentService/SaveContactInformationResponse" message="ApartmentService_SaveContactInformation_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ListOrganisation">
+      <wsdl:input wsaw:Action="urn:ApartmentService/ListOrganisation" message="ApartmentService_ListOrganisation_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/ListOrganisationResponse" message="ApartmentService_ListOrganisation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListOrgAdminAspUser">
+      <wsdl:input wsaw:Action="urn:ApartmentService/ListOrgAdminAspUser" message="ApartmentService_ListOrgAdminAspUser_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/ListOrgAdminAspUserResponse" message="ApartmentService_ListOrgAdminAspUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveOrganisations">
+      <wsdl:input wsaw:Action="urn:ApartmentService/SaveOrganisations" message="ApartmentService_SaveOrganisations_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/SaveOrganisationsResponse" message="ApartmentService_SaveOrganisations_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganisation">
+      <wsdl:input wsaw:Action="urn:ApartmentService/GetOrganisation" message="ApartmentService_GetOrganisation_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/GetOrganisationResponse" message="ApartmentService_GetOrganisation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganisationByCode">
+      <wsdl:input wsaw:Action="urn:ApartmentService/GetOrganisationByCode" message="ApartmentService_GetOrganisationByCode_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/GetOrganisationByCodeResponse" message="ApartmentService_GetOrganisationByCode_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="ListCustomer">
       <wsdl:input wsaw:Action="urn:ApartmentService/ListCustomer" message="ApartmentService_ListCustomer_InputMessage" />
       <wsdl:output wsaw:Action="urn:ApartmentService/ListCustomerResponse" message="ApartmentService_ListCustomer_OutputMessage" />
@@ -148,6 +217,18 @@
     <wsdl:operation name="SaveCustomer">
       <wsdl:input wsaw:Action="urn:ApartmentService/SaveCustomer" message="ApartmentService_SaveCustomer_InputMessage" />
       <wsdl:output wsaw:Action="urn:ApartmentService/SaveCustomerResponse" message="ApartmentService_SaveCustomer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListAspUser">
+      <wsdl:input wsaw:Action="urn:ApartmentService/ListAspUser" message="ApartmentService_ListAspUser_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/ListAspUserResponse" message="ApartmentService_ListAspUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListUserName">
+      <wsdl:input wsaw:Action="urn:ApartmentService/ListUserName" message="ApartmentService_ListUserName_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/ListUserNameResponse" message="ApartmentService_ListUserName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMembershipUserName">
+      <wsdl:input wsaw:Action="urn:ApartmentService/UpdateMembershipUserName" message="ApartmentService_UpdateMembershipUserName_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/UpdateMembershipUserNameResponse" message="ApartmentService_UpdateMembershipUserName_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

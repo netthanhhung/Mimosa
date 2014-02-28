@@ -272,5 +272,12 @@ namespace Mimosa.Apartment.Business
         }
 
         #endregion
+
+        #region Tag Version
+        public static TagVersion GetLatestTagVersion()
+        {
+            return new DataLayer().GetLatestTagVersion();
+        }
+        #endregion
     }
 }

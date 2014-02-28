@@ -299,6 +299,41 @@ namespace Mimosa.Apartment.Common
         }
         #endregion
 
+        #region TagVersions
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public static void PopulateTagVersionsList(List<TagVersion> list, System.Data.IDataReader reader)
+        {
+            list.Clear();
 
+            while (reader.Read())
+            {
+                TagVersion item = new TagVersion();
+                PopulateTagVersion(item, reader);
+
+                list.Add(item);
+            }
+        }
+
+        public static void PopulateTagVersion(TagVersion input, System.Data.IDataReader reader)
+        {
+            input.TagVersionID = Utilities.ToInt(reader[TagVersion.ColumnNames.TagVersionID]);
+            input.TagName = Utilities.ToString(reader[TagVersion.ColumnNames.TagName]);
+            input.Version = Utilities.ToString(reader[TagVersion.ColumnNames.Version]);
+            input.DateCreated = Utilities.ToDateTime(reader[TagVersion.ColumnNames.DateCreated]);
+            input.CreatedBy = Utilities.ToString(reader[TagVersion.ColumnNames.CreatedBy]);
+        }
+
+        public static TagVersion PopulateTagVersion(System.Data.IDataReader reader)
+        {
+            TagVersion result = null;
+            if (null != reader && reader.Read())
+            {
+                result = new TagVersion();
+                PopulateTagVersion(result, reader);
+            }
+
+            return result;
+        }
+        #endregion
     }
 }

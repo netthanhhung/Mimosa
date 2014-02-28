@@ -29,6 +29,7 @@
     <MetadataFile FileName="ApartmentService1.xsd" MetadataType="Schema" ID="3a6c2829-010b-44af-aba5-8d39a5c301d8" SourceId="1" SourceUrl="http://localhost:49555/Services/ApartmentService.svc?xsd=xsd1" />
     <MetadataFile FileName="ApartmentService2.xsd" MetadataType="Schema" ID="20aa1751-e72b-436b-8bea-5f3a8a9071bb" SourceId="1" SourceUrl="http://localhost:49555/Services/ApartmentService.svc?xsd=xsd2" />
     <MetadataFile FileName="ApartmentService3.xsd" MetadataType="Schema" ID="c30d324a-c430-4a57-bd51-bcb1663acd2a" SourceId="1" SourceUrl="http://localhost:49555/Services/ApartmentService.svc?xsd=xsd3" />
+    <MetadataFile FileName="ApartmentService4.xsd" MetadataType="Schema" ID="759b1c4f-822f-4338-838c-66d004fc0521" SourceId="1" SourceUrl="http://localhost:49555/Services/ApartmentService.svc?xsd=xsd4" />
     <MetadataFile FileName="ApartmentService.wsdl" MetadataType="Wsdl" ID="c09bcec7-5212-4d07-bcd9-bdbb16e4fbc4" SourceId="1" SourceUrl="http://localhost:49555/Services/ApartmentService.svc?wsdl" />
     <MetadataFile FileName="ApartmentService1.wsdl" MetadataType="Wsdl" ID="2dc2a3fe-d72e-4926-bc8e-532cac1c5868" SourceId="1" SourceUrl="http://localhost:49555/Services/ApartmentService.svc?wsdl=wsdl0" />
     <MetadataFile FileName="ApartmentService.disco" MetadataType="Disco" ID="fa6ff840-7af2-4b04-a677-ce44060448a5" SourceId="1" SourceUrl="http://localhost:49555/Services/ApartmentService.svc?disco" />

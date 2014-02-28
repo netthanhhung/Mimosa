@@ -1,0 +1,177 @@
+﻿<navigation:Page x:Class="Mimosa.Apartment.Silverlight.UI.PortalAdminPage" Title="Synergi"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:local="clr-namespace:Mimosa.Apartment.Silverlight.UI"
+    xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"             
+    xmlns:bg="clr-namespace:TiledBG;assembly=TiledBG"
+    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation">
+
+    <Grid x:Name="LayoutRootOrgAdmin" Style="{StaticResource LayoutRootGridStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="Auto"></RowDefinition>
+                <RowDefinition
+                    Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <local:ClippedGrid
+                Background="{StaticResource BackgroundGradientBrush}">
+                <local:Highlight
+                    HighlightBrush="{StaticResource AdminBrush}"></local:Highlight>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="*"></ColumnDefinition>
+                        <ColumnDefinition
+                            Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Margin="20,0,0,0" Orientation="Horizontal">
+                        <TextBlock
+                            x:Name="uiTitle"
+                            VerticalAlignment="Center"
+                            Foreground="{StaticResource TitleForeground}"
+                            Text="Portal Administrattion"></TextBlock>
+                        <TextBlock
+                            x:Name="uiParamsDisplay"
+                            VerticalAlignment="Center"
+                            Foreground="{StaticResource TitleForeground}"
+                            Text=""></TextBlock>
+                    </StackPanel>
+
+                </Grid>
+            </local:ClippedGrid>
+            <local:ClippedGrid Background="{StaticResource ImageBackgroundBrush}"
+                               Grid.Row="1" Grid.ColumnSpan="6"/>
+            <local:ClippedGrid
+                    Grid.Row="1" Grid.ColumnSpan="6"
+                    Margin="10" Opacity="0.9">
+                <ScrollViewer x:Name="scrollViewerOrganisation" BorderThickness="0" Padding="0">
+                    <local:ClippedGrid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>   
+                        </Grid.RowDefinitions>
+
+                        <bg:TiledBGControl BorderThickness="0" Grid.Row="0" Margin="0,5,0,0" TiledImageSource="{StaticResource CarbonFiberImage}"/>
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Organisation Administration" 
+                                       Margin="5,5,5,5" Height="25" FontSize="12" />
+                            <telerik:RadGridView
+                                Margin="10,5,10,10"
+                                x:Name="gvwOrganisations"
+                                AutoGenerateColumns="False"
+                                ShowGroupPanel="False"
+                                CanUserDeleteRows="False" CanUserInsertRows="True" ShowInsertRow="True"                               
+                                Grid.Row="1" Grid.ColumnSpan="4">
+                                <telerik:RadGridView.Resources>
+                                    <Style TargetType="TextBlock" BasedOn="{x:Null}"/>
+                                    <Style TargetType="CheckBox" BasedOn="{x:Null}"/>
+                                </telerik:RadGridView.Resources>
+                                <telerik:RadGridView.Columns>
+                                    <telerik:GridViewDataColumn
+                                    UniqueName="Name"
+                                    DataMemberBinding="{Binding Name}"
+                                    Header="Organisation Name" 
+                                    Width="*">
+                                    </telerik:GridViewDataColumn>
+                                    <telerik:GridViewDataColumn
+                                    UniqueName="AuthorisationCode"
+                                    DataMemberBinding="{Binding AuthorisationCode}"
+                                    Header="Authorisation Code">
+                                    </telerik:GridViewDataColumn>
+                                    <telerik:GridViewDataColumn
+                                    UniqueName="DisplayIndex"
+                                    DataMemberBinding="{Binding DisplayIndex}"
+                                    DataFormatString="{} {0:0}"
+                                    Header="Display Index">
+                                    </telerik:GridViewDataColumn>
+                                    <!--<telerik:GridViewDataColumn
+                                    UniqueName="LicenceKey"
+                                    DataMemberBinding="{Binding LicenceKey}"
+                                    Header="Licence Key">
+                                </telerik:GridViewDataColumn>-->
+                                    <telerik:GridViewDataColumn Width="50" Header="Inactive">
+                                        <telerik:GridViewDataColumn.CellStyle>
+                                            <Style TargetType="telerik:GridViewCell">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="telerik:GridViewCell">
+                                                            <StackPanel>
+                                                                <CheckBox Margin="5, 0, 0, 0"
+                                                                    VerticalAlignment="Center"
+                                                                    IsChecked="{Binding IsLegacy, Mode=TwoWay}" />
+                                                            </StackPanel>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </telerik:GridViewDataColumn.CellStyle>
+                                    </telerik:GridViewDataColumn>
+                                </telerik:RadGridView.Columns>
+                            </telerik:RadGridView>
+                            <local:SingleClickButton x:Name="btnSaveOrg" Height="25" Width="80" Grid.Row="2" Grid.Column="1" Content="Save" 
+                            HorizontalAlignment="Right" Margin="10,0,5,10"/>
+                            <Button x:Name="btnCancelOrg" Height="25" Width="80" Grid.Row="2" Grid.Column="2" Content="Cancel" 
+                            HorizontalAlignment="Left" Margin="10,0,5,10"/>
+
+                        </Grid>
+
+                        <bg:TiledBGControl BorderThickness="0" Grid.Row="2" Margin="0,5,0,0" TiledImageSource="{StaticResource CarbonFiberImage}"/>
+                        <Grid x:Name="gridContactAccount" Grid.Row="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock x:Name="txtContactInfo" 
+                                       Grid.Column="0"
+                                       Text="Contact Information" 
+                                       Margin="5,5,5,5" Height="25" FontSize="12" />
+                            <local:ContactInformationPanel x:Name="panelContactInfo" Margin="5,5,5,5"></local:ContactInformationPanel>
+                           
+
+
+                            <TextBlock x:Name="txtAccountInfo" 
+                                           Text="Account Information" 
+                                           Grid.Column="1"
+                                           Margin="5,5,5,5" Height="25" FontSize="12" />
+
+                            <local:UserAccount x:Name="ucUserAccount" Grid.Row="1" Grid.Column="1" IsEditable="True" ShowUserPhoto="False"></local:UserAccount>
+
+                        </Grid>
+
+
+                    </local:ClippedGrid>
+
+                </ScrollViewer>
+            </local:ClippedGrid>
+        </Grid>
+    </Grid>
+
+</navigation:Page>

@@ -26,7 +26,7 @@
                             <Grid>
                                 <Image x:Name="uiLogo"
                                 Source="/Mimosa.Apartment.Silverlight.UI;component/Images/mimosa.jpg"
-                                Margin="0" Width="50" Height="30"></Image>
+                                Margin="0" Width="100" Height="50"></Image>
 
                                 <!--<TextBlock
                                 x:Name="uiDeploymentInfo"

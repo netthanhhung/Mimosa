@@ -3,6 +3,7 @@
   <xs:import schemaLocation="http://localhost:49555/Services/ApartmentService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Web.UI" />
   <xs:import schemaLocation="http://localhost:49555/Services/ApartmentService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:import schemaLocation="http://localhost:49555/Services/ApartmentService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" />
+  <xs:import schemaLocation="http://localhost:49555/Services/ApartmentService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:element name="SelectSessionId">
     <xs:complexType>
       <xs:sequence />
@@ -15,15 +16,15 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetGlobalVariable">
+  <xs:element name="GetUserLogin">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetGlobalVariableResponse">
+  <xs:element name="GetUserLoginResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Web.UI" minOccurs="0" name="GetGlobalVariableResult" nillable="true" type="q1:GlobalVariable" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Web.UI" minOccurs="0" name="GetUserLoginResult" nillable="true" type="q1:UserLogin" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -39,73 +40,15 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetUserLogin">
+  <xs:element name="GetGlobalVariable">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetUserLoginResponse">
+  <xs:element name="GetGlobalVariableResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Web.UI" minOccurs="0" name="GetUserLoginResult" nillable="true" type="q3:UserLogin" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetAspUser">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="userId" type="q4:guid" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetAspUserResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="GetAspUserResult" nillable="true" type="q5:AspUser" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ListAspUser">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="orgId" nillable="true" type="xs:int" />
-        <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="userId" nillable="true" type="q6:guid" />
-        <xs:element minOccurs="0" name="isLegacy" nillable="true" type="xs:boolean" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ListAspUserResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListAspUserResult" nillable="true" type="q7:ArrayOfAspUser" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UnlockAspUser">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="oldUser" nillable="true" type="q8:AspUser" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UnlockAspUserResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="UnlockAspUserResult" nillable="true" type="q9:AspUser" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SaveAspUser">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveUser" nillable="true" type="q10:AspUser" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SaveAspUserResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="SaveAspUserResult" nillable="true" type="q11:AspUser" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Web.UI" minOccurs="0" name="GetGlobalVariableResult" nillable="true" type="q3:GlobalVariable" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -124,6 +67,63 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetAspUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="userId" type="q4:guid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAspUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="GetAspUserResult" nillable="true" type="q5:AspUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteAspUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="aspUser" nillable="true" type="q6:AspUser" />
+        <xs:element minOccurs="0" name="employeeId" nillable="true" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteAspUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DeleteAspUserResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnlockAspUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="oldUser" nillable="true" type="q7:AspUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnlockAspUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="UnlockAspUserResult" nillable="true" type="q8:AspUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveAspUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveUser" nillable="true" type="q9:AspUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveAspUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="SaveAspUserResult" nillable="true" type="q10:AspUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="ListCountry">
     <xs:complexType>
       <xs:sequence>
@@ -134,7 +134,7 @@
   <xs:element name="ListCountryResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListCountryResult" nillable="true" type="q12:ArrayOfCountry" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListCountryResult" nillable="true" type="q11:ArrayOfCountry" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -148,20 +148,89 @@
   <xs:element name="ListContactInformationResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListContactInformationResult" nillable="true" type="q13:ArrayOfContactInformation" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListContactInformationResult" nillable="true" type="q12:ArrayOfContactInformation" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveContactInformation">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q14:ArrayOfContactInformation" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q13:ArrayOfContactInformation" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveContactInformationResponse">
     <xs:complexType>
       <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListOrganisation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="roleId" nillable="true" type="q14:guid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListOrganisationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListOrganisationResult" nillable="true" type="q15:ArrayOfOrganisation" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListOrgAdminAspUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="orgId" type="xs:int" />
+        <xs:element xmlns:q16="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="roleId" type="q16:guid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListOrgAdminAspUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListOrgAdminAspUserResult" nillable="true" type="q17:ArrayOfAspUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveOrganisations">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q18:ArrayOfOrganisation" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveOrganisationsResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrganisation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="organisationId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrganisationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="GetOrganisationResult" nillable="true" type="q19:Organisation" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrganisationByCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="authorisationCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrganisationByCodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="GetOrganisationByCodeResult" nillable="true" type="q20:Organisation" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ListCustomer">
@@ -176,20 +245,68 @@
   <xs:element name="ListCustomerResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListCustomerResult" nillable="true" type="q15:ArrayOfCustomer" />
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListCustomerResult" nillable="true" type="q21:ArrayOfCustomer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveCustomer">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q16:ArrayOfCustomer" />
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q22:ArrayOfCustomer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveCustomerResponse">
     <xs:complexType>
       <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListAspUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="orgId" nillable="true" type="xs:int" />
+        <xs:element xmlns:q23="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="userId" nillable="true" type="q23:guid" />
+        <xs:element minOccurs="0" name="isLegacy" nillable="true" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListAspUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListAspUserResult" nillable="true" type="q24:ArrayOfAspUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListUserName">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="applicationName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="orgId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="startsWith" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListUserNameResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q25="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ListUserNameResult" nillable="true" type="q25:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateMembershipUserName">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="applicationName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="newUserName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateMembershipUserNameResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdateMembershipUserNameResult" nillable="true" type="xs:int" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
 </xs:schema>

@@ -214,6 +214,60 @@ namespace Mimosa.Apartment.Silverlight.UI
             }
         }
 
+        internal delegate void ListOrganisationCallback(List<Organisation> itemSource);
+        internal static void ListOrganisationAsync(Guid? roleId, ListOrganisationCallback callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.ListOrganisationCompleted += new EventHandler<ListOrganisationCompletedEventArgs>(proxy_ListOrganisationCompleted);
+            proxy.ListOrganisationAsync(roleId, callerKey);
+        }
+
+        static void proxy_ListOrganisationCompleted(object sender, ListOrganisationCompletedEventArgs e)
+        {
+            Guid callerKey = (Guid)e.UserState;
+            if (_callbacks.ContainsKey(callerKey))
+            {
+                List<Organisation> itemSource = new List<Organisation>();
+                if (e.Result != null)
+                    itemSource = e.Result;
+                ((ListOrganisationCallback)_callbacks[callerKey]).Invoke(itemSource);
+
+                _callbacks.Remove(callerKey);
+            }
+        }
+
+        //GetOrganisation
+        internal delegate void GetOrganisationCallBack(Organisation itemSource);
+        internal static void GetOrganisationAsync(int organisationId, GetOrganisationCallBack callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.GetOrganisationCompleted += new EventHandler<GetOrganisationCompletedEventArgs>(proxy_GetOrganisationCompleted);
+            proxy.GetOrganisationAsync(organisationId, callerKey);
+        }
+
+        static void proxy_GetOrganisationCompleted(object sender, GetOrganisationCompletedEventArgs e)
+        {
+            Guid callerKey = (Guid)e.UserState;
+            if (_callbacks.ContainsKey(callerKey))
+            {
+                Organisation itemSource = e.Result;
+                ((GetOrganisationCallBack)_callbacks[callerKey]).Invoke(itemSource);
+
+                _callbacks.Remove(callerKey);
+            }
+        }
+
+        //SaveOrganisation
+        internal static void SaveOrganisationAsync(List<Organisation> saveList, EmptyCallback callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.SaveOrganisationCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(proxy_VoidMethodCompleted);
+            proxy.SaveOrganisationAsync(saveList, callerKey);
+        }
+
         // ListContactInformation
         internal delegate void ListContactInformationCallback(List<ContactInformation> itemSource);
         internal static void ListContactInformationAsync(int? contactInformationId, ListContactInformationCallback callback)
