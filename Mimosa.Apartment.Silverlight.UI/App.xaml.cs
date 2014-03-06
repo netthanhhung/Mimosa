@@ -67,12 +67,9 @@ namespace Mimosa.Apartment.Silverlight.UI
             {
                 Globals.UserLogin = itemsSource.UserLogin;
                 Globals.AppSettings = itemsSource.AppSettings;
-                Globals.ApplicationCurrentDateTime = itemsSource.ApplicationCurrentDateTime;
 
                 //Security section
-                Globals.UserLogin.IsUserCustomer = false;
-                Globals.UserLogin.IsUserAdministrator = true;                
-
+                
                 // Until their page has been converted to SL, redirect Portal admin to their aspx page (unless just loading the header).
                 string typeName = this.startupEventArgs.InitParams["TypeName"];
                 if (typeName == "MainPage")

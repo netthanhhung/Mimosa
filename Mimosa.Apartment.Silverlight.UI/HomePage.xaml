@@ -9,11 +9,8 @@
     <navigation:Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Assets/Styles.xaml"/>
-                <ResourceDictionary Source="Assets/Brushes.xaml"/>
-                <ResourceDictionary Source="Assets/TextBox.xaml"/>
-                <ResourceDictionary Source="Assets/RadComboBox.xaml"/>
-                <ResourceDictionary Source="Assets/ComboBox.xaml"/>
+                <ResourceDictionary Source="Assets/Themes/BlackBlue/Brushes.xaml"/>
+                <ResourceDictionary Source="Assets/Themes/BlackBlue/TextBox.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </navigation:Page.Resources>
