@@ -111,12 +111,12 @@ namespace Mimosa.Apartment.Silverlight.UI
             ucInformation.InfoMessage = UserMessages.NewRecord;            
         }
 
-        public void RebindData()
+        public void RebindData(int orgId)
         {
             Globals.IsBusy = true;
             ResetControlStatus();
             ucInformation.InfoMessage = UserMessages.NewRecord;
-            DataServiceHelper.ListAspUserAsync(null, null, null, ListAllAspUserCompleted);
+            DataServiceHelper.ListAspUserAsync(orgId, null, null, ListAllAspUserCompleted);
         }
        
         void ListAllAspUserCompleted(List<AspUser> userList)

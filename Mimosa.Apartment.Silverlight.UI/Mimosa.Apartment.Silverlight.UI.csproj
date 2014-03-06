@@ -125,16 +125,17 @@
     <Compile Include="Administration\UserAccountPage.xaml.cs">
       <DependentUpon>UserAccountPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Administration\ChangePasswordPage.xaml.cs">
       <DependentUpon>ChangePasswordPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Code\DataServiceHelper.cs" />
     <Compile Include="Code\ExtensionsTelerikSilverlight.cs" />
     <Compile Include="Code\FontHelper.cs" />
     <Compile Include="Code\Globals.cs" />
+    <Compile Include="Code\LayoutManager.cs" />
     <Compile Include="Code\MembershipServiceHelper.cs" />
     <Compile Include="Code\SecurityHelper.cs" />
     <Compile Include="Code\Silverlight.Controls.ToolTips.cs" />
@@ -169,11 +170,16 @@
     <Compile Include="Converters\ConstantConverter.cs" />
     <Compile Include="Converters\DateConverter.cs" />
     <Compile Include="Converters\ErrorToVisibilityConverter.cs" />
+    <Compile Include="Converters\FormatConverter.cs" />
+    <Compile Include="Converters\LayoutConverter.cs" />
     <Compile Include="Converters\NumericConverter.cs" />
     <Compile Include="Converters\SiteActivationTextConverter.cs" />
     <Compile Include="Converters\StatusToColorConverter.cs" />
     <Compile Include="Converters\TagToVisibilityConverter.cs" />
     <Compile Include="Converters\TextBlockInlineConverter.cs" />
+    <Compile Include="Converters\TextBlockMultilineConverter.cs" />
+    <Compile Include="Converters\TimeSpanStringConverter.cs" />
+    <Compile Include="Converters\TypeTypeConverter.cs" />
     <Compile Include="Customer\CustomerAdminPage.xaml.cs">
       <DependentUpon>CustomerAdminPage.xaml</DependentUpon>
     </Compile>
@@ -211,55 +217,67 @@
     <Compile Include="ViewModels\LoginVM.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </ApplicationDefinition>
-    <Content Include="Assets\Themes\BlackBlue\ButtonChrome.xaml">
+    <Content Include="Assets\ButtonChrome.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Assets\Themes\BlackBlue\MasterResource.xaml">
+    <Resource Include="Assets\Images\background.png" />
+    <Resource Include="Assets\Images\carbon-fiber-10x10.png" />
+    <Resource Include="Assets\Images\carbon-fiber-13x23.png" />
+    <Resource Include="Assets\Images\carbon-fiber-bg.png" />
+    <Resource Include="Assets\Images\employee-bg.png" />
+    <Resource Include="Assets\Images\logo_admin.png" />
+    <Resource Include="Assets\Images\logo_employees.png" />
+    <Resource Include="Assets\Images\logo_energy.png" />
+    <Resource Include="Assets\Images\logo_guests.png" />
+    <Resource Include="Assets\Images\logo_ibudget.png" />
+    <Resource Include="Assets\Images\logo_operations.png" />
+    <Resource Include="Assets\Images\logo_sales.png" />
+    <Resource Include="Assets\Images\logo_yield.png" />
+    <Resource Include="Assets\Images\Office_BlackChartBackground.jpg" />
+    <Resource Include="Assets\Images\shinyblue-bg.png" />
+    <Resource Include="Assets\Images\synergi.png" />
+    <Content Include="Assets\MasterResource.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Assets\Themes\BlackBlue\RadComboBox.xaml">
+    <Content Include="Assets\RadComboBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Assets\Themes\BlackBlue\RadDatePicker.xaml">
+    <Content Include="Assets\RadDatePicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Assets\Themes\BlackBlue\RadGridView.xaml">
+    <Content Include="Assets\RadGridView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Assets\Themes\BlackBlue\RadMaskedTextBox.xaml">
+    <Content Include="Assets\RadMaskedTextBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Assets\Themes\BlackBlue\RadNumericUpDown.xaml">
+    <Content Include="Assets\RadNumericUpDown.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Assets\Themes\BlackBlue\RadTabItem.xaml">
+    <Content Include="Assets\RadTabItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Assets\Themes\BlackBlue\RadTreeView.xaml">
+    <Content Include="Assets\RadTreeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Assets\Themes\BlackBlue\RadWindow.xaml">
+    <Content Include="Assets\RadWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Assets\Themes\BlackBlue\SpecificPageResource.xaml">
+    <Content Include="Assets\SpecificPageResource.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Assets\Themes\BlackBlue\TextBox.xaml">
+    <Content Include="Assets\TextBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Content>
@@ -272,6 +290,26 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Administration\UserAccountPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assets\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\Brushes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\ComboBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\RadContextMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -332,6 +370,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MasterPage\SideBarMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ResourceDictionaries\BrushResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ResourceDictionaries\ColourResources.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -101,8 +101,7 @@ namespace Mimosa.Apartment.Silverlight.UI
             {
                 Globals.UserLogin = itemsSource.UserLogin;
                 Globals.AppSettings = itemsSource.AppSettings;
-                Globals.ApplicationCurrentDateTime = itemsSource.ApplicationCurrentDateTime;
-
+                
                 //Security section
                 Globals.UserLogin.IsUserOrganisationAdministrator = SecurityHelper.HasRole(Globals.UserLogin.UserRoleAuths, SecurityHelper.OrganisationAdministratorRoleId);
                 Globals.UserLogin.IsUserSiteAdministrator = SecurityHelper.HasRole(Globals.UserLogin.UserRoleAuths, SecurityHelper.SiteAdministratorRoleId);
@@ -110,58 +109,6 @@ namespace Mimosa.Apartment.Silverlight.UI
                 Globals.UserLogin.IsUserSecurityAdministrator = SecurityHelper.HasRole(Globals.UserLogin.UserRoleAuths, SecurityHelper.SecurityAdminRoleId);
                                                 
             }
-        }
-
-        internal static List<common.AspUser> FilterUserList(List<common.AspUser> userList, List<common.SiteGroup> allSiteGroups)
-        {
-            List<common.AspUser> result = new List<common.AspUser>();
-            if (Globals.UserLogin.UserRoleAuths != null && Globals.UserLogin.UserRoleAuths.Count > 0
-               && Globals.UserLogin.IsUserSecurityAdministrator)
-            {
-                var auths = Globals.UserLogin.UserRoleAuths.Where(i => i.RoleId == SecurityHelper.SecurityAdminRoleId);
-                foreach (common.AspUser user in userList)
-                {
-                    if (!result.Contains(user))
-                    {
-                        foreach (common.UserRoleAuth auth in auths)
-                        {
-                            if (!auth.SiteGroupId.HasValue && !auth.SiteId.HasValue && !auth.DepartmentId.HasValue
-                                || auth.SiteGroupId.HasValue && !auth.SiteId.HasValue && !auth.DepartmentId.HasValue && SiteInSiteGroup(user.SiteId.Value, auth.SiteGroupId.Value, allSiteGroups)
-                                || auth.SiteId.HasValue && !auth.DepartmentId.HasValue && user.SiteId == auth.SiteId
-                                || (!auth.SiteId.HasValue || user.SiteId == auth.SiteId) && auth.DepartmentId.HasValue && !auth.RosterCentreId.HasValue && user.DepartmentId == auth.DepartmentId
-                                || (!auth.SiteId.HasValue || user.SiteId == auth.SiteId) && auth.RosterCentreId.HasValue && !auth.CentreId.HasValue && user.RosterCentreId == auth.RosterCentreId
-                                || (!auth.SiteId.HasValue || user.SiteId == auth.SiteId) && auth.CentreId.HasValue && auth.CentreId == user.CentreId
-                                || !user.SiteId.HasValue)
-                            {
-                                if (user.UserId == Globals.UserLogin.UserUserId || user.MinRoleLevel > Globals.UserLogin.AspUser.MinRoleLevel)
-                                {
-                                    result.Add(user);
-                                    break;
-                                }
-                            }
-
-                            //with special case : user is Sale manager
-                            //if (Globals.UserLogin.IsUserSaleManager)
-                            //{
-                            //    if (_allSalePersons.Count(i => i.UserId == user.UserId) > 0)
-                            //    {
-                            //        if (!auth.SiteGroupId.HasValue
-                            //                || auth.SiteGroupId.HasValue && !auth.SiteId.HasValue && SiteInSiteGroup(user.SiteId, auth.SiteGroupId.Value)
-                            //                || auth.SiteId.HasValue && !auth.DepartmentId.HasValue && user.SiteId == auth.SiteId
-                            //                || user.SiteId == auth.SiteId && auth.DepartmentId.HasValue && !auth.RosterCentreId.HasValue && user.DepartmentId == auth.DepartmentId
-                            //                || user.SiteId == auth.SiteId && auth.RosterCentreId.HasValue && !auth.CentreId.HasValue && user.RosterCentreId == auth.RosterCentreId
-                            //                || user.SiteId == auth.SiteId && auth.CentreId.HasValue && auth.CentreId == user.CentreId)
-                            //        {
-                            //            added = true;
-                            //            break;
-                            //        }
-                            //    }
-                            //}
-                        }
-                    }
-                }                
-            }
-            return result;
         }
 
         internal static bool SiteInSiteGroup(int? userSiteId, int siteGroupId, List<common.SiteGroup> allSiteGroup)

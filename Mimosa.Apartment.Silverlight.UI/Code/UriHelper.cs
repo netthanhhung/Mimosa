@@ -47,5 +47,10 @@ namespace Mimosa.Apartment.Silverlight.UI
         {
             NavigateTo(page, false);
         }
+
+        internal static void Logout()
+        {
+            NavigateTo("Logon.aspx?Logout=true");
+        }
     }
 }

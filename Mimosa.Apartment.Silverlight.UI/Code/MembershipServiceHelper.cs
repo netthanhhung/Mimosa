@@ -320,7 +320,7 @@ namespace Mimosa.Apartment.Silverlight.UI
 
             ApartmentServiceClient proxy = GetProxy(callerKey, callback);
             proxy.ListAspUserCompleted += new EventHandler<ListAspUserCompletedEventArgs>(proxy_ListAspUserCompleted);
-            proxy.ListAspUserAsync(orgId, userId, isLegacy, loadCentreId, callerKey);
+            proxy.ListAspUserAsync(orgId, userId, isLegacy, callerKey);
         }
 
         static void proxy_ListAspUserCompleted(object sender, ListAspUserCompletedEventArgs e)

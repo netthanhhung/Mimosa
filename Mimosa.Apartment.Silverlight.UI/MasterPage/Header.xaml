@@ -5,73 +5,92 @@
     xmlns:local="clr-namespace:Mimosa.Apartment.Silverlight.UI"
     xmlns:telerik="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls"
     xmlns:telerikNavigation="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Navigation">
-    <Grid>
 
+    <Grid>
         <Border
             BorderThickness="0,0,0,1"
-            BorderBrush="{StaticResource DefaultBackgroundGradientStartBrush}">
+            BorderBrush="{StaticResource HeaderBorderBrush}">
 
             <Grid
                 VerticalAlignment="Bottom"
-                Background="{StaticResource DefaultBackgroundBrush}">
+                Background="{StaticResource HeaderBackgroundBrush}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <StackPanel
+                    x:Name="uiMenuBar"
                     Orientation="Horizontal"
                     VerticalAlignment="Bottom">
                     <Button x:Name="uiBtnLogo" Margin="0" Padding="0">
                         <Button.Content>
                             <Grid>
                                 <Image x:Name="uiLogo"
-                                Source="/Mimosa.Apartment.Silverlight.UI;component/Images/mimosa.jpg"
-                                Margin="0" Width="100" Height="50"></Image>
-
-                                <!--<TextBlock
-                                x:Name="uiDeploymentInfo"
-                                Foreground="#BBA598"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Bottom"
-                                FontSize="12"></TextBlock>-->
+                                Source="{StaticResource LogoSourceUrl}"
+                                Margin="0"></Image>
                             </Grid>
                         </Button.Content>
                         <telerikNavigation:RadContextMenu.ContextMenu>
                             <telerikNavigation:RadContextMenu 
-                        x:Name="uiContextMenu"   
-                        EventName="Click"            
-                        VerticalContentAlignment="Center"
-                        Foreground="White"
-                        FontSize="12"
-                        Style="{StaticResource RadContextMenuStyle}" 
-                        ItemTemplate="{StaticResource RadMenuItemTemplate}"
-                        ItemContainerStyle="{StaticResource RadMenuItemContainerStyle}"
-                        ItemClick="uiContextMenu_ItemClick" 
-                        VerticalOffset="10"
-                        HorizontalOffset="5">
+                                x:Name="uiContextMenu"
+                                EventName="Click"
+                                VerticalContentAlignment="Center"
+                                FontSize="12"
+                                Style="{StaticResource RadContextMenuStyle}"
+                                ItemTemplate="{StaticResource RadMenuItemTemplate}"
+                                ItemContainerStyle="{StaticResource RadMenuItemContainerStyle}"
+                                ItemClick="uiContextMenu_ItemClick"
+                                VerticalOffset="10"
+                                HorizontalOffset="5">
                             </telerikNavigation:RadContextMenu>
                         </telerikNavigation:RadContextMenu.ContextMenu>
                     </Button>
 
-                    <local:HeaderMenuButton
-                        x:Name="uiCustomer"
-                        InnerText="[c]ustomer"
-                        HighlightBrush="{StaticResource CustomerBrush}"></local:HeaderMenuButton>
                     <!--<local:HeaderMenuButton
-                        x:Name="uiContract"
-                        InnerText="[c]ontract"
-                        HighlightBrush="{StaticResource ContractBrush}"></local:HeaderMenuButton>-->
-                    
+                    x:Name="uiSales"
+                    InnerText="[s]ales"
+                    ModuleEntryPoint="{StaticResource SalesEntryPoint}"
+                    HighlightBrush="{StaticResource SalesBrush}"></local:HeaderMenuButton>
+                    <local:HeaderMenuButton
+                    x:Name="uiYield"
+                    InnerText="[y]ield"
+                    ModuleEntryPoint="{StaticResource YieldEntryPoint}"
+                    HighlightBrush="{StaticResource YieldBrush}"></local:HeaderMenuButton>
+                    <local:HeaderMenuButton
+                    x:Name="uiEnergy"
+                    InnerText="e[n]ergy"
+                    ModuleEntryPoint="{StaticResource EnergyEntryPoint}"
+                    HighlightBrush="{StaticResource EnergyBrush}"></local:HeaderMenuButton>
+                    <local:HeaderMenuButton
+                    x:Name="uiEmployees"
+                    InnerText="[e]mployees"
+                    ModuleEntryPoint="{StaticResource EmployeeEntryPoint}"
+                    HighlightBrush="{StaticResource EmployeeBrush}"></local:HeaderMenuButton>
+                    <local:HeaderMenuButton
+                    x:Name="uiOperations"
+                    InnerText="ope[r]ations"
+                    ModuleEntryPoint="{StaticResource RosteringEntryPoint}"
+                    HighlightBrush="{StaticResource RosteringBrush}">
+                    </local:HeaderMenuButton>
+                    <local:HeaderMenuButton
+                    x:Name="uiGuests"
+                    InnerText="[g]uests"
+                    ModuleEntryPoint="{StaticResource GuestEntryPoint}"
+                    HighlightBrush="{StaticResource GuestBrush}"></local:HeaderMenuButton>
+                    <local:HeaderMenuButton
+                    x:Name="uiBudget"
+                    InnerText="[i]budget"
+                    ModuleEntryPoint="{StaticResource BudgetEntryPoint}"
+                    HighlightBrush="{StaticResource BudgetBrush}"></local:HeaderMenuButton>-->
                 </StackPanel>
 
-                <TextBlock
-                    x:Name="uiDeploymentInfo"
-                    Grid.Column="1"
-                    Foreground="#BBA598"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Bottom"
-                    Margin="0,0,6,0"
-                    FontSize="8"></TextBlock>
+                <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Bottom" HorizontalAlignment="Right">                    
+                    <TextBlock
+                        x:Name="uiDeploymentInfo"
+                        Foreground="#BBA598"
+                        Margin="0,0,6,0"
+                        FontSize="8"></TextBlock>
+                </StackPanel>
             </Grid>
         </Border>
     </Grid>

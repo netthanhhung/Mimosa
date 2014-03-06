@@ -17,7 +17,7 @@
                 To="16"
                 Duration="0:0:0.5"></DoubleAnimation>
         </Storyboard>
-
+        
         <Style
             x:Key="uiClippedButton"
             TargetType="Button">
@@ -28,7 +28,7 @@
                         TargetType="Button">                                                
                         <local:ClippedGrid
                             x:Name="uiMenuContainer"
-                            Background="{StaticResource DefaultBlackBlueBackgroundGradientBrush}">
+                            Background="{StaticResource MenuBackgroundGradientBrush}">
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup
                                     x:Name="FocusStates">
@@ -66,45 +66,38 @@
                                                 </DiscreteObjectKeyFrame>
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="uiMenuContainer">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource HighlightedBlackBlueBackgroundGradientBrush}" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource HighlightedMenuBackgroundGradientBrush}" />
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>                                    
                                     <VisualState
                                         x:Name="Pressed" />
-                                    <VisualState
-                                        x:Name="Disabled" />
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Duration="0:0:0" Storyboard.TargetProperty="Background" Storyboard.TargetName="uiMenuContainer">
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{StaticResource DisabledMenuBackgroundGradientBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-
-                            
-                            <!--<local:Highlight
-                                Visibility="{Binding HighlightVisibility}"
-                                HighlightBrush="{Binding HighlightBrush}" />-->
 
                             <Grid
                                 Margin="2,2,7,2"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center">
+                                
 
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition
                                         Width="*" />
                                     <ColumnDefinition
                                         Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                
-                                <!--<TextBlock
-                                    x:Name="uiPrefix"
-                                    Grid.Column="1"
-                                    Foreground="{Binding HighlightBrush}" 
-                                    Text="mimosa"
-                                    FontSize="10"
-                                     />-->
+                                </Grid.ColumnDefinitions>                                
 
                                 <TextBlock
                                     x:Name="uiModuleName"
-                                    Foreground="White"
+                                    Foreground="{StaticResource BaseControlForeground}"
                                     local:HeaderMenuButton.ExtendedText="{Binding InnerText, Converter={StaticResource TextBlockInlineConverter}}"
                                      />
 
@@ -115,7 +108,97 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style
+            x:Key="uiHighlightClippedButton"
+            TargetType="Button">
+            <Setter
+                Property="Template">
+                <Setter.Value>
+                    <ControlTemplate
+                        TargetType="Button">
+                        <local:ClippedGrid
+                            x:Name="uiMenuContainer"
+                            Background="{StaticResource HighlightedMenuBackgroundGradientBrush}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup
+                                    x:Name="FocusStates">
+                                    <VisualState
+                                        x:Name="Focused" />
+                                    <VisualState
+                                        x:Name="Unfocused" />
+                                </VisualStateGroup>
+                                <VisualStateGroup
+                                    x:Name="CommonStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition
+                                            To="Normal"
+                                            GeneratedDuration="0:0:0.1" />
+                                        <VisualTransition
+                                            To="MouseOver"
+                                            GeneratedDuration="0:0:0.1" />
+                                    </VisualStateGroup.Transitions>
 
+                                    <VisualState
+                                        x:Name="Normal" />
+                                    <VisualState
+                                        x:Name="MouseOver">
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                                Storyboard.TargetName="uiModuleName"
+                                                Storyboard.TargetProperty="FontSize"
+                                                From="30"
+                                                To="32"></DoubleAnimation>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.ColumnSpan)" Storyboard.TargetName="uiModuleName">
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <system:Int32>2</system:Int32>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="uiMenuContainer">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource HighlightedMenuBackgroundGradientBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState
+                                        x:Name="Pressed" />
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Duration="0:0:0" Storyboard.TargetProperty="Background" Storyboard.TargetName="uiMenuContainer">
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{StaticResource DisabledMenuBackgroundGradientBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+
+                            <Grid
+                                Margin="2,2,7,2"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition
+                                        Width="*" />
+                                    <ColumnDefinition
+                                        Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock
+                                    x:Name="uiModuleName"
+                                    Foreground="{StaticResource BaseControlForeground}"
+                                    FontSize="28"
+                                    local:HeaderMenuButton.ExtendedText="{Binding InnerText, Converter={StaticResource TextBlockInlineConverter}}"
+                                     />
+
+                            </Grid>
+                            <ContentPresenter />
+                        </local:ClippedGrid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
 
     <Button
@@ -124,6 +207,7 @@
         Width="135"
         Height="48"
         Margin="5,0,5,0"
+        FontSize="16"
         Style="{StaticResource uiClippedButton}">
         <telerikNavigation:RadContextMenu.ContextMenu>              
             <telerikNavigation:RadContextMenu 

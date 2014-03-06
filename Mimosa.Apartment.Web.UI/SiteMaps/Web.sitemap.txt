@@ -19,14 +19,15 @@
 	  url="/Administration/UserAccountPage.xaml"
 	  title="User Account Administration"
 	  description="User Account Administration"/>	
-	<siteMapNode
-	  url="/Administration/ModuleAdminPage.xaml"
-	  title="Module Administration"
-	  description="Module Administration"/>
-	<siteMapNode
-	  url="/Administration/PackageAdminPage.xaml"
-	  title="Package Administration"
-	  description="Package Administration"/>
+    <siteMapNode
+	  title="Administration"
+	  description="Administration">
+
+		<siteMapNode
+		  url="/Administration/PortalAdminPage.xaml"
+		  title="Organisagion Administration"
+		  description="Organisagion Administration"/>
+     </siteMapNode>
   </siteMapNode>
 
   <siteMapNode

@@ -128,12 +128,11 @@ namespace Mimosa.Apartment.Silverlight.UI
 
         internal static AppSettings AppSettings { get; set; }
 
-        internal static DateTime? ApplicationCurrentDateTime { get; set; }
         internal static DateTime Today
         {
             get
             {
-                return ApplicationCurrentDateTime.HasValue ? ApplicationCurrentDateTime.Value.Date : DateTime.Today;
+                return DateTime.Today;
             }
         }
 
@@ -141,7 +140,7 @@ namespace Mimosa.Apartment.Silverlight.UI
         {
             get
             {
-                return ApplicationCurrentDateTime.HasValue ? ApplicationCurrentDateTime.Value : DateTime.Now;
+                return DateTime.Now;
             }
         }
 
@@ -183,6 +182,31 @@ namespace Mimosa.Apartment.Silverlight.UI
 
         internal const int MaxEmailContent = 8000;
 
+        internal static LayoutManager LayoutManager
+        {
+            get
+            {
+                return App.Current.Resources["LayoutManager"] as LayoutManager;
+            }
+        }
 
+        internal static void ApplyTheme(string themeName, bool reloadPage)
+        {
+            if (Application.Current.Resources.MergedDictionaries.Count == 2)
+            {
+                ResourceDictionary rd = new ResourceDictionary()
+                {
+                    Source = new Uri("/Assets/Themes/" + themeName + "/MasterResource.xaml", UriKind.Relative)
+                };
+
+                Application.Current.Resources.MergedDictionaries.RemoveAt(1);
+                Application.Current.Resources.MergedDictionaries.Add(rd);
+            }
+
+            if (reloadPage)
+            {
+                Application.Current.RootVisual.SetValue(UserControl.ContentProperty, new MainPage());
+            }
+        }
     }
 }

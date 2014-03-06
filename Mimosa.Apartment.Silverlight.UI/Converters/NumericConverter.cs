@@ -25,7 +25,7 @@ namespace Mimosa.Apartment.Silverlight.UI
             {
                 return string.Empty;
             }
-            var input = (Decimal)value;
+            var input = System.Convert.ToDecimal(value);
             string format = Utilities.ToString(parameter);
             if (format[0] == '-')
             {

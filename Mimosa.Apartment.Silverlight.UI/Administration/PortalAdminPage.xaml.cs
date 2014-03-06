@@ -185,7 +185,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                     _seletedOrgId = selectedOrg.OrganisationId;
                     if (selectedOrg.ContactInformation != null)
                     {
-                        gridContactInfo.DataContext = selectedOrg.ContactInformation;                        
+                        ucCntactInfoPanel.DataContext = selectedOrg.ContactInformation;                        
                     }
                     gridContactAccount.Visibility = System.Windows.Visibility.Visible;
                     txtContactInfo.Text = string.Format(UserMessages.ContactInfoFor, selectedOrg.Name);
@@ -202,18 +202,6 @@ namespace Mimosa.Apartment.Silverlight.UI
             if (item != null && e.PropertyName != "IsChanged")
             {
                 item.IsChanged = true;
-            }
-        }
-
-        void btnSaveContact_Click(object sender, RoutedEventArgs e)
-        {
-            ContactInformation contactInfo = gridContactInfo.DataContext as ContactInformation;
-            List<ContactInformation> list = new List<ContactInformation>();
-            list.Add(contactInfo);
-            if (contactInfo != null)
-            {
-                Globals.IsBusy = true;
-                DataServiceHelper.SaveContactInformationAsync(list, SaveOrganisationCompleted);
             }
         }
         #endregion

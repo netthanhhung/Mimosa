@@ -264,8 +264,8 @@ namespace Mimosa.Apartment.Silverlight.UI
         {
             Guid callerKey = Guid.NewGuid();
             ApartmentServiceClient proxy = GetProxy(callerKey, callback);
-            proxy.SaveOrganisationCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(proxy_VoidMethodCompleted);
-            proxy.SaveOrganisationAsync(saveList, callerKey);
+            proxy.SaveOrganisationsCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(proxy_VoidMethodCompleted);
+            proxy.SaveOrganisationsAsync(saveList, callerKey);
         }
 
         // ListContactInformation
