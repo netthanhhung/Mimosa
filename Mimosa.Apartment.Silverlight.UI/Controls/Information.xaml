@@ -26,7 +26,7 @@
                     </Grid.ColumnDefinitions>
                     <Image x:Name="uiImageInfo" 
                            Grid.Column="0" Margin="5,5,5,5"
-                           Source="/Mimosa.Apartment.Silverlight.UI;component/Images/info.png"></Image>
+                           Source="/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/info.png"></Image>
                     <TextBlock x:Name="textInfo"
                             Grid.Column="1"                
                             Margin="{StaticResource SmallContentMargin}"

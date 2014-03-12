@@ -32,27 +32,27 @@
 
         <ImageBrush
             x:Key="DefaultBackgroundImageBrush"
-            ImageSource="/Mimosa.Apartment.Silverlight.UI;component/Images/DefaultBackground.png">
+            ImageSource="/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/DefaultBackground.png">
         </ImageBrush>
         <ImageBrush
             x:Key="BlueBackground14ImageBrush"
-            ImageSource="/Mimosa.Apartment.Silverlight.UI;component/Images/BlueBg14.png">
+            ImageSource="/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/BlueBg14.png">
         </ImageBrush>
         <ImageBrush
             x:Key="BlackBlueBackgroundImageBrush"
-            ImageSource="/Mimosa.Apartment.Silverlight.UI;component/Images/BlackBlueBg.png">
+            ImageSource="/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/BlackBlueBg.png">
         </ImageBrush>
         <ImageBrush
             x:Key="CarbonFiberImageBrush" Stretch="UniformToFill"
-            ImageSource="/Mimosa.Apartment.Silverlight.UI;component/Images/carbon-fiber-bg.png">
+            ImageSource="/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/carbon-fiber-bg.png">
         </ImageBrush>
         <ImageBrush
             x:Key="CarbonFiberColumnImageBrush" Stretch="UniformToFill"
-            ImageSource="/Mimosa.Apartment.Silverlight.UI;component/Images/carbon-fiber-13x23.png">
+            ImageSource="/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/carbon-fiber-13x23.png">
         </ImageBrush>
         <ImageBrush
             x:Key="EmployeeImageBrush" Stretch="UniformToFill"
-            ImageSource="/Mimosa.Apartment.Silverlight.UI;component/Images/employee-bg.png">
+            ImageSource="/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/Lighthouse.jpg">
         </ImageBrush>
         <LinearGradientBrush
             x:Key="DefaultBlackBlueBackgroundGradientBrush"
@@ -131,7 +131,6 @@
         </Style>
 
         <Style
-            x:Key="TextBlockStyle"
             TargetType="TextBlock">
             <Setter
                 Property="Foreground"
@@ -164,11 +163,10 @@
         </Style>
 
         <Style
-            x:Key="CheckBoxStyle"
             TargetType="CheckBox">
             <Setter
                 Property="Foreground"
-                Value="Black" />
+                Value="White" />
             <Setter
                 Property="Margin"
                 Value="3,3,3,3" />
@@ -775,7 +773,7 @@
                 Property="Background">
                 <Setter.Value>
                     <ImageBrush
-                        ImageSource="/Mimosa.Apartment.Silverlight.UI;component/Images/Office_BlackChartBackground.jpg" />
+                        ImageSource="/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/Office_BlackChartBackground.jpg" />
                 </Setter.Value>
             </Setter>
         </Style>
@@ -3203,14 +3201,14 @@
         <SolidColorBrush x:Key="MenuPopupBackground" Color="Transparent"/>
         <!--<ImageBrush
             x:Key="MenuPopupBackground"
-            ImageSource="/Mimosa.Apartment.Silverlight.UI;component/Images/BlueBg14.png">
+            ImageSource="/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/BlueBg14.png">
         </ImageBrush>-->
         <SolidColorBrush x:Key="MenuPopupOuterBorder" Color="#FF848484"/>
         <SolidColorBrush x:Key="ControlForeground_Normal" Color="Transparent"/>
         <!--<SolidColorBrush x:Key="ControlForeground_Normal" Color="#FF000000"/>-->
         <!--<ImageBrush
             x:Key="ControlForeground_Normal"
-            ImageSource="/Mimosa.Apartment.Silverlight.UI;component/Images/BlueBg14.png">
+            ImageSource="/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/BlueBg14.png">
         </ImageBrush>-->
         <telerik:Office_BlackTheme x:Key="Theme"/>
         <telerik:Expression_DarkTheme x:Key="DarkTheme"/>

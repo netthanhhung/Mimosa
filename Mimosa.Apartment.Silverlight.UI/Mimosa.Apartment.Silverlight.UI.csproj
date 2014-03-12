@@ -222,17 +222,8 @@
     <Resource Include="Assets\Images\carbon-fiber-13x23.png" />
     <Resource Include="Assets\Images\carbon-fiber-bg.png" />
     <Resource Include="Assets\Images\employee-bg.png" />
-    <Resource Include="Assets\Images\logo_admin.png" />
-    <Resource Include="Assets\Images\logo_employees.png" />
-    <Resource Include="Assets\Images\logo_energy.png" />
-    <Resource Include="Assets\Images\logo_guests.png" />
-    <Resource Include="Assets\Images\logo_ibudget.png" />
-    <Resource Include="Assets\Images\logo_operations.png" />
-    <Resource Include="Assets\Images\logo_sales.png" />
-    <Resource Include="Assets\Images\logo_yield.png" />
     <Resource Include="Assets\Images\Office_BlackChartBackground.jpg" />
     <Resource Include="Assets\Images\shinyblue-bg.png" />
-    <Resource Include="Assets\Images\synergi.png" />
     <Page Include="Administration\ChangePasswordPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -403,7 +394,45 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ApartmentService\ApartmentService.disco" />
-    <Resource Include="Images\mimosa.jpg" />
+    <Resource Include="Assets\Images\BlackBlueBg.png" />
+    <Resource Include="Assets\Images\BlueBg14.png" />
+    <Resource Include="Assets\Images\Boardroom.png" />
+    <Resource Include="Assets\Images\carbon-fiber-8x8.png" />
+    <Resource Include="Assets\Images\ChartOptions.gif" />
+    <Resource Include="Assets\Images\ChartOptions.png" />
+    <Resource Include="Assets\Images\checkboxOff.gif" />
+    <Resource Include="Assets\Images\checkboxOn.gif" />
+    <Resource Include="Assets\Images\Clear.png" />
+    <Resource Include="Assets\Images\DefaultBackground.png" />
+    <Resource Include="Assets\Images\empty_user_photo.png" />
+    <Resource Include="Assets\Images\grid-add-multiple.png" />
+    <Resource Include="Assets\Images\grid-delete.png" />
+    <Resource Include="Assets\Images\grid-edit.png" />
+    <Resource Include="Assets\Images\grid-select-disabled.png" />
+    <Resource Include="Assets\Images\grid-select.png" />
+    <Resource Include="Assets\Images\happy-smiley-face.png" />
+    <Resource Include="Assets\Images\info.png" />
+    <Resource Include="Assets\Images\infosmall.png" />
+    <Resource Include="Assets\Images\Lighthouse.jpg" />
+    <Resource Include="Assets\Images\lookupIcon.png" />
+    <Resource Include="Assets\Images\mimosa.jpg" />
+    <Resource Include="Assets\Images\object_add.png" />
+    <Resource Include="Assets\Images\offline.png" />
+    <Resource Include="Assets\Images\orange-question-mark.png" />
+    <Resource Include="Assets\Images\padlock.png" />
+    <Resource Include="Assets\Images\Pause.png" />
+    <Resource Include="Assets\Images\plain-face.png" />
+    <Resource Include="Assets\Images\Play.png" />
+    <Resource Include="Assets\Images\red-cross.png" />
+    <Resource Include="Assets\Images\ReportIcon.png" />
+    <Resource Include="Assets\Images\restore.png" />
+    <Resource Include="Assets\Images\restore2.png" />
+    <Resource Include="Assets\Images\Routing.PNG" />
+    <Resource Include="Assets\Images\sad-face.png" />
+    <Resource Include="Assets\Images\startLocationIcon.png" />
+    <Resource Include="Assets\Images\StepForward.png" />
+    <Resource Include="Assets\Images\Transparent.png" />
+    <Resource Include="Assets\Images\uncle-scrooge.png" />
     <Content Include="Properties\AppManifest.xml" />
     <Content Include="ServiceReferences.ClientConfig">
       <SubType>Designer</SubType>
@@ -417,54 +446,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\BlackBlueBg.png" />
-    <Resource Include="Images\BlueBg14.png" />
-    <Resource Include="Images\Boardroom.png" />
-    <Resource Include="Images\carbon-fiber-10x10.png" />
-    <Resource Include="Images\carbon-fiber-13x23.png" />
-    <Resource Include="Images\carbon-fiber-8x8.png" />
-    <Resource Include="Images\carbon-fiber-bg.png" />
-    <Resource Include="Images\ChartOptions.gif" />
-    <Resource Include="Images\ChartOptions.png" />
-    <Resource Include="Images\checkboxOff.gif" />
-    <Resource Include="Images\checkboxOn.gif" />
-    <Resource Include="Images\Clear.png" />
-    <Resource Include="Images\DefaultBackground.png" />
-    <Resource Include="Images\employee-bg.png" />
-    <Resource Include="Images\empty_user_photo.png" />
-    <Resource Include="Images\endLocationIcon.png" />
-    <Resource Include="Images\green-cross.png" />
-    <Resource Include="Images\green-tick.png" />
-    <Resource Include="Images\grid-add-multiple.png" />
-    <Resource Include="Images\grid-add.png" />
-    <Resource Include="Images\grid-delete.png" />
-    <Resource Include="Images\grid-edit.png" />
-    <Resource Include="Images\grid-select-disabled.png" />
-    <Resource Include="Images\grid-select.png" />
-    <Resource Include="Images\happy-smiley-face.png" />
-    <Resource Include="Images\info.png" />
-    <Resource Include="Images\infosmall.png" />
-    <Resource Include="Images\lookupIcon.png" />
-    <Resource Include="Images\object_add.png" />
-    <Resource Include="Images\Office_BlackChartBackground.jpg" />
-    <Resource Include="Images\offline.png" />
-    <Resource Include="Images\orange-question-mark.png" />
-    <Resource Include="Images\padlock.png" />
-    <Resource Include="Images\Pause.png" />
-    <Resource Include="Images\plain-face.png" />
-    <Resource Include="Images\Play.png" />
-    <Resource Include="Images\red-cross.png" />
-    <Resource Include="Images\ReportIcon.png" />
-    <Resource Include="Images\restore.png" />
-    <Resource Include="Images\restore2.png" />
-    <Resource Include="Images\Routing.PNG" />
-    <Resource Include="Images\sad-face.png" />
-    <Resource Include="Images\startLocationIcon.png" />
-    <Resource Include="Images\StepForward.png" />
-    <Resource Include="Images\Transparent.png" />
-    <Resource Include="Images\uncle-scrooge.png" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\ApartmentService\" />

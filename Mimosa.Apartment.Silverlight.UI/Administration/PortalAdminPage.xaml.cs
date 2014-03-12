@@ -188,7 +188,6 @@ namespace Mimosa.Apartment.Silverlight.UI
                         ucCntactInfoPanel.DataContext = selectedOrg.ContactInformation;                        
                     }
                     gridContactAccount.Visibility = System.Windows.Visibility.Visible;
-                    txtContactInfo.Text = string.Format(UserMessages.ContactInfoFor, selectedOrg.Name);
                     txtAccountInfo.Text = string.Format(UserMessages.AccountInfoFor, selectedOrg.Name);
                     ucUserAccount.RebindData(selectedOrg.OrganisationId);
 

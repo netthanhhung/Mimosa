@@ -49,7 +49,7 @@
             <local:ClippedGrid
                 Grid.Row="1"
                 Margin="10" Opacity="0.9">
-                <bg:TiledBGControl BorderThickness="0" TiledImageSource="/Mimosa.Apartment.Silverlight.UI;component/Images/carbon-fiber-10x10.png"/>
+                <bg:TiledBGControl BorderThickness="0" TiledImageSource="/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/carbon-fiber-10x10.png"/>
                 <local:UserAccount x:Name="ucUserAccount"></local:UserAccount>
 
             </local:ClippedGrid>

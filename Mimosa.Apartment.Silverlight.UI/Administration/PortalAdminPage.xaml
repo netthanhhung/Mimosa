@@ -142,26 +142,18 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"></RowDefinition>
                                 <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-
-                            <TextBlock x:Name="txtContactInfo" 
-                                       Grid.Column="0"
-                                       Text="Contact Information" 
-                                       Margin="5,5,5,5" Height="25" FontSize="12" />
-                            <local:ContactInformationPanel x:Name="ucCntactInfoPanel" Margin="5,5,5,5"></local:ContactInformationPanel>
-                           
-
-
+                            
+                            <local:ContactInformationPanel x:Name="ucCntactInfoPanel" Margin="5,5,5,5" Grid.RowSpan="2"></local:ContactInformationPanel>
+                            
                             <TextBlock x:Name="txtAccountInfo" 
                                            Text="Account Information" 
                                            Grid.Column="1"
                                            Margin="5,5,5,5" Height="25" FontSize="12" />
-
                             <local:UserAccount x:Name="ucUserAccount" Grid.Row="1" Grid.Column="1" IsEditable="True"></local:UserAccount>
 
                         </Grid>

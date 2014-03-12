@@ -42,9 +42,9 @@ namespace Mimosa.Apartment.Silverlight.UI
 
         #region Properties
         //private const string DisplayPassword = "display";
-        private const string OnlineImage = "/Mimosa.Apartment.Silverlight.UI;component/Images/online.png";
-        private const string OfflineImage = "/Mimosa.Apartment.Silverlight.UI;component/Images/offline.png";
-        private const string TransparentImage = "/Mimosa.Apartment.Silverlight.UI;component/Images/Transparent.png";
+        private const string OnlineImage = "/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/online.png";
+        private const string OfflineImage = "/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/offline.png";
+        private const string TransparentImage = "/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/Transparent.png";
 
         private List<AspUser> _aspUsers = new List<AspUser>();        
 

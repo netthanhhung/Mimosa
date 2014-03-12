@@ -10,13 +10,18 @@ namespace Mimosa.Apartment.Common
             return new SqlParameter[]
 			{
 				Utilities.MakeInputOutputParameter(ColumnNames.ContactInformationId, NullableRecordId),
-				Utilities.MakeInputParameter(ColumnNames.Address, _address),
-				Utilities.MakeInputParameter(ColumnNames.City, _city),
-				Utilities.MakeInputParameter(ColumnNames.State, _state),
-				Utilities.MakeInputParameter(ColumnNames.Postcode, _postcode),
-				Utilities.MakeInputParameter(ColumnNames.CountryId, _countryId),
-				Utilities.MakeInputParameter(ColumnNames.PhoneNumber, _phoneNumber),
-				Utilities.MakeInputParameter(ColumnNames.FaxNumber, _faxNumber)
+                Utilities.MakeInputParameter(ColumnNames.ContactTypeId, ContactTypeId),
+                Utilities.MakeInputParameter(ColumnNames.FirstName, FirstName),
+                Utilities.MakeInputParameter(ColumnNames.LastName, LastName),
+				Utilities.MakeInputParameter(ColumnNames.Address, Address),
+                Utilities.MakeInputParameter(ColumnNames.Address2, Address2),
+				Utilities.MakeInputParameter(ColumnNames.City, City),
+				Utilities.MakeInputParameter(ColumnNames.State, State),
+				Utilities.MakeInputParameter(ColumnNames.Postcode, Postcode),
+				Utilities.MakeInputParameter(ColumnNames.CountryId, CountryId),
+				Utilities.MakeInputParameter(ColumnNames.PhoneNumber, PhoneNumber),
+				Utilities.MakeInputParameter(ColumnNames.FaxNumber, FaxNumber),
+                Utilities.MakeInputParameter(ColumnNames.Email, Email)
 			};
         }
     }

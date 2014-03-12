@@ -9,26 +9,17 @@
     </UserControl.Resources>
 
     <Grid x:Name="LayoutRootInformation">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
         <Grid x:Name="gridContactAccount">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
 
             <TextBlock x:Name="txtContactInfo" 
-                                       Grid.Column="0"
                                        Text="Contact Information" 
                                        Margin="5,5,5,5" Height="25" FontSize="12" />
 
-            <Grid x:Name="gridContactInfo" Grid.Column="0" Grid.Row="1">
+            <Grid x:Name="gridContactInfo" Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
@@ -145,7 +136,7 @@
                         Width="150"
                         Margin="0"
                         DisplayMemberPath="Name"
-                        SelectedValuePath="CountryId"
+                        SelectedValuePath="CountryId" HorizontalAlignment="Left"
                         SelectedValue="{Binding CountryId, Mode=TwoWay}">
                 </ComboBox>
                 <TextBlock

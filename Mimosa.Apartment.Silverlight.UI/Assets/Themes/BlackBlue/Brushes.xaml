@@ -50,7 +50,7 @@
 
     <ImageBrush
             x:Key="ImageBackgroundBrush" Stretch="UniformToFill"
-            ImageSource="/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/employee-bg.png">
+            ImageSource="/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/Lighthouse.jpg">
     </ImageBrush>
 
     <ImageBrush
@@ -83,15 +83,7 @@
 
     <!-- ******STRINGS****** -->
     <!-- **************************** -->
-    <System:String x:Key="LogoSourceUrl">/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/synergi.png</System:String>
-    <System:String x:Key="LogoAdministrationSourceUrl">/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/logo_admin.png</System:String>
-    <System:String x:Key="LogoSalesSourceUrl">/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/logo_sales.png</System:String>
-    <System:String x:Key="LogoYieldSourceUrl">/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/logo_yield.png</System:String>
-    <System:String x:Key="LogoEnergySourceUrl">/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/logo_energy.png</System:String>
-    <System:String x:Key="LogoOperationsSourceUrl">/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/logo_operations.png</System:String>
-    <System:String x:Key="LogoEmployeesSourceUrl">/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/logo_employees.png</System:String>
-    <System:String x:Key="LogoGuestsSourceUrl">/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/logo_guests.png</System:String>
-    <System:String x:Key="LogoIBudgetSourceUrl">/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/logo_ibudget.png</System:String>
+    <System:String x:Key="LogoSourceUrl">/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/mimosa.jpg</System:String>
     <BitmapImage
         x:Key="CarbonFiberImage"
         UriSource="/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/carbon-fiber-10x10.png">
