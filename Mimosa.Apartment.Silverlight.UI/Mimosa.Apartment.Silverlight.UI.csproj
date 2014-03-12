@@ -413,7 +413,7 @@
     <Resource Include="Assets\Images\happy-smiley-face.png" />
     <Resource Include="Assets\Images\info.png" />
     <Resource Include="Assets\Images\infosmall.png" />
-    <Resource Include="Assets\Images\Lighthouse.jpg" />
+    <Resource Include="Assets\Images\MainBackGround.jpg" />
     <Resource Include="Assets\Images\lookupIcon.png" />
     <Resource Include="Assets\Images\mimosa.jpg" />
     <Resource Include="Assets\Images\object_add.png" />

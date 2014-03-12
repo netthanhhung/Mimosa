@@ -6,13 +6,6 @@
     xmlns:bg="clr-namespace:TiledBG;assembly=TiledBG"
     xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation">
 
-    <navigation:Page.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Assets/Themes/BlackBlue/MasterResource.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </navigation:Page.Resources>
     <Grid Style="{StaticResource LayoutRootGridStyle}">
         <Grid.RowDefinitions>
             <RowDefinition

@@ -52,7 +52,7 @@
         </ImageBrush>
         <ImageBrush
             x:Key="EmployeeImageBrush" Stretch="UniformToFill"
-            ImageSource="/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/Lighthouse.jpg">
+            ImageSource="/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/MainBackGround.jpg">
         </ImageBrush>
         <LinearGradientBrush
             x:Key="DefaultBlackBlueBackgroundGradientBrush"

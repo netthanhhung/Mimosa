@@ -50,7 +50,7 @@
 
     <ImageBrush
             x:Key="ImageBackgroundBrush" Stretch="UniformToFill"
-            ImageSource="/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/Lighthouse.jpg">
+            ImageSource="/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/MainBackGround.jpg">
     </ImageBrush>
 
     <ImageBrush
