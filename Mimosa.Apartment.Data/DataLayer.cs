@@ -151,6 +151,10 @@ namespace Mimosa.Apartment.Data
         }
 
 
+        #endregion
+
+        #region Security
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         public List<UserRoleAuth> ListUserRoleAuth(int? orgId, Guid? userId, Guid? roleId)
         {
@@ -162,6 +166,69 @@ namespace Mimosa.Apartment.Data
             }
             return result;
         }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public List<Component> ListComponent(int? componentId)
+        {
+            List<Component> result = new List<Component>();
+
+            using (IDataReader reader = _db.ExecuteReader("procListComponent", componentId))
+            {
+                Factory.FillComponentList(result, reader);
+            }
+            return result;
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public List<RoleComponentPermission> ListRoleComponentPermission(Guid? roleId, int? componentId)
+        {
+            List<RoleComponentPermission> result = new List<RoleComponentPermission>();
+
+            using (IDataReader reader = _db.ExecuteReader("procListRoleComponentPermission", roleId, componentId))
+            {
+                Factory.FillRoleComponentPermissionList(result, reader);
+            }
+            return result;
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public List<RoleComponentPermission> ListRoleComponentPermissionByUser(Guid? userId)
+        {
+            List<RoleComponentPermission> result = new List<RoleComponentPermission>();
+
+            using (IDataReader reader = _db.ExecuteReader("procListRoleComponentPermissionByUser", userId))
+            {
+                Factory.FillRoleComponentPermissionList(result, reader);
+            }
+            return result;
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public List<AspRole> ListAspRole(Guid? roleId)
+        {
+            List<AspRole> result = new List<AspRole>();
+
+            using (IDataReader reader = _db.ExecuteReader("procListAspRole", roleId))
+            {
+                Factory.FillAspRoleList(result, reader);
+            }
+            return result;
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public void SaveAspRole(string applicationName, AspRole saveItem, string currentUser)
+        {
+            _db.ExecuteNonQuery("procSaveAspRole", applicationName, saveItem.RoleId, saveItem.RoleName,
+                saveItem.LoweredRoleName, saveItem.Description, currentUser);
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public void DeleteAspRole(AspRole deleteItem)
+        {
+            _db.ExecuteNonQuery("procDeleteAspRole", deleteItem.RoleId);
+        }
+
+
         #endregion
 
         #region Organisation
@@ -219,9 +286,26 @@ namespace Mimosa.Apartment.Data
         public List<Organisation> ListOrganisation()
         {
             List<Organisation> result = new List<Organisation>();
-            using (IDataReader reader = this._db.ExecuteReader(CommandType.StoredProcedure, "procListOrganisation"))
+            using (IDataReader reader = this._db.ExecuteReader("procListOrganisation"))
             {
                 Factory.PopulateOrganisationList(result, reader);
+            }
+            return result;
+        }
+        #endregion
+
+        #region Sites
+        /// <summary>
+        /// Lists the Site.
+        /// </summary>
+        /// <returns>The generic Site list.</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public List<Site> ListSite(int? orgId, int? siteId, bool showLegacy)
+        {
+            List<Site> result = new List<Site>();
+            using (IDataReader reader = this._db.ExecuteReader("procListSite", orgId, siteId, showLegacy))
+            {
+                Factory.PopulateSiteList(result, reader);
             }
             return result;
         }

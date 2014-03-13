@@ -268,6 +268,38 @@ namespace Mimosa.Apartment.Silverlight.UI
             proxy.SaveOrganisationsAsync(saveList, callerKey);
         }
 
+        internal delegate void ListSiteCallback(List<Site> itemSource);
+        internal static void ListSiteAsync(int? orgId, int? siteId, bool showLegacy, bool loadContact, ListSiteCallback callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.ListSiteCompleted += new EventHandler<ListSiteCompletedEventArgs>(proxy_ListSiteCompleted);
+            proxy.ListSiteAsync(orgId, siteId, showLegacy, loadContact, callerKey);
+        }
+
+        static void proxy_ListSiteCompleted(object sender, ListSiteCompletedEventArgs e)
+        {
+            Guid callerKey = (Guid)e.UserState;
+            if (_callbacks.ContainsKey(callerKey))
+            {
+                List<Site> itemSource = new List<Site>();
+                if (e.Result != null)
+                    itemSource = e.Result;
+                ((ListSiteCallback)_callbacks[callerKey]).Invoke(itemSource);
+
+                _callbacks.Remove(callerKey);
+            }
+        }
+
+        //SaveSite
+        internal static void SaveSiteAsync(List<Site> saveList, EmptyCallback callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.SaveSiteCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(proxy_VoidMethodCompleted);
+            proxy.SaveSiteAsync(saveList, callerKey);
+        }
+
         // ListContactInformation
         internal delegate void ListContactInformationCallback(List<ContactInformation> itemSource);
         internal static void ListContactInformationAsync(int? contactInformationId, ListContactInformationCallback callback)
@@ -329,6 +361,148 @@ namespace Mimosa.Apartment.Silverlight.UI
             proxy.SaveCustomerCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(proxy_VoidMethodCompleted);
             proxy.SaveCustomerAsync(saveList, callerKey);
         }
+
+        #region Security
+        // ListComponent
+        internal delegate void ListComponentCallBack(List<Component> itemSource);
+        internal static void ListComponentAsync(int? componentId, ListComponentCallBack callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.ListComponentCompleted += new EventHandler<ListComponentCompletedEventArgs>(proxy_ListComponentCompleted);
+            proxy.ListComponentAsync(componentId, callerKey);
+        }
+
+        static void proxy_ListComponentCompleted(object sender, ListComponentCompletedEventArgs e)
+        {
+            Guid callerKey = (Guid)e.UserState;
+            if (_callbacks.ContainsKey(callerKey))
+            {
+                List<Component> itemSource = e.Result;
+                ((ListComponentCallBack)_callbacks[callerKey]).Invoke(itemSource);
+
+                _callbacks.Remove(callerKey);
+            }
+        }
+
+        // ListRoleComponentPermission
+        internal delegate void ListRoleComponentPermissionCallBack(List<RoleComponentPermission> itemSource);
+        internal static void ListRoleComponentPermissionAsync(Guid? roleId, int? componentId, ListRoleComponentPermissionCallBack callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.ListRoleComponentPermissionCompleted += new EventHandler<ListRoleComponentPermissionCompletedEventArgs>(proxy_ListRoleComponentPermissionCompleted);
+            proxy.ListRoleComponentPermissionAsync(roleId, componentId, callerKey);
+        }
+
+        static void proxy_ListRoleComponentPermissionCompleted(object sender, ListRoleComponentPermissionCompletedEventArgs e)
+        {
+            Guid callerKey = (Guid)e.UserState;
+            if (_callbacks.ContainsKey(callerKey))
+            {
+                List<RoleComponentPermission> itemSource = e.Result;
+                ((ListRoleComponentPermissionCallBack)_callbacks[callerKey]).Invoke(itemSource);
+
+                _callbacks.Remove(callerKey);
+            }
+        }
+
+        internal static void SaveRoleComponentPermissionAsync(List<RoleComponentPermission> saveList, EmptyCallback callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.SaveRoleComponentPermissionCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(proxy_VoidMethodCompleted);
+            proxy.SaveRoleComponentPermissionAsync(saveList, callerKey);
+        }
+
+        // ListAspRole
+        internal delegate void ListAspRoleCallBack(List<AspRole> itemSource);
+        internal static void ListAspRoleAsync(Guid? roleId, ListAspRoleCallBack callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.ListAspRoleCompleted += new EventHandler<ListAspRoleCompletedEventArgs>(proxy_ListAspRoleCompleted);
+            proxy.ListAspRoleAsync(roleId, callerKey);
+        }
+
+        static void proxy_ListAspRoleCompleted(object sender, ListAspRoleCompletedEventArgs e)
+        {
+            Guid callerKey = (Guid)e.UserState;
+            if (_callbacks.ContainsKey(callerKey))
+            {
+                List<AspRole> itemSource = e.Result;
+                ((ListAspRoleCallBack)_callbacks[callerKey]).Invoke(itemSource);
+
+                _callbacks.Remove(callerKey);
+            }
+        }
+
+        internal static void SaveAspRoleAsync(List<AspRole> saveList, string currentUser, EmptyCallback callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.SaveAspRoleCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(proxy_VoidMethodCompleted);
+            proxy.SaveAspRoleAsync(saveList, currentUser, callerKey);
+        }
+
+        // ListUserRoleAuth
+        internal delegate void ListUserRoleAuthCallBack(List<UserRoleAuth> itemSource);
+        internal static void ListUserRoleAuthAsync(int? orgId, Guid? userId, Guid? roleId, ListUserRoleAuthCallBack callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.ListUserRoleAuthCompleted += new EventHandler<ListUserRoleAuthCompletedEventArgs>(proxy_ListUserRoleAuthCompleted);
+            proxy.ListUserRoleAuthAsync(orgId, userId, roleId, callerKey);
+        }
+
+        static void proxy_ListUserRoleAuthCompleted(object sender, ListUserRoleAuthCompletedEventArgs e)
+        {
+            Guid callerKey = (Guid)e.UserState;
+            if (_callbacks.ContainsKey(callerKey))
+            {
+                List<UserRoleAuth> itemSource = e.Result;
+                ((ListUserRoleAuthCallBack)_callbacks[callerKey]).Invoke(itemSource);
+
+                _callbacks.Remove(callerKey);
+            }
+        }
+
+        internal static void SaveUserRoleAuthAsync(List<UserRoleAuth> saveList, EmptyCallback callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.SaveUserRoleAuthCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(proxy_VoidMethodCompleted);
+            proxy.SaveUserRoleAuthAsync(saveList, callerKey);
+        }
+
+        // ListOrgAdminAspUser
+        internal delegate void ListOrgAdminAspUserCallBack(List<AspUser> itemSource);
+        internal static void ListOrgAdminAspUserAsync(int orgId, Guid roleid, ListOrgAdminAspUserCallBack callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.ListOrgAdminAspUserCompleted += new EventHandler<ListOrgAdminAspUserCompletedEventArgs>(proxy_ListOrgAdminAspUserCompleted);
+            proxy.ListOrgAdminAspUserAsync(orgId, roleid, callerKey);
+        }
+
+        static void proxy_ListOrgAdminAspUserCompleted(object sender, ListOrgAdminAspUserCompletedEventArgs e)
+        {
+            Guid callerKey = (Guid)e.UserState;
+            if (_callbacks.ContainsKey(callerKey))
+            {
+                List<AspUser> itemSource = e.Result;
+                ((ListOrgAdminAspUserCallBack)_callbacks[callerKey]).Invoke(itemSource);
+
+                _callbacks.Remove(callerKey);
+            }
+        }
+
+        #endregion
 
 	}
 }

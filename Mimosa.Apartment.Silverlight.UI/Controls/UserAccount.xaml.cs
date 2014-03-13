@@ -46,6 +46,7 @@ namespace Mimosa.Apartment.Silverlight.UI
         private const string OfflineImage = "/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/offline.png";
         private const string TransparentImage = "/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/Transparent.png";
 
+        private int _currentOrgId;
         private List<AspUser> _aspUsers = new List<AspUser>();        
 
         public Brush BackgroundColour {
@@ -116,7 +117,7 @@ namespace Mimosa.Apartment.Silverlight.UI
             Globals.IsBusy = true;
             ResetControlStatus();
             ucInformation.InfoMessage = UserMessages.NewRecord;
-            DataServiceHelper.ListAspUserAsync(orgId, null, null, ListAllAspUserCompleted);
+            DataServiceHelper.ListOrgAdminAspUserAsync(orgId, SecurityHelper.OrganisationAdministratorRoleId, ListAllAspUserCompleted);
         }
        
         void ListAllAspUserCompleted(List<AspUser> userList)
@@ -137,6 +138,8 @@ namespace Mimosa.Apartment.Silverlight.UI
                 }
             }
             uiUsers.ItemsSource = userItemSource;
+            if(userItemSource.Count > 0)
+                uiUsers.SelectedIndex = 0;
             RebindUserAccountData();
         }
 
@@ -303,6 +306,10 @@ namespace Mimosa.Apartment.Silverlight.UI
                 newUser.UserName = uiUsers.Text;
                 newUser.Password = txtPassword.Password;
                 newUser = GetSaveAspUser(newUser);
+                if (_currentOrgId > 0)
+                {
+                    newUser.OrganisationId = _currentOrgId;
+                }
                 if (string.IsNullOrEmpty(newUser.PasswordQuestion))
                     newUser.PasswordQuestion = UserMessages.DefaultPasswordQuestion;
                 if (string.IsNullOrEmpty(newUser.PasswordAnswer))
@@ -381,6 +388,28 @@ namespace Mimosa.Apartment.Silverlight.UI
 
         void CreateAspUserCompleted(AspUser aspUser)
         {
+            //if (!string.IsNullOrEmpty(aspUser.ErrorMessage))
+            //{
+            //    Globals.IsBusy = false;
+            //    MessageBox.Show(aspUser.ErrorMessage);
+            //    return;
+            //}
+            //_aspUsers.Add(aspUser);
+            //SavedAspUser = aspUser;
+            //if (SaveUserAccountComplete != null)
+            //{
+            //    SaveUserAccountComplete(this, null);
+            //}
+            //Dictionary<Guid, string> userItemSource = uiUsers.ItemsSource as Dictionary<Guid, string>;
+            //userItemSource.Add(aspUser.UserId, aspUser.UserName);
+            //userItemSource.OrderBy(i => i.Value);
+            //uiUsers.ItemsSource = null;
+            //uiUsers.ItemsSource = userItemSource;
+            //uiUsers.SelectedValue = aspUser.UserId;
+            //RebindUserAccountData();
+            //Globals.IsBusy = false;
+            //MessageBox.Show(Globals.UserMessages.RecordsSaved);
+
             if (!string.IsNullOrEmpty(aspUser.ErrorMessage))
             {
                 Globals.IsBusy = false;
@@ -400,9 +429,40 @@ namespace Mimosa.Apartment.Silverlight.UI
             uiUsers.ItemsSource = userItemSource;
             uiUsers.SelectedValue = aspUser.UserId;
             RebindUserAccountData();
+            if (Globals.UserLogin.IsUserPortalAdministrator)
+            {
+                UserRoleAuth uraOrgAdmin = new UserRoleAuth();
+                uraOrgAdmin.RoleId = SecurityHelper.OrganisationAdministratorRoleId;
+                uraOrgAdmin.WholeOrg = true;
+                uraOrgAdmin.UserId = aspUser.UserId;
+                uraOrgAdmin.IsChanged = true;
+                uraOrgAdmin.CreatedBy = uraOrgAdmin.UpdatedBy = Globals.UserLogin.UserName;
+
+                UserRoleAuth uraSecurityAdmin = new UserRoleAuth();
+                uraSecurityAdmin.RoleId = SecurityHelper.SecurityAdminRoleId;
+                uraSecurityAdmin.WholeOrg = true;
+                uraSecurityAdmin.UserId = aspUser.UserId;
+                uraSecurityAdmin.IsChanged = true;
+                uraSecurityAdmin.CreatedBy = uraSecurityAdmin.UpdatedBy = Globals.UserLogin.UserName;
+
+                List<UserRoleAuth> saveList = new List<UserRoleAuth>();
+                saveList.Add(uraOrgAdmin);
+                saveList.Add(uraSecurityAdmin);
+                DataServiceHelper.SaveUserRoleAuthAsync(saveList, SaveUserRoleAuthCompleted);
+            }
+            else
+            {
+                Globals.IsBusy = false;
+                MessageBox.Show(Globals.UserMessages.RecordsSaved);
+            }
+
+        }
+
+        void SaveUserRoleAuthCompleted()
+        {
             Globals.IsBusy = false;
             MessageBox.Show(Globals.UserMessages.RecordsSaved);
-        }     
+        }
         #endregion
 
     }

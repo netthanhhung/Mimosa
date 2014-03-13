@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <xsd:schema targetNamespace="/Imports">
       <xsd:import schemaLocation="http://localhost:49555/Services/ApartmentService.svc?xsd=xsd0" />
@@ -111,6 +111,18 @@
   <wsdl:message name="ApartmentService_GetOrganisationByCode_OutputMessage">
     <wsdl:part name="parameters" element="GetOrganisationByCodeResponse" />
   </wsdl:message>
+  <wsdl:message name="ApartmentService_ListSite_InputMessage">
+    <wsdl:part name="parameters" element="ListSite" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListSite_OutputMessage">
+    <wsdl:part name="parameters" element="ListSiteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_SaveSite_InputMessage">
+    <wsdl:part name="parameters" element="SaveSite" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_SaveSite_OutputMessage">
+    <wsdl:part name="parameters" element="SaveSiteResponse" />
+  </wsdl:message>
   <wsdl:message name="ApartmentService_ListCustomer_InputMessage">
     <wsdl:part name="parameters" element="ListCustomer" />
   </wsdl:message>
@@ -140,6 +152,54 @@
   </wsdl:message>
   <wsdl:message name="ApartmentService_UpdateMembershipUserName_OutputMessage">
     <wsdl:part name="parameters" element="UpdateMembershipUserNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListComponent_InputMessage">
+    <wsdl:part name="parameters" element="ListComponent" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListComponent_OutputMessage">
+    <wsdl:part name="parameters" element="ListComponentResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListRoleComponentPermission_InputMessage">
+    <wsdl:part name="parameters" element="ListRoleComponentPermission" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListRoleComponentPermission_OutputMessage">
+    <wsdl:part name="parameters" element="ListRoleComponentPermissionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListRoleComponentPermissionByUser_InputMessage">
+    <wsdl:part name="parameters" element="ListRoleComponentPermissionByUser" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListRoleComponentPermissionByUser_OutputMessage">
+    <wsdl:part name="parameters" element="ListRoleComponentPermissionByUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_SaveRoleComponentPermission_InputMessage">
+    <wsdl:part name="parameters" element="SaveRoleComponentPermission" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_SaveRoleComponentPermission_OutputMessage">
+    <wsdl:part name="parameters" element="SaveRoleComponentPermissionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListAspRole_InputMessage">
+    <wsdl:part name="parameters" element="ListAspRole" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListAspRole_OutputMessage">
+    <wsdl:part name="parameters" element="ListAspRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_SaveAspRole_InputMessage">
+    <wsdl:part name="parameters" element="SaveAspRole" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_SaveAspRole_OutputMessage">
+    <wsdl:part name="parameters" element="SaveAspRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListUserRoleAuth_InputMessage">
+    <wsdl:part name="parameters" element="ListUserRoleAuth" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListUserRoleAuth_OutputMessage">
+    <wsdl:part name="parameters" element="ListUserRoleAuthResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_SaveUserRoleAuth_InputMessage">
+    <wsdl:part name="parameters" element="SaveUserRoleAuth" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_SaveUserRoleAuth_OutputMessage">
+    <wsdl:part name="parameters" element="SaveUserRoleAuthResponse" />
   </wsdl:message>
   <wsdl:portType name="ApartmentService">
     <wsdl:operation name="SelectSessionId">
@@ -210,6 +270,14 @@
       <wsdl:input wsaw:Action="urn:ApartmentService/GetOrganisationByCode" message="ApartmentService_GetOrganisationByCode_InputMessage" />
       <wsdl:output wsaw:Action="urn:ApartmentService/GetOrganisationByCodeResponse" message="ApartmentService_GetOrganisationByCode_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ListSite">
+      <wsdl:input wsaw:Action="urn:ApartmentService/ListSite" message="ApartmentService_ListSite_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/ListSiteResponse" message="ApartmentService_ListSite_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveSite">
+      <wsdl:input wsaw:Action="urn:ApartmentService/SaveSite" message="ApartmentService_SaveSite_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/SaveSiteResponse" message="ApartmentService_SaveSite_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="ListCustomer">
       <wsdl:input wsaw:Action="urn:ApartmentService/ListCustomer" message="ApartmentService_ListCustomer_InputMessage" />
       <wsdl:output wsaw:Action="urn:ApartmentService/ListCustomerResponse" message="ApartmentService_ListCustomer_OutputMessage" />
@@ -229,6 +297,38 @@
     <wsdl:operation name="UpdateMembershipUserName">
       <wsdl:input wsaw:Action="urn:ApartmentService/UpdateMembershipUserName" message="ApartmentService_UpdateMembershipUserName_InputMessage" />
       <wsdl:output wsaw:Action="urn:ApartmentService/UpdateMembershipUserNameResponse" message="ApartmentService_UpdateMembershipUserName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListComponent">
+      <wsdl:input wsaw:Action="urn:ApartmentService/ListComponent" message="ApartmentService_ListComponent_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/ListComponentResponse" message="ApartmentService_ListComponent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListRoleComponentPermission">
+      <wsdl:input wsaw:Action="urn:ApartmentService/ListRoleComponentPermission" message="ApartmentService_ListRoleComponentPermission_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/ListRoleComponentPermissionResponse" message="ApartmentService_ListRoleComponentPermission_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListRoleComponentPermissionByUser">
+      <wsdl:input wsaw:Action="urn:ApartmentService/ListRoleComponentPermissionByUser" message="ApartmentService_ListRoleComponentPermissionByUser_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/ListRoleComponentPermissionByUserResponse" message="ApartmentService_ListRoleComponentPermissionByUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveRoleComponentPermission">
+      <wsdl:input wsaw:Action="urn:ApartmentService/SaveRoleComponentPermission" message="ApartmentService_SaveRoleComponentPermission_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/SaveRoleComponentPermissionResponse" message="ApartmentService_SaveRoleComponentPermission_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListAspRole">
+      <wsdl:input wsaw:Action="urn:ApartmentService/ListAspRole" message="ApartmentService_ListAspRole_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/ListAspRoleResponse" message="ApartmentService_ListAspRole_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveAspRole">
+      <wsdl:input wsaw:Action="urn:ApartmentService/SaveAspRole" message="ApartmentService_SaveAspRole_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/SaveAspRoleResponse" message="ApartmentService_SaveAspRole_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListUserRoleAuth">
+      <wsdl:input wsaw:Action="urn:ApartmentService/ListUserRoleAuth" message="ApartmentService_ListUserRoleAuth_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/ListUserRoleAuthResponse" message="ApartmentService_ListUserRoleAuth_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveUserRoleAuth">
+      <wsdl:input wsaw:Action="urn:ApartmentService/SaveUserRoleAuth" message="ApartmentService_SaveUserRoleAuth_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/SaveUserRoleAuthResponse" message="ApartmentService_SaveUserRoleAuth_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

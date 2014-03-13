@@ -29,8 +29,7 @@
     <OutOfBrowserSettingsFile>Properties\OutOfBrowserSettings.xml</OutOfBrowserSettingsFile>
     <UsePlatformExtensions>false</UsePlatformExtensions>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
-    <LinkedServerProject>
-    </LinkedServerProject>
+    <LinkedServerProject>..\Mimosa.Apartment.Web.UI\Mimosa.Apartment.Web.UI.csproj</LinkedServerProject>
   </PropertyGroup>
   <!-- This property group is only here to support building this project using the 
        MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
@@ -64,8 +63,12 @@
       <HintPath>..\References\Blacklight.Controls.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
+    <Reference Include="System.ComponentModel.DataAnnotations, Version=2.0.5.0, Culture=neutral, PublicKeyToken=ddd0da4d3e678217, processorArchitecture=MSIL" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.DomainServices.Client, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.ServiceModel.DomainServices.Client.Web, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.ServiceModel.Web.Extensions, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core" />
@@ -118,6 +121,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administration\SiteAdminPage.xaml.cs">
+      <DependentUpon>SiteAdminPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Administration\LayoutComponentType.cs" />
     <Compile Include="Administration\PortalAdminPage.xaml.cs">
       <DependentUpon>PortalAdminPage.xaml</DependentUpon>
@@ -225,6 +231,10 @@
     <Resource Include="Assets\Images\Office_BlackChartBackground.jpg" />
     <Resource Include="Assets\Images\shinyblue-bg.png" />
     <Page Include="Administration\ChangePasswordPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Administration\SiteAdminPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -362,11 +372,16 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\DataSources\Mimosa.Apartment.Common.AspRole.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.AspUser.datasource" />
+    <None Include="Properties\DataSources\Mimosa.Apartment.Common.Component.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.ContactInformation.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.Country.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.Customer.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.Organisation.datasource" />
+    <None Include="Properties\DataSources\Mimosa.Apartment.Common.RoleComponentPermission.datasource" />
+    <None Include="Properties\DataSources\Mimosa.Apartment.Common.Site.datasource" />
+    <None Include="Properties\DataSources\Mimosa.Apartment.Common.UserRoleAuth.datasource" />
     <None Include="Service References\ApartmentService\ApartmentService.wsdl" />
     <None Include="Service References\ApartmentService\ApartmentService.xsd">
       <SubType>Designer</SubType>

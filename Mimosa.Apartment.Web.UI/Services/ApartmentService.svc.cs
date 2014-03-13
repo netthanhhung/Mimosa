@@ -52,22 +52,26 @@ namespace Mimosa.Apartment.Web.UI
                 settings.AspUser = GetAspUser(settings.UserUserId);
                 //settings.UserEmployeeId = EmployeeMethods.GetEmployeeId(settings.UserUserId);
 
-                //settings.RoleComponentPermissions = SecurityMethods.ListRoleComponentPermissionByUser(settings.UserUserId);
-                //if (!settings.AspUser.OrganisationId.HasValue)
-                //{
-                //    settings.UserRoleAuths = SecurityMethods.ListUserRoleAuth(null, settings.UserUserId, null);
-                //}
-                //else
-                //{
-                //    settings.UserRoleAuths = SecurityMethods.ListUserRoleAuth(settings.UserOrganisationId, settings.UserUserId, null);
-                //}
+                settings.RoleComponentPermissions = ApartmentMethods.ListRoleComponentPermissionByUser(settings.UserUserId);
+                if (!settings.AspUser.OrganisationId.HasValue)
+                {
+                    settings.UserRoleAuths = ApartmentMethods.ListUserRoleAuth(null, settings.UserUserId, null);
+                }
+                else
+                {
+                    settings.UserRoleAuths = ApartmentMethods.ListUserRoleAuth(settings.UserOrganisationId, settings.UserUserId, null);
+                }
 
-                //if (settings.UserSite == null && settings.UserRoleAuths != null && settings.UserRoleAuths.Count > 0
-                //    && settings.UserRoleAuths.Count(i => i.SiteId.HasValue) > 0)
-                //{
-                //    settings.UserSiteId = settings.UserRoleAuths.FirstOrDefault(i => i.SiteId.HasValue).SiteId.Value;
-                //    settings.UserSite = SiteMethods.GetSite(settings.UserSiteId.Value);
-                //}
+                if (settings.UserSite == null && settings.UserRoleAuths != null && settings.UserRoleAuths.Count > 0
+                    && settings.UserRoleAuths.Count(i => i.SiteId.HasValue) > 0)
+                {
+                    settings.UserSiteId = settings.UserRoleAuths.FirstOrDefault(i => i.SiteId.HasValue).SiteId.Value;
+                    List<Site> sites = ApartmentMethods.ListSite(null, settings.UserSiteId.Value, true, false);
+                    if (sites.Count > 0)
+                    {
+                        settings.UserSite = sites[0];
+                    }
+                }
             }
             return settings;
         }
@@ -133,7 +137,7 @@ namespace Mimosa.Apartment.Web.UI
         [OperationContract]
         public bool DeleteAspUser(AspUser aspUser, long? employeeId)
         {
-            bool userDeleted = Membership.DeleteUser(aspUser.UserName);            
+            bool userDeleted = Membership.DeleteUser(aspUser.UserName);
             return userDeleted;
         }
 
@@ -245,7 +249,7 @@ namespace Mimosa.Apartment.Web.UI
 
             return saveUser;
         }
-        
+
         private AspUser ConvertUser(MembershipUser membership)
         {
             AspUser user = new AspUser();
@@ -291,7 +295,6 @@ namespace Mimosa.Apartment.Web.UI
         }
         #endregion
 
-        
         #region Organisation
         [OperationContract]
         public List<Organisation> ListOrganisation(Guid? roleId)
@@ -323,6 +326,20 @@ namespace Mimosa.Apartment.Web.UI
             return ApartmentMethods.GetOrganisation(authorisationCode);
         }
 
+        #endregion
+
+        #region Sites
+        [OperationContract]
+        public List<Site> ListSite(int? orgId, int? siteId, bool showLegacy, bool loadContact)
+        {
+            return ApartmentMethods.ListSite(orgId, siteId, showLegacy, loadContact);
+        }
+
+        [OperationContract]
+        public void SaveSite(List<Site> saveList)
+        {
+            ApartmentMethods.SaveSite(saveList);
+        }
         #endregion
 
         #region Customer
@@ -360,6 +377,51 @@ namespace Mimosa.Apartment.Web.UI
 
         #endregion
 
+        #region Security
+        [OperationContract]
+        public List<Component> ListComponent(int? componentId)
+        {
+            return ApartmentMethods.ListComponent(componentId);
+        }
+        [OperationContract]
+        public List<RoleComponentPermission> ListRoleComponentPermission(Guid? roleId, int? componentId)
+        {
+            return ApartmentMethods.ListRoleComponentPermission(roleId, componentId);
+        }
+
+        [OperationContract]
+        public List<RoleComponentPermission> ListRoleComponentPermissionByUser(Guid? userId)
+        {
+            return ApartmentMethods.ListRoleComponentPermissionByUser(userId);
+        }
+
+        [OperationContract]
+        public void SaveRoleComponentPermission(List<RoleComponentPermission> saveList)
+        {
+            ApartmentMethods.SaveRoleComponentPermission(saveList);
+        }
+        [OperationContract]
+        public List<AspRole> ListAspRole(Guid? roleId)
+        {
+            return ApartmentMethods.ListAspRole(roleId);
+        }
+        [OperationContract]
+        public void SaveAspRole(List<AspRole> saveList, string currentUser)
+        {
+            ApartmentMethods.SaveAspRole(Membership.ApplicationName, saveList, currentUser);
+        }
+        [OperationContract]
+        public List<UserRoleAuth> ListUserRoleAuth(int? orgId, Guid? userId, Guid? roleId)
+        {
+            return ApartmentMethods.ListUserRoleAuth(orgId, userId, roleId);
+        }
+        [OperationContract]
+        public void SaveUserRoleAuth(List<UserRoleAuth> saveList)
+        {
+            ApartmentMethods.SaveUserRoleAuth(saveList);
+        }
+        #endregion
+
     }
 
     /// <summary>
@@ -380,7 +442,7 @@ namespace Mimosa.Apartment.Web.UI
 
         [DataMember]
         public string UserName { set; get; }
-        
+
         [DataMember]
         public bool IsUserOrganisationAdministrator { set; get; }
         [DataMember]
@@ -389,8 +451,8 @@ namespace Mimosa.Apartment.Web.UI
         public bool IsUserPortalAdministrator { set; get; }
         [DataMember]
         public bool IsUserSecurityAdministrator { set; get; }
-        
-        
+
+
         [DataMember]
         public Guid UserUserId { get; set; }
 

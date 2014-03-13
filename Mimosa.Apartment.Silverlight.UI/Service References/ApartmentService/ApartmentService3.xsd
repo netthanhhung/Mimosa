@@ -165,6 +165,7 @@
           <xs:element minOccurs="0" name="AbbreviatedName" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="Availability" type="xs:int" />
           <xs:element minOccurs="0" name="CanDelete" type="xs:boolean" />
+          <xs:element minOccurs="0" name="ContactInformation" nillable="true" type="tns:ContactInformation" />
           <xs:element minOccurs="0" name="ContactInformationID" nillable="true" type="xs:int" />
           <xs:element minOccurs="0" name="DisplayIndex" type="xs:int" />
           <xs:element minOccurs="0" name="HotelId" nillable="true" type="xs:int" />
@@ -227,6 +228,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfAspUser" nillable="true" type="tns:ArrayOfAspUser" />
+  <xs:complexType name="ArrayOfSite">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Site" nillable="true" type="tns:Site" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSite" nillable="true" type="tns:ArrayOfSite" />
   <xs:complexType name="ArrayOfCustomer">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Customer" nillable="true" type="tns:Customer" />
@@ -250,4 +257,40 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="Customer" nillable="true" type="tns:Customer" />
+  <xs:complexType name="ArrayOfComponent">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Component" nillable="true" type="tns:Component" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfComponent" nillable="true" type="tns:ArrayOfComponent" />
+  <xs:complexType name="Component">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Record">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ComponentId" type="xs:int" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Component" nillable="true" type="tns:Component" />
+  <xs:complexType name="ArrayOfAspRole">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AspRole" nillable="true" type="tns:AspRole" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAspRole" nillable="true" type="tns:ArrayOfAspRole" />
+  <xs:complexType name="AspRole">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ApplicationId" type="ser:guid" />
+      <xs:element minOccurs="0" name="CanDelete" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsChanged" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsDeleted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LoweredRoleName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RoleId" type="ser:guid" />
+      <xs:element minOccurs="0" name="RoleName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AspRole" nillable="true" type="tns:AspRole" />
 </xs:schema>

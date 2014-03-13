@@ -16,73 +16,6 @@ namespace Mimosa.Apartment.Common
             record.UpdatedBy = Utilities.ToString(reader["UpdatedBy"]);
         }
 
-        #region User
-        public static AspUser AspUser(System.Data.IDataReader reader)
-        {
-            AspUser result = null;
-
-            if (null != reader && reader.Read())
-            {
-                result = new AspUser();
-                PopulateAspUser(result, reader);
-            }
-
-            return result;
-        }
-
-        public static void PopulateAspUser(AspUser input, System.Data.IDataReader reader)
-        {
-            input.ApplicationId = Utilities.ToGuid(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.ApplicationId]);
-            input.UserId = Utilities.ToGuid(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.UserId]);
-            input.Password = Utilities.ToString(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.Password]);
-            input.PasswordFormat = Utilities.ToInt(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.PasswordFormat]);
-            input.PasswordSalt = Utilities.ToString(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.PasswordSalt]);
-            input.MobilePIN = Utilities.ToString(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.MobilePIN]);
-            input.Email = Utilities.ToString(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.Email]);
-
-            input.LoweredEmail = Utilities.ToString(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.LoweredEmail]);
-            input.PasswordQuestion = Utilities.ToString(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.PasswordQuestion]);
-            input.PasswordAnswer = Utilities.ToString(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.PasswordAnswer]);
-            input.IsApproved = Utilities.ToBool(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.IsApproved]);
-            input.IsLockedOut = Utilities.ToBool(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.IsLockedOut]);
-            input.CreationDate = Utilities.ToDateTime(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.CreateDate]);
-            input.LastLoginDate = Utilities.ToDateTime(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.LastLoginDate]);
-            input.LastPasswordChangedDate = Utilities.ToDateTime(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.LastPasswordChangedDate]);
-            input.LastLockoutDate = Utilities.ToDateTime(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.LastLockoutDate]);
-
-            input.FailedPasswordAttemptCount = Utilities.ToInt(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.FailedPasswordAttemptCount]);
-            input.FailedPasswordAttemptWindowStart = Utilities.ToDateTime(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.FailedPasswordAttemptWindowStart]);
-            input.FailedPasswordAnswerAttemptCount = Utilities.ToInt(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.FailedPasswordAnswerAttemptCount]);
-            input.FailedPasswordAnswerAttemptWindowStart = Utilities.ToDateTime(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.FailedPasswordAnswerAttemptWindowStart]);
-            input.Comment = Utilities.ToString(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.Comment]);
-            input.UserName = Utilities.ToString(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.UserName]);
-            input.LoweredUserName = Utilities.ToString(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.LoweredUserName]);
-            input.MobileAlias = Utilities.ToString(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.MobileAlias]);
-
-            input.IsAnonymous = Utilities.ToBool(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.IsAnonymous]);
-            input.LastActivityDate = Utilities.ToDateTime(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.LastActivityDate]);
-
-            input.OrganisationId = Utilities.ToNInt(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.OrganisationId]);
-            if (reader.ColumnExists(Mimosa.Apartment.Common.AspUser.ColumnNames.MinRoleLevel))
-                input.MinRoleLevel = Utilities.ToNInt(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.MinRoleLevel]);
-            else
-                input.MinRoleLevel = 1000;
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
-        public static void FillAspUserList(List<AspUser> list, System.Data.IDataReader reader)
-        {
-            list.Clear();
-            AspUser item;
-            while (true)
-            {
-                item = Factory.AspUser(reader);
-                if (null == item) break;
-                list.Add(item);
-            }
-        }
-        #endregion
-
         #region UserRoleAuth
 
         public static UserRoleAuth UserRoleAuth(System.Data.IDataReader reader)
@@ -127,6 +60,191 @@ namespace Mimosa.Apartment.Common
             }
         }
 
+        #endregion
+
+        #region Component
+
+        public static Component Component(System.Data.IDataReader reader)
+        {
+            Component result = null;
+
+            if (null != reader && reader.Read())
+            {
+                result = new Component();
+                PopulateComponent(result, reader);
+            }
+
+            return result;
+        }
+
+        public static void PopulateComponent(Component input, System.Data.IDataReader reader)
+        {
+            PopulateRecord(input, reader);
+            input.RecordId = input.ComponentId = Utilities.ToInt(reader[Mimosa.Apartment.Common.Component.ColumnNames.ComponentId]);
+            input.Name = Utilities.ToString(reader[Mimosa.Apartment.Common.Component.ColumnNames.Name]);
+
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public static void FillComponentList(List<Component> list, System.Data.IDataReader reader)
+        {
+            list.Clear();
+            Component item;
+            while (true)
+            {
+                item = Factory.Component(reader);
+                if (null == item) break;
+                list.Add(item);
+            }
+        }
+        #endregion
+
+        #region RoleComponentPermission
+
+        public static RoleComponentPermission RoleComponentPermission(System.Data.IDataReader reader)
+        {
+            RoleComponentPermission result = null;
+
+            if (null != reader && reader.Read())
+            {
+                result = new RoleComponentPermission();
+                PopulateRoleComponentPermission(result, reader);
+            }
+
+            return result;
+        }
+
+        public static void PopulateRoleComponentPermission(RoleComponentPermission input, System.Data.IDataReader reader)
+        {
+            PopulateRecord(input, reader);
+            input.RecordId = input.RoleComponentPermissionId = Utilities.ToInt(reader[Mimosa.Apartment.Common.RoleComponentPermission.ColumnNames.RoleComponentPermissionId]);
+            input.RoleId = Utilities.ToGuid(reader[Mimosa.Apartment.Common.RoleComponentPermission.ColumnNames.RoleId]);
+            input.ComponentId = Utilities.ToInt(reader[Mimosa.Apartment.Common.RoleComponentPermission.ColumnNames.ComponentId]);
+            input.WriteRight = Utilities.ToNBool(reader[Mimosa.Apartment.Common.RoleComponentPermission.ColumnNames.WriteRight]);
+            input.RoleName = Utilities.ToString(reader[Mimosa.Apartment.Common.RoleComponentPermission.ColumnNamesExtended.RoleName]);
+            input.ComponentName = Utilities.ToString(reader[Mimosa.Apartment.Common.RoleComponentPermission.ColumnNamesExtended.ComponentName]);
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public static void FillRoleComponentPermissionList(List<RoleComponentPermission> list, System.Data.IDataReader reader)
+        {
+            list.Clear();
+            RoleComponentPermission item;
+            while (true)
+            {
+                item = Factory.RoleComponentPermission(reader);
+                if (null == item) break;
+                list.Add(item);
+            }
+        }
+        #endregion
+
+        #region AspRole
+
+        public static AspRole AspRole(System.Data.IDataReader reader)
+        {
+            AspRole result = null;
+
+            if (null != reader && reader.Read())
+            {
+                result = new AspRole();
+                PopulateAspRole(result, reader);
+            }
+
+            return result;
+        }
+
+        public static void PopulateAspRole(AspRole input, System.Data.IDataReader reader)
+        {
+            input.ApplicationId = Utilities.ToGuid(reader[Mimosa.Apartment.Common.AspRole.ColumnNames.ApplicationId]);
+            input.RoleId = Utilities.ToGuid(reader[Mimosa.Apartment.Common.AspRole.ColumnNames.RoleId]);
+            input.RoleName = Utilities.ToString(reader[Mimosa.Apartment.Common.AspRole.ColumnNames.RoleName]);
+            input.LoweredRoleName = Utilities.ToString(reader[Mimosa.Apartment.Common.AspRole.ColumnNames.LoweredRoleName]);
+            input.Description = Utilities.ToString(reader[Mimosa.Apartment.Common.AspRole.ColumnNames.Description]);
+            input.CanDelete = Utilities.ToBool(reader[Mimosa.Apartment.Common.AspRole.ColumnNames.CanDelete]);
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public static void FillAspRoleList(List<AspRole> list, System.Data.IDataReader reader)
+        {
+            list.Clear();
+            AspRole item;
+            while (true)
+            {
+                item = Factory.AspRole(reader);
+                if (null == item) break;
+                list.Add(item);
+            }
+        }
+        #endregion
+
+        #region AspUser
+
+        public static AspUser AspUser(System.Data.IDataReader reader)
+        {
+            AspUser result = null;
+
+            if (null != reader && reader.Read())
+            {
+                result = new AspUser();
+                PopulateAspUser(result, reader);
+            }
+
+            return result;
+        }
+
+        public static void PopulateAspUser(AspUser input, System.Data.IDataReader reader)
+        {
+            input.ApplicationId = Utilities.ToGuid(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.ApplicationId]);
+            input.UserId = Utilities.ToGuid(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.UserId]);
+            input.Password = Utilities.ToString(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.Password]);
+            input.PasswordFormat = Utilities.ToInt(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.PasswordFormat]);
+            input.PasswordSalt = Utilities.ToString(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.PasswordSalt]);
+            input.MobilePIN = Utilities.ToString(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.MobilePIN]);
+            input.Email = Utilities.ToString(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.Email]);
+
+            input.Email = Utilities.ToString(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.Email]);
+            input.LoweredEmail = Utilities.ToString(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.LoweredEmail]);
+            input.PasswordQuestion = Utilities.ToString(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.PasswordQuestion]);
+            input.PasswordAnswer = Utilities.ToString(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.PasswordAnswer]);
+            input.IsApproved = Utilities.ToBool(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.IsApproved]);
+            input.IsLockedOut = Utilities.ToBool(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.IsLockedOut]);
+            input.CreationDate = Utilities.ToDateTime(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.CreateDate]);
+            input.LastLoginDate = Utilities.ToDateTime(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.LastLoginDate]);
+            input.LastPasswordChangedDate = Utilities.ToDateTime(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.LastPasswordChangedDate]);
+            input.LastLockoutDate = Utilities.ToDateTime(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.LastLockoutDate]);
+
+            input.FailedPasswordAttemptCount = Utilities.ToInt(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.FailedPasswordAttemptCount]);
+            input.FailedPasswordAttemptWindowStart = Utilities.ToDateTime(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.FailedPasswordAttemptWindowStart]);
+            input.FailedPasswordAnswerAttemptCount = Utilities.ToInt(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.FailedPasswordAnswerAttemptCount]);
+            input.FailedPasswordAnswerAttemptWindowStart = Utilities.ToDateTime(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.FailedPasswordAnswerAttemptWindowStart]);
+            input.Comment = Utilities.ToString(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.Comment]);
+            input.UserName = Utilities.ToString(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.UserName]);
+            input.LoweredUserName = Utilities.ToString(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.LoweredUserName]);
+            input.MobileAlias = Utilities.ToString(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.MobileAlias]);
+
+            input.IsAnonymous = Utilities.ToBool(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.IsAnonymous]);
+            
+            input.OrganisationId = Utilities.ToNInt(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.OrganisationId]);
+            //input.SiteId = Utilities.ToNInt(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.SiteId]);
+            if (reader.ColumnExists(Mimosa.Apartment.Common.AspUser.ColumnNames.MinRoleLevel))
+                input.MinRoleLevel = Utilities.ToNInt(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.MinRoleLevel]);
+            else
+                input.MinRoleLevel = 1000;
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public static void FillAspUserList(List<AspUser> list, System.Data.IDataReader reader)
+        {
+            list.Clear();
+            AspUser item;
+            while (true)
+            {
+                item = Factory.AspUser(reader);
+                if (null == item) break;
+                list.Add(item);
+            }
+        }
         #endregion
 
         #region ContactInformation
@@ -188,7 +306,7 @@ namespace Mimosa.Apartment.Common
             input.City = Utilities.ToString(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.City]);
             input.State = Utilities.ToString(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.State]);
             input.Postcode = Utilities.ToString(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.Postcode]);
-            input.CountryId = Utilities.ToInt(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.CountryId]);
+            input.CountryId = Utilities.ToNInt(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.CountryId]);
             input.PhoneNumber = Utilities.ToString(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.PhoneNumber]);
             input.FaxNumber = Utilities.ToString(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.FaxNumber]);
             input.Email = Utilities.ToString(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.Email]);
@@ -254,6 +372,64 @@ namespace Mimosa.Apartment.Common
             while (true)
             {
                 item = Factory.PopulateOrganisation(reader);
+                if (item == null) break;
+                list.Add(item);
+            }
+        }
+        #endregion
+
+        #region Site
+        /// <summary>
+        /// Populate a Site object.
+        /// </summary>
+        /// <param name="input">The Site object to populate.</param>
+        /// <param name="reader">The data reader from which to populate the Site object.</param>
+        public static void PopulateSite(Site input, System.Data.IDataReader reader)
+        {
+            PopulateRecord(input, reader);
+            input.RecordId = input.SiteId = Utilities.ToInt(reader["SiteID"]);
+            input.OrganisationId = Utilities.ToInt(reader["OrganisationId"]);
+            input.HotelId = Utilities.ToNInt(reader["HotelId"]);
+            input.Name = Utilities.ToString(reader["Name"]);
+            input.AbbreviatedName = Utilities.ToString(reader["AbbreviatedName"]);
+            input.ContactInformationID = Utilities.ToNInt(reader["ContactInformationID"]);
+            input.LicenseKey = Utilities.ToNGuid(reader["LicenseKey"]);
+            input.StarRating = Utilities.ToNDecimal(reader["StarRating"]);
+            input.PropCode = Utilities.ToString(reader["PropCode"]);
+            input.DisplayIndex = Utilities.ToInt(reader["DisplayIndex"]);
+            input.IsLegacy = Utilities.ToBool(reader["IsLegacy"]);
+            input.Availability = Utilities.ToInt(reader["Availability"]);
+        }
+
+        /// <summary>
+        /// Creates a Site object using data from a data reader.
+        /// </summary>
+        /// <param name="reader">A data reader containing a key and corresponding value for each property of a Site object.</param>
+        /// <returns>A populated Site object.</returns>
+        public static Site PopulateSite(System.Data.IDataReader reader)
+        {
+            Site result = null;
+            if (reader != null && reader.Read())
+            {
+                result = new Site();
+                PopulateSite(result, reader);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Populates a generic Site list with data from a data reader.
+        /// </summary>
+        /// <param name="list">The Site list to be populated.</param>
+        /// <param name="reader">A data reader containing data for zero or more Site records.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public static void PopulateSiteList(List<Site> list, System.Data.IDataReader reader)
+        {
+            list.Clear();
+            Site item;
+            while (true)
+            {
+                item = Factory.PopulateSite(reader);
                 if (item == null) break;
                 list.Add(item);
             }

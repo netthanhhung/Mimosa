@@ -69,6 +69,11 @@ namespace Mimosa.Apartment.Silverlight.UI
                 Globals.AppSettings = itemsSource.AppSettings;
 
                 //Security section
+                Globals.UserLogin.IsUserOrganisationAdministrator = SecurityHelper.HasRole(Globals.UserLogin.UserRoleAuths, SecurityHelper.OrganisationAdministratorRoleId);
+                Globals.UserLogin.IsUserSiteAdministrator = SecurityHelper.HasRole(Globals.UserLogin.UserRoleAuths, SecurityHelper.SiteAdministratorRoleId);
+                Globals.UserLogin.IsUserPortalAdministrator = SecurityHelper.HasRole(Globals.UserLogin.UserRoleAuths, SecurityHelper.PortalAdministratorRoleId);
+                Globals.UserLogin.IsUserSecurityAdministrator = SecurityHelper.HasRole(Globals.UserLogin.UserRoleAuths, SecurityHelper.SecurityAdminRoleId);
+
                 
                 // Until their page has been converted to SL, redirect Portal admin to their aspx page (unless just loading the header).
                 string typeName = this.startupEventArgs.InitParams["TypeName"];

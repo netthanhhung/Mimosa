@@ -14,9 +14,11 @@ namespace Mimosa.Apartment.Silverlight.UI
     public enum LayoutComponentType : int
     {
         None = 0,
-
+        RoleAdmin = 1,
+        RoleComponentPermission = 2,
+        UserRoleAuthorisation = 3,
+        SiteAdmin = 4,
+        SiteGroupAdmin = 5,
         
-
-
     }
 }

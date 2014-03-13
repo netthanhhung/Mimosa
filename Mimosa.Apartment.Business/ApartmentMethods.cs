@@ -119,6 +119,56 @@ namespace Mimosa.Apartment.Business
         }
         #endregion
 
+        #region Sites
+        public static List<Site> ListSite(int? orgId, int? siteId, bool showLegacy, bool loadContact)
+        {
+            DataLayer dataLayer = new DataLayer();
+            List<Site> result = dataLayer.ListSite(orgId, siteId, showLegacy);
+            if (loadContact)
+            {
+                foreach (Site site in result)
+                {
+                    if (site.ContactInformationID > 0)
+                    {
+                        List<ContactInformation> contacts = dataLayer.ListContactInformation(site.ContactInformationID);
+                        if (contacts.Count > 0)
+                        {
+                            site.ContactInformation = contacts[0];
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+
+        public static void SaveSite(List<Site> saveList)
+        {
+            if (saveList != null)
+            {
+                foreach (Site item in saveList)
+                {
+                    if (item.IsDeleted && item.NullableRecordId != null)
+                    {
+                        DeleteRecord((Record)item);
+                    }
+                    else if (item.IsChanged)
+                    {
+                        if (item.ContactInformation != null)
+                        {
+                            SaveRecord(item.ContactInformation);
+                            if (item.ContactInformation.NullableRecordId.HasValue
+                                && item.ContactInformationID != Convert.ToInt32(item.ContactInformation.RecordId.Value))
+                            {
+                                item.ContactInformationID = Convert.ToInt32(item.ContactInformation.RecordId.Value);
+                            }
+                        }
+                        SaveRecord(item);
+                    }
+                }
+            }
+        }
+        #endregion
+
         #region UserAccount
         public static List<AspUser> ListAspUser(int? orgId, Guid? userId, bool? isLegacy)
         {
@@ -136,6 +186,93 @@ namespace Mimosa.Apartment.Business
             return new DataLayer().UpdateMemberhipUserName(applicationName, userName, newUserName);
         }
 
+        #endregion
+
+        #region Security
+        public static List<Component> ListComponent(int? componentId)
+        {
+            return new DataLayer().ListComponent(componentId);
+        }
+
+        public static List<RoleComponentPermission> ListRoleComponentPermission(Guid? roleId, int? componentId)
+        {
+            return new DataLayer().ListRoleComponentPermission(roleId, componentId);
+        }
+
+        public static List<RoleComponentPermission> ListRoleComponentPermissionByUser(Guid? userId)
+        {
+            return new DataLayer().ListRoleComponentPermissionByUser(userId);
+        }
+
+        public static void SaveRoleComponentPermission(List<RoleComponentPermission> saveList)
+        {
+            if (saveList != null)
+            {
+                foreach (RoleComponentPermission item in saveList)
+                {
+                    if (item.IsDeleted && item.NullableRecordId != null)
+                    {
+                        DeleteRecord((Record)item);
+                    }
+                    else if (item.IsChanged)
+                    {
+                        SaveRecord((Record)item);
+                    }
+                }
+            }
+        }
+
+
+        public static List<AspRole> ListAspRole(Guid? roleId)
+        {
+            return new DataLayer().ListAspRole(roleId);
+        }
+
+        public static void SaveAspRole(string applicationName, List<AspRole> saveList, string currentUser)
+        {
+            if (saveList != null)
+            {
+                DataLayer dataLayer = new DataLayer();
+                foreach (AspRole item in saveList)
+                {
+                    if (item.IsDeleted && item.RoleId != Guid.Empty && item.CanDelete)
+                    {
+                        dataLayer.DeleteAspRole(item);
+                    }
+                    else if (item.IsChanged)
+                    {
+                        if (!string.IsNullOrEmpty(item.RoleName))
+                            item.LoweredRoleName = item.RoleName.ToLower();
+                        else
+                            item.LoweredRoleName = item.RoleName = string.Empty;
+                        dataLayer.SaveAspRole(applicationName, item, currentUser);
+                    }
+                }
+            }
+        }
+
+        public static List<UserRoleAuth> ListUserRoleAuth(int? orgId, Guid? userId, Guid? roleId)
+        {
+            return new DataLayer().ListUserRoleAuth(orgId, userId, roleId);
+        }
+
+        public static void SaveUserRoleAuth(List<UserRoleAuth> saveList)
+        {
+            if (saveList != null)
+            {
+                foreach (UserRoleAuth item in saveList)
+                {
+                    if (item.IsDeleted && item.NullableRecordId != null)
+                    {
+                        DeleteRecord((Record)item);
+                    }
+                    else if (item.IsChanged)
+                    {
+                        SaveRecord((Record)item);
+                    }
+                }
+            }
+        }
         #endregion
 
         #region Contact Information

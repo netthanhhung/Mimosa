@@ -137,6 +137,8 @@
     <Content Include="Images\PaleBlueBorderTopRight.gif" />
     <Content Include="Logon.aspx" />
     <Content Include="Logout.aspx" />
+    <Content Include="Mimosa.Apartment.Silverlight.UITestPage.aspx" />
+    <Content Include="Mimosa.Apartment.Silverlight.UITestPage.html" />
     <Content Include="RadControls\Combobox\Scripts\2_6_2\RadComboBox.js" />
     <Content Include="RadControls\Combobox\Skins\WindowsXP\DropArrow.gif" />
     <Content Include="RadControls\Combobox\Skins\WindowsXP\ScrollDown.gif" />

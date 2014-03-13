@@ -27,6 +27,10 @@
 		  url="/Administration/PortalAdminPage.xaml"
 		  title="Organisagion Administration"
 		  description="Organisagion Administration"/>
+		<siteMapNode
+		  url="/Administration/SiteAdminPage.xaml"
+		  title="Site Administration"
+		  description="Site Administration"/>
      </siteMapNode>
   </siteMapNode>
 

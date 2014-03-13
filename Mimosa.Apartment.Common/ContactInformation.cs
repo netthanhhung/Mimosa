@@ -66,9 +66,9 @@ namespace Mimosa.Apartment.Common
         [DataMember]
         public string Postcode { get { return _postcode; } set { if (!object.ReferenceEquals(this.Postcode, value)) { _postcode = value; RaisePropertyChanged("Postcode"); } } }
 
-        private int _countryId;
+        private int? _countryId;
         [DataMember]
-        public int CountryId { get { return _countryId; } set { if (!this.CountryId.Equals(value)) { _countryId = value; RaisePropertyChanged("CountryId"); } } }
+        public int? CountryId { get { return _countryId; } set { if (!this.CountryId.Equals(value)) { _countryId = value; RaisePropertyChanged("CountryId"); } } }
 
         private string _phoneNumber;
         [DataMember]

@@ -16,13 +16,7 @@ namespace Mimosa.Apartment.Silverlight.UI
 {
     public partial class PortalAdminPage : Page
     {
-        private const int _defaultCountryId = 13;        
-        private const int _defaultWeekStartDayId = 1;
-        private const int _defaultTimeTypeId = 5;
-        private const int _defaultSalesTimeTypeId = 5;
-
         private int _seletedOrgId;
-        private int _cultureInited = 3;
         private List<Organisation> _originalItemSource = new List<Organisation>();
         
         //public List<UserRoleAuth> UserRoleAuths { get; set; }
@@ -32,19 +26,17 @@ namespace Mimosa.Apartment.Silverlight.UI
             internal const string NameErrorMessage2 = "The string may not exceed 128 characters in length.";
             internal const string ContactInfoFor = "Contact information for {0}";
             internal const string AccountInfoFor = "Account information for {0}";
-            internal const string CompSourceNotLicensed = "Canot activate this source because it is not licensed.";  
         }
 
         public PortalAdminPage()
         {
-            InitializeComponent();
-            //UserRoleAuths = SecurityHelper.GetUserRoleAuths((int)LayoutComponentType.PortalAdmin);
-            
-            //if (!Globals.UserLogin.IsUserPortalAdministrator)
-            //{
-            //    this.Content = SecurityHelper.GetNoPermissionInfoPanel();
-            //    return;
-            //}
+            InitializeComponent();            
+
+            if (!Globals.UserLogin.IsUserPortalAdministrator)
+            {
+                this.Content = SecurityHelper.GetNoPermissionInfoPanel();
+                return;
+            }
 
             BeginRebindOrg();
             
@@ -138,7 +130,7 @@ namespace Mimosa.Apartment.Silverlight.UI
             //newItem.DateCreated = Globals.ServerNow;
             newItem.AuthorisationCode = string.Empty;
             newItem.ContactInformation = new ContactInformation();
-            newItem.ContactInformation.CountryId = _defaultCountryId;
+            newItem.ContactInformation.ContactTypeId = (int)ContactType.Organisation;
             if (_originalItemSource.Count() > 0)
                 newItem.DisplayIndex = _originalItemSource.Max(d => d.DisplayIndex) + 1;
             newItem.IsChanged = true;
@@ -175,23 +167,21 @@ namespace Mimosa.Apartment.Silverlight.UI
 
         void gvwOrganisations_SelectionChanged(object sender, Telerik.Windows.Controls.SelectionChangeEventArgs e)
         {
-            //throw new NotImplementedException();
-            if (gvwOrganisations.SelectedItem != null)
+            Organisation selectedOrg = gvwOrganisations.SelectedItem as Organisation;
+            if (selectedOrg != null && selectedOrg.OrganisationId > 0)
             {
-                Organisation selectedOrg = gvwOrganisations.SelectedItem as Organisation;
-                gridContactAccount.Visibility = System.Windows.Visibility.Collapsed;                
-                if (selectedOrg != null)
+                _seletedOrgId = selectedOrg.OrganisationId;
+                if (selectedOrg.ContactInformation != null)
                 {
-                    _seletedOrgId = selectedOrg.OrganisationId;
-                    if (selectedOrg.ContactInformation != null)
-                    {
-                        ucCntactInfoPanel.DataContext = selectedOrg.ContactInformation;                        
-                    }
-                    gridContactAccount.Visibility = System.Windows.Visibility.Visible;
-                    txtAccountInfo.Text = string.Format(UserMessages.AccountInfoFor, selectedOrg.Name);
-                    ucUserAccount.RebindData(selectedOrg.OrganisationId);
-
+                    ucCntactInfoPanel.DataContext = selectedOrg.ContactInformation;
                 }
+                gridContactAccount.Visibility = System.Windows.Visibility.Visible;
+                txtAccountInfo.Text = string.Format(UserMessages.AccountInfoFor, selectedOrg.Name);
+                ucUserAccount.RebindData(selectedOrg.OrganisationId);
+            }
+            else
+            {
+                gridContactAccount.Visibility = System.Windows.Visibility.Collapsed;
             }
         }
 

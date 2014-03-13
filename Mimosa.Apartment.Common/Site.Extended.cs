@@ -28,6 +28,9 @@ namespace Mimosa.Apartment.Common
         [DataMember]
         public bool IsChecked { get { return _isChecked; } set { if (!this.IsChecked.Equals(value)) { _isChecked = value; RaisePropertyChanged("IsChecked"); } } }
 
-        
+        private ContactInformation _contactInformation;
+        [DataMember]
+        public ContactInformation ContactInformation { get { return _contactInformation; } set { if (!object.ReferenceEquals(this.ContactInformation, value)) { _contactInformation = value; RaisePropertyChanged("ContactInformation"); } } }
+      
     }
 }

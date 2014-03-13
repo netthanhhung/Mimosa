@@ -1,13 +1,13 @@
 ﻿<configuration>
     <system.serviceModel>
-        <bindings>
-            <basicHttpBinding>
-                <binding name="BasicHttpBinding_ApartmentService" maxBufferSize="2147483647"
-                    maxReceivedMessageSize="2147483647">
-                    <security mode="None" />
-                </binding>
-            </basicHttpBinding>
-        </bindings>
+      <bindings>
+        <basicHttpBinding>
+          <binding name="BasicHttpBinding_ApartmentService" maxBufferSize="2147483647"
+              maxReceivedMessageSize="2147483647">
+            <security mode="None" />
+          </binding>
+        </basicHttpBinding>
+      </bindings>
         <client>
             <endpoint address="http://localhost:49555/Services/ApartmentService.svc"
                 binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_ApartmentService"

@@ -49,10 +49,6 @@ namespace Mimosa.Apartment.Common
         [DataMember]
         public string Description { get { return _description; } set { if (!object.ReferenceEquals(this.Description, value)) { _description = value; RaisePropertyChanged("Description"); } } }
 
-        private bool _isCustom;
-        [DataMember]
-        public bool IsCustom { get { return _isCustom; } set { if (this.IsCustom != value) { _isCustom = value; RaisePropertyChanged("IsCustom"); } } }
-
         private bool _canDelete;
         [DataMember]
         public bool CanDelete { get { return _canDelete; } set { if (this.CanDelete != value) { _canDelete = value; RaisePropertyChanged("CanDelete"); } } }

@@ -10,6 +10,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mimosa.Apartment.Silverlight.UI", "Mimosa.Apartment.Silverlight.UI\Mimosa.Apartment.Silverlight.UI.csproj", "{C98F5BF3-14A0-4673-996E-22974451AEF0}"
 	ProjectSection(ProjectDependencies) = postProject
 		{06490B2E-4833-489F-87A4-4327814F21EF} = {06490B2E-4833-489F-87A4-4327814F21EF}
+		{06490B2E-4833-489F-87A4-4327814F21EF} = {06490B2E-4833-489F-87A4-4327814F21EF}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mimosa.Apartment.SL.Common", "Mimosa.Apartment.SL.Common\Mimosa.Apartment.SL.Common.csproj", "{BF5FD8B1-41F6-44BA-8A20-B1B0F1C68C06}"

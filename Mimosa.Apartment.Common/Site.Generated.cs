@@ -71,9 +71,9 @@ namespace Mimosa.Apartment.Common
         [DataMember]
         public string AbbreviatedName { get { return _abbreviatedName; } set { if (!object.ReferenceEquals(this.AbbreviatedName, value)) { _abbreviatedName = value; RaisePropertyChanged("AbbreviatedName"); } } }
         
-        private Guid _licenseKey;
+        private Guid? _licenseKey;
         [DataMember]
-        public Guid LicenseKey { get { return _licenseKey; } set { if (!this.LicenseKey.Equals(value)) { _licenseKey = value; RaisePropertyChanged("LicenseKey"); } } }
+        public Guid? LicenseKey { get { return _licenseKey; } set { if (!this.LicenseKey.Equals(value)) { _licenseKey = value; RaisePropertyChanged("LicenseKey"); } } }
 
         private int _availability;
         [DataMember]

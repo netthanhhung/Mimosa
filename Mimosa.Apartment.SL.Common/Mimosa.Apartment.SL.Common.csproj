@@ -62,8 +62,14 @@
     <Compile Include="..\Mimosa.Apartment.Common\AspUser.cs">
       <Link>AspUser.cs</Link>
     </Compile>
+    <Compile Include="..\Mimosa.Apartment.Common\Component.Generated.cs">
+      <Link>Component.Generated.cs</Link>
+    </Compile>
     <Compile Include="..\Mimosa.Apartment.Common\ContactInformation.cs">
       <Link>ContactInformation.cs</Link>
+    </Compile>
+    <Compile Include="..\Mimosa.Apartment.Common\ContactType.cs">
+      <Link>ContactType.cs</Link>
     </Compile>
     <Compile Include="..\Mimosa.Apartment.Common\Country.Generated.cs">
       <Link>Country.Generated.cs</Link>

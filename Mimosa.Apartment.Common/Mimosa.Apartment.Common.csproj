@@ -44,8 +44,11 @@
   <ItemGroup>
     <Compile Include="AspRole.cs" />
     <Compile Include="AspUser.cs" />
+    <Compile Include="Component.Generated.cs" />
+    <Compile Include="Component.SqlParameters.cs" />
     <Compile Include="ContactInformation.cs" />
     <Compile Include="ContactInformation.SqlParameters.cs" />
+    <Compile Include="ContactType.cs" />
     <Compile Include="Country.Generated.cs" />
     <Compile Include="Country.SqlParameters.cs" />
     <Compile Include="Customer.Extended.cs" />
