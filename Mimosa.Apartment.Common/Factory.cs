@@ -511,5 +511,88 @@ namespace Mimosa.Apartment.Common
             return result;
         }
         #endregion
+
+        #region Equipment
+
+        public static Equipment Equipment(System.Data.IDataReader reader)
+        {
+            Equipment result = null;
+
+            if (null != reader && reader.Read())
+            {
+                result = new Equipment();
+                PopulateEquipment(result, reader);
+            }
+
+            return result;
+        }
+
+        public static void PopulateEquipment(Equipment input, System.Data.IDataReader reader)
+        {
+            PopulateRecord(input, reader);
+            input.RecordId = input.EquipmentId = Utilities.ToInt(reader[Mimosa.Apartment.Common.Equipment.ColumnNames.EquipmentId]);
+            input.OrganisationId = Utilities.ToInt(reader[Mimosa.Apartment.Common.Equipment.ColumnNames.OrganisationId]);
+            input.EquipmentName = Utilities.ToString(reader[Mimosa.Apartment.Common.Equipment.ColumnNames.EquipmentName]);
+            input.Description = Utilities.ToString(reader[Mimosa.Apartment.Common.Equipment.ColumnNames.Description]);
+            input.IsLegacy = Utilities.ToBool(reader[Mimosa.Apartment.Common.Equipment.ColumnNames.IsLegacy]);
+            input.RealPrice = Utilities.ToNDecimal(reader[Mimosa.Apartment.Common.Equipment.ColumnNames.RealPrice]);
+            input.RentPrice = Utilities.ToNDecimal(reader[Mimosa.Apartment.Common.Equipment.ColumnNames.RentPrice]);
+
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public static void FillEquipmentList(List<Equipment> list, System.Data.IDataReader reader)
+        {
+            list.Clear();
+            Equipment item;
+            while (true)
+            {
+                item = Factory.Equipment(reader);
+                if (null == item) break;
+                list.Add(item);
+            }
+        }
+        #endregion
+
+        #region Service
+
+        public static Service Service(System.Data.IDataReader reader)
+        {
+            Service result = null;
+
+            if (null != reader && reader.Read())
+            {
+                result = new Service();
+                PopulateService(result, reader);
+            }
+
+            return result;
+        }
+
+        public static void PopulateService(Service input, System.Data.IDataReader reader)
+        {
+            PopulateRecord(input, reader);
+            input.RecordId = input.ServiceId = Utilities.ToInt(reader[Mimosa.Apartment.Common.Service.ColumnNames.ServiceId]);
+            input.OrganisationId = Utilities.ToInt(reader[Mimosa.Apartment.Common.Service.ColumnNames.OrganisationId]);
+            input.Name = Utilities.ToString(reader[Mimosa.Apartment.Common.Service.ColumnNames.Name]);
+            input.Description = Utilities.ToString(reader[Mimosa.Apartment.Common.Service.ColumnNames.Description]);
+            input.IsLegacy = Utilities.ToBool(reader[Mimosa.Apartment.Common.Service.ColumnNames.IsLegacy]);
+            input.Price = Utilities.ToNDecimal(reader[Mimosa.Apartment.Common.Service.ColumnNames.Price]);
+
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public static void FillServiceList(List<Service> list, System.Data.IDataReader reader)
+        {
+            list.Clear();
+            Service item;
+            while (true)
+            {
+                item = Factory.Service(reader);
+                if (null == item) break;
+                list.Add(item);
+            }
+        }
+        #endregion
     }
 }

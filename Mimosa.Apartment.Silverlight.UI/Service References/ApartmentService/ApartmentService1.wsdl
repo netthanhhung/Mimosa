@@ -201,6 +201,30 @@
   <wsdl:message name="ApartmentService_SaveUserRoleAuth_OutputMessage">
     <wsdl:part name="parameters" element="SaveUserRoleAuthResponse" />
   </wsdl:message>
+  <wsdl:message name="ApartmentService_ListEquipment_InputMessage">
+    <wsdl:part name="parameters" element="ListEquipment" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListEquipment_OutputMessage">
+    <wsdl:part name="parameters" element="ListEquipmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_SaveEquipment_InputMessage">
+    <wsdl:part name="parameters" element="SaveEquipment" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_SaveEquipment_OutputMessage">
+    <wsdl:part name="parameters" element="SaveEquipmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListService_InputMessage">
+    <wsdl:part name="parameters" element="ListService" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListService_OutputMessage">
+    <wsdl:part name="parameters" element="ListServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_SaveService_InputMessage">
+    <wsdl:part name="parameters" element="SaveService" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_SaveService_OutputMessage">
+    <wsdl:part name="parameters" element="SaveServiceResponse" />
+  </wsdl:message>
   <wsdl:portType name="ApartmentService">
     <wsdl:operation name="SelectSessionId">
       <wsdl:input wsaw:Action="urn:ApartmentService/SelectSessionId" message="ApartmentService_SelectSessionId_InputMessage" />
@@ -329,6 +353,22 @@
     <wsdl:operation name="SaveUserRoleAuth">
       <wsdl:input wsaw:Action="urn:ApartmentService/SaveUserRoleAuth" message="ApartmentService_SaveUserRoleAuth_InputMessage" />
       <wsdl:output wsaw:Action="urn:ApartmentService/SaveUserRoleAuthResponse" message="ApartmentService_SaveUserRoleAuth_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListEquipment">
+      <wsdl:input wsaw:Action="urn:ApartmentService/ListEquipment" message="ApartmentService_ListEquipment_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/ListEquipmentResponse" message="ApartmentService_ListEquipment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveEquipment">
+      <wsdl:input wsaw:Action="urn:ApartmentService/SaveEquipment" message="ApartmentService_SaveEquipment_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/SaveEquipmentResponse" message="ApartmentService_SaveEquipment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListService">
+      <wsdl:input wsaw:Action="urn:ApartmentService/ListService" message="ApartmentService_ListService_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/ListServiceResponse" message="ApartmentService_ListService_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveService">
+      <wsdl:input wsaw:Action="urn:ApartmentService/SaveService" message="ApartmentService_SaveService_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/SaveServiceResponse" message="ApartmentService_SaveService_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

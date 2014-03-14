@@ -121,6 +121,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administration\ServiceAdminPage.xaml.cs">
+      <DependentUpon>ServiceAdminPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\EquipmentAdminPage.xaml.cs">
+      <DependentUpon>EquipmentAdminPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Administration\SiteAdminPage.xaml.cs">
       <DependentUpon>SiteAdminPage.xaml</DependentUpon>
     </Compile>
@@ -231,6 +237,14 @@
     <Resource Include="Assets\Images\Office_BlackChartBackground.jpg" />
     <Resource Include="Assets\Images\shinyblue-bg.png" />
     <Page Include="Administration\ChangePasswordPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Administration\ServiceAdminPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Administration\EquipmentAdminPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -378,8 +392,10 @@
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.ContactInformation.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.Country.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.Customer.datasource" />
+    <None Include="Properties\DataSources\Mimosa.Apartment.Common.Equipment.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.Organisation.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.RoleComponentPermission.datasource" />
+    <None Include="Properties\DataSources\Mimosa.Apartment.Common.Service.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.Site.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.UserRoleAuth.datasource" />
     <None Include="Service References\ApartmentService\ApartmentService.wsdl" />

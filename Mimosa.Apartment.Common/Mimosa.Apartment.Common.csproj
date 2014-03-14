@@ -49,6 +49,10 @@
     <Compile Include="ContactInformation.cs" />
     <Compile Include="ContactInformation.SqlParameters.cs" />
     <Compile Include="ContactType.cs" />
+    <Compile Include="Service.Generated.cs" />
+    <Compile Include="Service.SqlParameters.cs" />
+    <Compile Include="Equipment.Generated.cs" />
+    <Compile Include="Equipment.SqlParameters.cs" />
     <Compile Include="Country.Generated.cs" />
     <Compile Include="Country.SqlParameters.cs" />
     <Compile Include="Customer.Extended.cs" />

@@ -89,8 +89,7 @@ namespace Mimosa.Apartment.Silverlight.UI
         private void gvwOrganisations_CellValidating(object sender, Telerik.Windows.Controls.GridViewCellValidatingEventArgs e)
         {
             if (e.Cell.Column.UniqueName == "Name"
-                || e.Cell.Column.UniqueName == "AuthorisationCode" 
-                || e.Cell.Column.UniqueName == "LicenceKey")
+                || e.Cell.Column.UniqueName == "AuthorisationCode")
             {
                 if (e.NewValue.ToString().Length < 1)
                 {

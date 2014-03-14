@@ -31,6 +31,14 @@
 		  url="/Administration/SiteAdminPage.xaml"
 		  title="Site Administration"
 		  description="Site Administration"/>
+		<siteMapNode
+		  url="/Administration/EquipmentAdminPage.xaml"
+		  title="Equipment Administration"
+		  description="Equipment Administration"/>
+	   <siteMapNode
+		  url="/Administration/ServiceAdminPage.xaml"
+		  title="Service Administration"
+		  description="Service Administration"/>
      </siteMapNode>
   </siteMapNode>
 

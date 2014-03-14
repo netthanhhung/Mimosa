@@ -116,7 +116,7 @@
           <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="ContactInformationId" type="xs:int" />
           <xs:element minOccurs="0" name="ContactTypeId" type="xs:int" />
-          <xs:element minOccurs="0" name="CountryId" type="xs:int" />
+          <xs:element minOccurs="0" name="CountryId" nillable="true" type="xs:int" />
           <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="FaxNumber" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
@@ -172,7 +172,7 @@
           <xs:element minOccurs="0" name="IsChanged" type="xs:boolean" />
           <xs:element minOccurs="0" name="IsChecked" type="xs:boolean" />
           <xs:element minOccurs="0" name="IsLegacy" type="xs:boolean" />
-          <xs:element minOccurs="0" name="LicenseKey" type="ser:guid" />
+          <xs:element minOccurs="0" name="LicenseKey" nillable="true" type="ser:guid" />
           <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="OrganisationId" type="xs:int" />
           <xs:element minOccurs="0" name="PropCode" nillable="true" type="xs:string" />
@@ -293,4 +293,47 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="AspRole" nillable="true" type="tns:AspRole" />
+  <xs:complexType name="ArrayOfEquipment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Equipment" nillable="true" type="tns:Equipment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEquipment" nillable="true" type="tns:ArrayOfEquipment" />
+  <xs:complexType name="Equipment">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Record">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="EquipmentId" type="xs:int" />
+          <xs:element minOccurs="0" name="EquipmentName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IsLegacy" type="xs:boolean" />
+          <xs:element minOccurs="0" name="OrganisationId" type="xs:int" />
+          <xs:element minOccurs="0" name="RealPrice" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="0" name="RentPrice" nillable="true" type="xs:decimal" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Equipment" nillable="true" type="tns:Equipment" />
+  <xs:complexType name="ArrayOfService">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Service" nillable="true" type="tns:Service" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfService" nillable="true" type="tns:ArrayOfService" />
+  <xs:complexType name="Service">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Record">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IsLegacy" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="OrganisationId" type="xs:int" />
+          <xs:element minOccurs="0" name="Price" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="0" name="ServiceId" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Service" nillable="true" type="tns:Service" />
 </xs:schema>

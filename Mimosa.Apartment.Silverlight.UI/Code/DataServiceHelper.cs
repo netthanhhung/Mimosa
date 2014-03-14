@@ -504,5 +504,68 @@ namespace Mimosa.Apartment.Silverlight.UI
 
         #endregion
 
+        // ListEquipment
+        internal delegate void ListEquipmentCallBack(List<Equipment> itemSource);
+        internal static void ListEquipmentAsync(int? organisationId, int? equipmentId, bool showLegacy, ListEquipmentCallBack callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.ListEquipmentCompleted += new EventHandler<ListEquipmentCompletedEventArgs>(proxy_ListEquipmentCompleted);
+            proxy.ListEquipmentAsync(organisationId, equipmentId, showLegacy, callerKey);
+        }
+
+        static void proxy_ListEquipmentCompleted(object sender, ListEquipmentCompletedEventArgs e)
+        {
+            Guid callerKey = (Guid)e.UserState;
+            if (_callbacks.ContainsKey(callerKey))
+            {
+                List<Equipment> itemSource = e.Result;
+                ((ListEquipmentCallBack)_callbacks[callerKey]).Invoke(itemSource);
+
+                _callbacks.Remove(callerKey);
+            }
+        }
+
+        //SaveEquipment
+        internal static void SaveEquipmentAsync(List<Equipment> saveList, EmptyCallback callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.SaveEquipmentCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(proxy_VoidMethodCompleted);
+            proxy.SaveEquipmentAsync(saveList, callerKey);
+        }
+
+        // ListService
+        internal delegate void ListServiceCallBack(List<Service> itemSource);
+        internal static void ListServiceAsync(int? organisationId, int? serviceId, bool showLegacy, ListServiceCallBack callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.ListServiceCompleted += new EventHandler<ListServiceCompletedEventArgs>(proxy_ListServiceCompleted);
+            proxy.ListServiceAsync(organisationId, serviceId, showLegacy, callerKey);
+        }
+
+        static void proxy_ListServiceCompleted(object sender, ListServiceCompletedEventArgs e)
+        {
+            Guid callerKey = (Guid)e.UserState;
+            if (_callbacks.ContainsKey(callerKey))
+            {
+                List<Service> itemSource = e.Result;
+                ((ListServiceCallBack)_callbacks[callerKey]).Invoke(itemSource);
+
+                _callbacks.Remove(callerKey);
+            }
+        }
+
+        //SaveService
+        internal static void SaveServiceAsync(List<Service> saveList, EmptyCallback callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.SaveServiceCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(proxy_VoidMethodCompleted);
+            proxy.SaveServiceAsync(saveList, callerKey);
+        }
 	}
 }

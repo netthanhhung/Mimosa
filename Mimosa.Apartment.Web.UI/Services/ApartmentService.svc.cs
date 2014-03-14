@@ -422,6 +422,34 @@ namespace Mimosa.Apartment.Web.UI
         }
         #endregion
 
+        #region Equipment
+        [OperationContract]
+        public List<Equipment> ListEquipment(int? organisationId, int? equipmentId, bool showLegacy)
+        {
+            return ApartmentMethods.ListEquipment(organisationId, equipmentId, showLegacy);
+        }
+
+        [OperationContract]
+        public void SaveEquipment(List<Equipment> saveList)
+        {
+            ApartmentMethods.SaveEquipment(saveList);
+        }
+        #endregion
+
+        #region Service
+        [OperationContract]
+        public List<Service> ListService(int? organisationId, int? serviceId, bool showLegacy)
+        {
+            return ApartmentMethods.ListService(organisationId, serviceId, showLegacy);
+        }
+
+        [OperationContract]
+        public void SaveService(List<Service> saveList)
+        {
+            ApartmentMethods.SaveService(saveList);
+        }
+        #endregion
+
     }
 
     /// <summary>

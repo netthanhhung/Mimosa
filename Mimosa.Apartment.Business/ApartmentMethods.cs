@@ -416,5 +416,57 @@ namespace Mimosa.Apartment.Business
             return new DataLayer().GetLatestTagVersion();
         }
         #endregion
+
+        #region Equipment
+        public static List<Equipment> ListEquipment(int? organisationId, int? equipmentId, bool showLegacy)
+        {
+            return new DataLayer().ListEquipment(organisationId, equipmentId, showLegacy);
+        }
+
+        public static void SaveEquipment(List<Equipment> saveList)
+        {
+            if (saveList != null)
+            {
+                foreach (Equipment item in saveList)
+                {
+                    if (item.IsDeleted && item.NullableRecordId != null)
+                    {
+                        DeleteRecord((Record)item);
+                    }
+                    else if (item.IsChanged)
+                    {
+                        SaveRecord((Record)item);
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region Service
+        public static List<Service> ListService(int? organisationId, int? serviceId, bool showLegacy)
+        {
+            return new DataLayer().ListService(organisationId, serviceId, showLegacy);
+        }
+
+        public static void SaveService(List<Service> saveList)
+        {
+            if (saveList != null)
+            {
+                foreach (Service item in saveList)
+                {
+                    if (item.IsDeleted && item.NullableRecordId != null)
+                    {
+                        DeleteRecord((Record)item);
+                    }
+                    else if (item.IsChanged)
+                    {
+                        SaveRecord((Record)item);
+                    }
+                }
+            }
+        }
+        #endregion
+
     }
 }
+

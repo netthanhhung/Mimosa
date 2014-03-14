@@ -83,6 +83,9 @@
     <Compile Include="..\Mimosa.Apartment.Common\DeploymentInfo.cs">
       <Link>DeploymentInfo.cs</Link>
     </Compile>
+    <Compile Include="..\Mimosa.Apartment.Common\Equipment.Generated.cs">
+      <Link>Equipment.Generated.cs</Link>
+    </Compile>
     <Compile Include="..\Mimosa.Apartment.Common\Organisation.Extended.cs">
       <Link>Organisation.Extended.cs</Link>
     </Compile>
@@ -100,6 +103,9 @@
     </Compile>
     <Compile Include="..\Mimosa.Apartment.Common\RoleComponentPermission.Generated.cs">
       <Link>RoleComponentPermission.Generated.cs</Link>
+    </Compile>
+    <Compile Include="..\Mimosa.Apartment.Common\Service.Generated.cs">
+      <Link>Service.Generated.cs</Link>
     </Compile>
     <Compile Include="..\Mimosa.Apartment.Common\Site.Extended.cs">
       <Link>Site.Extended.cs</Link>

@@ -388,5 +388,33 @@ namespace Mimosa.Apartment.Data
             }
         }
         #endregion
+
+        #region Equipment
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public List<Equipment> ListEquipment(int? organisationId, int? equipmentId, bool showLegacy)
+        {
+            List<Equipment> result = new List<Equipment>();
+
+            using (IDataReader reader = _db.ExecuteReader("procListEquipment", organisationId, equipmentId, showLegacy))
+            {
+                Factory.FillEquipmentList(result, reader);
+            }
+            return result;
+        }
+        #endregion
+
+        #region Service
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public List<Service> ListService(int? organisationId, int? serviceId, bool showLegacy)
+        {
+            List<Service> result = new List<Service>();
+
+            using (IDataReader reader = _db.ExecuteReader("procListService", organisationId, serviceId, showLegacy))
+            {
+                Factory.FillServiceList(result, reader);
+            }
+            return result;
+        }
+        #endregion
     }
 }
