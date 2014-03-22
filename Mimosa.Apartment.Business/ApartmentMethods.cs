@@ -467,6 +467,133 @@ namespace Mimosa.Apartment.Business
         }
         #endregion
 
+        #region RoomType
+        public static List<RoomType> ListRoomType(int? organisationId, int? siteId, bool showLegacy)
+        {
+            return new DataLayer().ListRoomType(organisationId, siteId, showLegacy);
+        }
+
+        public static void SaveRoomType(List<RoomType> saveList)
+        {
+            if (saveList != null)
+            {
+                foreach (RoomType item in saveList)
+                {
+                    if (item.IsDeleted && item.NullableRecordId != null)
+                    {
+                        DeleteRecord((Record)item);
+                    }
+                    else if (item.IsChanged)
+                    {
+                        SaveRecord((Record)item);
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region Room
+        public static List<Room> ListRoom(int orgId, int? siteId, int? roomId, string roomName, string roomStatusIds, string roomTypeIds, int? floor , bool showLegacy)
+        {
+            return new DataLayer().ListRoom(orgId, siteId, roomId, roomName, roomStatusIds, roomTypeIds, floor, showLegacy);
+        }
+
+        public static void SaveRoom(List<Room> saveList)
+        {
+            if (saveList != null)
+            {
+                foreach (Room item in saveList)
+                {
+                    if (item.IsChanged)
+                    {
+                        SaveRecord((Record)item);
+                    }
+                    //if (item.RoomEquipments != null && item.RoomEquipments.Count > 0)
+                    //{
+                    //    foreach (RoomEquipment equipment in item.RoomEquipments)
+                    //    {
+                    //        equipment.RoomId = roomId;
+                    //        if (equipment.IsChanged)
+                    //        {
+                    //            DeleteRecord((Record)equipment);
+                    //        }
+                    //        else if (equipment.IsChanged)
+                    //        {
+                    //            SaveRecord((Record)equipment);
+                    //        }
+                    //    }
+                    //}
+
+                    //if (item.RoomServices != null && item.RoomServices.Count > 0)
+                    //{
+                    //    foreach (RoomService service in item.RoomServices)
+                    //    {
+                    //        service.RoomId = roomId;
+                    //        if (service.IsChanged)
+                    //        {
+                    //            DeleteRecord((Record)service);
+                    //        }
+                    //        else if (service.IsChanged)
+                    //        {
+                    //            SaveRecord((Record)service);
+                    //        }
+                    //    }
+                    //}
+                }
+            }
+        }
+        #endregion
+
+        #region RoomEquipment
+        public static List<RoomEquipment> ListRoomEquipment(int? roomEquipmentId, int? roomId)
+        {
+            return new DataLayer().ListRoomEquipment(roomEquipmentId, roomId);
+        }
+
+        public static void SaveRoomEquipment(List<RoomEquipment> saveList)
+        {
+            if (saveList != null)
+            {
+                foreach (RoomEquipment item in saveList)
+                {
+                    if (item.IsDeleted && item.NullableRecordId != null)
+                    {
+                        DeleteRecord((Record)item);
+                    }
+                    else if (item.IsChanged)
+                    {
+                        SaveRecord((Record)item);
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region RoomService
+        public static List<RoomService> ListRoomService(int? roomServiceId, int? roomId)
+        {
+            return new DataLayer().ListRoomService(roomServiceId, roomId);
+        }
+
+        public static void SaveRoomService(List<RoomService> saveList)
+        {
+            if (saveList != null)
+            {
+                foreach (RoomService item in saveList)
+                {
+                    if (item.IsDeleted && item.NullableRecordId != null)
+                    {
+                        DeleteRecord((Record)item);
+                    }
+                    else if (item.IsChanged)
+                    {
+                        SaveRecord((Record)item);
+                    }
+                }
+            }
+        }
+        #endregion
+
     }
 }
 

@@ -49,6 +49,15 @@
     <Compile Include="ContactInformation.cs" />
     <Compile Include="ContactInformation.SqlParameters.cs" />
     <Compile Include="ContactType.cs" />
+    <Compile Include="RoomType.Generated.cs" />
+    <Compile Include="RoomType.SqlParameters.cs" />
+    <Compile Include="RoomStatus.cs" />
+    <Compile Include="RoomService.Generated.cs" />
+    <Compile Include="RoomService.SqlParameters.cs" />
+    <Compile Include="RoomEquipment.Generated.cs" />
+    <Compile Include="RoomEquipment.SqlParameters.cs" />
+    <Compile Include="Room.Generated.cs" />
+    <Compile Include="Room.SqlParameters.cs" />
     <Compile Include="Service.Generated.cs" />
     <Compile Include="Service.SqlParameters.cs" />
     <Compile Include="Equipment.Generated.cs" />

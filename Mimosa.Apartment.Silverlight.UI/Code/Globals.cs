@@ -41,37 +41,6 @@ namespace Mimosa.Apartment.Silverlight.UI
                 }
             }
 
-            internal static string DepartmentSMSActivated
-            {
-                get
-                {
-                    return "SMS feature has been activated for {0}: " + Globals.Now.ToShortTimeString();
-                }
-            }
-
-            internal static string DepartmentSMSActivatedNoParam
-            {
-                get
-                {
-                    return "SMS feature has been activated: " + Globals.Now.ToShortTimeString();
-                }
-            }
-
-            internal static string DepartmentSMSDeactivated
-            {
-                get
-                {
-                    return "SMS feature has been deactivated for {0}: " + Globals.Now.ToShortTimeString();
-                }
-            }
-
-            internal static string DepartmentSMSDeactivatedNoParam
-            {
-                get
-                {
-                    return "SMS feature has been deactivated: " + Globals.Now.ToShortTimeString();
-                }
-            }
 
             internal const string NewRecord = "New Record.";
 
@@ -92,8 +61,7 @@ namespace Mimosa.Apartment.Silverlight.UI
             internal const string SaveComplete = "'{0}' has been saved.";
             internal const string DeleteFailed = "'{0}' could not be deleted.";
             internal const string DeleteFailedBeingUsed = "'{0}' could not be deleted. It is being used.";
-            internal const string EmployeeDetailsIncomplete = "Your Employee Details are incomplete.\r\n\r\nPlease use the Employee Self Management page to complete your Employee Details as soon as possible.";
-            internal const string TrainingCourseIsInUsed = "This course was used for another training need.\r\nPlease select another one!";
+            internal const string ItemExist = "This item is already exist";
         }
 
         internal static class ListConstants

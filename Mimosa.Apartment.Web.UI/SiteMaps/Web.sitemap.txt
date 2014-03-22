@@ -39,6 +39,10 @@
 		  url="/Administration/ServiceAdminPage.xaml"
 		  title="Service Administration"
 		  description="Service Administration"/>
+	  <siteMapNode
+		  url="/Administration/RoomAdminPage.xaml"
+		  title="Room Administration"
+		  description="Room Administration"/>
      </siteMapNode>
   </siteMapNode>
 

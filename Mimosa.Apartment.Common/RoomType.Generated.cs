@@ -5,11 +5,11 @@ using System.ComponentModel;
 namespace Mimosa.Apartment.Common
 {
     [DataContract]
-    public partial class Service : Record
+    public partial class RoomType : Record
     {
         #region Public Constructors
 
-        public Service() : base() { }
+        public RoomType() : base() { }
 
         #endregion
 
@@ -17,29 +17,33 @@ namespace Mimosa.Apartment.Common
 
         public static class ColumnNames
         {
-            public const string ServiceId = "ServiceId";
-            public const string OrganisationId = "OrganisationID";
+            public const string RoomTypeId = "RoomTypeId";
             public const string Name = "Name";
+            public const string OrganisationId = "OrganisationId";
+            public const string SiteId = "SiteId";
             public const string Description = "Description";
             public const string IsLegacy = "IsLegacy";
-            public const string Price = "Price";
         }
 
         #endregion
 
         #region Properties
 
-        private int _serviceId;
+        private int _roomTypeId;
         [DataMember]
-        public int ServiceId { get { return _serviceId; } set { _serviceId = value; RaisePropertyChanged("ServiceId"); } }
-
-        private int _organisationId;
-        [DataMember]
-        public int OrganisationId { get { return _organisationId; } set { if (!this.OrganisationId.Equals(value)) { _organisationId = value; RaisePropertyChanged("OrganisationId"); } } }
+        public int RoomTypeId { get { return _roomTypeId; } set { _roomTypeId = value; RaisePropertyChanged("RoomTypeId"); } }
 
         private string _name;
         [DataMember]
         public string Name { get { return _name; } set { if (!object.ReferenceEquals(this.Name, value)) { _name = value; RaisePropertyChanged("Name"); } } }
+
+        private int? _organisationId;
+        [DataMember]
+        public int? OrganisationId { get { return _organisationId; } set { if (!this.OrganisationId.Equals(value)) { _organisationId = value; RaisePropertyChanged("OrganisationId"); } } }
+
+        private int? _siteId;
+        [DataMember]
+        public int? SiteId { get { return _siteId; } set { if (!this.SiteId.Equals(value)) { _siteId = value; RaisePropertyChanged("SiteId"); } } }
 
         private string _description;
         [DataMember]
@@ -49,9 +53,6 @@ namespace Mimosa.Apartment.Common
         [DataMember]
         public bool IsLegacy { get { return _isLegacy; } set { if (!this.IsLegacy.Equals(value)) { _isLegacy = value; RaisePropertyChanged("IsLegacy"); } } }
 
-        private decimal? _price;
-        [DataMember]
-        public decimal? Price { get { return _price; } set { if (!this.Price.Equals(value)) { _price = value; RaisePropertyChanged("Price"); } } }
 
         #endregion
     }

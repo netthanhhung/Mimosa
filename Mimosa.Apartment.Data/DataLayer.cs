@@ -96,7 +96,8 @@ namespace Mimosa.Apartment.Data
 
         public void DeleteRecord(long recordId, string recordType)
         {
-            _db.ExecuteNonQuery("procDelete", recordId, recordType);
+            string store = "procDelete" + recordType;
+            _db.ExecuteNonQuery(store, recordId);
         }
         #endregion
 
@@ -412,6 +413,62 @@ namespace Mimosa.Apartment.Data
             using (IDataReader reader = _db.ExecuteReader("procListService", organisationId, serviceId, showLegacy))
             {
                 Factory.FillServiceList(result, reader);
+            }
+            return result;
+        }
+        #endregion
+
+        #region RoomType
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public List<RoomType> ListRoomType(int? organisationId, int? siteId, bool showLegacy)
+        {
+            List<RoomType> result = new List<RoomType>();
+
+            using (IDataReader reader = _db.ExecuteReader("procListRoomType", organisationId, siteId, showLegacy))
+            {
+                Factory.FillRoomTypeList(result, reader);
+            }
+            return result;
+        }
+        #endregion
+
+        #region Room
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public List<Room> ListRoom(int orgId, int? siteId, int? roomId, string roomName, string roomStatusIds, string roomTypeIds, int? floor, bool showLegacy)
+        {
+            List<Room> result = new List<Room>();
+
+            using (IDataReader reader = _db.ExecuteReader("procListRoom", orgId, siteId, roomId, roomName, roomStatusIds, roomTypeIds, floor, showLegacy))
+            {
+                Factory.FillRoomList(result, reader);
+            }
+            return result;
+        }
+        #endregion
+
+        #region RoomEquipment
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public List<RoomEquipment> ListRoomEquipment(int? roomEquipmentId, int? roomId)
+        {
+            List<RoomEquipment> result = new List<RoomEquipment>();
+
+            using (IDataReader reader = _db.ExecuteReader("procListRoomEquipment", roomEquipmentId, roomId))
+            {
+                Factory.FillRoomEquipmentList(result, reader);
+            }
+            return result;
+        }
+        #endregion
+
+        #region RoomService
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public List<RoomService> ListRoomService(int? roomServiceId, int? roomId)
+        {
+            List<RoomService> result = new List<RoomService>();
+
+            using (IDataReader reader = _db.ExecuteReader("procListRoomService", roomServiceId, roomId))
+            {
+                Factory.FillRoomServiceList(result, reader);
             }
             return result;
         }

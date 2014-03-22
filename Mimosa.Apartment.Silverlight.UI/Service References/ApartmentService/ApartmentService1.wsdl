@@ -225,6 +225,54 @@
   <wsdl:message name="ApartmentService_SaveService_OutputMessage">
     <wsdl:part name="parameters" element="SaveServiceResponse" />
   </wsdl:message>
+  <wsdl:message name="ApartmentService_ListRoomType_InputMessage">
+    <wsdl:part name="parameters" element="ListRoomType" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListRoomType_OutputMessage">
+    <wsdl:part name="parameters" element="ListRoomTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_SaveRoomType_InputMessage">
+    <wsdl:part name="parameters" element="SaveRoomType" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_SaveRoomType_OutputMessage">
+    <wsdl:part name="parameters" element="SaveRoomTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListRoom_InputMessage">
+    <wsdl:part name="parameters" element="ListRoom" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListRoom_OutputMessage">
+    <wsdl:part name="parameters" element="ListRoomResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_SaveRoom_InputMessage">
+    <wsdl:part name="parameters" element="SaveRoom" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_SaveRoom_OutputMessage">
+    <wsdl:part name="parameters" element="SaveRoomResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListRoomEquipment_InputMessage">
+    <wsdl:part name="parameters" element="ListRoomEquipment" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListRoomEquipment_OutputMessage">
+    <wsdl:part name="parameters" element="ListRoomEquipmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_SaveRoomEquipment_InputMessage">
+    <wsdl:part name="parameters" element="SaveRoomEquipment" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_SaveRoomEquipment_OutputMessage">
+    <wsdl:part name="parameters" element="SaveRoomEquipmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListRoomService_InputMessage">
+    <wsdl:part name="parameters" element="ListRoomService" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListRoomService_OutputMessage">
+    <wsdl:part name="parameters" element="ListRoomServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_SaveRoomService_InputMessage">
+    <wsdl:part name="parameters" element="SaveRoomService" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_SaveRoomService_OutputMessage">
+    <wsdl:part name="parameters" element="SaveRoomServiceResponse" />
+  </wsdl:message>
   <wsdl:portType name="ApartmentService">
     <wsdl:operation name="SelectSessionId">
       <wsdl:input wsaw:Action="urn:ApartmentService/SelectSessionId" message="ApartmentService_SelectSessionId_InputMessage" />
@@ -369,6 +417,38 @@
     <wsdl:operation name="SaveService">
       <wsdl:input wsaw:Action="urn:ApartmentService/SaveService" message="ApartmentService_SaveService_InputMessage" />
       <wsdl:output wsaw:Action="urn:ApartmentService/SaveServiceResponse" message="ApartmentService_SaveService_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListRoomType">
+      <wsdl:input wsaw:Action="urn:ApartmentService/ListRoomType" message="ApartmentService_ListRoomType_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/ListRoomTypeResponse" message="ApartmentService_ListRoomType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveRoomType">
+      <wsdl:input wsaw:Action="urn:ApartmentService/SaveRoomType" message="ApartmentService_SaveRoomType_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/SaveRoomTypeResponse" message="ApartmentService_SaveRoomType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListRoom">
+      <wsdl:input wsaw:Action="urn:ApartmentService/ListRoom" message="ApartmentService_ListRoom_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/ListRoomResponse" message="ApartmentService_ListRoom_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveRoom">
+      <wsdl:input wsaw:Action="urn:ApartmentService/SaveRoom" message="ApartmentService_SaveRoom_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/SaveRoomResponse" message="ApartmentService_SaveRoom_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListRoomEquipment">
+      <wsdl:input wsaw:Action="urn:ApartmentService/ListRoomEquipment" message="ApartmentService_ListRoomEquipment_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/ListRoomEquipmentResponse" message="ApartmentService_ListRoomEquipment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveRoomEquipment">
+      <wsdl:input wsaw:Action="urn:ApartmentService/SaveRoomEquipment" message="ApartmentService_SaveRoomEquipment_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/SaveRoomEquipmentResponse" message="ApartmentService_SaveRoomEquipment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListRoomService">
+      <wsdl:input wsaw:Action="urn:ApartmentService/ListRoomService" message="ApartmentService_ListRoomService_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/ListRoomServiceResponse" message="ApartmentService_ListRoomService_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveRoomService">
+      <wsdl:input wsaw:Action="urn:ApartmentService/SaveRoomService" message="ApartmentService_SaveRoomService_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/SaveRoomServiceResponse" message="ApartmentService_SaveRoomService_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

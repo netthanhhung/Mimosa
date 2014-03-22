@@ -121,6 +121,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administration\RoomAdminPage.xaml.cs">
+      <DependentUpon>RoomAdminPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Administration\ServiceAdminPage.xaml.cs">
       <DependentUpon>ServiceAdminPage.xaml</DependentUpon>
     </Compile>
@@ -163,6 +166,9 @@
     <Compile Include="Controls\CountryPicker.xaml.cs">
       <DependentUpon>CountryPicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DataPicker.xaml.cs">
+      <DependentUpon>DataPicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Highlighter.xaml.cs">
       <DependentUpon>Highlighter.xaml</DependentUpon>
     </Compile>
@@ -172,8 +178,12 @@
     <Compile Include="Controls\Logo.xaml.cs">
       <DependentUpon>Logo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MultiRoomTypePicker.xaml.cs">
+      <DependentUpon>MultiRoomTypePicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SharedResourceDictionary.cs" />
     <Compile Include="Controls\SingleClickButton.cs" />
+    <Compile Include="Controls\SitePicker.cs" />
     <Compile Include="Controls\UserAccount.xaml.cs">
       <DependentUpon>UserAccount.xaml</DependentUpon>
     </Compile>
@@ -237,6 +247,10 @@
     <Resource Include="Assets\Images\Office_BlackChartBackground.jpg" />
     <Resource Include="Assets\Images\shinyblue-bg.png" />
     <Page Include="Administration\ChangePasswordPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Administration\RoomAdminPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -324,6 +338,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\DataPicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\Highlighter.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -333,6 +351,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\Logo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MultiRoomTypePicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -395,6 +417,10 @@
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.Equipment.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.Organisation.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.RoleComponentPermission.datasource" />
+    <None Include="Properties\DataSources\Mimosa.Apartment.Common.Room.datasource" />
+    <None Include="Properties\DataSources\Mimosa.Apartment.Common.RoomEquipment.datasource" />
+    <None Include="Properties\DataSources\Mimosa.Apartment.Common.RoomService.datasource" />
+    <None Include="Properties\DataSources\Mimosa.Apartment.Common.RoomType.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.Service.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.Site.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.UserRoleAuth.datasource" />

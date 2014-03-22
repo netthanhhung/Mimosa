@@ -450,6 +450,62 @@ namespace Mimosa.Apartment.Web.UI
         }
         #endregion
 
+        #region RoomType
+        [OperationContract]
+        public List<RoomType> ListRoomType(int? organisationId, int? siteId, bool showLegacy)
+        {
+            return ApartmentMethods.ListRoomType(organisationId, siteId, showLegacy);
+        }
+
+        [OperationContract]
+        public void SaveRoomType(List<RoomType> saveList)
+        {
+            ApartmentMethods.SaveRoomType(saveList);
+        }
+        #endregion
+
+        #region Room
+        [OperationContract]
+        public List<Room> ListRoom(int orgId, int? siteId, int? roomId, string roomName, string roomStatusIds, string roomTypeIds, int? floor, bool showLegacy)
+        {
+            return ApartmentMethods.ListRoom(orgId, siteId, roomId, roomName, roomStatusIds, roomTypeIds, floor, showLegacy);
+        }
+
+        [OperationContract]
+        public void SaveRoom(List<Room> saveList)
+        {
+            ApartmentMethods.SaveRoom(saveList);
+        }
+        #endregion
+
+        #region RoomEquipment
+        [OperationContract]
+        public List<RoomEquipment> ListRoomEquipment(int? roomEquipmentId, int? roomId)
+        {
+            return ApartmentMethods.ListRoomEquipment(roomEquipmentId, roomId);
+        }
+
+        [OperationContract]
+        public void SaveRoomEquipment(List<RoomEquipment> saveList)
+        {
+            ApartmentMethods.SaveRoomEquipment(saveList);
+        }
+        #endregion
+
+        #region RoomService
+        [OperationContract]
+        public List<RoomService> ListRoomService(int? roomServiceId, int? roomId)
+        {
+            return ApartmentMethods.ListRoomService(roomServiceId, roomId);
+        }
+
+        [OperationContract]
+        public void SaveRoomService(List<RoomService> saveList)
+        {
+            ApartmentMethods.SaveRoomService(saveList);
+        }
+        #endregion
+
     }
 
     /// <summary>

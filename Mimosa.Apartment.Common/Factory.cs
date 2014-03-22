@@ -594,5 +594,174 @@ namespace Mimosa.Apartment.Common
             }
         }
         #endregion
+
+        #region RoomType
+
+        public static RoomType RoomType(System.Data.IDataReader reader)
+        {
+            RoomType result = null;
+
+            if (null != reader && reader.Read())
+            {
+                result = new RoomType();
+                PopulateRoomType(result, reader);
+            }
+
+            return result;
+        }
+
+        public static void PopulateRoomType(RoomType input, System.Data.IDataReader reader)
+        {
+            PopulateRecord(input, reader);
+            input.RecordId = input.RoomTypeId = Utilities.ToInt(reader[Mimosa.Apartment.Common.RoomType.ColumnNames.RoomTypeId]);            
+            input.Name = Utilities.ToString(reader[Mimosa.Apartment.Common.RoomType.ColumnNames.Name]);
+            input.OrganisationId = Utilities.ToNInt(reader[Mimosa.Apartment.Common.RoomType.ColumnNames.OrganisationId]);
+            input.SiteId = Utilities.ToNInt(reader[Mimosa.Apartment.Common.RoomType.ColumnNames.SiteId]);
+            input.Description = Utilities.ToString(reader[Mimosa.Apartment.Common.RoomType.ColumnNames.Description]);
+            input.IsLegacy = Utilities.ToBool(reader[Mimosa.Apartment.Common.RoomType.ColumnNames.IsLegacy]);
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public static void FillRoomTypeList(List<RoomType> list, System.Data.IDataReader reader)
+        {
+            list.Clear();
+            RoomType item;
+            while (true)
+            {
+                item = Factory.RoomType(reader);
+                if (null == item) break;
+                list.Add(item);
+            }
+        }
+        #endregion
+
+        #region Room
+
+        public static Room Room(System.Data.IDataReader reader)
+        {
+            Room result = null;
+
+            if (null != reader && reader.Read())
+            {
+                result = new Room();
+                PopulateRoom(result, reader);
+            }
+
+            return result;
+        }
+
+        public static void PopulateRoom(Room input, System.Data.IDataReader reader)
+        {
+            PopulateRecord(input, reader);
+            input.RecordId = input.RoomId = Utilities.ToInt(reader[Mimosa.Apartment.Common.Room.ColumnNames.RoomId]);
+            input.SiteId = Utilities.ToInt(reader[Mimosa.Apartment.Common.Room.ColumnNames.SiteId]);
+            input.RoomName = Utilities.ToString(reader[Mimosa.Apartment.Common.Room.ColumnNames.RoomName]);
+            input.RoomStatusId = Utilities.ToInt(reader[Mimosa.Apartment.Common.Room.ColumnNames.RoomStatusId]);
+            input.RoomStatus = Utilities.ToString(reader[Mimosa.Apartment.Common.Room.ColumnNames.RoomStatus]);
+            input.RoomTypeId = Utilities.ToInt(reader[Mimosa.Apartment.Common.Room.ColumnNames.RoomTypeId]);
+            input.RoomType = Utilities.ToString(reader[Mimosa.Apartment.Common.Room.ColumnNames.RoomType]);
+            input.IsLegacy = Utilities.ToBool(reader[Mimosa.Apartment.Common.Room.ColumnNames.IsLegacy]);
+            input.Description = Utilities.ToString(reader[Mimosa.Apartment.Common.Room.ColumnNames.Description]);
+            input.Width = Utilities.ToNDecimal(reader[Mimosa.Apartment.Common.Room.ColumnNames.Width]);
+            input.Height = Utilities.ToNDecimal(reader[Mimosa.Apartment.Common.Room.ColumnNames.Height]);
+            input.MeterSquare = Utilities.ToNDecimal(reader[Mimosa.Apartment.Common.Room.ColumnNames.MeterSquare]);
+            input.Floor = Utilities.ToNInt(reader[Mimosa.Apartment.Common.Room.ColumnNames.Floor]);
+            input.BasePrice = Utilities.ToNDecimal(reader[Mimosa.Apartment.Common.Room.ColumnNames.BasePrice]);
+
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public static void FillRoomList(List<Room> list, System.Data.IDataReader reader)
+        {
+            list.Clear();
+            Room item;
+            while (true)
+            {
+                item = Factory.Room(reader);
+                if (null == item) break;
+                list.Add(item);
+            }
+        }
+        #endregion
+
+        #region RoomEquipment
+
+        public static RoomEquipment RoomEquipment(System.Data.IDataReader reader)
+        {
+            RoomEquipment result = null;
+
+            if (null != reader && reader.Read())
+            {
+                result = new RoomEquipment();
+                PopulateRoomEquipment(result, reader);
+            }
+
+            return result;
+        }
+
+        public static void PopulateRoomEquipment(RoomEquipment input, System.Data.IDataReader reader)
+        {
+            PopulateRecord(input, reader);
+            input.RecordId = input.RoomEquipmentId = Utilities.ToInt(reader[Mimosa.Apartment.Common.RoomEquipment.ColumnNames.RoomEquipmentId]);
+            input.RoomId = Utilities.ToInt(reader[Mimosa.Apartment.Common.RoomEquipment.ColumnNames.RoomId]);
+            input.EquipmentId = Utilities.ToInt(reader[Mimosa.Apartment.Common.RoomEquipment.ColumnNames.EquipmentId]);
+            input.Equipment = Utilities.ToString(reader[Mimosa.Apartment.Common.RoomEquipment.ColumnNames.Equipment]);
+            input.Price = Utilities.ToNDecimal(reader[Mimosa.Apartment.Common.RoomEquipment.ColumnNames.Price]);
+            input.Description = Utilities.ToString(reader[Mimosa.Apartment.Common.RoomEquipment.ColumnNames.Description]);
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public static void FillRoomEquipmentList(List<RoomEquipment> list, System.Data.IDataReader reader)
+        {
+            list.Clear();
+            RoomEquipment item;
+            while (true)
+            {
+                item = Factory.RoomEquipment(reader);
+                if (null == item) break;
+                list.Add(item);
+            }
+        }
+        #endregion
+
+        #region RoomService
+
+        public static RoomService RoomService(System.Data.IDataReader reader)
+        {
+            RoomService result = null;
+
+            if (null != reader && reader.Read())
+            {
+                result = new RoomService();
+                PopulateRoomService(result, reader);
+            }
+
+            return result;
+        }
+
+        public static void PopulateRoomService(RoomService input, System.Data.IDataReader reader)
+        {
+            PopulateRecord(input, reader);
+            input.RecordId = input.RoomServiceId = Utilities.ToInt(reader[Mimosa.Apartment.Common.RoomService.ColumnNames.RoomServiceId]);
+            input.RoomId = Utilities.ToInt(reader[Mimosa.Apartment.Common.RoomService.ColumnNames.RoomId]);
+            input.ServiceId = Utilities.ToInt(reader[Mimosa.Apartment.Common.RoomService.ColumnNames.ServiceId]);
+            input.Service = Utilities.ToString(reader[Mimosa.Apartment.Common.RoomService.ColumnNames.Service]);
+            input.Price = Utilities.ToNDecimal(reader[Mimosa.Apartment.Common.RoomService.ColumnNames.Price]);
+            input.Description = Utilities.ToString(reader[Mimosa.Apartment.Common.RoomService.ColumnNames.Description]);
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public static void FillRoomServiceList(List<RoomService> list, System.Data.IDataReader reader)
+        {
+            list.Clear();
+            RoomService item;
+            while (true)
+            {
+                item = Factory.RoomService(reader);
+                if (null == item) break;
+                list.Add(item);
+            }
+        }
+        #endregion
     }
 }

@@ -30,9 +30,9 @@ namespace Mimosa.Apartment.Common
 
         #region Properties
 
-        private int _EquipmentId;
+        private int _equipmentId;
         [DataMember]
-        public int EquipmentId { get { return _EquipmentId; } set { _EquipmentId = value; RaisePropertyChanged("EquipmentId"); } }
+        public int EquipmentId { get { return _equipmentId; } set { _equipmentId = value; RaisePropertyChanged("EquipmentId"); } }
 
         private int _organisationId;
         [DataMember]

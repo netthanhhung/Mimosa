@@ -104,6 +104,21 @@
     <Compile Include="..\Mimosa.Apartment.Common\RoleComponentPermission.Generated.cs">
       <Link>RoleComponentPermission.Generated.cs</Link>
     </Compile>
+    <Compile Include="..\Mimosa.Apartment.Common\Room.Generated.cs">
+      <Link>Room.Generated.cs</Link>
+    </Compile>
+    <Compile Include="..\Mimosa.Apartment.Common\RoomEquipment.Generated.cs">
+      <Link>RoomEquipment.Generated.cs</Link>
+    </Compile>
+    <Compile Include="..\Mimosa.Apartment.Common\RoomService.Generated.cs">
+      <Link>RoomService.Generated.cs</Link>
+    </Compile>
+    <Compile Include="..\Mimosa.Apartment.Common\RoomStatus.cs">
+      <Link>RoomStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\Mimosa.Apartment.Common\RoomType.Generated.cs">
+      <Link>RoomType.Generated.cs</Link>
+    </Compile>
     <Compile Include="..\Mimosa.Apartment.Common\Service.Generated.cs">
       <Link>Service.Generated.cs</Link>
     </Compile>

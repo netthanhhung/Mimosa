@@ -146,5 +146,9 @@ namespace Mimosa.Apartment.Common
         [DataMember]
         public bool IsChanged { get { return _isChanged; } set { if (this.IsChanged != value) { _isChanged = value; RaisePropertyChanged("IsChanged"); } } }
 
+        private bool _isChecked;
+        [DataMember]
+        public bool IsChecked { get { return _isChecked; } set { if (this.IsChecked != value) { _isChecked = value; RaisePropertyChanged("IsChecked"); } } }
+
 	}
 }

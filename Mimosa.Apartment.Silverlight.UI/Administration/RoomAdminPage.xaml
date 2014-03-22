@@ -1,0 +1,375 @@
+﻿<navigation:Page x:Class="Mimosa.Apartment.Silverlight.UI.RoomAdminPage" Title="Mimosa"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:local="clr-namespace:Mimosa.Apartment.Silverlight.UI"
+    xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"             
+    xmlns:bg="clr-namespace:TiledBG;assembly=TiledBG"
+    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation">
+    <Grid x:Name="LayoutRoot" Style="{StaticResource LayoutRootGridStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+
+            </Grid.RowDefinitions>
+
+            <local:ClippedGrid
+                Background="{StaticResource DefaultBackgroundGradientBrush}">
+                <local:Highlight
+                    HighlightBrush="{StaticResource AdminBrush}"></local:Highlight>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock x:Name="uiParamsDisplay"
+                               VerticalAlignment="Center"
+                               Margin="20,0,0,0"
+                               Foreground="{StaticResource TitleForeground}"
+                               Text="Room Administration"></TextBlock>
+
+                    <!--<telerik:RadButton x:Name="uiSelectParams"
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       Margin="0,5,20,5"
+                                       Padding="2,2,2,2"
+                                       Content="Selections"></telerik:RadButton>-->
+                </Grid>
+            </local:ClippedGrid>
+
+            <local:ClippedGrid Background="{StaticResource ImageBackgroundBrush}" Grid.Row="1"/>
+            <local:ClippedGrid
+                x:Name="layoutContent"
+                Grid.Row="1"
+                Margin="10" Opacity="0.9">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <local:ClippedGrid>
+                    <bg:TiledBGControl TiledImageSource="{StaticResource CarbonFiberImage}"/>
+
+                    <local:ClippedGrid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel  Orientation="Horizontal">
+                            <TextBlock
+                                Margin="10,10,5,5"
+                                VerticalAlignment="Center"
+                                Text="Site:">
+                            </TextBlock>
+                            <local:SitePicker
+                                x:Name="ucSitePicker"
+                                Grid.Row="0" Margin="5,10,5,5"
+                                DataListWidth="200" ShowInactiveCheck="True" InactiveMessage="Show Inactive"
+                                Style="{StaticResource InputControlStyle}"></local:SitePicker>
+                            <TextBlock
+                                Margin="20,10,5,5"
+                                VerticalAlignment="Center"
+                                Text="Name:">
+                            </TextBlock>
+                            <TextBox x:Name="txtName"
+                                Margin="5,10,5,5" Width="100"
+                                VerticalAlignment="Center">
+                            </TextBox>
+
+                            <TextBlock
+                                Margin="20,10,5,5"
+                                VerticalAlignment="Center"
+                                Text="Floor:">
+                            </TextBlock>
+                            <TextBox x:Name="txtFloor"
+                                Margin="5,10,5,5" Width="50"
+                                VerticalAlignment="Center">
+                            </TextBox>
+
+                            <TextBlock
+                                Margin="20,10,5,5"
+                                VerticalAlignment="Center"
+                                Text="Room Status:">
+                            </TextBlock>
+                            <CheckBox x:Name="chkAvailable"
+                                Margin="5,10,5,5"
+                                VerticalAlignment="Center" IsChecked="True"
+                                Content="Available">
+                            </CheckBox>
+                            <CheckBox x:Name="chkOccupied"
+                                Margin="5,10,5,5"
+                                VerticalAlignment="Center" IsChecked="True" 
+                                Content="Occupied">
+                            </CheckBox>
+
+                            <TextBlock
+                                Margin="20,10,5,5"
+                                VerticalAlignment="Center"
+                                Text="RoomType:">
+                            </TextBlock>
+                            <local:MultiRoomTypePicker x:Name="ucRoomTypes" Width="100"
+                                 Margin="5,10,5,5">
+                            </local:MultiRoomTypePicker>
+
+
+                            <CheckBox x:Name="chkShowLegacy"
+                                Margin="20,10,5,5"
+                                VerticalAlignment="Center"
+                                Content="Show Legacy">
+                            </CheckBox>
+
+                            <Button x:Name="btnSearch" Width="70" Height="25" Margin="20,10,5,5"  Content="Search"></Button>
+                        </StackPanel>
+
+
+                        <telerik:RadGridView
+                            x:Name="gvwRoom"
+                            Grid.Row="1"
+                            AutoGenerateColumns="False" Margin="10,20,10,20" 
+                            VerticalAlignment="Top"
+                            ShowGroupPanel="False" 
+                            IsFilteringAllowed="False" 
+                            CanUserSortColumns="True" CanUserFreezeColumns="False"
+                            CanUserResizeColumns="False" CanUserInsertRows="True" ShowInsertRow="True"
+                            CanUserDeleteRows="False" CanUserReorderColumns="False">
+                            <telerik:RadGridView.Resources>
+                                <Style TargetType="TextBlock" BasedOn="{x:Null}"/>
+                            </telerik:RadGridView.Resources>
+                            <telerik:RadGridView.Columns>
+                                <telerik:GridViewDataColumn
+                                        DataMemberBinding="{Binding RoomName}" UniqueName="RoomName"
+                                        Header="Room Name" HeaderTextAlignment="Center"
+                                        Width="200">
+                                </telerik:GridViewDataColumn>
+                                <telerik:GridViewDataColumn
+                                        DataMemberBinding="{Binding Description}" UniqueName="Description"
+                                        Header="Description" HeaderTextAlignment="Center"
+                                        Width="*">
+                                </telerik:GridViewDataColumn>
+                                <telerik:GridViewDataColumn
+                                        DataMemberBinding="{Binding Floor}"
+                                        Width="70" ShowFieldFilters="False" HeaderTextAlignment="Center"
+                                        DataFormatString="{} {0:0}" Header="Floor">
+                                </telerik:GridViewDataColumn>
+                                <telerik:GridViewComboBoxColumn
+                                       DataMemberBinding="{Binding RoomStatusId}"
+                                       UniqueName="RoomStatus" Header="Room Status"
+                                       SelectedValueMemberPath="Key" HeaderTextAlignment="Center"
+                                       DisplayMemberPath="Value" 
+                                       Width="100">
+                                </telerik:GridViewComboBoxColumn>
+                                <telerik:GridViewComboBoxColumn
+                                       DataMemberBinding="{Binding RoomTypeId}"
+                                       UniqueName="RoomType" Header="Room Type"
+                                       SelectedValueMemberPath="RoomTypeId" HeaderTextAlignment="Center"
+                                       DisplayMemberPath="Name" 
+                                        Width="150">
+                                </telerik:GridViewComboBoxColumn>
+                                <telerik:GridViewDataColumn
+                                        DataMemberBinding="{Binding Width}"
+                                        Width="70" ShowFieldFilters="False" HeaderTextAlignment="Center"
+                                        DataFormatString="{} {0:0.0}" Header="Width">
+                                </telerik:GridViewDataColumn>
+                                <telerik:GridViewDataColumn
+                                        DataMemberBinding="{Binding Height}"
+                                        Width="70" ShowFieldFilters="False" HeaderTextAlignment="Center"
+                                        DataFormatString="{} {0:0.0}" Header="Height">
+                                </telerik:GridViewDataColumn>
+                                <telerik:GridViewDataColumn
+                                        DataMemberBinding="{Binding MeterSquare}"
+                                        Width="100" ShowFieldFilters="False" HeaderTextAlignment="Center"
+                                        DataFormatString="{} {0:0.0}" Header="Meter Square">
+                                </telerik:GridViewDataColumn>
+                                <telerik:GridViewDataColumn
+                                        DataMemberBinding="{Binding BasePrice}"
+                                        Width="70" ShowFieldFilters="False" HeaderTextAlignment="Center"
+                                        DataFormatString="{} {0:C2}" Header="Base Price">
+                                </telerik:GridViewDataColumn>
+                                <telerik:GridViewDataColumn Width="70" Header="Inactive">
+                                    <telerik:GridViewDataColumn.CellStyle>
+                                        <Style TargetType="telerik:GridViewCell">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="telerik:GridViewCell">
+                                                        <StackPanel>
+                                                            <CheckBox Margin="5, 0, 0, 0"
+                                                                        VerticalAlignment="Center"
+                                                                        IsChecked="{Binding IsLegacy, Mode=TwoWay}" />
+                                                        </StackPanel>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </telerik:GridViewDataColumn.CellStyle>
+                                </telerik:GridViewDataColumn>
+                            </telerik:RadGridView.Columns>
+                        </telerik:RadGridView>
+
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <local:SingleClickButton x:Name="btnSaveRoom" Height="25" Width="80" Grid.Column="0" Content="Save" 
+                                HorizontalAlignment="Right" Margin="10,10,5,10"/>
+                            <Button x:Name="btnCancelRoom" Height="25" Width="80" Grid.Column="1" Content="Cancel" 
+                                HorizontalAlignment="Left" Margin="10,10,5,10"/>
+                        </Grid>
+
+                    </local:ClippedGrid>
+                </local:ClippedGrid>
+
+                
+                <Grid x:Name="gridEquipmentService" Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <bg:TiledBGControl BorderThickness="0" Grid.Column="0" Margin="0,5,0,0" TiledImageSource="{StaticResource CarbonFiberImage}"/>
+                    <Grid x:Name="gridEquipment" Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <telerik:RadGridView
+                                Margin="10,15,10,10"
+                                x:Name="gvwRoomEquipment"
+                                AutoGenerateColumns="False"
+                                ShowGroupPanel="False"
+                                CanUserDeleteRows="True" CanUserInsertRows="False" ShowInsertRow="False"                               
+                                Grid.Row="0" Grid.ColumnSpan="2">
+                            <telerik:RadGridView.Resources>
+                                <Style TargetType="TextBlock" BasedOn="{x:Null}"/>
+                                <Style TargetType="CheckBox" BasedOn="{x:Null}"/>
+                            </telerik:RadGridView.Resources>
+                            <telerik:RadGridView.Columns>
+                                <telerik:GridViewDataColumn
+                                        UniqueName="Equipment"
+                                        DataMemberBinding="{Binding Equipment}"
+                                        Header="Equipment" IsReadOnly="True"
+                                        Width="200">
+                                </telerik:GridViewDataColumn>
+                                <telerik:GridViewDataColumn
+                                        UniqueName="Description"
+                                        DataMemberBinding="{Binding Description}"
+                                        Header="Description"  ShowFieldFilters="False"
+                                        Width="*">
+                                </telerik:GridViewDataColumn>
+                                <telerik:GridViewDataColumn
+                                        DataMemberBinding="{Binding Price}"
+                                        Width="100" ShowFieldFilters="False" Header="Price"
+                                        DataFormatString="{} {0:C2}">
+                                </telerik:GridViewDataColumn>
+                            </telerik:RadGridView.Columns>
+                        </telerik:RadGridView>
+
+                        <ComboBox
+                            x:Name="uiEquipmentList" Width="200" Height="25"
+                            Margin="37,5,10,10" Grid.Row="1" Grid.Column="0"
+                            DisplayMemberPath="EquipmentName"
+                            SelectedValuePath="EquipmentId" />
+                        <local:SingleClickButton x:Name="btnInsertRoomEquipment" Height="25" Width="80" Grid.Row="1" Grid.Column="1" Content="Insert" 
+                                HorizontalAlignment="Left" Margin="10,10,5,10"/>
+
+                        <Grid Grid.Row="2" Grid.ColumnSpan="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <local:SingleClickButton x:Name="btnSaveRoomEquipment" Height="25" Width="80" Grid.Column="0" Content="Save" 
+                                HorizontalAlignment="Right" Margin="10,10,5,10"/>
+                            <Button x:Name="btnCancelRoomEquipment" Height="25" Width="80" Grid.Column="1" Content="Cancel" 
+                                HorizontalAlignment="Left" Margin="10,10,5,10"/>
+                        </Grid>
+                    </Grid>
+
+                    <bg:TiledBGControl BorderThickness="0" Grid.Column="1" Margin="5,5,0,0" TiledImageSource="{StaticResource CarbonFiberImage}"/>
+                    <Grid x:Name="gridService" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <telerik:RadGridView
+                                Margin="10,15,10,10"
+                                x:Name="gvwRoomService"
+                                AutoGenerateColumns="False"
+                                ShowGroupPanel="False"
+                                CanUserDeleteRows="True" CanUserInsertRows="False" ShowInsertRow="False"                               
+                                Grid.Row="0" Grid.ColumnSpan="2">
+                            <telerik:RadGridView.Resources>
+                                <Style TargetType="TextBlock" BasedOn="{x:Null}"/>
+                                <Style TargetType="CheckBox" BasedOn="{x:Null}"/>
+                            </telerik:RadGridView.Resources>
+                            <telerik:RadGridView.Columns>
+                                <telerik:GridViewDataColumn
+                                        UniqueName="Service"
+                                        DataMemberBinding="{Binding Service}"
+                                        Header="Service" IsReadOnly="True"
+                                        Width="200">
+                                </telerik:GridViewDataColumn>
+                                <telerik:GridViewDataColumn
+                                        UniqueName="Description"
+                                        DataMemberBinding="{Binding Description}"
+                                        Header="Description"  ShowFieldFilters="False"
+                                        Width="*">
+                                </telerik:GridViewDataColumn>
+                                <telerik:GridViewDataColumn
+                                        DataMemberBinding="{Binding Price}"
+                                        Width="100" ShowFieldFilters="False" Header="Price"
+                                        DataFormatString="{} {0:C2}">
+                                </telerik:GridViewDataColumn>
+                            </telerik:RadGridView.Columns>
+                        </telerik:RadGridView>
+
+                        <ComboBox
+                            x:Name="uiServiceList" Width="200" Height="25"
+                            Margin="37,5,10,10" Grid.Row="1" Grid.Column="0"
+                            DisplayMemberPath="Name"
+                            SelectedValuePath="ServiceId" />
+                        <local:SingleClickButton x:Name="btnInsertRoomService" Height="25" Width="80" Grid.Row="1" Grid.Column="1" Content="Insert" 
+                                HorizontalAlignment="Left" Margin="10,10,5,10"/>
+
+                        <Grid Grid.Row="2" Grid.ColumnSpan="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <local:SingleClickButton x:Name="btnSaveRoomService" Height="25" Width="80" Grid.Column="0" Content="Save" 
+                                HorizontalAlignment="Right" Margin="10,10,5,10"/>
+                            <Button x:Name="btnCancelRoomService" Height="25" Width="80" Grid.Column="1" Content="Cancel" 
+                                HorizontalAlignment="Left" Margin="10,10,5,10"/>
+                        </Grid>
+                    </Grid>
+
+                </Grid>
+            </local:ClippedGrid>
+
+        </Grid>
+    </Grid>
+
+</navigation:Page>

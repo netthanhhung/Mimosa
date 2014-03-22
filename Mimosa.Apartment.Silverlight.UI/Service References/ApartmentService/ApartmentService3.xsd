@@ -79,6 +79,7 @@
       <xs:element minOccurs="0" name="DateCreated" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="DateUpdated" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="IsChanged" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsChecked" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsDeleted" type="xs:boolean" />
       <xs:element minOccurs="0" name="LastUpdatedText" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="RecordId" nillable="true" type="xs:long" />
@@ -336,4 +337,98 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="Service" nillable="true" type="tns:Service" />
+  <xs:complexType name="ArrayOfRoomType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RoomType" nillable="true" type="tns:RoomType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRoomType" nillable="true" type="tns:ArrayOfRoomType" />
+  <xs:complexType name="RoomType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Record">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IsLegacy" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="OrganisationId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="RoomTypeId" type="xs:int" />
+          <xs:element minOccurs="0" name="SiteId" nillable="true" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RoomType" nillable="true" type="tns:RoomType" />
+  <xs:complexType name="ArrayOfRoom">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Room" nillable="true" type="tns:Room" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRoom" nillable="true" type="tns:ArrayOfRoom" />
+  <xs:complexType name="Room">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Record">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="BasePrice" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Floor" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="Height" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="0" name="IsLegacy" type="xs:boolean" />
+          <xs:element minOccurs="0" name="MeterSquare" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="0" name="RoomEquipments" nillable="true" type="tns:ArrayOfRoomEquipment" />
+          <xs:element minOccurs="0" name="RoomId" type="xs:int" />
+          <xs:element minOccurs="0" name="RoomName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RoomServices" nillable="true" type="tns:ArrayOfRoomService" />
+          <xs:element minOccurs="0" name="RoomStatus" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RoomStatusId" type="xs:int" />
+          <xs:element minOccurs="0" name="RoomType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RoomTypeId" type="xs:int" />
+          <xs:element minOccurs="0" name="SiteId" type="xs:int" />
+          <xs:element minOccurs="0" name="Width" nillable="true" type="xs:decimal" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Room" nillable="true" type="tns:Room" />
+  <xs:complexType name="ArrayOfRoomEquipment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RoomEquipment" nillable="true" type="tns:RoomEquipment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRoomEquipment" nillable="true" type="tns:ArrayOfRoomEquipment" />
+  <xs:complexType name="RoomEquipment">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Record">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Equipment" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="EquipmentId" type="xs:int" />
+          <xs:element minOccurs="0" name="Price" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="0" name="RoomEquipmentId" type="xs:int" />
+          <xs:element minOccurs="0" name="RoomId" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RoomEquipment" nillable="true" type="tns:RoomEquipment" />
+  <xs:complexType name="ArrayOfRoomService">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RoomService" nillable="true" type="tns:RoomService" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRoomService" nillable="true" type="tns:ArrayOfRoomService" />
+  <xs:complexType name="RoomService">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Record">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Price" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="0" name="RoomId" type="xs:int" />
+          <xs:element minOccurs="0" name="RoomServiceId" type="xs:int" />
+          <xs:element minOccurs="0" name="Service" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ServiceId" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RoomService" nillable="true" type="tns:RoomService" />
 </xs:schema>
