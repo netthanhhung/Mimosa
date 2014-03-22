@@ -49,6 +49,9 @@
     <Compile Include="ContactInformation.cs" />
     <Compile Include="ContactInformation.SqlParameters.cs" />
     <Compile Include="ContactType.cs" />
+    <Compile Include="Image.Generated.cs" />
+    <Compile Include="Image.SqlParameters.cs" />
+    <Compile Include="ImageType.cs" />
     <Compile Include="RoomType.Generated.cs" />
     <Compile Include="RoomType.SqlParameters.cs" />
     <Compile Include="RoomStatus.cs" />

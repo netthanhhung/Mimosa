@@ -86,6 +86,12 @@
     <Compile Include="..\Mimosa.Apartment.Common\Equipment.Generated.cs">
       <Link>Equipment.Generated.cs</Link>
     </Compile>
+    <Compile Include="..\Mimosa.Apartment.Common\Image.Generated.cs">
+      <Link>Image.Generated.cs</Link>
+    </Compile>
+    <Compile Include="..\Mimosa.Apartment.Common\ImageType.cs">
+      <Link>ImageType.cs</Link>
+    </Compile>
     <Compile Include="..\Mimosa.Apartment.Common\Organisation.Extended.cs">
       <Link>Organisation.Extended.cs</Link>
     </Compile>
