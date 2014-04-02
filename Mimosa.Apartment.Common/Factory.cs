@@ -763,5 +763,47 @@ namespace Mimosa.Apartment.Common
             }
         }
         #endregion
+
+        #region Image
+
+        public static Image Image(System.Data.IDataReader reader)
+        {
+            Image result = null;
+
+            if (null != reader && reader.Read())
+            {
+                result = new Image();
+                PopulateImage(result, reader);
+            }
+
+            return result;
+        }
+
+        public static void PopulateImage(Image input, System.Data.IDataReader reader)
+        {
+            PopulateRecord(input, reader);
+            input.RecordId = input.ImageId = Utilities.ToInt(reader[Mimosa.Apartment.Common.Image.ColumnNames.ImageId]);
+            input.ImageTypeId = Utilities.ToInt(reader[Mimosa.Apartment.Common.Image.ColumnNames.ImageTypeId]);
+            input.ItemId = Utilities.ToInt(reader[Mimosa.Apartment.Common.Image.ColumnNames.ItemId]);
+            input.FileName = Utilities.ToString(reader[Mimosa.Apartment.Common.Image.ColumnNames.FileName]);
+            input.ImageContent = Utilities.ToByteArray(reader[Mimosa.Apartment.Common.Image.ColumnNames.ImageContent]);
+            input.ImageContent = Utilities.ToByteArray(reader[Mimosa.Apartment.Common.Image.ColumnNames.ImageContent]);
+            input.DisplayIndex = Utilities.ToNInt(reader[Mimosa.Apartment.Common.Image.ColumnNames.DisplayIndex]);
+            input.Description = Utilities.ToString(reader[Mimosa.Apartment.Common.Image.ColumnNames.Description]);
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public static void FillImageList(List<Image> list, System.Data.IDataReader reader)
+        {
+            list.Clear();
+            Image item;
+            while (true)
+            {
+                item = Factory.Image(reader);
+                if (null == item) break;
+                list.Add(item);
+            }
+        }
+        #endregion
     }
 }

@@ -619,4 +619,33 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="ListImage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="imageId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="itemId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="imageTypeId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="loadType" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListImageResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q53="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListImageResult" nillable="true" type="q53:ArrayOfImage" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveImage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q54="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q54:ArrayOfImage" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveImageResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

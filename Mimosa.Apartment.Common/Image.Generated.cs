@@ -53,15 +53,15 @@ namespace Mimosa.Apartment.Common
 
         private byte[] _imageSmallContent;
         [DataMember]
-        public byte[] ImageSmallContent { get { return _imageSmallContent; } set { if (!object.ReferenceEquals(this.ImageSmallContent, value)) { _imageContent = value; RaisePropertyChanged("ImageSmallContent"); } } }
+        public byte[] ImageSmallContent { get { return _imageSmallContent; } set { if (!object.ReferenceEquals(this.ImageSmallContent, value)) { _imageSmallContent = value; RaisePropertyChanged("ImageSmallContent"); } } }
 
         private string _description;
         [DataMember]
         public string Description { get { return _description; } set { if (!object.ReferenceEquals(this.Description, value)) { _description = value; RaisePropertyChanged("Description"); } } }
 
-        private int _displayIndex;
+        private int? _displayIndex;
         [DataMember]
-        public int DisplayIndex { get { return _displayIndex; } set { if (!this.DisplayIndex.Equals(value)) { _displayIndex = value; RaisePropertyChanged("DisplayIndex"); } } }
+        public int? DisplayIndex { get { return _displayIndex; } set { if (!this.DisplayIndex.Equals(value)) { _displayIndex = value; RaisePropertyChanged("DisplayIndex"); } } }
 
         #endregion
     }

@@ -594,6 +594,31 @@ namespace Mimosa.Apartment.Business
         }
         #endregion
 
+        #region Image
+        public static List<Image> ListImage(int? imageId, int? itemId, int? imageTypeId, int loadType)
+        {
+            return new DataLayer().ListImage(imageId, itemId, imageTypeId, loadType);
+        }
+
+        public static void SaveImage(List<Image> saveList)
+        {
+            if (saveList != null)
+            {
+                foreach (Image item in saveList)
+                {
+                    if (item.IsDeleted && item.NullableRecordId != null)
+                    {
+                        DeleteRecord((Record)item);
+                    }
+                    else if (item.IsChanged)
+                    {
+                        SaveRecord((Record)item);
+                    }
+                }
+            }
+        }
+        #endregion
+
     }
 }
 

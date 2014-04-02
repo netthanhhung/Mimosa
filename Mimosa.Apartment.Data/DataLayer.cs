@@ -473,5 +473,19 @@ namespace Mimosa.Apartment.Data
             return result;
         }
         #endregion
+
+        #region Image
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public List<Image> ListImage(int? imageId, int? itemId, int? imageTypeId, int loadType)
+        {
+            List<Image> result = new List<Image>();
+
+            using (IDataReader reader = _db.ExecuteReader("procListImage", imageId, itemId, imageTypeId, loadType))
+            {
+                Factory.FillImageList(result, reader);
+            }
+            return result;
+        }
+        #endregion
     }
 }

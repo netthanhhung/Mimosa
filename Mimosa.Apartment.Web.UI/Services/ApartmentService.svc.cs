@@ -506,6 +506,19 @@ namespace Mimosa.Apartment.Web.UI
         }
         #endregion
 
+        #region Image
+        [OperationContract]
+        public List<Image> ListImage(int? imageId, int? itemId, int? imageTypeId, int loadType)
+        {
+            return ApartmentMethods.ListImage(imageId, itemId, imageTypeId, loadType);
+        }
+
+        [OperationContract]
+        public void SaveImage(List<Image> saveList)
+        {
+            ApartmentMethods.SaveImage(saveList);
+        }
+        #endregion
     }
 
     /// <summary>

@@ -14,6 +14,7 @@ using System.Xml.Linq;
 using System.Linq;
 using Mimosa.Apartment.Common;
 using System.IO;
+using common = Mimosa.Apartment.Common;
 using Mimosa.Apartment.Silverlight.UI.ApartmentService;
 
 namespace Mimosa.Apartment.Silverlight.UI
@@ -694,6 +695,38 @@ namespace Mimosa.Apartment.Silverlight.UI
             ApartmentServiceClient proxy = GetProxy(callerKey, callback);
             proxy.SaveRoomServiceCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(proxy_VoidMethodCompleted);
             proxy.SaveRoomServiceAsync(saveList, callerKey);
+        }
+
+        // ListImage
+        internal delegate void ListImageCallBack(List<common.Image> itemSource);
+        internal static void ListImageAsync(int? imageId, int? itemId, int? imageTypeId, int loadType, ListImageCallBack callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.ListImageCompleted += new EventHandler<ListImageCompletedEventArgs>(proxy_ListImageCompleted);
+            proxy.ListImageAsync(imageId, itemId, imageTypeId, loadType, callerKey);
+        }
+
+        static void proxy_ListImageCompleted(object sender, ListImageCompletedEventArgs e)
+        {
+            Guid callerKey = (Guid)e.UserState;
+            if (_callbacks.ContainsKey(callerKey))
+            {
+                List<common.Image> itemSource = e.Result;
+                ((ListImageCallBack)_callbacks[callerKey]).Invoke(itemSource);
+
+                _callbacks.Remove(callerKey);
+            }
+        }
+
+        //SaveImage
+        internal static void SaveImageAsync(List<common.Image> saveList, EmptyCallback callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.SaveImageCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(proxy_VoidMethodCompleted);
+            proxy.SaveImageAsync(saveList, callerKey);
         }
 	}
 }

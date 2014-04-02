@@ -431,4 +431,27 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="RoomService" nillable="true" type="tns:RoomService" />
+  <xs:complexType name="ArrayOfImage">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Image" nillable="true" type="tns:Image" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfImage" nillable="true" type="tns:ArrayOfImage" />
+  <xs:complexType name="Image">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Record">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DisplayIndex" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ImageContent" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="ImageId" type="xs:int" />
+          <xs:element minOccurs="0" name="ImageSmallContent" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="ImageTypeId" type="xs:int" />
+          <xs:element minOccurs="0" name="ItemId" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Image" nillable="true" type="tns:Image" />
 </xs:schema>

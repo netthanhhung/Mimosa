@@ -163,6 +163,9 @@
     <Compile Include="Controls\ContactInformationPanel.xaml.cs">
       <DependentUpon>ContactInformationPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ImageItem.xaml.cs">
+      <DependentUpon>ImageItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CountryPicker.xaml.cs">
       <DependentUpon>CountryPicker.xaml</DependentUpon>
     </Compile>
@@ -186,6 +189,9 @@
     <Compile Include="Controls\SitePicker.cs" />
     <Compile Include="Controls\UserAccount.xaml.cs">
       <DependentUpon>UserAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ImageUpload.xaml.cs">
+      <DependentUpon>ImageUpload.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ActivationTextConverter.cs" />
     <Compile Include="Converters\CheckStateConverter.cs" />
@@ -334,6 +340,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\ImageItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\CountryPicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -359,6 +369,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\UserAccount.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ImageUpload.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -415,6 +429,7 @@
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.Country.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.Customer.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.Equipment.datasource" />
+    <None Include="Properties\DataSources\Mimosa.Apartment.Common.Image.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.Organisation.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.RoleComponentPermission.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.Room.datasource" />

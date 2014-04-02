@@ -61,7 +61,8 @@ namespace Mimosa.Apartment.Silverlight.UI
             roomStatusDic.Add((int)RoomStatus.Occupied, RoomStatus.Occupied.ToString());
             ((GridViewComboBoxColumn)this.gvwRoom.Columns["RoomStatus"]).ItemsSource = roomStatusDic;
 
-            gridEquipmentService.Visibility = System.Windows.Visibility.Collapsed;
+            gridEquipmentService.Visibility = gridImages.Visibility = System.Windows.Visibility.Collapsed;
+            ucImageUpload.ImageType = ImageType.Room;
 
             DataServiceHelper.ListEquipmentAsync(Globals.UserLogin.UserOrganisationId, null, false, ListEquipmentCompleted);
             btnSaveRoomEquipment.Click += new RoutedEventHandler(btnSaveRoomEquipment_Click);
@@ -74,6 +75,9 @@ namespace Mimosa.Apartment.Silverlight.UI
             btnCancelRoomService.Click += new RoutedEventHandler(btnCancelRoomService_Click);
             btnInsertRoomService.Click += new RoutedEventHandler(btnInsertRoomService_Click);
             gvwRoomService.Deleting += new EventHandler<GridViewDeletingEventArgs>(gvwRoomService_Deleting);
+
+            //Common
+            UiHelper.ApplyMouseWheelScrollViewer(scrollViewerRooms);
         }
         #region Room
 
@@ -171,8 +175,10 @@ namespace Mimosa.Apartment.Silverlight.UI
             Room selectedRoom = gvwRoom.SelectedItem as Room;
             if (selectedRoom != null && selectedRoom.RoomId > 0)
             {
-                gridEquipmentService.Visibility = System.Windows.Visibility.Visible;
+                gridEquipmentService.Visibility = gridImages.Visibility = System.Windows.Visibility.Visible;
                 _selectedRoomId = selectedRoom.RoomId;
+                ucImageUpload.ItemId = _selectedRoomId;
+                ucImageUpload.BeginRebind();
 
                 //Bind Equipment and Service :
                 RebindRoomEquipments();
@@ -181,7 +187,7 @@ namespace Mimosa.Apartment.Silverlight.UI
             else
             {
                 _selectedRoomId = -1;
-                gridEquipmentService.Visibility = System.Windows.Visibility.Collapsed;
+                gridEquipmentService.Visibility = gridImages.Visibility = System.Windows.Visibility.Collapsed;
             }
         }
 
@@ -298,7 +304,10 @@ namespace Mimosa.Apartment.Silverlight.UI
         private void ListEquipmentCompleted(List<Equipment> equipments)
         {
             uiEquipmentList.ItemsSource = equipments;
-            uiEquipmentList.SelectedIndex = 0;
+            if (equipments.Count > 0)
+            {
+                uiEquipmentList.SelectedIndex = 0;
+            }
         }
 
         private void ListRoomEquipmentCompleted(List<RoomEquipment> roomEquipments)
@@ -407,7 +416,10 @@ namespace Mimosa.Apartment.Silverlight.UI
         private void ListServiceCompleted(List<Service> services)
         {
             uiServiceList.ItemsSource = services;
-            uiServiceList.SelectedIndex = 0;
+            if (services.Count > 0)
+            {
+                uiServiceList.SelectedIndex = 0;
+            }
         }
 
         private void ListRoomServiceCompleted(List<RoomService> roomServices)

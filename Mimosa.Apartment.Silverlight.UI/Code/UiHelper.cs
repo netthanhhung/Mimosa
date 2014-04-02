@@ -392,6 +392,41 @@ namespace Mimosa.Apartment.Silverlight.UI
             return b;
         }
 
+        public static WriteableBitmap ResizeImage(Stream stream, double targetSize)
+        {
+            BitmapImage bmp = new BitmapImage();
+            bmp.SetSource(stream);
+            System.Windows.Controls.Image img = new System.Windows.Controls.Image();
+            img.Source = bmp;
+            double scaleX = 1;
+            double scaleY = 1;
+            if (bmp.PixelHeight > targetSize)
+                scaleY = targetSize / bmp.PixelHeight;
+            if (bmp.PixelWidth > targetSize)
+                scaleX = targetSize / bmp.PixelWidth;
+            double scale = Math.Min(scaleY, scaleX);
+            int newWidth = Convert.ToInt32(bmp.PixelWidth * scale);
+            int newHeight = Convert.ToInt32(bmp.PixelHeight * scale);
+            WriteableBitmap result = new WriteableBitmap(newWidth, newHeight);
+            result.Render(img, new ScaleTransform() { ScaleX = scale, ScaleY = scale });
+            result.Invalidate();
+            return result;
+        }
+
+        public static void WriteableBitmapToStream(WriteableBitmap writeableBitmap, Stream stream)
+        {
+            for (int i = 0; i < writeableBitmap.Pixels.Length; i++)
+            {
+                int pixel = writeableBitmap.Pixels[i];
+
+                byte[] bytes = BitConverter.GetBytes(pixel);
+                Array.Reverse(bytes);
+
+                stream.Write(bytes, 0, bytes.Length);
+            }
+        }
+
+
 		[System.Diagnostics.DebuggerStepThrough()]
 		public static ToggleState ToCheckState(bool input)
 		{
