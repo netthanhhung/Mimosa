@@ -58,7 +58,7 @@ namespace Mimosa.Apartment.Silverlight.UI
 
                 if (this.ImageDataItem.ImageContent != null)
                 {
-                    imgContent.Source = UiHelper.ToBitmapImageFromBytes(this.ImageDataItem.ImageContent);
+                    imgContent.Source = UiHelper.ToBitmapImageFromBytes(this.ImageDataItem.ImageSmallContent);
                 }
                 else
                 {

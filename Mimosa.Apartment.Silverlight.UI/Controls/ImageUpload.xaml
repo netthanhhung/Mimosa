@@ -48,20 +48,21 @@
 
         <telerik:RadWindow x:Name="uiPopupUpload"
                 WindowStartupLocation="CenterOwner"
-                Header="Upload Image" Width="800" Height="600">
+                Header="Upload Image" Width="800" Height="550">
             <Grid>
                 <bg:TiledBGControl BorderThickness="0" TiledImageSource="{StaticResource CarbonFiberImage}"/>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="5"></RowDefinition>
-                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
                     <TextBlock
@@ -74,11 +75,11 @@
                         Style="{StaticResource InputControlStyle}"></TextBox>
                     <Button x:Name="btnChooseImage" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Left"
                         Content="Browse" Width="70"></Button>
-                    <Image x:Name="imgRoomFigure" Width="600" Height="400" Grid.ColumnSpan="2" 
-                            Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left"></Image>
-                    <local:SingleClickButton x:Name="btnUploadOK" Grid.Column="3" Grid.Row="3"
-                                               Margin="5" VerticalAlignment="Top" HorizontalAlignment="Center"
-                                               Content="OK" Width="70" />
+                    <Image x:Name="imgRoomFigure" Grid.ColumnSpan="4" 
+                        Grid.Row="2" HorizontalAlignment="Left"></Image>
+                    <local:SingleClickButton x:Name="btnUploadOK" Grid.Column="1" Grid.Row="3"
+                        Margin="5" VerticalAlignment="Top" HorizontalAlignment="Center"
+                        Content="OK" Width="70" />
                 </Grid>
             </Grid>
         </telerik:RadWindow>

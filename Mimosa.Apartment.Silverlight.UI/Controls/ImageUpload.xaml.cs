@@ -139,22 +139,26 @@ namespace Mimosa.Apartment.Silverlight.UI
                     if (fs.Length < int.MaxValue)
                     {
                         imageSource.SetSource(fs);
-                        imgRoomFigure.Source = imageSource;
+                        //imgRoomFigure.Source = imageSource;
                         WriteableBitmap resizeSource = UiHelper.ResizeImage(fs, 200); //max 200px
-                        
+
                         txtFileName.Text = openFileDialog.File.Name;
                         _byteArray = new byte[fs.Length];
                         fs.Position = 0;
                         fs.Read(_byteArray, 0, (int)fs.Length);
                         fs.Close();
 
-                        MemoryStream smallStream = new MemoryStream();
-                        UiHelper.WriteableBitmapToStream(resizeSource, smallStream);                        
-                        _byteArraySmall = new byte[smallStream.Length];
-                        smallStream.Position = 0;
-                        smallStream.Read(_byteArraySmall, 0, (int)smallStream.Length);
-                        smallStream.Close();
+                        //_byteArraySmall = UiHelper.ToByteArray(resizeSource);
+                        
+                        using (Stream source = UiHelper.EncodeWriteableBitmap(resizeSource, 100))
+                        {
+                            int bufferSize = Convert.ToInt32(source.Length);
+                            _byteArraySmall = new byte[bufferSize];
+                            source.Read(_byteArraySmall, 0, bufferSize);
+                            source.Close();
+                        }
 
+                        imgRoomFigure.Source = UiHelper.ToBitmapImageFromBytes(_byteArraySmall);
 
                     }
                     else
@@ -185,6 +189,8 @@ namespace Mimosa.Apartment.Silverlight.UI
             ImageItem imageItem = new ImageItem(newImage);
             imageItem.btnDelete.Click += new RoutedEventHandler(btnDelete_Click);
             listImages.Items.Add(imageItem);
+
+            uiPopupUpload.Close();
         }
 
         #endregion

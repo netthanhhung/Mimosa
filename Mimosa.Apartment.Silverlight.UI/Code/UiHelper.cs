@@ -16,6 +16,8 @@ using System.Linq;
 using System.Windows.Media.Imaging;
 using System.IO.IsolatedStorage;
 using System.Windows.Automation;
+using FluxJpeg.Core.Encoder;
+using FluxJpeg.Core;
 
 namespace Mimosa.Apartment.Silverlight.UI
 {
@@ -382,7 +384,6 @@ namespace Mimosa.Apartment.Silverlight.UI
             }
         }
 
-
         public static BitmapImage ToBitmapImageFromBytes(byte[] bytes)
         {
             MemoryStream ms = new MemoryStream(bytes);
@@ -390,6 +391,34 @@ namespace Mimosa.Apartment.Silverlight.UI
             b.SetSource(ms);
 
             return b;
+        }
+
+        public static WriteableBitmap ResizeImage(Stream stream, double maxWidth, double maxHeight)
+        {
+            BitmapImage bmp = new BitmapImage();
+            bmp.SetSource(stream);
+
+            System.Windows.Controls.Image img = new System.Windows.Controls.Image();
+            //img.Effect = new DropShadowEffect() { ShadowDepth = 0, BlurRadius = 0 };
+            img.Source = bmp;
+
+            double scaleX = 1;
+            double scaleY = 1;
+
+            if (bmp.PixelHeight > maxHeight)
+                scaleY = maxHeight / bmp.PixelHeight;
+            if (bmp.PixelWidth > maxWidth)
+                scaleX = maxWidth / bmp.PixelWidth;
+
+            // maintain aspect ratio by picking the most severe scale
+            double scale = Math.Min(scaleY, scaleX);
+
+            int newWidth = Convert.ToInt32(bmp.PixelWidth * scale);
+            int newHeight = Convert.ToInt32(bmp.PixelHeight * scale);
+            WriteableBitmap result = new WriteableBitmap(newWidth, newHeight);
+            result.Render(img, new ScaleTransform() { ScaleX = scale, ScaleY = scale });
+            result.Invalidate();
+            return result;
         }
 
         public static WriteableBitmap ResizeImage(Stream stream, double targetSize)
@@ -413,19 +442,77 @@ namespace Mimosa.Apartment.Silverlight.UI
             return result;
         }
 
-        public static void WriteableBitmapToStream(WriteableBitmap writeableBitmap, Stream stream)
+        public static Stream EncodeWriteableBitmap(WriteableBitmap bitmap, int quality)
         {
-            for (int i = 0; i < writeableBitmap.Pixels.Length; i++)
+            //Convert the Image to pass into FJCore
+            int width = bitmap.PixelWidth;
+            int height = bitmap.PixelHeight;
+            int bands = 3;
+
+            byte[][,] raster = new byte[bands][,];
+
+            for (int i = 0; i < bands; i++)
             {
-                int pixel = writeableBitmap.Pixels[i];
-
-                byte[] bytes = BitConverter.GetBytes(pixel);
-                Array.Reverse(bytes);
-
-                stream.Write(bytes, 0, bytes.Length);
+                raster[i] = new byte[width, height];
             }
+
+            for (int row = 0; row < height; row++)
+            {
+                for (int column = 0; column < width; column++)
+                {
+                    int pixel = bitmap.Pixels[width * row + column];
+                    raster[0][column, row] = (byte)(pixel >> 16);
+                    raster[1][column, row] = (byte)(pixel >> 8);
+                    raster[2][column, row] = (byte)pixel;
+                }
+            }
+
+            ColorModel model = new ColorModel { colorspace = ColorSpace.RGB };
+
+            FluxJpeg.Core.Image img = new FluxJpeg.Core.Image(model, raster);
+
+            //Encode the Image as a JPEG
+            MemoryStream stream = new MemoryStream();
+            JpegEncoder encoder = new JpegEncoder(img, quality, stream);
+
+            encoder.Encode();
+
+            //Move back to the start of the stream
+            stream.Flush();
+            stream.Seek(0, SeekOrigin.Begin);
+            return stream;
         }
 
+
+        public static byte[] SaveToByteArray(WriteableBitmap writeableBitmap)
+        {
+            int length = writeableBitmap.Pixels.Length * 4;
+            var buffer = new byte[length];
+            Buffer.BlockCopy(writeableBitmap.Pixels, 0, buffer, 0, length);
+            return buffer;
+        }
+
+        public static byte[] ToByteArray(WriteableBitmap bmp)
+        {
+            // Init buffer
+            int w = bmp.PixelWidth;
+            int h = bmp.PixelHeight;
+            int[] p = bmp.Pixels;
+            int len = p.Length;
+            byte[] result = new byte[4 * w * h];
+
+            // Copy pixels to buffer
+            for (int i = 0, j = 0; i < len; i++, j += 4)
+            {
+                int color = p[i];
+                result[j + 0] = (byte)(color >> 24); // A
+                result[j + 1] = (byte)(color >> 16); // R
+                result[j + 2] = (byte)(color >> 8);  // G
+                result[j + 3] = (byte)(color);       // B
+            }
+
+            return result;
+        }
 
 		[System.Diagnostics.DebuggerStepThrough()]
 		public static ToggleState ToCheckState(bool input)
