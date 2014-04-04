@@ -139,7 +139,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                     if (fs.Length < int.MaxValue)
                     {
                         imageSource.SetSource(fs);
-                        //imgRoomFigure.Source = imageSource;
+                        imgRoomFigure.Source = imageSource;
                         WriteableBitmap resizeSource = UiHelper.ResizeImage(fs, 200); //max 200px
 
                         txtFileName.Text = openFileDialog.File.Name;
@@ -148,7 +148,6 @@ namespace Mimosa.Apartment.Silverlight.UI
                         fs.Read(_byteArray, 0, (int)fs.Length);
                         fs.Close();
 
-                        //_byteArraySmall = UiHelper.ToByteArray(resizeSource);
                         
                         using (Stream source = UiHelper.EncodeWriteableBitmap(resizeSource, 100))
                         {
@@ -157,9 +156,6 @@ namespace Mimosa.Apartment.Silverlight.UI
                             source.Read(_byteArraySmall, 0, bufferSize);
                             source.Close();
                         }
-
-                        imgRoomFigure.Source = UiHelper.ToBitmapImageFromBytes(_byteArraySmall);
-
                     }
                     else
                     {
