@@ -31,7 +31,7 @@ namespace Mimosa.Apartment.Silverlight.UI
 
         private byte[] _byteArray;
         private byte[] _byteArraySmall;
-        public List<common.Image> ImageList { get; set; }
+        public List<common.Image> OriginalImageList { get; set; }
         public common.ImageType ImageType { get; set; }
         public int ItemId { get; set; }
 
@@ -62,37 +62,56 @@ namespace Mimosa.Apartment.Silverlight.UI
         public void BeginRebind()
         {
             Globals.IsBusy = true;
-            DataServiceHelper.ListImageAsync(null, this.ItemId, (int)this.ImageType, 2, ListImageCompleted);
+            DataServiceHelper.ListImageAsync(null, this.ItemId, (int)this.ImageType, 3, ListImageCompleted);
         }
 
         private void ListImageCompleted(List<common.Image> imageList)
         {
             Globals.IsBusy = false;
             listImages.Items.Clear();
-            
+            OriginalImageList = new List<common.Image>();
             foreach (common.Image item in imageList)
             {
-                ImageList.Add(item);
+                OriginalImageList.Add(item);
                 ImageItem imageItem = new ImageItem(item);
                 imageItem.btnDelete.Click += new RoutedEventHandler(btnDelete_Click);
                 listImages.Items.Add(imageItem);
             }
 
-            if (imageList.Count > 0)
-            {
-                listImages.Visibility = System.Windows.Visibility.Collapsed;
-                btnSave.IsEnabled = false;
-            }
-            else
+            if (OriginalImageList.Count > 0)
             {
                 listImages.Visibility = System.Windows.Visibility.Visible;
                 btnSave.IsEnabled = true;
+            }
+            else
+            {
+                listImages.Visibility = System.Windows.Visibility.Collapsed;
+                btnSave.IsEnabled = false;
             }
         }
 
 
         void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            List<common.Image> saveList = new List<common.Image>();
+            foreach (object item in listImages.Items)
+            {
+                ImageItem content = (ImageItem)item;
+                saveList.Add(content.ImageDataItem);
+            }
+            if (OriginalImageList != null)
+            {
+                foreach (common.Image oldItem in OriginalImageList)
+                {
+                    if (oldItem.ImageId > 0 && saveList.Count(i => i.ImageId == oldItem.ImageId) == 0)
+                    {
+                        oldItem.IsDeleted = true;
+                        saveList.Add(oldItem);
+                    }
+                }
+            }
+            Globals.IsBusy = true;
+            DataServiceHelper.SaveImageAsync(saveList, SaveComplete);
         }
 
         private void SaveComplete()
@@ -173,12 +192,22 @@ namespace Mimosa.Apartment.Silverlight.UI
 
         void btnUploadOK_Click(object sender, RoutedEventArgs e)
         {
+            listImages.Visibility = System.Windows.Visibility.Visible;
+            btnSave.IsEnabled = true;
+
+            List<ImageItem> list = new List<ImageItem>();
+            foreach (object item in listImages.Items)
+            {
+                list.Add((ImageItem)item);
+            }
+
             common.Image newImage = new common.Image();
             newImage.IsChanged = true;
+            newImage.FileName = txtFileName.Text;
             newImage.ImageContent = _byteArray;
             newImage.ImageSmallContent = _byteArraySmall;
             newImage.CreatedBy = newImage.UpdatedBy = Globals.UserLogin.UserName;
-            newImage.DisplayIndex = ImageList != null && ImageList.Count > 0 ? (ImageList.Max(i => i.DisplayIndex) + 1) : 1;
+            newImage.DisplayIndex = list != null && list.Count > 0 ? (list.Max(i => i.ImageDataItem.DisplayIndex) + 1) : 1;
             newImage.ImageTypeId = (int) this.ImageType;
             newImage.ItemId = this.ItemId;
 

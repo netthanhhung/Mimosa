@@ -50,7 +50,7 @@
                 Minimum="0" Maximum="1000" Width="100"></telerik:RadNumericUpDown>
 
             <Button x:Name="btnDelete" Height="32" Width="70" ToolTipService.ToolTip="Remove Image"
-                    Grid.Column="0" Grid.Row="3" Content="Remove" HorizontalAlignment="Left">
+                    Grid.Column="0" Grid.Row="3" Content="Remove" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <!--<Image Source="/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/red-cross.png" Height="32" Width="32"></Image>-->
             </Button>
             <Image x:Name="imgContent" Width="200"

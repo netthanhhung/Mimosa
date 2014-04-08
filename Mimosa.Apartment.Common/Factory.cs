@@ -787,7 +787,7 @@ namespace Mimosa.Apartment.Common
             input.ItemId = Utilities.ToInt(reader[Mimosa.Apartment.Common.Image.ColumnNames.ItemId]);
             input.FileName = Utilities.ToString(reader[Mimosa.Apartment.Common.Image.ColumnNames.FileName]);
             input.ImageContent = Utilities.ToByteArray(reader[Mimosa.Apartment.Common.Image.ColumnNames.ImageContent]);
-            input.ImageContent = Utilities.ToByteArray(reader[Mimosa.Apartment.Common.Image.ColumnNames.ImageContent]);
+            input.ImageSmallContent = Utilities.ToByteArray(reader[Mimosa.Apartment.Common.Image.ColumnNames.ImageSmallContent]);
             input.DisplayIndex = Utilities.ToNInt(reader[Mimosa.Apartment.Common.Image.ColumnNames.DisplayIndex]);
             input.Description = Utilities.ToString(reader[Mimosa.Apartment.Common.Image.ColumnNames.Description]);
         }
