@@ -15,9 +15,9 @@ namespace Mimosa.Apartment.Common
         public ContactInformation ContactInformation { get { return _contactInformation; } set { if (!object.ReferenceEquals(this.ContactInformation, value)) { _contactInformation = value; RaisePropertyChanged("ContactInformation"); } } }
         
         [DataMember]
-        public string NameWithStatus
+        public string FullName
         {
-            get { return this.Name + (this.IsLegacy ? " (Legacy)" : string.Empty); }
+            get { return this.FirstName + " " + this.LastName; }
             set { }
         }
 

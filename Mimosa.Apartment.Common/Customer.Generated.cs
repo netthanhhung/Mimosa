@@ -18,11 +18,12 @@ namespace Mimosa.Apartment.Common
         public static class ColumnNames
         {
             public const string CustomerId = "CustomerId";
-            public const string Name = "Name";
-            public const string BusinessName = "BusinessName";
-            public const string ContactInformationId = "ContactInformationId";
-            public const string ShippingContactInformationId = "ShippingContactInformationId";
+            public const string FirstName = "FirstName";
+            public const string LastName = "LastName";
             public const string IsLegacy = "IsLegacy";
+            public const string Gender = "Gender";
+            public const string Age = "Age";
+            public const string ContactInformationId = "ContactInformationId";
 
         }
 
@@ -33,25 +34,29 @@ namespace Mimosa.Apartment.Common
         [DataMember]
         public int CustomerId { get { return Utilities.ToInt(RecordId); } set { RecordId = value; RaisePropertyChanged("CustomerId"); } }
 
-        private string _name;
+        private string _firstName;
         [DataMember]
-        public string Name { get { return _name; } set { if (!object.ReferenceEquals(this.Name, value)) { _name = value; RaisePropertyChanged("Name"); } } }
+        public string FirstName { get { return _firstName; } set { if (!object.ReferenceEquals(this.FirstName, value)) { _firstName = value; RaisePropertyChanged("FirstName"); } } }
 
-        private string _businessName;
+        private string _lastName;
         [DataMember]
-        public string BusinessName { get { return _businessName; } set { if (!object.ReferenceEquals(this.BusinessName, value)) { _businessName = value; RaisePropertyChanged("BusinessName"); } } }
-
-        private int? _contactInformationId;
-        [DataMember]
-        public int? ContactInformationId { get { return _contactInformationId; } set { if (!object.ReferenceEquals(this.ContactInformationId, value)) { _contactInformationId = value; RaisePropertyChanged("ContactInformationId"); } } }
-
-        private int? _shippingContactInformationId;
-        [DataMember]
-        public int? ShippingContactInformationId { get { return _shippingContactInformationId; } set { if (!object.ReferenceEquals(this.ShippingContactInformationId, value)) { _shippingContactInformationId = value; RaisePropertyChanged("ShippingContactInformationId"); } } }
+        public string LastName { get { return _lastName; } set { if (!object.ReferenceEquals(this.LastName, value)) { _lastName = value; RaisePropertyChanged("LastName"); } } }
 
         private bool _isLegacy;
         [DataMember]
         public bool IsLegacy { get { return _isLegacy; } set { if (!this.IsLegacy.Equals(value)) { _isLegacy = value; RaisePropertyChanged("IsLegacy"); } } }
+
+        private int? _gender;
+        [DataMember]
+        public int? Gender { get { return _gender; } set { if (!object.ReferenceEquals(this.Gender, value)) { _gender = value; RaisePropertyChanged("Gender"); } } }
+
+        private int? _age;
+        [DataMember]
+        public int? Age { get { return _age; } set { if (!object.ReferenceEquals(this.Age, value)) { _age = value; RaisePropertyChanged("Age"); } } }
+
+        private int? _contactInformationId;
+        [DataMember]
+        public int? ContactInformationId { get { return _contactInformationId; } set { if (!object.ReferenceEquals(this.ContactInformationId, value)) { _contactInformationId = value; RaisePropertyChanged("ContactInformationId"); } } }
 
         #endregion
 

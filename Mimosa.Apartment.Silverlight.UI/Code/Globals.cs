@@ -10,6 +10,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Collections.Generic;
 using Mimosa.Apartment.Silverlight.UI.ApartmentService;
+using Mimosa.Apartment.Common;
 
 namespace Mimosa.Apartment.Silverlight.UI
 {
@@ -175,6 +176,27 @@ namespace Mimosa.Apartment.Silverlight.UI
             {
                 Application.Current.RootVisual.SetValue(UserControl.ContentProperty, new MainPage());
             }
+        }
+
+        internal static ModuleTypes ActiveModule
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(CookiesHelper.GetCookie("ActiveModule")))
+                {
+                    return Enum<ModuleTypes>.Parse(CookiesHelper.GetCookie("ActiveModule"));
+                }
+                else
+                {
+                    return ModuleTypes.Administration;
+                }
+            }
+            set
+            {
+                CookiesHelper.SetCookie("ActiveModule", value.ToString());
+            }
+
+
         }
     }
 }

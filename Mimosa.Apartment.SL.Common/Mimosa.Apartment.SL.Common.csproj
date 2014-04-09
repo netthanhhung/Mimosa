@@ -62,6 +62,18 @@
     <Compile Include="..\Mimosa.Apartment.Common\AspUser.cs">
       <Link>AspUser.cs</Link>
     </Compile>
+    <Compile Include="..\Mimosa.Apartment.Common\Booking.Generated.cs">
+      <Link>Booking.Generated.cs</Link>
+    </Compile>
+    <Compile Include="..\Mimosa.Apartment.Common\BookingRoomEquipment.Generated.cs">
+      <Link>BookingRoomEquipment.Generated.cs</Link>
+    </Compile>
+    <Compile Include="..\Mimosa.Apartment.Common\BookingRoomService.Generated.cs">
+      <Link>BookingRoomService.Generated.cs</Link>
+    </Compile>
+    <Compile Include="..\Mimosa.Apartment.Common\BookingStatus.cs">
+      <Link>BookingStatus.cs</Link>
+    </Compile>
     <Compile Include="..\Mimosa.Apartment.Common\Component.Generated.cs">
       <Link>Component.Generated.cs</Link>
     </Compile>
@@ -83,6 +95,9 @@
     <Compile Include="..\Mimosa.Apartment.Common\DeploymentInfo.cs">
       <Link>DeploymentInfo.cs</Link>
     </Compile>
+    <Compile Include="..\Mimosa.Apartment.Common\Enums.cs">
+      <Link>Enums.cs</Link>
+    </Compile>
     <Compile Include="..\Mimosa.Apartment.Common\Equipment.Generated.cs">
       <Link>Equipment.Generated.cs</Link>
     </Compile>
@@ -91,6 +106,9 @@
     </Compile>
     <Compile Include="..\Mimosa.Apartment.Common\ImageType.cs">
       <Link>ImageType.cs</Link>
+    </Compile>
+    <Compile Include="..\Mimosa.Apartment.Common\ModuleTypes.cs">
+      <Link>ModuleTypes.cs</Link>
     </Compile>
     <Compile Include="..\Mimosa.Apartment.Common\Organisation.Extended.cs">
       <Link>Organisation.Extended.cs</Link>

@@ -11,12 +11,14 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Xml.Linq;
 using Telerik.Windows.Controls;
+using Mimosa.Apartment.Common;
 using nsTooltips = Silverlight.Controls.ToolTips;
 
 namespace Mimosa.Apartment.Silverlight.UI
 {
     public partial class HeaderMenuButton : UserControl
     {
+        public event EventHandler MenuItemClicked;
         /*  ======================================================================            
          *      PAGE MEMBERS
          *  ====================================================================== */
@@ -40,6 +42,7 @@ namespace Mimosa.Apartment.Silverlight.UI
             DependencyProperty.Register("HighlightVisibility", typeof(Visibility), typeof(HeaderMenuButton),
             new PropertyMetadata(Visibility.Visible));
 
+        public ModuleTypes ModuleType { get; set; }
 
         public string ModuleName
         {
@@ -73,6 +76,18 @@ namespace Mimosa.Apartment.Silverlight.UI
             typeof(HeaderMenuButton),
             new PropertyMetadata(null, OnInlineListPropertyChanged));
 
+        public double ContentWidth
+        {
+            get
+            {
+                return uiContent.Width;
+            }
+            set
+            {
+                uiContent.Width = value;
+            }
+        }
+
         public static void SetExtendedText(DependencyObject obj, List<Inline> extendedText)
         {
             obj.SetValue(ContentProperty, extendedText);
@@ -100,6 +115,28 @@ namespace Mimosa.Apartment.Silverlight.UI
             }
         }
 
+        public bool IsHighLight
+        {
+            get
+            {
+                Style highLightStyle = this.Resources["uiHighlightClippedButton"] as Style;
+                return uiContent.Style.Equals(highLightStyle);
+            }
+            set
+            {
+                if (value)
+                {
+                    uiContent.Style = this.Resources["uiHighlightClippedButton"] as Style;
+                }
+                else
+                {
+                    uiContent.Style = this.Resources["uiClippedButton"] as Style;
+                }
+            }
+        }
+
+        private string _url = String.Empty;
+
         /*  ======================================================================            
          *      EVENT HANDLERS
          *  ====================================================================== */
@@ -109,10 +146,29 @@ namespace Mimosa.Apartment.Silverlight.UI
 
             //uiContent.Click += new RoutedEventHandler(delegate(object sender, RoutedEventArgs e) { UriHelper.NavigateTo(ModuleEntryPoint); });
 
-            this.Loaded += new RoutedEventHandler(HeaderMenuButton_Loaded);
+            //this.Loaded += new RoutedEventHandler(HeaderMenuButton_Loaded);
             //uiContextMenu.EventName = "MouseMove";
             //uiContextMenu.MouseLeave += new MouseEventHandler(uiContextMenu_MouseLeave);
             //this.MouseMove += new MouseEventHandler(HeaderMenuButton_MouseMove);
+        }
+
+        public void Init(List<SiteMapMenuItem> siteMap, string url)
+        {
+            uiContent.DataContext = this;
+            if (siteMap == null || siteMap.Count == 0)
+            {
+                _url = url;
+                uiContent.Click += new RoutedEventHandler(uiContent_Click);
+            }
+            else
+            {
+                uiContextMenu.ItemsSource = siteMap;
+            }
+        }
+
+        void uiContent_Click(object sender, RoutedEventArgs e)
+        {
+            Navigate(_url, "");
         }
 
         void HeaderMenuButton_MouseMove(object sender, MouseEventArgs e)
@@ -126,24 +182,24 @@ namespace Mimosa.Apartment.Silverlight.UI
             uiContextMenu.IsOpen = false;
         }
 
-        void HeaderMenuButton_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (this.ModuleName == "accorLogo")
-            {
-                uiContent.Style = Application.Current.Resources["uiLogoButton"] as Style;
-            }
+        //void HeaderMenuButton_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    if (this.ModuleName == "accorLogo")
+        //    {
+        //        uiContent.Style = Application.Current.Resources["uiLogoButton"] as Style;
+        //    }
 
-            uiContent.DataContext = this;
-            FontHelper.SetFontType(uiContent, null, 16);
-            SiteMapHelper.SelectWeb1SiteMapAsync(LoadMenuItems);
-        }
+        //    uiContent.DataContext = this;
+        //    FontHelper.SetFontType(uiContent, null, 16);
+        //    SiteMapHelper.SelectWebSiteMapAsync(LoadMenuItems);
+        //}
 
-        private void LoadMenuItems(XDocument xdocument)
+        private void LoadMenuItems(List<SiteMapMenuItem> siteMap)
         {
-            IEnumerable<SiteMapMenuItem> itemsSource =
-                from menuitem in xdocument.Root.Elements(SiteMapHelper.XNameSiteMapNode)
-                select ChildMenuItem(menuitem);
-            foreach (SiteMapMenuItem parentItem in itemsSource)
+            //IEnumerable<SiteMapMenuItem> itemsSource =
+            //    from menuitem in xdocument.Root.Elements(SiteMapHelper.XNameSiteMapNode)
+            //    select ChildMenuItem(menuitem);
+            foreach (SiteMapMenuItem parentItem in siteMap)
             {
                 if (parentItem.Title.ToLower() == this.ModuleName.ToLower())
                 {
@@ -154,46 +210,61 @@ namespace Mimosa.Apartment.Silverlight.UI
 
         }
 
-		//private SiteMapMenuItem ChildMenuItem(XElement siteMapNode)
-		//{
-		//    SiteMapMenuItem result =
-		//        new SiteMapMenuItem()
-		//        {
-		//            Title = (string)siteMapNode.Attribute("title"),
-		//            Description = (string)siteMapNode.Attribute("description"),
-		//            Url = (string)siteMapNode.Attribute("url"),
-		//            Target = (string)siteMapNode.Attribute("target"),
-		//            IsEnabled = (string.IsNullOrEmpty((string)siteMapNode.Attribute("disabled"))) && CheckRoleAccess((string)siteMapNode.Attribute("roles")),
-		//            Items =
-		//                from childNode in siteMapNode.Elements(SiteMapHelper.XNameSiteMapNode)
-		//                select ChildMenuItem(childNode)
-		//        };
-		//    return result;
-		//}
+        //private SiteMapMenuItem ChildMenuItem(XElement siteMapNode)
+        //{
+        //    SiteMapMenuItem result =
+        //        new SiteMapMenuItem()
+        //        {
+        //            Title = (string)siteMapNode.Attribute("title"),
+        //            Description = (string)siteMapNode.Attribute("description"),
+        //            Url = (string)siteMapNode.Attribute("url"),
+        //            Target = (string)siteMapNode.Attribute("target"),
+        //            IsEnabled = (string.IsNullOrEmpty((string)siteMapNode.Attribute("disabled"))) && CheckRoleAccess((string)siteMapNode.Attribute("roles")),
+        //            Items =
+        //                from childNode in siteMapNode.Elements(SiteMapHelper.XNameSiteMapNode)
+        //                select ChildMenuItem(childNode)
+        //        };
+        //    return result;
+        //}
 
-		private SiteMapMenuItem ChildMenuItem(XElement siteMapNode)
-		{
+        private SiteMapMenuItem ChildMenuItem(XElement siteMapNode)
+        {
             bool isEnabled = (string.IsNullOrEmpty((string)siteMapNode.Attribute("disabled")));
-
-			SiteMapMenuItem result =
-				new SiteMapMenuItem()
-				{
-					Title = (string)siteMapNode.Attribute("title"),
-					Description = (string)siteMapNode.Attribute("description"),
-					Url = (string)siteMapNode.Attribute("url"),
-					Target = (string)siteMapNode.Attribute("target"),
-					IsEnabled = isEnabled,
-					Items =
-						from childNode in siteMapNode.Elements(SiteMapHelper.XNameSiteMapNode)
+            string title = (string)siteMapNode.Attribute("title");
+            //if (this.Name == "uiEmployees" && isEnabled && title == "Reports")
+            //{
+            //    isEnabled = Globals.UserLogin.UserModuleTypes.Contains(ModuleTypes.Employees);
+            //}
+            SiteMapMenuItem result =
+                new SiteMapMenuItem()
+                {
+                    Title = (string)siteMapNode.Attribute("title"),
+                    Description = (string)siteMapNode.Attribute("description"),
+                    Url = (string)siteMapNode.Attribute("url"),
+                    Target = (string)siteMapNode.Attribute("target"),
+                    IsEnabled = isEnabled,
+                    Items =
+                        from childNode in siteMapNode.Elements(SiteMapHelper.XNameSiteMapNode)
                         where isEnabled && (string.IsNullOrEmpty((string)childNode.Attribute("disabled")))
-						select ChildMenuItem(childNode)
-				};
+                        select ChildMenuItem(childNode)
+                };
 
-			return result;
-		}	
+            return result;
+        }
 
         private void uiContextMenu_ItemClick(object sender, Telerik.Windows.RadRoutedEventArgs e)
         {
+            //if (Globals.Licenses.Count == 0)
+            //{
+            //    UriHelper.NavigateTo("#/Administration/LicenseAdminPage.xaml");
+            //    return;
+            //}
+
+            if (MenuItemClicked != null)
+            {
+                MenuItemClicked(this, null);
+            }
+
             RadMenuItem radMenuItem = e.OriginalSource as RadMenuItem;
             if (radMenuItem != null)
             {
@@ -201,20 +272,20 @@ namespace Mimosa.Apartment.Silverlight.UI
                 if (menuItem != null && !string.IsNullOrEmpty(menuItem.Url))
                 {
                     nsTooltips.ToolTipService.ClearAllToolTip();
-                    if (menuItem.Url.Contains(".xaml"))
-                    {
-                        UriHelper.NavigateTo("#" + menuItem.Url, menuItem.Target);
-                        //UriHelper.NavigateTo(menuItem.Url, menuItem.Target);
-                        //if (menuItem.Url.Contains("Sale"))
-                        //    UriHelper.NavigateTo("#/Sale/DCRoomForecastPage.xaml", null);
-                        //else
-                        //    UriHelper.NavigateTo("#/FeedbackChartPage.xaml", null);
-                    }
-                    else
-                    {
-                        UriHelper.NavigateTo(menuItem.Url, menuItem.Target);
-                    }
+                    Navigate(menuItem.Url, menuItem.Target);
                 }
+            }
+        }
+
+        private void Navigate(string url, string target)
+        {
+            if (url.Contains(".xaml"))
+            {
+                UriHelper.NavigateTo("#" + url, target);
+            }
+            else
+            {
+                UriHelper.NavigateTo(url, target);
             }
         }
     }

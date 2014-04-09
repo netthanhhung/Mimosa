@@ -454,11 +454,13 @@ namespace Mimosa.Apartment.Common
         {
             PopulateRecord(input, reader);
             input.RecordId = Utilities.ToInt(reader[Mimosa.Apartment.Common.Customer.ColumnNames.CustomerId]);
-            input.Name = Utilities.ToString(reader[Mimosa.Apartment.Common.Customer.ColumnNames.Name]);
-            input.BusinessName = Utilities.ToString(reader[Mimosa.Apartment.Common.Customer.ColumnNames.BusinessName]);
-            input.ContactInformationId = Utilities.ToInt(reader[Mimosa.Apartment.Common.Customer.ColumnNames.ContactInformationId]);
-            input.ShippingContactInformationId = Utilities.ToNInt(reader[Mimosa.Apartment.Common.Customer.ColumnNames.ShippingContactInformationId]);
+            input.FirstName = Utilities.ToString(reader[Mimosa.Apartment.Common.Customer.ColumnNames.FirstName]);
+            input.LastName = Utilities.ToString(reader[Mimosa.Apartment.Common.Customer.ColumnNames.LastName]);
             input.IsLegacy = Utilities.ToBool(reader[Mimosa.Apartment.Common.Customer.ColumnNames.IsLegacy]);
+            input.Gender = Utilities.ToNInt(reader[Mimosa.Apartment.Common.Customer.ColumnNames.Gender]);
+            input.Age = Utilities.ToNInt(reader[Mimosa.Apartment.Common.Customer.ColumnNames.Age]);
+            input.ContactInformationId = Utilities.ToInt(reader[Mimosa.Apartment.Common.Customer.ColumnNames.ContactInformationId]);            
+            
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]

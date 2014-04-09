@@ -47,8 +47,18 @@
   </siteMapNode>
 
   <siteMapNode
-	title="Customer"
-	description="Customer Administration">
+	title="[S]ales"
+	description="Sales">
+
+	<siteMapNode
+		url="/Sales/BookingAdminPage.xaml"
+		title="Booking Admin"
+		description="Booking Admin"/>
+  </siteMapNode>
+  	
+  <siteMapNode
+	title="[C]ustomer"
+	description="Customer">
 
 	<siteMapNode
 		url="/Customer/CustomerAdminPage.xaml"

@@ -10,11 +10,13 @@ namespace Mimosa.Apartment.Common
             return new SqlParameter[]
 			{
 				Utilities.MakeInputOutputParameter(ColumnNames.CustomerId, NullableRecordId)
-				, Utilities.MakeInputParameter(ColumnNames.Name, Name)
-				, Utilities.MakeInputParameter(ColumnNames.BusinessName, BusinessName)
+				, Utilities.MakeInputParameter(ColumnNames.FirstName, FirstName)
+				, Utilities.MakeInputParameter(ColumnNames.LastName, LastName)
+                , Utilities.MakeInputParameter(ColumnNames.IsLegacy, IsLegacy)
+				, Utilities.MakeInputParameter(ColumnNames.Gender, Gender)
+                , Utilities.MakeInputParameter(ColumnNames.Age, Age)
 				, Utilities.MakeInputParameter(ColumnNames.ContactInformationId, ContactInformationId)
-				, Utilities.MakeInputParameter(ColumnNames.ShippingContactInformationId, ShippingContactInformationId)
-				, Utilities.MakeInputParameter(ColumnNames.IsLegacy, IsLegacy)
+				
 
 			};
         }
