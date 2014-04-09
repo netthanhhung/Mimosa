@@ -124,7 +124,7 @@ namespace Mimosa.Apartment.Silverlight.UI
         void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             Button btnDelete = (Button)sender;
-            ImageItem imageItem = btnDelete.Parent as ImageItem;
+            ImageItem imageItem = btnDelete.Tag as ImageItem;
             if (imageItem != null)
             {
                 listImages.Items.Remove(imageItem);

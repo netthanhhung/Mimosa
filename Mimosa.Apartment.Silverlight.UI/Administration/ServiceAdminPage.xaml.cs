@@ -16,7 +16,7 @@ namespace Mimosa.Apartment.Silverlight.UI
 {
     public partial class ServiceAdminPage : Page
     {
-        private int _seletedServiceId;
+        private int _selectedServiceId;
         private List<Service> _originalItemSource = new List<Service>();
         
         //public List<UserRoleAuth> UserRoleAuths { get; set; }
@@ -45,6 +45,10 @@ namespace Mimosa.Apartment.Silverlight.UI
             gvwServices.AddingNewDataItem += new EventHandler<Telerik.Windows.Controls.GridView.GridViewAddingNewEventArgs>(gvwServices_AddingNewDataItem);
             //gvwServices.BeginningEdit += new EventHandler<Telerik.Windows.Controls.GridViewBeginningEditRoutedEventArgs>(gvwServices_BeginningEdit);
             gvwServices.CellValidating += new EventHandler<Telerik.Windows.Controls.GridViewCellValidatingEventArgs>(gvwServices_CellValidating);
+            gvwServices.SelectionChanged += new EventHandler<SelectionChangeEventArgs>(gvwServices_SelectionChanged);
+
+            gridImages.Visibility = System.Windows.Visibility.Collapsed;
+            ucImageUpload.ImageType = ImageType.Service;
             
             //Common
             UiHelper.ApplyMouseWheelScrollViewer(scrollViewerService);
@@ -66,9 +70,9 @@ namespace Mimosa.Apartment.Silverlight.UI
                 _originalItemSource.Add(item);
             }
             gvwServices.ItemsSource = orgList;
-            if (_seletedServiceId > 0 && orgList.Count(i => i.ServiceId == _seletedServiceId) > 0)
+            if (_selectedServiceId > 0 && orgList.Count(i => i.ServiceId == _selectedServiceId) > 0)
             {
-                gvwServices.SelectedItem = orgList.First(i => i.ServiceId == _seletedServiceId);
+                gvwServices.SelectedItem = orgList.First(i => i.ServiceId == _selectedServiceId);
             }
             else if (orgList.Count > 0)
             {
@@ -109,14 +113,14 @@ namespace Mimosa.Apartment.Silverlight.UI
         void btnCancelService_Click(object sender, RoutedEventArgs e)
         {
             if (gvwServices.SelectedItem != null)
-                _seletedServiceId = ((Service)gvwServices.SelectedItem).ServiceId;
+                _selectedServiceId = ((Service)gvwServices.SelectedItem).ServiceId;
             BeginRebindService();
         }
 
         void btnSaveService_Click(object sender, RoutedEventArgs e)
         {
             if (gvwServices.SelectedItem != null)
-                _seletedServiceId = ((Service)gvwServices.SelectedItem).ServiceId;
+                _selectedServiceId = ((Service)gvwServices.SelectedItem).ServiceId;
             List<Service> oldList = (List<Service>)gvwServices.ItemsSource;
 			List<Service> saveList = oldList.Where(d => (d.IsChanged || d.NullableRecordId == null)).ToList();
             Globals.IsBusy = true;
@@ -139,6 +143,24 @@ namespace Mimosa.Apartment.Silverlight.UI
             if (item != null && e.PropertyName != "IsChanged")
             {
                 item.IsChanged = true;
+            }
+        }
+
+        void gvwServices_SelectionChanged(object sender, SelectionChangeEventArgs e)
+        {
+            Service selectedService = gvwServices.SelectedItem as Service;
+            if (selectedService != null && selectedService.ServiceId > 0)
+            {
+                gridImages.Visibility = System.Windows.Visibility.Visible;
+                _selectedServiceId = selectedService.ServiceId;
+                ucImageUpload.ItemId = _selectedServiceId;
+                ucImageUpload.BeginRebind();
+
+            }
+            else
+            {
+                _selectedServiceId = -1;
+                gridImages.Visibility = System.Windows.Visibility.Collapsed;
             }
         }
         #endregion

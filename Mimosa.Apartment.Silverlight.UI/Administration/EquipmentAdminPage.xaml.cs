@@ -16,7 +16,7 @@ namespace Mimosa.Apartment.Silverlight.UI
 {
     public partial class EquipmentAdminPage : Page
     {
-        private int _seletedEquipmentId;
+        private int _selectedEquipmentId;
         private List<Equipment> _originalItemSource = new List<Equipment>();
         
         //public List<UserRoleAuth> UserRoleAuths { get; set; }
@@ -45,6 +45,10 @@ namespace Mimosa.Apartment.Silverlight.UI
             gvwEquipments.AddingNewDataItem += new EventHandler<Telerik.Windows.Controls.GridView.GridViewAddingNewEventArgs>(gvwEquipments_AddingNewDataItem);
             //gvwEquipments.BeginningEdit += new EventHandler<Telerik.Windows.Controls.GridViewBeginningEditRoutedEventArgs>(gvwEquipments_BeginningEdit);
             gvwEquipments.CellValidating += new EventHandler<Telerik.Windows.Controls.GridViewCellValidatingEventArgs>(gvwEquipments_CellValidating);
+            gvwEquipments.SelectionChanged += new EventHandler<SelectionChangeEventArgs>(gvwEquipments_SelectionChanged);
+
+            gridImages.Visibility = System.Windows.Visibility.Collapsed;
+            ucImageUpload.ImageType = ImageType.Equipment;
             
             //Common
             UiHelper.ApplyMouseWheelScrollViewer(scrollViewerEquipment);
@@ -66,9 +70,9 @@ namespace Mimosa.Apartment.Silverlight.UI
                 _originalItemSource.Add(item);
             }
             gvwEquipments.ItemsSource = orgList;
-            if (_seletedEquipmentId > 0 && orgList.Count(i => i.EquipmentId == _seletedEquipmentId) > 0)
+            if (_selectedEquipmentId > 0 && orgList.Count(i => i.EquipmentId == _selectedEquipmentId) > 0)
             {
-                gvwEquipments.SelectedItem = orgList.First(i => i.EquipmentId == _seletedEquipmentId);
+                gvwEquipments.SelectedItem = orgList.First(i => i.EquipmentId == _selectedEquipmentId);
             }
             else if (orgList.Count > 0)
             {
@@ -109,14 +113,14 @@ namespace Mimosa.Apartment.Silverlight.UI
         void btnCancelEquipment_Click(object sender, RoutedEventArgs e)
         {
             if (gvwEquipments.SelectedItem != null)
-                _seletedEquipmentId = ((Equipment)gvwEquipments.SelectedItem).EquipmentId;
+                _selectedEquipmentId = ((Equipment)gvwEquipments.SelectedItem).EquipmentId;
             BeginRebindEquipment();
         }
 
         void btnSaveEquipment_Click(object sender, RoutedEventArgs e)
         {
             if (gvwEquipments.SelectedItem != null)
-                _seletedEquipmentId = ((Equipment)gvwEquipments.SelectedItem).EquipmentId;
+                _selectedEquipmentId = ((Equipment)gvwEquipments.SelectedItem).EquipmentId;
             List<Equipment> oldList = (List<Equipment>)gvwEquipments.ItemsSource;
 			List<Equipment> saveList = oldList.Where(d => (d.IsChanged || d.NullableRecordId == null)).ToList();
             Globals.IsBusy = true;
@@ -141,6 +145,26 @@ namespace Mimosa.Apartment.Silverlight.UI
                 item.IsChanged = true;
             }
         }
+
+
+        void gvwEquipments_SelectionChanged(object sender, SelectionChangeEventArgs e)
+        {
+            Equipment selectedEquipment = gvwEquipments.SelectedItem as Equipment;
+            if (selectedEquipment != null && selectedEquipment.EquipmentId > 0)
+            {
+                gridImages.Visibility = System.Windows.Visibility.Visible;
+                _selectedEquipmentId = selectedEquipment.EquipmentId;
+                ucImageUpload.ItemId = _selectedEquipmentId;
+                ucImageUpload.BeginRebind();
+
+            }
+            else
+            {
+                _selectedEquipmentId = -1;
+                gridImages.Visibility = System.Windows.Visibility.Collapsed;
+            }
+        }
+
         #endregion
 
 

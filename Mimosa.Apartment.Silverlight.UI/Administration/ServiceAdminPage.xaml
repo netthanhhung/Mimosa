@@ -138,6 +138,23 @@
 
                         </Grid>
 
+
+                        <Grid x:Name="gridImages" Grid.Column="1" Margin="5,5,0,0">
+                            <bg:TiledBGControl BorderThickness="0"  TiledImageSource="{StaticResource CarbonFiberImage}"/>
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <TextBlock 
+                               VerticalAlignment="Center" HorizontalAlignment="Left"
+                               Margin="10,10,0,0"
+                               Foreground="{StaticResource TitleForeground}"
+                               Text="Images : "></TextBlock>
+
+                                <local:ImageUpload x:Name="ucImageUpload" Grid.Row="1" Margin="10,5,10,10"></local:ImageUpload>
+                            </Grid>
+                        </Grid>
                     </local:ClippedGrid>
 
                 </ScrollViewer>

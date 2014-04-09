@@ -51,7 +51,7 @@ namespace Mimosa.Apartment.Silverlight.UI
         private void DataBind()
         {
             this.DataContext = this.ImageDataItem;
-            btnDelete.Tag = this.ImageDataItem;
+            btnDelete.Tag = this;
             if (this.ImageDataItem != null)
             {
                 IsEnabled = true;

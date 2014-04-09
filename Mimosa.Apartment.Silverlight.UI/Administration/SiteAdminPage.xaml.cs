@@ -49,7 +49,9 @@ namespace Mimosa.Apartment.Silverlight.UI
             gvwSites.CellValidating += new EventHandler<Telerik.Windows.Controls.GridViewCellValidatingEventArgs>(gvwSites_CellValidating);
             gvwSites.RowEditEnded += new EventHandler<GridViewRowEditEndedEventArgs>(gvwSites_RowEditEnded);
 
-            gridContactAccount.Visibility = System.Windows.Visibility.Collapsed;
+            gridContactAccount.Visibility = gridImages.Visibility = System.Windows.Visibility.Collapsed;
+            ucImageUpload.ImageType = ImageType.Site;
+
             //Common
             UiHelper.ApplyMouseWheelScrollViewer(scrollViewerSite);
         }
@@ -173,11 +175,14 @@ namespace Mimosa.Apartment.Silverlight.UI
                 {
                     ucCntactInfoPanel.DataContext = selectedSite.ContactInformation;
                 }
-                gridContactAccount.Visibility = System.Windows.Visibility.Visible;
+                gridContactAccount.Visibility = gridImages.Visibility = System.Windows.Visibility.Visible;
+                ucImageUpload.ItemId = _seletedSiteId;
+                ucImageUpload.BeginRebind();
             }
             else
             {
-                gridContactAccount.Visibility = System.Windows.Visibility.Collapsed;
+                _seletedSiteId = -1;
+                gridContactAccount.Visibility = gridImages.Visibility = System.Windows.Visibility.Collapsed;
             }
         }
 
