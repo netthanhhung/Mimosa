@@ -44,8 +44,8 @@ namespace Mimosa.Apartment.Silverlight.UI
             
             //ucSitePicker.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(ucSitePicker_SelectionChanged);
             ucSitePicker.Init();
-            gvwBooking.AddingNewDataItem += new EventHandler<Telerik.Windows.Controls.GridView.GridViewAddingNewEventArgs>(gvwBooking_AddingNewDataItem);
-            gvwBooking.Deleting += new EventHandler<GridViewDeletingEventArgs>(gvwBooking_Deleting);
+            //gvwBooking.AddingNewDataItem += new EventHandler<Telerik.Windows.Controls.GridView.GridViewAddingNewEventArgs>(gvwBooking_AddingNewDataItem);
+            //gvwBooking.Deleting += new EventHandler<GridViewDeletingEventArgs>(gvwBooking_Deleting);
             gvwBooking.CellValidating += new EventHandler<GridViewCellValidatingEventArgs>(gvwBooking_CellValidating);
             gvwBooking.BeginningEdit += new EventHandler<GridViewBeginningEditRoutedEventArgs>(gvwBooking_BeginningEdit);
             gvwBooking.SelectionChanged += new EventHandler<SelectionChangeEventArgs>(gvwBooking_SelectionChanged);
@@ -62,15 +62,13 @@ namespace Mimosa.Apartment.Silverlight.UI
             ((GridViewComboBoxColumn)this.gvwBooking.Columns["BookingStatus"]).ItemsSource = bookingStatusDic;
 
             gridEquipmentService.Visibility = gridImages.Visibility = System.Windows.Visibility.Collapsed;
-            ucImageUpload.ImageType = ImageType.Booking;
+            ucImageUpload.ImageType = ImageType.Room;
 
-            DataServiceHelper.ListEquipmentAsync(Globals.UserLogin.UserOrganisationId, null, false, ListEquipmentCompleted);
             btnSaveBookingEquipment.Click += new RoutedEventHandler(btnSaveBookingEquipment_Click);
             btnCancelBookingEquipment.Click += new RoutedEventHandler(btnCancelBookingEquipment_Click);
             btnInsertBookingEquipment.Click += new RoutedEventHandler(btnInsertBookingEquipment_Click);
             gvwBookingEquipment.Deleting += new EventHandler<GridViewDeletingEventArgs>(gvwBookingEquipment_Deleting);
 
-            DataServiceHelper.ListServiceAsync(Globals.UserLogin.UserOrganisationId, null, false, ListServiceCompleted);
             btnSaveBookingService.Click += new RoutedEventHandler(btnSaveBookingService_Click);
             btnCancelBookingService.Click += new RoutedEventHandler(btnCancelBookingService_Click);
             btnInsertBookingService.Click += new RoutedEventHandler(btnInsertBookingService_Click);
@@ -78,14 +76,11 @@ namespace Mimosa.Apartment.Silverlight.UI
 
             //Common
             UiHelper.ApplyMouseWheelScrollViewer(scrollViewerBookings);
+
+            uiDateFrom.SelectedDate = DateTime.Today.AddMonths(-1);
         }
         #region Booking
-
-        void ucBookingTypes_InitComplete(object sender, EventArgs e)
-        {
-            ((GridViewComboBoxColumn)this.gvwBooking.Columns["BookingType"]).ItemsSource = ucBookingTypes.BookingTypeList;
-        }
-
+        
         void btnSearch_Click(object sender, RoutedEventArgs e)
         {
             RebindBookingData();
@@ -93,39 +88,52 @@ namespace Mimosa.Apartment.Silverlight.UI
 
         private void RebindBookingData()
         {
-            int siteId = ucSitePicker.SiteId;
-            string name = txtName.Text;
-            if (!string.IsNullOrEmpty(name))
+            int? siteId = null;
+            if (ucSitePicker.SiteId > 0)
             {
-                name = name.Trim();
+                siteId = ucSitePicker.SiteId;
+            }
+
+
+            DateTime? fromDate = null;
+            if (uiDateFrom.SelectedDate.HasValue)
+            {
+                fromDate = uiDateFrom.SelectedDate.Value;
+            }
+            DateTime? toDate = null;
+            if (uiDateTo.SelectedDate.HasValue)
+            {
+                toDate = uiDateTo.SelectedDate.Value;
+            }
+
+            string statusIds = string.Empty;
+            if (chkNew.IsChecked == true)
+            {
+                statusIds += ((int)BookingStatus.New).ToString() + ",";
+            }
+            if (chkProcessing.IsChecked == true)
+            {
+                statusIds += ((int)BookingStatus.Processing).ToString() + ",";
+            }
+            if (chkContract.IsChecked == true)
+            {
+                statusIds += ((int)BookingStatus.Contract).ToString() + ",";
+            }
+            if (chkCancelled.IsChecked == true)
+            {
+                statusIds += ((int)BookingStatus.Cancelled).ToString() + ",";
+            }
+
+            string customer = txtCustomer.Text;
+            if (!string.IsNullOrEmpty(customer))
+            {
+                customer = customer.Trim();
             }
             else
             {
-                name = null;
+                customer = null;
             }
 
-            int floor = -1000;
-            if (!string.IsNullOrEmpty(txtFloor.Text))
-            {
-                if (!int.TryParse(txtFloor.Text, out floor))
-                {
-                    floor = 0;
-                }
-            }
-            int? realFloor = null;
-            if (floor != -1000)
-            {
-                realFloor = floor;
-            }
-            string statusIds = string.Empty;
-            if (chkAvailable.IsChecked == true)
-            {
-                statusIds += ((int)BookingStatus.Available).ToString() + ",";
-            }
-            if (chkOccupied.IsChecked == true)
-            {
-                statusIds += ((int)BookingStatus.Occupied).ToString() + ",";
-            }
             if (!string.IsNullOrEmpty(statusIds))
             {
                 statusIds = statusIds.Substring(0, statusIds.Length - 1);
@@ -135,17 +143,9 @@ namespace Mimosa.Apartment.Silverlight.UI
                 statusIds = null;
             }
 
-            string BookingTypeIDs = ucBookingTypes.SelectedBookingTypeIds;
-            if (string.IsNullOrEmpty(BookingTypeIDs))
-            {
-                BookingTypeIDs = null;
-            }
-
-            bool showLegacy = chkShowLegacy.IsChecked == true;
-
             Globals.IsBusy = true;
-            DataServiceHelper.ListBookingAsync(Globals.UserLogin.UserOrganisationId, siteId, null, name, statusIds, BookingTypeIDs, realFloor, showLegacy,
-                ListBookingCompleted);
+            DataServiceHelper.ListBookingAsync(Globals.UserLogin.UserOrganisationId, siteId, null, null, null, statusIds,
+                customer, fromDate, toDate, ListBookingCompleted);
         }
 
         void ListBookingCompleted(List<Booking> itemSource)
@@ -177,7 +177,7 @@ namespace Mimosa.Apartment.Silverlight.UI
             {
                 gridEquipmentService.Visibility = gridImages.Visibility = System.Windows.Visibility.Visible;
                 _selectedBookingId = selectedBooking.BookingId;
-                ucImageUpload.ItemId = _selectedBookingId;
+                ucImageUpload.ItemId = selectedBooking.RoomId;
                 ucImageUpload.BeginRebind();
 
                 //Bind Equipment and Service :
@@ -195,10 +195,10 @@ namespace Mimosa.Apartment.Silverlight.UI
         void gvwBooking_BeginningEdit(object sender, GridViewBeginningEditRoutedEventArgs e)
         {
             Booking rowData = e.Row.Item as Booking;
-            if (rowData.NullableRecordId != null && e.Cell.Column.UniqueName == "DaymarkerType")
-            {
-                e.Cancel = true;
-            }
+            //if (rowData.NullableRecordId != null && e.Cell.Column.UniqueName == "DaymarkerType")
+            //{
+            //    e.Cancel = true;
+            //}
         }
 
         void item_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -212,49 +212,16 @@ namespace Mimosa.Apartment.Silverlight.UI
 
         void gvwBooking_CellValidating(object sender, GridViewCellValidatingEventArgs e)
         {
-            if (e.Cell.Column.UniqueName == "BookingType" 
-                || e.Cell.Column.UniqueName == "BookingStatus" 
-                || e.Cell.Column.UniqueName == "BookingName")
-            {
-                if (e.NewValue == null || string.IsNullOrEmpty(e.NewValue.ToString()))
-                {
-                    e.IsValid = false;
-                    e.ErrorMessage = Globals.UserMessages.RequiredFieldGeneric;
-                }
-            }
-        }
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBoxResult result = MessageBox.Show(Globals.UserMessages.ConfirmDeleteNoParam, Globals.UserMessages.ConfirmationRequired, MessageBoxButton.OKCancel);
-            if (result == MessageBoxResult.OK)
-            {
-                int recordId = int.Parse((sender as Button).Tag.ToString());
-                List<Booking> itemSource = gvwBooking.ItemsSource as List<Booking>;
-                itemSource = itemSource.Where(i => i.RecordId != recordId).ToList();
-                gvwBooking.ItemsSource = null;
-                gvwBooking.ItemsSource = itemSource;
-            }
-            
-        }
-        
-        void gvwBooking_Deleting(object sender, GridViewDeletingEventArgs e)
-        {
-            MessageBoxResult result = MessageBox.Show(Globals.UserMessages.ConfirmDeleteNoParam, Globals.UserMessages.ConfirmationRequired, MessageBoxButton.OKCancel);
-            if (result == MessageBoxResult.Cancel)
-            {
-                e.Cancel = true;
-            }
-        }
-
-        void gvwBooking_AddingNewDataItem(object sender, Telerik.Windows.Controls.GridView.GridViewAddingNewEventArgs e)
-        {
-            Booking newItem = new Booking();
-            newItem.RecordId = _newId--;
-            newItem.SiteId = ucSitePicker.SiteId;
-            newItem.BookingStatusId = (int)BookingStatus.Available;
-            newItem.CreatedBy = newItem.UpdatedBy = Globals.UserLogin.UserName;
-            newItem.IsChanged = true;
-            e.NewObject = newItem;
+            //if (e.Cell.Column.UniqueName == "BookingType" 
+            //    || e.Cell.Column.UniqueName == "BookingStatus" 
+            //    || e.Cell.Column.UniqueName == "BookingName")
+            //{
+            //    if (e.NewValue == null || string.IsNullOrEmpty(e.NewValue.ToString()))
+            //    {
+            //        e.IsValid = false;
+            //        e.ErrorMessage = Globals.UserMessages.RequiredFieldGeneric;
+            //    }
+            //}
         }
 
         void btnSaveBooking_Click(object sender, RoutedEventArgs e)
@@ -294,39 +261,49 @@ namespace Mimosa.Apartment.Silverlight.UI
         private void RebindBookingEquipments()
         {
             Booking selectedBooking = gvwBooking.SelectedItem as Booking;
-            if (selectedBooking != null && selectedBooking.BookingId > 0)
+            if (selectedBooking != null && selectedBooking.RoomId > 0)
             {
                 Globals.IsBusy = true;
-                DataServiceHelper.ListBookingEquipmentAsync(null, selectedBooking.BookingId, ListBookingEquipmentCompleted);
+                DataServiceHelper.ListRoomEquipmentAsync(null, selectedBooking.RoomId, ListRoomEquipmentCompleted);
+
+                
             }
         }
 
-        private void ListEquipmentCompleted(List<Equipment> equipments)
+        private void ListRoomEquipmentCompleted(List<RoomEquipment> equipments)
         {
+            Globals.IsBusy = false;
             uiEquipmentList.ItemsSource = equipments;
             if (equipments.Count > 0)
             {
                 uiEquipmentList.SelectedIndex = 0;
             }
+
+            Booking selectedBooking = gvwBooking.SelectedItem as Booking;
+            if (selectedBooking != null && selectedBooking.BookingId > 0)
+            {
+                Globals.IsBusy = true;
+                DataServiceHelper.ListBookingRoomEquipmentAsync(null, selectedBooking.BookingId, null, ListBookingRoomEquipmentCompleted);
+            }
         }
 
-        private void ListBookingEquipmentCompleted(List<BookingRoomEquipment> BookingEquipments)
+        private void ListBookingRoomEquipmentCompleted(List<BookingRoomEquipment> bookingEquipments)
         {
             Globals.IsBusy = false;
             _currentBookingEquipments.Clear();
-            foreach (BookingRoomEquipment BookingEquipment in BookingEquipments)
+            foreach (BookingRoomEquipment bookingEquipment in bookingEquipments)
             {
-                BookingEquipment.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(BookingEquipment_PropertyChanged);
-                _currentBookingEquipments.Add(BookingEquipment);
+                bookingEquipment.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(BookingEquipment_PropertyChanged);
+                _currentBookingEquipments.Add(bookingEquipment);
             }
-            gvwBookingEquipment.ItemsSource = BookingEquipments;
+            gvwBookingEquipment.ItemsSource = bookingEquipments;
         }
 
         void BookingEquipment_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName != "IsChanged")
             {
-                BookingEquipment item = (BookingEquipment)sender;
+                BookingRoomEquipment item = (BookingRoomEquipment)sender;
                 item.IsChanged = true;
             }
         }
@@ -338,14 +315,14 @@ namespace Mimosa.Apartment.Silverlight.UI
 
         void btnSaveBookingEquipment_Click(object sender, RoutedEventArgs e)
         {
-            List<BookingEquipment> saveList = (List<BookingEquipment>)gvwBookingEquipment.ItemsSource;
+            List<BookingRoomEquipment> saveList = (List<BookingRoomEquipment>)gvwBookingEquipment.ItemsSource;
             //Get delete items :
-            foreach (BookingEquipment oldItem in _currentBookingEquipments)
+            foreach (BookingRoomEquipment oldItem in _currentBookingEquipments)
             {
                 bool isDeleted = true;
-                foreach (BookingEquipment saveItem in saveList)
+                foreach (BookingRoomEquipment saveItem in saveList)
                 {
-                    if (saveItem.BookingEquipmentId == oldItem.BookingEquipmentId)
+                    if (saveItem.BookingRoomEquipmentId == oldItem.BookingRoomEquipmentId)
                     {
                         isDeleted = false;
                         break;
@@ -358,7 +335,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                 }
             }
             Globals.IsBusy = true;
-            DataServiceHelper.SaveBookingEquipmentAsync(saveList, SaveBookingEquipmentCompleted);
+            DataServiceHelper.SaveBookingRoomEquipmentAsync(saveList, SaveBookingEquipmentCompleted);
         }
 
         void SaveBookingEquipmentCompleted()
@@ -370,21 +347,24 @@ namespace Mimosa.Apartment.Silverlight.UI
 
         void btnInsertBookingEquipment_Click(object sender, RoutedEventArgs e)
         {
-            Equipment equipment = uiEquipmentList.SelectedItem as Equipment;
+            RoomEquipment equipment = uiEquipmentList.SelectedItem as RoomEquipment;
             if (equipment != null && _selectedBookingId > 0)
             {
-                List<BookingEquipment> list = (List<BookingEquipment>)gvwBookingEquipment.ItemsSource;
+                List<BookingRoomEquipment> list = (List<BookingRoomEquipment>)gvwBookingEquipment.ItemsSource;
                 if (list.Count(i => i.EquipmentId == equipment.EquipmentId) > 0)
                 {
                     MessageBox.Show(Globals.UserMessages.ItemExist);
                 }
                 else
                 {
-                    BookingEquipment newBookingEquipment = new BookingEquipment();
+                    BookingRoomEquipment newBookingEquipment = new BookingRoomEquipment();
                     newBookingEquipment.BookingId = _selectedBookingId;
+                    newBookingEquipment.RoomEquipmentId = equipment.RoomEquipmentId;
                     newBookingEquipment.EquipmentId = equipment.EquipmentId;
-                    newBookingEquipment.Equipment = equipment.EquipmentName;
+                    newBookingEquipment.Equipment = equipment.Equipment;
                     newBookingEquipment.IsChanged = true;
+                    newBookingEquipment.Price = equipment.Price;
+                    newBookingEquipment.Description = equipment.Description;
                     list.Add(newBookingEquipment);
                     gvwBookingEquipment.ItemsSource = null;
                     gvwBookingEquipment.ItemsSource = list;
@@ -403,26 +383,37 @@ namespace Mimosa.Apartment.Silverlight.UI
             }
         }
 
+
         private void RebindBookingServices()
         {
             Booking selectedBooking = gvwBooking.SelectedItem as Booking;
-            if (selectedBooking != null && selectedBooking.BookingId > 0)
+            if (selectedBooking != null && selectedBooking.RoomId > 0)
             {
                 Globals.IsBusy = true;
-                DataServiceHelper.ListBookingServiceAsync(null, selectedBooking.BookingId, ListBookingServiceCompleted);
+                DataServiceHelper.ListRoomServiceAsync(null, selectedBooking.RoomId, ListRoomServiceCompleted);
+
+
             }
         }
 
-        private void ListServiceCompleted(List<Service> services)
+        private void ListRoomServiceCompleted(List<RoomService> services)
         {
+            Globals.IsBusy = false;
             uiServiceList.ItemsSource = services;
             if (services.Count > 0)
             {
                 uiServiceList.SelectedIndex = 0;
             }
+
+            Booking selectedBooking = gvwBooking.SelectedItem as Booking;
+            if (selectedBooking != null && selectedBooking.BookingId > 0)
+            {
+                Globals.IsBusy = true;
+                DataServiceHelper.ListBookingRoomServiceAsync(null, selectedBooking.BookingId, null, ListBookingRoomServiceCompleted);
+            }
         }
 
-        private void ListBookingServiceCompleted(List<BookingRoomService> bookingServices)
+        private void ListBookingRoomServiceCompleted(List<BookingRoomService> bookingServices)
         {
             Globals.IsBusy = false;
             _currentBookingServices.Clear();
@@ -438,7 +429,7 @@ namespace Mimosa.Apartment.Silverlight.UI
         {
             if (e.PropertyName != "IsChanged")
             {
-                BookingService item = (BookingService)sender;
+                BookingRoomService item = (BookingRoomService)sender;
                 item.IsChanged = true;
             }
         }
@@ -469,36 +460,37 @@ namespace Mimosa.Apartment.Silverlight.UI
                     saveList.Add(oldItem);
                 }
             }
-            //Globals.IsBusy = true;
-            //DataServiceHelper.SaveBookingRoomServiceAsync(saveList, SaveBookingRoomServiceCompleted);
+            Globals.IsBusy = true;
+            DataServiceHelper.SaveBookingRoomServiceAsync(saveList, SaveBookingServiceCompleted);
         }
 
-        void SaveBookingRoomServiceCompleted()
+        void SaveBookingServiceCompleted()
         {
             Globals.IsBusy = false;
             MessageBox.Show(Globals.UserMessages.RecordsSaved);
             RebindBookingServices();
         }
 
-
         void btnInsertBookingService_Click(object sender, RoutedEventArgs e)
         {
-            Service service = uiServiceList.SelectedItem as Service;
+            RoomService service = uiServiceList.SelectedItem as RoomService;
             if (service != null && _selectedBookingId > 0)
             {
-                List<BookingService> list = (List<BookingService>)gvwBookingService.ItemsSource;
+                List<BookingRoomService> list = (List<BookingRoomService>)gvwBookingService.ItemsSource;
                 if (list.Count(i => i.ServiceId == service.ServiceId) > 0)
                 {
                     MessageBox.Show(Globals.UserMessages.ItemExist);
                 }
                 else
                 {
-
-                    BookingService newBookingService = new BookingService();
+                    BookingRoomService newBookingService = new BookingRoomService();
                     newBookingService.BookingId = _selectedBookingId;
+                    newBookingService.RoomServiceId = service.RoomServiceId;
                     newBookingService.ServiceId = service.ServiceId;
-                    newBookingService.Service = service.Name;
-                    newBookingService.IsChanged = true;                 
+                    newBookingService.Service = service.Service;
+                    newBookingService.IsChanged = true;
+                    newBookingService.Price = service.Price;
+                    newBookingService.Description = service.Description;
                     list.Add(newBookingService);
                     gvwBookingService.ItemsSource = null;
                     gvwBookingService.ItemsSource = list;
@@ -506,5 +498,6 @@ namespace Mimosa.Apartment.Silverlight.UI
             }
         }
         #endregion
+
     }
 }

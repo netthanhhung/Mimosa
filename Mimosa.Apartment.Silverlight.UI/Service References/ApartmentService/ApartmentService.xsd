@@ -648,4 +648,94 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="ListBooking">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="orgId" type="xs:int" />
+        <xs:element minOccurs="0" name="siteId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="roomId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="roomName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bookingId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="bookingStatusIds" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="customerName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bookDateStart" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="bookDateEnd" nillable="true" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListBookingResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q55="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListBookingResult" nillable="true" type="q55:ArrayOfBooking" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveBooking">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q56="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q56:ArrayOfBooking" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveBookingResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListBookingRoomEquipment">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="bookingRoomEquipmentId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="bookingId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="roomEquipmentId" nillable="true" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListBookingRoomEquipmentResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q57="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListBookingRoomEquipmentResult" nillable="true" type="q57:ArrayOfBookingRoomEquipment" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveBookingRoomEquipment">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q58="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q58:ArrayOfBookingRoomEquipment" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveBookingRoomEquipmentResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListBookingRoomService">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="bookingRoomServiceId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="bookingId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="roomServiceId" nillable="true" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListBookingRoomServiceResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q59="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListBookingRoomServiceResult" nillable="true" type="q59:ArrayOfBookingRoomService" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveBookingRoomService">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q60="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q60:ArrayOfBookingRoomService" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveBookingRoomServiceResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

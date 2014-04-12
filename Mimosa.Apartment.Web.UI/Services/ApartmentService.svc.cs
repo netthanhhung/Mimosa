@@ -519,6 +519,50 @@ namespace Mimosa.Apartment.Web.UI
             ApartmentMethods.SaveImage(saveList);
         }
         #endregion
+
+        #region Booking
+        [OperationContract]
+        public List<Booking> ListBooking(int orgId, int? siteId, int? roomId, string roomName, int? bookingId, string bookingStatusIds,
+            string customerName, DateTime? bookDateStart, DateTime? bookDateEnd)
+        {
+            return ApartmentMethods.ListBooking(orgId, siteId, roomId, roomName, bookingId, bookingStatusIds,
+                customerName, bookDateStart, bookDateEnd);
+        }
+
+        [OperationContract]
+        public void SaveBooking(List<Booking> saveList)
+        {
+            ApartmentMethods.SaveBooking(saveList);
+        }
+        #endregion
+
+        #region BookingRoomEquipment
+        [OperationContract]
+        public List<BookingRoomEquipment> ListBookingRoomEquipment(int? bookingRoomEquipmentId, int? bookingId, int? roomEquipmentId)
+        {
+            return ApartmentMethods.ListBookingRoomEquipment(bookingRoomEquipmentId, bookingId, roomEquipmentId);
+        }
+
+        [OperationContract]
+        public void SaveBookingRoomEquipment(List<BookingRoomEquipment> saveList)
+        {
+            ApartmentMethods.SaveBookingRoomEquipment(saveList);
+        }
+        #endregion
+
+        #region BookingRoomService
+        [OperationContract]
+        public List<BookingRoomService> ListBookingRoomService(int? bookingRoomServiceId, int? bookingId, int? roomServiceId)
+        {
+            return ApartmentMethods.ListBookingRoomService(bookingRoomServiceId, bookingId, roomServiceId);
+        }
+
+        [OperationContract]
+        public void SaveBookingRoomService(List<BookingRoomService> saveList)
+        {
+            ApartmentMethods.SaveBookingRoomService(saveList);
+        }
+        #endregion
     }
 
     /// <summary>

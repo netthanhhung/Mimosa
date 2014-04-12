@@ -99,7 +99,16 @@
                                     x:Name="uiDateTo"
                                     Margin="5,10,5,5"
                                     Style="{StaticResource InputControlStyle}"></telerik:RadDatePicker>
-
+                                <TextBlock
+                                    Margin="20,10,5,5"
+                                    VerticalAlignment="Center"
+                                    Text="Customer:">
+                                </TextBlock>
+                                <TextBox x:Name="txtCustomer"
+                                    Margin="5,10,5,5" Width="100"
+                                    VerticalAlignment="Center">
+                                </TextBox>
+                                
                                 <TextBlock
                                     Margin="20,10,5,5"
                                     VerticalAlignment="Center"
@@ -139,19 +148,19 @@
                             ShowGroupPanel="False" 
                             IsFilteringAllowed="False" 
                             CanUserSortColumns="True" CanUserFreezeColumns="False"
-                            CanUserResizeColumns="False" CanUserInsertRows="True" ShowInsertRow="True"
+                            CanUserResizeColumns="False" CanUserInsertRows="False" ShowInsertRow="False"
                             CanUserDeleteRows="False" CanUserReorderColumns="False">
                                 <telerik:RadGridView.Resources>
                                     <Style TargetType="TextBlock" BasedOn="{x:Null}"/>
                                 </telerik:RadGridView.Resources>
                                 <telerik:RadGridView.Columns>
                                     <telerik:GridViewDataColumn
-                                        DataMemberBinding="{Binding RoomName}" UniqueName="RoomName"
+                                        DataMemberBinding="{Binding RoomName}" UniqueName="RoomName" IsReadOnly="True"
                                         Header="Room" HeaderTextAlignment="Center" ShowFieldFilters="True"
                                         Width="200">
                                     </telerik:GridViewDataColumn>
                                     <telerik:GridViewDataColumn
-                                        DataMemberBinding="{Binding CustomerName}" UniqueName="CustomerName"
+                                        DataMemberBinding="{Binding CustomerName}" UniqueName="CustomerName" IsReadOnly="True"
                                         Header="Customer" HeaderTextAlignment="Center" ShowFieldFilters="True"
                                         Width="150">
                                     </telerik:GridViewDataColumn>
@@ -190,32 +199,35 @@
                                     <telerik:GridViewDataColumn
                                         DataMemberBinding="{Binding ContractDateStart}"
                                         Width="100" ShowFieldFilters="False" HeaderTextAlignment="Center"
-                                        Header="Date Start" DataFormatString="{} {0:dd-MMM-yyyy}">
+                                        Header="From Date" DataFormatString="{} {0:dd-MMM-yyyy}">
                                     </telerik:GridViewDataColumn>
                                     <telerik:GridViewDataColumn
                                         DataMemberBinding="{Binding ContractDateEnd}"
                                         Width="100" ShowFieldFilters="False" HeaderTextAlignment="Center"
-                                        Header="Date End" DataFormatString="{} {0:dd-MMM-yyyy}">
+                                        Header="To Date" DataFormatString="{} {0:dd-MMM-yyyy}">
                                     </telerik:GridViewDataColumn>
                                     <telerik:GridViewDataColumn
                                         DataMemberBinding="{Binding ContractTotalPrice}"
                                         Width="100" HeaderTextAlignment="Center" ShowFieldFilters="False"
                                         DataFormatString="{} {0:C2}" Header="Contract Total Price">
                                     </telerik:GridViewDataColumn>
-
-
                                 </telerik:RadGridView.Columns>
                             </telerik:RadGridView>
 
                             <Grid Grid.Row="2">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
 
-                                <local:SingleClickButton x:Name="btnSaveBooking" Height="25" Width="80" Grid.Column="0" Content="Save" 
+                                <local:SingleClickButton x:Name="btnNewBooking" Height="25" Width="80" Grid.Column="1" Content="New" 
                                 HorizontalAlignment="Right" Margin="10,10,5,10"/>
-                                <Button x:Name="btnCancelBooking" Height="25" Width="80" Grid.Column="1" Content="Cancel" 
+                                <local:SingleClickButton x:Name="btnSaveBooking" Height="25" Width="80" Grid.Column="2" Content="Save" 
+                                HorizontalAlignment="Right" Margin="10,10,5,10"/>
+                                <Button x:Name="btnCancelBooking" Height="25" Width="80" Grid.Column="3" Content="Cancel" 
                                 HorizontalAlignment="Left" Margin="10,10,5,10"/>
                             </Grid>
 
@@ -359,6 +371,22 @@
                         </Grid>
 
                     </Grid>
+
+                    <bg:TiledBGControl BorderThickness="0" Grid.Column="0" Grid.Row="2" Margin="0,5,0,0" TiledImageSource="{StaticResource CarbonFiberImage}"/>
+                    <Grid x:Name="gridImages" Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock 
+                               VerticalAlignment="Center" HorizontalAlignment="Left"
+                               Margin="10,10,10,10"
+                               Foreground="{StaticResource TitleForeground}"
+                               Text="Images : "></TextBlock>
+
+                        <local:ImageUpload x:Name="ucImageUpload" Grid.Row="1" Margin="10,10,10,10"></local:ImageUpload>
+                    </Grid>
+                    
                 </local:ClippedGrid>
 
             </Grid>

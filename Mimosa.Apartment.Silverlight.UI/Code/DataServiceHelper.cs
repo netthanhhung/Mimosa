@@ -728,5 +728,103 @@ namespace Mimosa.Apartment.Silverlight.UI
             proxy.SaveImageCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(proxy_VoidMethodCompleted);
             proxy.SaveImageAsync(saveList, callerKey);
         }
+
+        // ListBooking
+        internal delegate void ListBookingCallBack(List<Booking> itemSource);
+        internal static void ListBookingAsync(int orgId, int? siteId, int? roomId, string roomName, int? bookingId, string bookingStatusIds,
+            string customerName, DateTime? bookDateStart, DateTime? bookDateEnd, ListBookingCallBack callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.ListBookingCompleted += new EventHandler<ListBookingCompletedEventArgs>(proxy_ListBookingCompleted);
+            proxy.ListBookingAsync(orgId, siteId, roomId, roomName, bookingId, bookingStatusIds,
+                customerName, bookDateStart, bookDateEnd, callerKey);
+        }
+
+        static void proxy_ListBookingCompleted(object sender, ListBookingCompletedEventArgs e)
+        {
+            Guid callerKey = (Guid)e.UserState;
+            if (_callbacks.ContainsKey(callerKey))
+            {
+                List<Booking> itemSource = e.Result;
+                ((ListBookingCallBack)_callbacks[callerKey]).Invoke(itemSource);
+
+                _callbacks.Remove(callerKey);
+            }
+        }
+
+        //SaveBooking
+        internal static void SaveBookingAsync(List<Booking> saveList, EmptyCallback callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.SaveBookingCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(proxy_VoidMethodCompleted);
+            proxy.SaveBookingAsync(saveList, callerKey);
+        }
+
+        // ListBookingRoomEquipment
+        internal delegate void ListBookingRoomEquipmentCallBack(List<BookingRoomEquipment> itemSource);
+        internal static void ListBookingRoomEquipmentAsync(int? bookingRoomEquipmentId, int? bookingId, int? roomEquipmentId, ListBookingRoomEquipmentCallBack callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.ListBookingRoomEquipmentCompleted += new EventHandler<ListBookingRoomEquipmentCompletedEventArgs>(proxy_ListBookingRoomEquipmentCompleted);
+            proxy.ListBookingRoomEquipmentAsync(bookingRoomEquipmentId, bookingId, roomEquipmentId, callerKey);
+        }
+
+        static void proxy_ListBookingRoomEquipmentCompleted(object sender, ListBookingRoomEquipmentCompletedEventArgs e)
+        {
+            Guid callerKey = (Guid)e.UserState;
+            if (_callbacks.ContainsKey(callerKey))
+            {
+                List<BookingRoomEquipment> itemSource = e.Result;
+                ((ListBookingRoomEquipmentCallBack)_callbacks[callerKey]).Invoke(itemSource);
+
+                _callbacks.Remove(callerKey);
+            }
+        }
+
+        //SaveBookingRoomEquipment
+        internal static void SaveBookingRoomEquipmentAsync(List<BookingRoomEquipment> saveList, EmptyCallback callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.SaveBookingRoomEquipmentCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(proxy_VoidMethodCompleted);
+            proxy.SaveBookingRoomEquipmentAsync(saveList, callerKey);
+        }
+
+        // ListBookingRoomService
+        internal delegate void ListBookingRoomServiceCallBack(List<BookingRoomService> itemSource);
+        internal static void ListBookingRoomServiceAsync(int? bookingRoomServiceId, int? bookingId, int? roomServiceId, ListBookingRoomServiceCallBack callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.ListBookingRoomServiceCompleted += new EventHandler<ListBookingRoomServiceCompletedEventArgs>(proxy_ListBookingRoomServiceCompleted);
+            proxy.ListBookingRoomServiceAsync(bookingRoomServiceId, bookingId, roomServiceId, callerKey);
+        }
+
+        static void proxy_ListBookingRoomServiceCompleted(object sender, ListBookingRoomServiceCompletedEventArgs e)
+        {
+            Guid callerKey = (Guid)e.UserState;
+            if (_callbacks.ContainsKey(callerKey))
+            {
+                List<BookingRoomService> itemSource = e.Result;
+                ((ListBookingRoomServiceCallBack)_callbacks[callerKey]).Invoke(itemSource);
+
+                _callbacks.Remove(callerKey);
+            }
+        }
+
+        //SaveBookingRoomService
+        internal static void SaveBookingRoomServiceAsync(List<BookingRoomService> saveList, EmptyCallback callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.SaveBookingRoomServiceCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(proxy_VoidMethodCompleted);
+            proxy.SaveBookingRoomServiceAsync(saveList, callerKey);
+        }
 	}
 }

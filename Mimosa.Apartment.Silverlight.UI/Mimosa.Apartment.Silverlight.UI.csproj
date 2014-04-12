@@ -241,6 +241,9 @@
       <DependentUpon>SideBarMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sales\BookingAdminPage.xaml.cs">
+      <DependentUpon>BookingAdminPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Service References\ApartmentService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -249,6 +252,10 @@
     <Compile Include="ViewModels\LoginVM.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Sales\BookingAdminPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Resource Include="Assets\Images\background.png" />
     <Resource Include="Assets\Images\carbon-fiber-10x10.png" />
     <Resource Include="Assets\Images\carbon-fiber-13x23.png" />
@@ -428,6 +435,9 @@
   <ItemGroup>
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.AspRole.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.AspUser.datasource" />
+    <None Include="Properties\DataSources\Mimosa.Apartment.Common.Booking.datasource" />
+    <None Include="Properties\DataSources\Mimosa.Apartment.Common.BookingRoomEquipment.datasource" />
+    <None Include="Properties\DataSources\Mimosa.Apartment.Common.BookingRoomService.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.Component.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.ContactInformation.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.Country.datasource" />
@@ -538,9 +548,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Sales\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

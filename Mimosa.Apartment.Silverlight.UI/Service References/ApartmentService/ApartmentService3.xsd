@@ -245,14 +245,15 @@
     <xs:complexContent mixed="false">
       <xs:extension base="tns:Record">
         <xs:sequence>
-          <xs:element minOccurs="0" name="BusinessName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Age" nillable="true" type="xs:int" />
           <xs:element minOccurs="0" name="ContactInformation" nillable="true" type="tns:ContactInformation" />
           <xs:element minOccurs="0" name="ContactInformationId" nillable="true" type="xs:int" />
           <xs:element minOccurs="0" name="CustomerId" type="xs:int" />
+          <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FullName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Gender" nillable="true" type="xs:int" />
           <xs:element minOccurs="0" name="IsLegacy" type="xs:boolean" />
-          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="NameWithStatus" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="ShippingContactInformationId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -454,4 +455,84 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="Image" nillable="true" type="tns:Image" />
+  <xs:complexType name="ArrayOfBooking">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Booking" nillable="true" type="tns:Booking" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBooking" nillable="true" type="tns:ArrayOfBooking" />
+  <xs:complexType name="Booking">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Record">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="BookDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="BookingEquipments" nillable="true" type="tns:ArrayOfBookingRoomEquipment" />
+          <xs:element minOccurs="0" name="BookingId" type="xs:int" />
+          <xs:element minOccurs="0" name="BookingServices" nillable="true" type="tns:ArrayOfBookingRoomService" />
+          <xs:element minOccurs="0" name="BookingStatus" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="BookingStatusId" type="xs:int" />
+          <xs:element minOccurs="0" name="ContractDateEnd" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="ContractDateSign" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="ContractDateStart" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="ContractTotalPrice" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="0" name="CustomerId" type="xs:int" />
+          <xs:element minOccurs="0" name="CustomerName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RoomId" type="xs:int" />
+          <xs:element minOccurs="0" name="RoomName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RoomPrice" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="0" name="SiteId" type="xs:int" />
+          <xs:element minOccurs="0" name="SiteName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TotalPrice" nillable="true" type="xs:decimal" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Booking" nillable="true" type="tns:Booking" />
+  <xs:complexType name="ArrayOfBookingRoomEquipment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BookingRoomEquipment" nillable="true" type="tns:BookingRoomEquipment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBookingRoomEquipment" nillable="true" type="tns:ArrayOfBookingRoomEquipment" />
+  <xs:complexType name="BookingRoomEquipment">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Record">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="BookingId" type="xs:int" />
+          <xs:element minOccurs="0" name="BookingRoomEquipmentId" type="xs:int" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Equipment" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="EquipmentId" type="xs:int" />
+          <xs:element minOccurs="0" name="Price" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="0" name="RoomEquipmentId" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BookingRoomEquipment" nillable="true" type="tns:BookingRoomEquipment" />
+  <xs:complexType name="ArrayOfBookingRoomService">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BookingRoomService" nillable="true" type="tns:BookingRoomService" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBookingRoomService" nillable="true" type="tns:ArrayOfBookingRoomService" />
+  <xs:complexType name="BookingRoomService">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Record">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="BookingId" type="xs:int" />
+          <xs:element minOccurs="0" name="BookingRoomServiceId" type="xs:int" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Price" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="0" name="RoomServiceId" type="xs:int" />
+          <xs:element minOccurs="0" name="Service" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ServiceId" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BookingRoomService" nillable="true" type="tns:BookingRoomService" />
 </xs:schema>

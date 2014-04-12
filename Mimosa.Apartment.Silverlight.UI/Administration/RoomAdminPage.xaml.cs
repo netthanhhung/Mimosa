@@ -195,10 +195,10 @@ namespace Mimosa.Apartment.Silverlight.UI
         void gvwRoom_BeginningEdit(object sender, GridViewBeginningEditRoutedEventArgs e)
         {
             Room rowData = e.Row.Item as Room;
-            if (rowData.NullableRecordId != null && e.Cell.Column.UniqueName == "DaymarkerType")
-            {
-                e.Cancel = true;
-            }
+            //if (rowData.NullableRecordId != null && e.Cell.Column.UniqueName == "DaymarkerType")
+            //{
+            //    e.Cancel = true;
+            //}
         }
 
         void item_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

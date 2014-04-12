@@ -487,5 +487,50 @@ namespace Mimosa.Apartment.Data
             return result;
         }
         #endregion
+
+        #region Booking
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public List<Booking> ListBooking(int orgId, int? siteId, int? roomId, string roomName, int? bookingId, string bookingStatusIds, 
+            string customerName, DateTime? bookDateStart, DateTime? bookDateEnd)
+        {
+            List<Booking> result = new List<Booking>();
+
+            using (IDataReader reader = _db.ExecuteReader("procListBooking", orgId, siteId, roomId, roomName, bookingId, bookingStatusIds, 
+                customerName, bookDateStart, bookDateEnd))
+            {
+                Factory.FillBookingList(result, reader);
+            }
+            return result;
+        }
+
+        #endregion
+
+        #region BookingRoomEquipment
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public List<BookingRoomEquipment> ListBookingRoomEquipment(int? bookingRoomEquipmentId, int? bookingId, int? roomEquipmentId)
+        {
+            List<BookingRoomEquipment> result = new List<BookingRoomEquipment>();
+
+            using (IDataReader reader = _db.ExecuteReader("procListBookingRoomEquipment", bookingRoomEquipmentId, bookingId, roomEquipmentId))
+            {
+                Factory.FillBookingRoomEquipmentList(result, reader);
+            }
+            return result;
+        }
+        #endregion
+
+        #region BookingRoomService
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public List<BookingRoomService> ListBookingRoomService(int? bookingRoomServiceId, int? bookingId, int? roomServiceId)
+        {
+            List<BookingRoomService> result = new List<BookingRoomService>();
+
+            using (IDataReader reader = _db.ExecuteReader("procListBookingRoomService", bookingRoomServiceId, bookingId, roomServiceId))
+            {
+                Factory.FillBookingRoomServiceList(result, reader);
+            }
+            return result;
+        }
+        #endregion
     }
 }

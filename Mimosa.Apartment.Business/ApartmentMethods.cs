@@ -619,6 +619,79 @@ namespace Mimosa.Apartment.Business
         }
         #endregion
 
+        #region Booking
+        public static List<Booking> ListBooking(int orgId, int? siteId, int? roomId, string roomName, int? bookingId, string bookingStatusIds,
+            string customerName, DateTime? bookDateStart, DateTime? bookDateEnd)
+        {
+            return new DataLayer().ListBooking(orgId, siteId, roomId, roomName, bookingId, bookingStatusIds,
+                customerName, bookDateStart, bookDateEnd);
+        }
+
+        public static void SaveBooking(List<Booking> saveList)
+        {
+            if (saveList != null)
+            {
+                foreach (Booking item in saveList)
+                {
+                    if (item.IsChanged)
+                    {
+                        SaveRecord((Record)item);
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region BookingRoomEquipment
+        public static List<BookingRoomEquipment> ListBookingRoomEquipment(int? bookingRoomEquipmentId, int? bookingId, int? roomEquipmentId)
+        {
+            return new DataLayer().ListBookingRoomEquipment(bookingRoomEquipmentId, bookingId, roomEquipmentId);
+        }
+
+        public static void SaveBookingRoomEquipment(List<BookingRoomEquipment> saveList)
+        {
+            if (saveList != null)
+            {
+                foreach (BookingRoomEquipment item in saveList)
+                {
+                    if (item.IsDeleted && item.NullableRecordId != null)
+                    {
+                        DeleteRecord((Record)item);
+                    }
+                    else if (item.IsChanged)
+                    {
+                        SaveRecord((Record)item);
+                    }
+                }
+            }
+        }
+        #endregion
+
+
+        #region BookingRoomService
+        public static List<BookingRoomService> ListBookingRoomService(int? bookingRoomServiceId, int? bookingId, int? roomServiceId)
+        {
+            return new DataLayer().ListBookingRoomService(bookingRoomServiceId, bookingId, roomServiceId);
+        }
+
+        public static void SaveBookingRoomService(List<BookingRoomService> saveList)
+        {
+            if (saveList != null)
+            {
+                foreach (BookingRoomService item in saveList)
+                {
+                    if (item.IsDeleted && item.NullableRecordId != null)
+                    {
+                        DeleteRecord((Record)item);
+                    }
+                    else if (item.IsChanged)
+                    {
+                        SaveRecord((Record)item);
+                    }
+                }
+            }
+        }
+        #endregion
     }
 }
 
