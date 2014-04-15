@@ -15,6 +15,7 @@ namespace Mimosa.Apartment.Common
                 Utilities.MakeInputParameter(ColumnNames.LastName, LastName),
 				Utilities.MakeInputParameter(ColumnNames.Address, Address),
                 Utilities.MakeInputParameter(ColumnNames.Address2, Address2),
+                Utilities.MakeInputParameter(ColumnNames.District, District),
 				Utilities.MakeInputParameter(ColumnNames.City, City),
 				Utilities.MakeInputParameter(ColumnNames.State, State),
 				Utilities.MakeInputParameter(ColumnNames.Postcode, Postcode),

@@ -303,6 +303,7 @@ namespace Mimosa.Apartment.Common
             input.LastName = Utilities.ToString(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.LastName]);
             input.Address = Utilities.ToString(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.Address]);
             input.Address2 = Utilities.ToString(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.Address2]);
+            input.District = Utilities.ToString(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.District]);
             input.City = Utilities.ToString(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.City]);
             input.State = Utilities.ToString(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.State]);
             input.Postcode = Utilities.ToString(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.Postcode]);
