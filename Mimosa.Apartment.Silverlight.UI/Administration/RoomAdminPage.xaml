@@ -385,7 +385,7 @@
                                Foreground="{StaticResource TitleForeground}"
                                Text="Images : "></TextBlock>
 
-                        <local:ImageUpload x:Name="ucImageUpload" IsReadOnly="True"  Grid.Row="1" Margin="10,10,10,10"></local:ImageUpload>
+                        <local:ImageUpload x:Name="ucImageUpload" IsReadOnly="False"  Grid.Row="1" Margin="10,10,10,10"></local:ImageUpload>
                     </Grid>
                 </local:ClippedGrid>
 

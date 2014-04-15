@@ -35,11 +35,13 @@ namespace Mimosa.Apartment.Silverlight.UI
         public common.ImageType ImageType { get; set; }
         public int ItemId { get; set; }
 
+        private bool _isReadOnly = false;
         public bool IsReadOnly
         {
-            get { return btnSave.Visibility == Visibility.Collapsed; }
+            get { return _isReadOnly; }
             set
             {
+                _isReadOnly = value;
                 if (value)
                 {
                     btnSave.Visibility = btnAdd.Visibility = Visibility.Collapsed;
