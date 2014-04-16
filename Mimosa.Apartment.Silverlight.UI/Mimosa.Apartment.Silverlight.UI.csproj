@@ -136,7 +136,7 @@
     <Compile Include="Administration\SiteAdminPage.xaml.cs">
       <DependentUpon>SiteAdminPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Administration\LayoutComponentType.cs" />
+    <Compile Include="Common\LayoutComponentType.cs" />
     <Compile Include="Administration\PortalAdminPage.xaml.cs">
       <DependentUpon>PortalAdminPage.xaml</DependentUpon>
     </Compile>
