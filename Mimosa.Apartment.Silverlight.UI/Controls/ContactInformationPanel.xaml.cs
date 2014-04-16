@@ -55,5 +55,10 @@ namespace Mimosa.Apartment.Silverlight.UI
             Globals.IsBusy = false;
             MessageBox.Show(Globals.UserMessages.RecordsSaved);
         }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

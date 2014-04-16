@@ -244,6 +244,9 @@
     <Compile Include="Sales\BookingAdminPage.xaml.cs">
       <DependentUpon>BookingAdminPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Sales\BookingNew.xaml.cs">
+      <DependentUpon>BookingNew.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Service References\ApartmentService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -253,6 +256,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Sales\BookingAdminPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Sales\BookingNew.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

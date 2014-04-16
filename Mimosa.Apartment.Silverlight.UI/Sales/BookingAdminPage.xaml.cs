@@ -53,6 +53,9 @@ namespace Mimosa.Apartment.Silverlight.UI
             btnSearch.Click += new RoutedEventHandler(btnSearch_Click);
             btnSaveBooking.Click += new RoutedEventHandler(btnSaveBooking_Click);
             btnCancelBooking.Click += new RoutedEventHandler(btnCancelBooking_Click);
+            btnNewBooking.Click += new RoutedEventHandler(btnNewBooking_Click);
+            ucBookingNew.btnOK.Click += new RoutedEventHandler(btnOK_Click);
+            ucBookingNew.btnCancel.Click += new RoutedEventHandler(btnCancel_Click);
 
             Dictionary<int, string> bookingStatusDic = new Dictionary<int, string>();
             bookingStatusDic.Add((int)BookingStatus.New, BookingStatus.New.ToString());
@@ -79,6 +82,8 @@ namespace Mimosa.Apartment.Silverlight.UI
 
             uiDateFrom.SelectedDate = DateTime.Today.AddMonths(-1);
         }
+
+
         #region Booking
         
         void btnSearch_Click(object sender, RoutedEventArgs e)
@@ -244,6 +249,27 @@ namespace Mimosa.Apartment.Silverlight.UI
         void btnCancelBooking_Click(object sender, RoutedEventArgs e)
         {
             RebindBookingData();
+        }
+
+
+        void btnNewBooking_Click(object sender, RoutedEventArgs e)
+        {
+            if (ucSitePicker.SiteId > 0)
+            {
+                ucBookingNew.SiteId = ucSitePicker.SiteId;
+            }
+            uiPopupNewBooking.ShowDialog();
+        }
+
+
+        void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            uiPopupNewBooking.Close();
+        }
+
+        void btnOK_Click(object sender, RoutedEventArgs e)
+        {
+            uiPopupNewBooking.Close();
         }
         #endregion
 

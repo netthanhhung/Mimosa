@@ -141,15 +141,15 @@
 
 
                             <telerik:RadGridView
-                            x:Name="gvwBooking"
-                            Grid.Row="1"
-                            AutoGenerateColumns="False" Margin="10,20,10,20" 
-                            VerticalAlignment="Top"
-                            ShowGroupPanel="False" 
-                            IsFilteringAllowed="False" 
-                            CanUserSortColumns="True" CanUserFreezeColumns="False"
-                            CanUserResizeColumns="False" CanUserInsertRows="False" ShowInsertRow="False"
-                            CanUserDeleteRows="False" CanUserReorderColumns="False">
+                                x:Name="gvwBooking"
+                                Grid.Row="1"
+                                AutoGenerateColumns="False" Margin="10,20,10,20" 
+                                VerticalAlignment="Top"
+                                ShowGroupPanel="False" 
+                                IsFilteringAllowed="False" 
+                                CanUserSortColumns="True" CanUserFreezeColumns="False"
+                                CanUserResizeColumns="False" CanUserInsertRows="False" ShowInsertRow="False"
+                                CanUserDeleteRows="False" CanUserReorderColumns="False">
                                 <telerik:RadGridView.Resources>
                                     <Style TargetType="TextBlock" BasedOn="{x:Null}"/>
                                 </telerik:RadGridView.Resources>
@@ -389,8 +389,23 @@
                     
                 </local:ClippedGrid>
 
+
+                <telerik:RadWindow x:Name="uiPopupNewBooking"
+                WindowStartupLocation="CenterOwner"
+                Header="New Booking" Width="1000" Height="650">
+                    <Grid>
+                        <bg:TiledBGControl BorderThickness="0" TiledImageSource="{StaticResource CarbonFiberImage}"/>
+                        <Grid>
+                            <local:BookingNew x:Name="ucBookingNew"></local:BookingNew>
+                        </Grid>
+                    </Grid>
+                </telerik:RadWindow>
+                
             </Grid>
+            
+            
         </ScrollViewer>
     </Grid>
-
+    
+    
 </navigation:Page>
