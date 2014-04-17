@@ -17,12 +17,7 @@ namespace Mimosa.Apartment.Silverlight.UI
 {
     public partial class BookingAdminPage : Page
     {
-        private static class UserMessages
-        {
-            internal const string DateNotValid = "Date End must be greater than Date Start";
-            internal const string DateIntersect = "There is an intersect between date ranges";
-
-        }
+        
 
         private int _newId = -1;
         private int _selectedBookingId = -1;
@@ -269,7 +264,20 @@ namespace Mimosa.Apartment.Silverlight.UI
 
         void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            uiPopupNewBooking.Close();
+            if (ucBookingNew.CheckValidation())
+            {
+                Booking newBooking = ucBookingNew.GetSavedBooking();
+                List<Booking> itemSource = gvwBooking.ItemsSource as List<Booking>;
+                if (itemSource == null)
+                {
+                    itemSource = new List<Booking>();
+                }
+                itemSource.Add(newBooking);
+                gvwBooking.ItemsSource = null;
+                gvwBooking.ItemsSource = itemSource;
+                uiPopupNewBooking.Close();
+            }
+            
         }
         #endregion
 

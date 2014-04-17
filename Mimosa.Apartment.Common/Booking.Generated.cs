@@ -128,6 +128,10 @@ namespace Mimosa.Apartment.Common
         [DataMember]
         public List<BookingRoomService> BookingServices { get { return _bookingServices; } set { if (!object.ReferenceEquals(this.BookingServices, value)) { _bookingServices = value; RaisePropertyChanged("BookingServices"); } } }
 
+        private Customer _customerItem;
+        [DataMember]
+        public Customer CustomerItem { get { return _customerItem; } set { if (!object.ReferenceEquals(this.CustomerItem, value)) { _customerItem = value; RaisePropertyChanged("CustomerItem"); } } }
+
         #endregion
     }
 }

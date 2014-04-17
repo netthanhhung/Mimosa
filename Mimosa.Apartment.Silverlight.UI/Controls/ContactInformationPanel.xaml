@@ -92,50 +92,51 @@
                         Grid.Column="0" Grid.Row="4"
                         Margin="{StaticResource SmallContentMargin}"
                         HorizontalAlignment="Left" VerticalAlignment="Center"
-                        Text="City:">
+                        Text="District:">
                 </TextBlock>
                 <TextBox 
                         Grid.Column="1" Grid.Row="4" 
+                        x:Name="txtDistrict" 
+                        HorizontalAlignment="Left" VerticalAlignment="Center"
+                        Width="300" Height="24" 
+                        Text="{Binding District, Mode=TwoWay}"/>
+                <TextBlock
+                        Grid.Column="0" Grid.Row="5"
+                        Margin="{StaticResource SmallContentMargin}"
+                        HorizontalAlignment="Left" VerticalAlignment="Center"
+                        Text="City:">
+                </TextBlock>
+                <TextBox 
+                        Grid.Column="1" Grid.Row="5" 
                         x:Name="txtCity" 
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                         Width="300" Height="24" 
                         Text="{Binding City, Mode=TwoWay}"/>
                 <TextBlock
-                        Grid.Column="0" Grid.Row="5"
+                        Grid.Column="0" Grid.Row="6"
                         Margin="{StaticResource SmallContentMargin}"
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                         Text="State:">
                 </TextBlock>
                 <TextBox 
-                        Grid.Column="1" Grid.Row="5" 
+                        Grid.Column="1" Grid.Row="6" 
                         x:Name="txtState" 
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                         Width="300" Height="24" 
                         Text="{Binding State, Mode=TwoWay}"/>
                 <TextBlock
-                        Grid.Column="0" Grid.Row="6"
+                        Grid.Column="0" Grid.Row="7"
                         Margin="{StaticResource SmallContentMargin}"
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                         Text="Postcode:">
                 </TextBlock>
                 <TextBox 
-                        Grid.Column="1" Grid.Row="6" 
+                        Grid.Column="1" Grid.Row="7" 
                         x:Name="txtPostcode" 
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                         Width="300" Height="24" 
                         Text="{Binding Postcode, Mode=TwoWay}"/>
-                <TextBlock
-                        Grid.Column="0" Grid.Row="7"
-                        Margin="{StaticResource SmallContentMargin}"
-                        HorizontalAlignment="Left" VerticalAlignment="Center"
-                        Text="District:">
-                </TextBlock>
-                <TextBox 
-                        Grid.Column="1" Grid.Row="7" 
-                        x:Name="txtDistrict" 
-                        HorizontalAlignment="Left" VerticalAlignment="Center"
-                        Width="300" Height="24" 
-                        Text="{Binding Postcode, Mode=TwoWay}"/>
+                
                 
                 <TextBlock
                         Grid.Column="0" Grid.Row="8"
@@ -166,7 +167,7 @@
                         Width="300" Height="24" MaxLength="20"
                         Text="{Binding PhoneNumber, Mode=TwoWay}"/>
                 <TextBlock
-                        Grid.Column="0" Grid.Row="9"
+                        Grid.Column="0" Grid.Row="10"
                         Margin="{StaticResource SmallContentMargin}"
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                         Text="Fax:">

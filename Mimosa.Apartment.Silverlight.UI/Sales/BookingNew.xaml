@@ -15,6 +15,7 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="50"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
@@ -93,7 +94,7 @@
                      Margin="5" HorizontalAlignment="Left"></TextBox>
         </Grid>
 
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -106,7 +107,7 @@
                     Text="Customer:">
             </TextBlock>
             
-            <Grid VerticalAlignment="Top" Grid.Row="1">
+            <Grid VerticalAlignment="Top" Grid.Row="1" Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
@@ -131,7 +132,7 @@
                         Grid.Column="1" Grid.Row="0" 
                         x:Name="txtFirstName" 
                         HorizontalAlignment="Left" VerticalAlignment="Center"
-                        Width="300" Height="24" 
+                        Width="300" Height="24" Margin="5"
                         Text="{Binding FirstName, Mode=TwoWay}"/>
                 <TextBlock
                         Grid.Column="0" Grid.Row="1"
@@ -143,7 +144,7 @@
                         Grid.Column="1" Grid.Row="1" 
                         x:Name="txtLastName" 
                         HorizontalAlignment="Left" VerticalAlignment="Center"
-                        Width="300" Height="24" 
+                        Width="300" Height="24" Margin="5"
                         Text="{Binding LastName, Mode=TwoWay}"/>
                 <TextBlock
                         Grid.Column="0" Grid.Row="2"
@@ -151,7 +152,7 @@
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                         Text="Gender:">
                 </TextBlock>
-                <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
+                <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" Margin="5">
                     <RadioButton x:Name="radMale" Content="Male" IsChecked="True" GroupName="Gender" Foreground="White"></RadioButton>
                     <RadioButton x:Name="radFemale" Content="Female" IsChecked="False" GroupName="Gender"  Foreground="White"></RadioButton>
                 </StackPanel>
@@ -167,11 +168,11 @@
                         Minimum="0" Maximum="1000" Width="300"></telerik:RadNumericUpDown>
             </Grid>
 
-            <local:ContactInformationPanel x:Name="ucCntactInfoPanel" Margin="25,5,5,5" Grid.Row="2"></local:ContactInformationPanel>
+            <local:ContactInformationPanel x:Name="ucCntactInfoPanel" Margin="5,5,5,5" Grid.Row="2"></local:ContactInformationPanel>
 
         </Grid>
         
-        <Grid Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+        <Grid Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="20"></ColumnDefinition>
