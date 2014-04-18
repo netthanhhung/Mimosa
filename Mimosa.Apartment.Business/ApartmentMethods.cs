@@ -634,8 +634,19 @@ namespace Mimosa.Apartment.Business
                 foreach (Booking item in saveList)
                 {
                     if (item.IsChanged)
-                    {
+                    {                        
+                        if (item.CustomerItem != null)
+                        {
+                            if (item.CustomerItem.ContactInformation != null)
+                            {
+                                SaveRecord((Record)item.CustomerItem.ContactInformation);
+                                item.CustomerItem.ContactInformationId = item.CustomerItem.ContactInformation.ContactInformationId;
+                                SaveRecord((Record)item.CustomerItem);
+                                item.CustomerId = item.CustomerItem.CustomerId;
+                            }
+                        }
                         SaveRecord((Record)item);
+
                     }
                 }
             }

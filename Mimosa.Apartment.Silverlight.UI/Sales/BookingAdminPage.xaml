@@ -288,7 +288,7 @@
                             <ComboBox
                             x:Name="uiEquipmentList" Width="200" Height="25"
                             Margin="37,5,10,10" Grid.Row="1" Grid.Column="0"
-                            DisplayMemberPath="EquipmentName"
+                            DisplayMemberPath="Equipment"
                             SelectedValuePath="EquipmentId" />
                             <local:SingleClickButton x:Name="btnInsertBookingEquipment" Height="25" Width="80" Grid.Row="1" Grid.Column="1" Content="Insert" 
                                 HorizontalAlignment="Left" Margin="10,10,5,10"/>
@@ -352,7 +352,7 @@
                             <ComboBox
                             x:Name="uiServiceList" Width="200" Height="25"
                             Margin="37,5,10,10" Grid.Row="1" Grid.Column="0"
-                            DisplayMemberPath="Name"
+                            DisplayMemberPath="Service"
                             SelectedValuePath="ServiceId" />
                             <local:SingleClickButton x:Name="btnInsertBookingService" Height="25" Width="80" Grid.Row="1" Grid.Column="1" Content="Insert" 
                                 HorizontalAlignment="Left" Margin="10,10,5,10"/>

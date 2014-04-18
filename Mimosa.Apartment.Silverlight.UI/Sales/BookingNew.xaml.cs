@@ -137,6 +137,11 @@ namespace Mimosa.Apartment.Silverlight.UI
             newItem.BookingServices = new List<BookingRoomService>();
             newItem.CustomerItem = new Customer();
             newItem.CustomerItem.ContactInformation = ucCntactInfoPanel.DataContext as ContactInformation;
+            if (newItem.CustomerItem.ContactInformation == null)
+            {
+                newItem.CustomerItem.ContactInformation = new ContactInformation();
+            }
+            newItem.CustomerItem.ContactInformation.ContactTypeId = (int)ContactType.Customer;
             newItem.CustomerItem.FirstName = txtFirstName.Text;
             newItem.CustomerItem.LastName = txtLastName.Text;
             newItem.CustomerItem.Gender = radMale.IsChecked == true ? 1 : 0;
