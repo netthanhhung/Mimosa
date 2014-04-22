@@ -5,7 +5,7 @@ Title="Synergi Licensing - Recover Password" %>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>Synergi Licensing - Recover Password</title>
+    <title>Mimosa - Recover Password</title>
 </head>
 
 <body style="background-color: White;">

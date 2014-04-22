@@ -7,7 +7,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>Synergi - Logon Page</title>
+    <title>Mimosa - Logon Page</title>
 </head>
 <body style="background-color: White;">
     <form id="MainForm" runat="server">

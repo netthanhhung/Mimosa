@@ -2,7 +2,7 @@
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
   <siteMapNode
 	title="Logo"
-	description="Synergi Licensing Logo">
+	description="Mimosa Logo">
 	<siteMapNode
 	  url="/HomePage.xaml"
 	  title="Home"
