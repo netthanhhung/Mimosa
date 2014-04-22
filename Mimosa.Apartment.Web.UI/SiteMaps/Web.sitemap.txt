@@ -56,15 +56,6 @@
 		description="Booking Admin"/>
   </siteMapNode>
   	
-  <siteMapNode
-	title="[C]ustomer"
-	description="Customer">
-
-	<siteMapNode
-		url="/Customer/CustomerAdminPage.xaml"
-		title="Customer Administration"
-		description="Customer Administration"/>    
-  </siteMapNode>
  
   
 </siteMap>

@@ -1,6 +1,6 @@
 <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RecoverPassword.aspx.cs" 
 Inherits="Mimosa.Apartment.Web.UI.RecoverPassword" 
-Title="Synergi Licensing - Recover Password" %>
+Title="Mimosa - Recover Password" %>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
