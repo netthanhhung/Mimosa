@@ -178,15 +178,24 @@ namespace Mimosa.Apartment.Silverlight.UI
                     {
                         imageSource.SetSource(fs);
                         imgRoomFigure.Source = imageSource;
-                        WriteableBitmap resizeSource = UiHelper.ResizeImage(fs, 200); //max 200px
+                        
 
                         txtFileName.Text = openFileDialog.File.Name;
-                        _byteArray = new byte[fs.Length];
-                        fs.Position = 0;
-                        fs.Read(_byteArray, 0, (int)fs.Length);
-                        fs.Close();
+                        WriteableBitmap resizeBigSource = UiHelper.ResizeImage(fs, 800); //max 200px
+                        using (Stream source = UiHelper.EncodeWriteableBitmap(resizeBigSource, 100))
+                        {
+                            int bufferSize = Convert.ToInt32(source.Length);
+                            _byteArray = new byte[bufferSize];
+                            source.Read(_byteArray, 0, bufferSize);
+                            source.Close();
+                        }
 
-                        
+                        //_byteArray = new byte[fs.Length];
+                        //fs.Position = 0;
+                        //fs.Read(_byteArray, 0, (int)fs.Length);
+                        //fs.Close();
+
+                        WriteableBitmap resizeSource = UiHelper.ResizeImage(fs, 200); //max 200px
                         using (Stream source = UiHelper.EncodeWriteableBitmap(resizeSource, 100))
                         {
                             int bufferSize = Convert.ToInt32(source.Length);
