@@ -689,14 +689,14 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         void EndSaveSite(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:ApartmentService/ListCustomer", ReplyAction="urn:ApartmentService/ListCustomerResponse")]
-        System.IAsyncResult BeginListCustomer(System.Nullable<int> customerId, string name, bool includeLegacy, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginListCustomer(System.Nullable<int> customerId, string firstName, string lastName, bool includeLegacy, System.AsyncCallback callback, object asyncState);
         
         System.Collections.Generic.List<Mimosa.Apartment.Common.Customer> EndListCustomer(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:ApartmentService/SaveCustomer", ReplyAction="urn:ApartmentService/SaveCustomerResponse")]
         System.IAsyncResult BeginSaveCustomer(System.Collections.Generic.List<Mimosa.Apartment.Common.Customer> saveList, System.AsyncCallback callback, object asyncState);
         
-        void EndSaveCustomer(System.IAsyncResult result);
+        System.Collections.Generic.List<Mimosa.Apartment.Common.Customer> EndSaveCustomer(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:ApartmentService/ListAspUser", ReplyAction="urn:ApartmentService/ListAspUserResponse")]
         System.IAsyncResult BeginListAspUser(System.Nullable<int> orgId, System.Nullable<System.Guid> userId, System.Nullable<bool> isLegacy, System.AsyncCallback callback, object asyncState);
@@ -1169,6 +1169,25 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         private object[] results;
         
         public ListCustomerCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Collections.Generic.List<Mimosa.Apartment.Common.Customer> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Collections.Generic.List<Mimosa.Apartment.Common.Customer>)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class SaveCustomerCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public SaveCustomerCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -1932,7 +1951,7 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         
         public event System.EventHandler<ListCustomerCompletedEventArgs> ListCustomerCompleted;
         
-        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> SaveCustomerCompleted;
+        public event System.EventHandler<SaveCustomerCompletedEventArgs> SaveCustomerCompleted;
         
         public event System.EventHandler<ListAspUserCompletedEventArgs> ListAspUserCompleted;
         
@@ -2876,8 +2895,8 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService.BeginListCustomer(System.Nullable<int> customerId, string name, bool includeLegacy, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginListCustomer(customerId, name, includeLegacy, callback, asyncState);
+        System.IAsyncResult Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService.BeginListCustomer(System.Nullable<int> customerId, string firstName, string lastName, bool includeLegacy, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginListCustomer(customerId, firstName, lastName, includeLegacy, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -2887,9 +2906,10 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         
         private System.IAsyncResult OnBeginListCustomer(object[] inValues, System.AsyncCallback callback, object asyncState) {
             System.Nullable<int> customerId = ((System.Nullable<int>)(inValues[0]));
-            string name = ((string)(inValues[1]));
-            bool includeLegacy = ((bool)(inValues[2]));
-            return ((Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService)(this)).BeginListCustomer(customerId, name, includeLegacy, callback, asyncState);
+            string firstName = ((string)(inValues[1]));
+            string lastName = ((string)(inValues[2]));
+            bool includeLegacy = ((bool)(inValues[3]));
+            return ((Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService)(this)).BeginListCustomer(customerId, firstName, lastName, includeLegacy, callback, asyncState);
         }
         
         private object[] OnEndListCustomer(System.IAsyncResult result) {
@@ -2905,11 +2925,11 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
             }
         }
         
-        public void ListCustomerAsync(System.Nullable<int> customerId, string name, bool includeLegacy) {
-            this.ListCustomerAsync(customerId, name, includeLegacy, null);
+        public void ListCustomerAsync(System.Nullable<int> customerId, string firstName, string lastName, bool includeLegacy) {
+            this.ListCustomerAsync(customerId, firstName, lastName, includeLegacy, null);
         }
         
-        public void ListCustomerAsync(System.Nullable<int> customerId, string name, bool includeLegacy, object userState) {
+        public void ListCustomerAsync(System.Nullable<int> customerId, string firstName, string lastName, bool includeLegacy, object userState) {
             if ((this.onBeginListCustomerDelegate == null)) {
                 this.onBeginListCustomerDelegate = new BeginOperationDelegate(this.OnBeginListCustomer);
             }
@@ -2921,7 +2941,8 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
             }
             base.InvokeAsync(this.onBeginListCustomerDelegate, new object[] {
                         customerId,
-                        name,
+                        firstName,
+                        lastName,
                         includeLegacy}, this.onEndListCustomerDelegate, this.onListCustomerCompletedDelegate, userState);
         }
         
@@ -2931,8 +2952,8 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        void Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService.EndSaveCustomer(System.IAsyncResult result) {
-            base.Channel.EndSaveCustomer(result);
+        System.Collections.Generic.List<Mimosa.Apartment.Common.Customer> Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService.EndSaveCustomer(System.IAsyncResult result) {
+            return base.Channel.EndSaveCustomer(result);
         }
         
         private System.IAsyncResult OnBeginSaveCustomer(object[] inValues, System.AsyncCallback callback, object asyncState) {
@@ -2941,14 +2962,15 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         }
         
         private object[] OnEndSaveCustomer(System.IAsyncResult result) {
-            ((Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService)(this)).EndSaveCustomer(result);
-            return null;
+            System.Collections.Generic.List<Mimosa.Apartment.Common.Customer> retVal = ((Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService)(this)).EndSaveCustomer(result);
+            return new object[] {
+                    retVal};
         }
         
         private void OnSaveCustomerCompleted(object state) {
             if ((this.SaveCustomerCompleted != null)) {
                 InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.SaveCustomerCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+                this.SaveCustomerCompleted(this, new SaveCustomerCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
             }
         }
         
@@ -4785,11 +4807,12 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
                 base.EndInvoke("SaveSite", _args, result);
             }
             
-            public System.IAsyncResult BeginListCustomer(System.Nullable<int> customerId, string name, bool includeLegacy, System.AsyncCallback callback, object asyncState) {
-                object[] _args = new object[3];
+            public System.IAsyncResult BeginListCustomer(System.Nullable<int> customerId, string firstName, string lastName, bool includeLegacy, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[4];
                 _args[0] = customerId;
-                _args[1] = name;
-                _args[2] = includeLegacy;
+                _args[1] = firstName;
+                _args[2] = lastName;
+                _args[3] = includeLegacy;
                 System.IAsyncResult _result = base.BeginInvoke("ListCustomer", _args, callback, asyncState);
                 return _result;
             }
@@ -4807,9 +4830,10 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
                 return _result;
             }
             
-            public void EndSaveCustomer(System.IAsyncResult result) {
+            public System.Collections.Generic.List<Mimosa.Apartment.Common.Customer> EndSaveCustomer(System.IAsyncResult result) {
                 object[] _args = new object[0];
-                base.EndInvoke("SaveCustomer", _args, result);
+                System.Collections.Generic.List<Mimosa.Apartment.Common.Customer> _result = ((System.Collections.Generic.List<Mimosa.Apartment.Common.Customer>)(base.EndInvoke("SaveCustomer", _args, result)));
+                return _result;
             }
             
             public System.IAsyncResult BeginListAspUser(System.Nullable<int> orgId, System.Nullable<System.Guid> userId, System.Nullable<bool> isLegacy, System.AsyncCallback callback, object asyncState) {

@@ -344,15 +344,15 @@ namespace Mimosa.Apartment.Web.UI
 
         #region Customer
         [OperationContract]
-        public List<Customer> ListCustomer(int? customerId, string name, bool includeLegacy)
+        public List<Customer> ListCustomer(int? customerId,  string firstName, string lastName, bool includeLegacy)
         {
-            return ApartmentMethods.ListCustomer(customerId, name, includeLegacy);
+            return ApartmentMethods.ListCustomer(customerId, firstName, lastName, includeLegacy);
         }
 
         [OperationContract]
-        public void SaveCustomer(List<Customer> saveList)
+        public List<Customer> SaveCustomer(List<Customer> saveList)
         {
-            ApartmentMethods.SaveCustomer(saveList);
+            return ApartmentMethods.SaveCustomer(saveList);
         }
         #endregion
 

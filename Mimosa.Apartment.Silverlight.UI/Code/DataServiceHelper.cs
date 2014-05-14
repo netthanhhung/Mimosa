@@ -334,12 +334,12 @@ namespace Mimosa.Apartment.Silverlight.UI
 
         // ListCustomer
         internal delegate void ListCustomerCallback(List<Customer> itemSource);
-        internal static void ListCustomerAsync(int? customerId, string name, bool includeLegacy, ListCustomerCallback callback)
+        internal static void ListCustomerAsync(int? customerId, string firstName, string lastName, bool includeLegacy, ListCustomerCallback callback)
         {
             Guid callerKey = Guid.NewGuid();
             ApartmentServiceClient proxy = GetProxy(callerKey, callback);
             proxy.ListCustomerCompleted += new EventHandler<ListCustomerCompletedEventArgs>(proxy_ListCustomerCompleted);
-            proxy.ListCustomerAsync(customerId, name, includeLegacy, callerKey);
+            proxy.ListCustomerAsync(customerId, firstName, lastName, includeLegacy, callerKey);
         }
 
         static void proxy_ListCustomerCompleted(object sender, ListCustomerCompletedEventArgs e)
@@ -354,13 +354,25 @@ namespace Mimosa.Apartment.Silverlight.UI
             }
         }
 
-        //SaveCustomer
-        internal static void SaveCustomerAsync(List<Customer> saveList, EmptyCallback callback)
+        //SaveCustomer        
+        internal static void SaveCustomerAsync(List<Customer> saveList, ListCustomerCallback callback)
         {
             Guid callerKey = Guid.NewGuid();
             ApartmentServiceClient proxy = GetProxy(callerKey, callback);
-            proxy.SaveCustomerCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(proxy_VoidMethodCompleted);
+            proxy.SaveCustomerCompleted += new EventHandler<SaveCustomerCompletedEventArgs>(proxy_SaveCustomerCompleted);
             proxy.SaveCustomerAsync(saveList, callerKey);
+        }
+
+        static void proxy_SaveCustomerCompleted(object sender, SaveCustomerCompletedEventArgs e)
+        {
+            Guid callerKey = (Guid)e.UserState;
+            if (_callbacks.ContainsKey(callerKey))
+            {
+                List<Customer> itemSource = e.Result;
+                ((ListCustomerCallback)_callbacks[callerKey]).Invoke(itemSource);
+
+                _callbacks.Remove(callerKey);
+            }
         }
 
         #region Security

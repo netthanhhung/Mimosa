@@ -306,10 +306,10 @@ namespace Mimosa.Apartment.Business
         #endregion
 
         #region Customer
-        public static List<Customer> ListCustomer(int? customerId, string name, bool includeLegacy)
+        public static List<Customer> ListCustomer(int? customerId, string firstName, string lastName, bool includeLegacy)
         {
             DataLayer dl = new DataLayer();
-            List<Customer> result = dl.ListCustomer(customerId, name, includeLegacy);
+            List<Customer> result = dl.ListCustomer(customerId, firstName, lastName, includeLegacy);
             if (result != null)
             {
                 foreach (Customer cus in result)
@@ -321,7 +321,7 @@ namespace Mimosa.Apartment.Business
             return result;
         }
 
-        public static void SaveCustomer(List<Customer> saveList)
+        public static List<Customer> SaveCustomer(List<Customer> saveList)
         {
             if (saveList != null)
             {
@@ -346,6 +346,7 @@ namespace Mimosa.Apartment.Business
                     }
                 }
             }
+            return saveList;
         }
         #endregion
 

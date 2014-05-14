@@ -30,9 +30,6 @@ namespace Mimosa.Apartment.Silverlight.UI
         public CustomerAdminPage()
         {
             InitializeComponent();            
-
-            DataServiceHelper.ListCountryAsync(null, ListCountryCompleted);
-            BeginRebindCustomer();
             
             btnSaveCustomer.Click += new RoutedEventHandler(btnSaveCustomer_Click);
             btnCancelCustomer.Click += new RoutedEventHandler(btnCancelCustomer_Click);
@@ -41,60 +38,26 @@ namespace Mimosa.Apartment.Silverlight.UI
             gvwCustomers.CellValidating += new EventHandler<Telerik.Windows.Controls.GridViewCellValidatingEventArgs>(gvwCustomers_CellValidating);
             gvwCustomers.RowEditEnded += new EventHandler<GridViewRowEditEndedEventArgs>(gvwCustomers_RowEditEnded);
 
-            uiCustomerFilter.TextChanged += new TextChangedEventHandler(uiCustomerFilter_TextChanged);
-            
-            chkShowInactive.Checked += new RoutedEventHandler(chkShowInactive_CheckChanged);
-            chkShowInactive.Unchecked += new RoutedEventHandler(chkShowInactive_CheckChanged);
+            Dictionary<int, string> genderDic = new Dictionary<int, string>();
+            genderDic.Add(0, string.Empty);
+            genderDic.Add((int)Enums.Gender.Male, Enums.Gender.Male.ToString());
+            genderDic.Add((int)Enums.Gender.Female, Enums.Gender.Female.ToString());
+            ((GridViewComboBoxColumn)this.gvwCustomers.Columns["Gender"]).ItemsSource = genderDic;
 
-            //UiHelper.ApplyMouseWheelScrollViewer(scrollViewerCustomer);
-            this.Loaded += new RoutedEventHandler(CustomerAdminPage_Loaded);
+            ucCntactInfoPanel.btnSaveContact.Visibility = Visibility.Collapsed;
+
+            btnSearch.Click += new RoutedEventHandler(btnSearch_Click);
+        }
+
+        void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            BeginRebindCustomer();
         }     
-
-        void chkShowInactive_CheckChanged(object sender, RoutedEventArgs e)
-        {
-            BeginRebindCustomer();
-        }
-
-        void CustomerAdminPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            gvwCustomers.Height = gridCustomer.ActualHeight - 30;
-        }
-
-        void ListCountryCompleted(List<Country> countryList)
-        {
-            uiCountry.ItemsSource = countryList;
-        }
-
-        void uiCustomerFilter_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            BeginRebindCustomer();
-            //string textFilter = uiCustomerFilter.Text.Trim();
-            //if (!string.IsNullOrEmpty(textFilter) && textFilter.Length > 2)
-            //{
-            //    textFilter = textFilter.ToLower();
-            //    IEnumerable<Customer> filteredList = _originalItemSource.Where(
-            //        i => (!string.IsNullOrEmpty(i.Name) && i.Name.ToLower().Contains(textFilter))
-            //              || (!string.IsNullOrEmpty(i.BusinessName) && i.BusinessName.ToLower().Contains(textFilter)));
-            //    if (filteredList != null)
-            //    {
-            //        gvwCustomers.ItemsSource = filteredList.ToList();
-            //    }
-            //}
-            //else if (string.IsNullOrEmpty(textFilter))
-            //{
-            //    List<Customer> newItemsource = new List<Customer>();
-            //    foreach (Customer item in _originalItemSource)
-            //    {
-            //        newItemsource.Add(item);
-            //    }
-            //    gvwCustomers.ItemsSource = newItemsource;
-            //}
-        }
 
         private void BeginRebindCustomer()
         {
             Globals.IsBusy = true;
-            DataServiceHelper.ListCustomerAsync(null, uiCustomerFilter.Text.Trim(), chkShowInactive.IsChecked == true, ListCustomerCompleted);
+            DataServiceHelper.ListCustomerAsync(null, txtFirstName.Text.Trim(), txtLastName.Text.Trim(), chkShowInactive.IsChecked == true, ListCustomerCompleted);
         }
 
         void ListCustomerCompleted(List<Customer> customerList)
@@ -126,7 +89,7 @@ namespace Mimosa.Apartment.Silverlight.UI
 
         private void gvwCustomers_CellValidating(object sender, Telerik.Windows.Controls.GridViewCellValidatingEventArgs e)
         {
-            if (e.Cell.Column.UniqueName == "Name")
+            if (e.Cell.Column.UniqueName == "FirstName" || e.Cell.Column.UniqueName == "LastName")
             {
                 if (e.NewValue.ToString().Length < 1)
                 {
@@ -166,10 +129,11 @@ namespace Mimosa.Apartment.Silverlight.UI
             newItem.DateCreated = Globals.Now;
             newItem.ContactInformation = new ContactInformation();
             newItem.ContactInformation.CountryId = _defaultCountryId;
+            newItem.ContactInformation.ContactTypeId = (int)ContactType.Customer;
             newItem.IsChanged = newItem.ContactInformation.IsChanged = true;
             e.NewObject = newItem;
 
-            gridDetails.Visibility = gridContactInfo.Visibility = System.Windows.Visibility.Collapsed;
+            gridDetails.Visibility = ucCntactInfoPanel.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         void btnCancelCustomer_Click(object sender, RoutedEventArgs e)
@@ -187,14 +151,16 @@ namespace Mimosa.Apartment.Silverlight.UI
 			List<Customer> saveList = oldList.Where(d => (d.IsChanged || d.NullableRecordId == null || d.ContactInformation.IsChanged)).ToList();
             Globals.IsBusy = true;
             DataServiceHelper.SaveCustomerAsync(saveList, SaveCustomerCompleted);
+
+            MessageBox.Show(Globals.UserMessages.RecordsSaved);
         }
 
-        private void SaveCustomerCompleted()
+        void SaveCustomerCompleted(List<Customer> savedList)
         {
-            Globals.IsBusy = false;
-            //Reload data
-            BeginRebindCustomer();
-            MessageBox.Show(Globals.UserMessages.RecordsSaved);
+            List<Customer> oldList = (List<Customer>)gvwCustomers.ItemsSource;
+            List<Customer> newList = oldList.Where(d => (!d.IsChanged && d.NullableRecordId > 0 && !d.ContactInformation.IsChanged)).ToList();
+            savedList.AddRange(newList);
+            ListCustomerCompleted(savedList);
         }
 
         void gvwCustomers_SelectionChanged(object sender, Telerik.Windows.Controls.SelectionChangeEventArgs e)
@@ -202,7 +168,7 @@ namespace Mimosa.Apartment.Silverlight.UI
             if (gvwCustomers.SelectedItem != null)
             {
                 Customer selectedCustomer = gvwCustomers.SelectedItem as Customer;
-                gridDetails.Visibility = gridContactInfo.Visibility = System.Windows.Visibility.Collapsed;
+                gridDetails.Visibility = ucCntactInfoPanel.Visibility = System.Windows.Visibility.Collapsed;
                 
                 if (selectedCustomer != null)
                 {
@@ -213,9 +179,9 @@ namespace Mimosa.Apartment.Silverlight.UI
                         selectedCustomer.ContactInformation.IsChanged = true;
                         selectedCustomer.ContactInformation.CountryId = _defaultCountryId;
                     }
-                    gridContactInfo.DataContext = selectedCustomer.ContactInformation;
-                    
-                    gridDetails.Visibility = gridContactInfo.Visibility = System.Windows.Visibility.Visible;
+                    ucCntactInfoPanel.DataContext = selectedCustomer.ContactInformation;
+
+                    gridDetails.Visibility = ucCntactInfoPanel.Visibility = System.Windows.Visibility.Visible;
                     //txtContactInfo.Text = string.Format(UserMessages.ContactInfoFor, selectedCustomer.Name);
                 }
             }

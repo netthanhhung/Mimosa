@@ -20,7 +20,6 @@ namespace Mimosa.Apartment.Common
             get { return this.FirstName + " " + this.LastName; }
             set { }
         }
-
         #endregion
     }
 }

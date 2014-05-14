@@ -56,58 +56,89 @@
 
                 <local:ClippedGrid>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
-
                     <Grid x:Name="gridCustomer">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                <ColumnDefinition Width="Auto"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="Customer filter" Margin="10,5,0,5"></TextBlock>
-                            <TextBox x:Name="uiCustomerFilter" Width="200" Grid.Column="1" 
-                                     HorizontalAlignment="Left" Margin="10,5,0,5"></TextBox>
-                            <CheckBox x:Name="chkShowInactive" Content="Show Inactive"
-                                      Margin="10,5,0,5" Grid.Column="2"></CheckBox>
-                            <!--<local:SingleClickButton x:Name="btnSearchCustomer" Height="25" Width="80" Grid.Column="2" Content="Search" 
-                                HorizontalAlignment="Left" Margin="10,0,5,10"/>-->
+
+                            <StackPanel  Orientation="Horizontal" >
+
+                                <TextBlock
+                                    Margin="20,10,5,5"
+                                    VerticalAlignment="Center"
+                                    Text="First name:">
+                                </TextBlock>
+                                <TextBox x:Name="txtFirstName"
+                                    Margin="5,10,5,5" Width="100"
+                                    VerticalAlignment="Center">
+                                </TextBox>
+                                <TextBlock
+                                    Margin="20,10,5,5"
+                                    VerticalAlignment="Center"
+                                    Text="Last name:">
+                                </TextBlock>
+                                <TextBox x:Name="txtLastName"
+                                    Margin="5,10,5,5" Width="100"
+                                    VerticalAlignment="Center">
+                                </TextBox>
+
+                                <CheckBox x:Name="chkShowInactive" Content="Show Inactive"
+                                      Margin="10,5,0,5" Grid.Column="2" VerticalAlignment="Center"></CheckBox>
+
+                                <Button x:Name="btnSearch" Width="70" Height="25" Margin="20,10,5,5"  Content="Search"></Button>
+                            </StackPanel>
+
                             <telerik:RadGridView
                                 Margin="10,5,0,5"
                                 x:Name="gvwCustomers"
                                 AutoGenerateColumns="False"
                                 ShowGroupPanel="False" SelectionMode="Single"
                                 CanUserDeleteRows="False" CanUserInsertRows="True" ShowInsertRow="True"
-                                Grid.Row="1" Grid.ColumnSpan="4">
+                                Grid.Row="1" Grid.Column="0">
                                 <telerik:RadGridView.Resources>
                                     <Style TargetType="TextBlock" BasedOn="{x:Null}"/>
                                     <Style TargetType="CheckBox" BasedOn="{x:Null}"/>
                                 </telerik:RadGridView.Resources>
                                 <telerik:RadGridView.Columns>
                                     <telerik:GridViewDataColumn
-                                        UniqueName="Name"
-                                        DataMemberBinding="{Binding Name}"
-                                        Header="Name" 
-                                        Width="*">
+                                        UniqueName="FirstName"
+                                        DataMemberBinding="{Binding FirstName}"
+                                        Header="First Name" 
+                                        Width="150">
                                     </telerik:GridViewDataColumn>
                                     <telerik:GridViewDataColumn
-                                        UniqueName="BusinessName"
-                                        DataMemberBinding="{Binding BusinessName}"
-                                        Header="Business Name"
-                                        Width="*">
+                                        UniqueName="LastName"
+                                        DataMemberBinding="{Binding LastName}"
+                                        Header="Last Name"
+                                        Width="150">
                                     </telerik:GridViewDataColumn>
+                                    <telerik:GridViewDataColumn
+                                        UniqueName="Age"
+                                        DataMemberBinding="{Binding Age}"
+                                        Header="Age"
+                                        Width="70">
+                                    </telerik:GridViewDataColumn>
+                                    <telerik:GridViewComboBoxColumn
+                                       DataMemberBinding="{Binding Gender}"
+                                       UniqueName="Gender" Header="Gender"
+                                       SelectedValueMemberPath="Key" HeaderTextAlignment="Center"
+                                       DisplayMemberPath="Value" 
+                                       Width="100">
+                                    </telerik:GridViewComboBoxColumn>
 
                                     <telerik:GridViewDataColumn Width="100" Header="Inactive">
                                         <telerik:GridViewDataColumn.CellStyle>
@@ -128,124 +159,27 @@
                                     </telerik:GridViewDataColumn>
                                 </telerik:RadGridView.Columns>
                             </telerik:RadGridView>
+
+                            <local:ContactInformationPanel x:Name="ucCntactInfoPanel" Margin="25,5,5,5" 
+                                                        Grid.Row="1" Grid.Column="1"></local:ContactInformationPanel>
+
                         </Grid>
 
-                        <Grid Grid.Column="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <TextBlock Text="Contact Information" Margin="100,5,0,5"></TextBlock>
-                            <Grid x:Name="gridContactInfo" Grid.Row="1" Margin="100,5,5,5">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="150"></ColumnDefinition>
-                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-
-                                <TextBlock
-                                    Grid.Column="0" Grid.Row="1"
-                                    Margin="{StaticResource SmallContentMargin}"
-                                    HorizontalAlignment="Left" VerticalAlignment="Center"
-                                    Text="Address:">
-                                </TextBlock>
-                                <TextBox 
-                                    Grid.Column="1" Grid.Row="1" 
-                                    x:Name="txtAddress" 
-                                    HorizontalAlignment="Left" VerticalAlignment="Center"
-                                    Width="200" Height="24" 
-                                    Text="{Binding Address, Mode=TwoWay}"/>
-                                <TextBlock
-                                    Grid.Column="0" Grid.Row="2"
-                                    Margin="{StaticResource SmallContentMargin}"
-                                    HorizontalAlignment="Left" VerticalAlignment="Center"
-                                    Text="City:">
-                                </TextBlock>
-                                <TextBox 
-                                    Grid.Column="1" Grid.Row="2" 
-                                    x:Name="txtCity" 
-                                    HorizontalAlignment="Left" VerticalAlignment="Center"
-                                    Width="200" Height="24" 
-                                    Text="{Binding City, Mode=TwoWay}"/>
-                                <TextBlock
-                                    Grid.Column="0" Grid.Row="3"
-                                    Margin="{StaticResource SmallContentMargin}"
-                                    HorizontalAlignment="Left" VerticalAlignment="Center"
-                                    Text="State:">
-                                </TextBlock>
-                                <TextBox 
-                                    Grid.Column="1" Grid.Row="3" 
-                                    x:Name="txtState" 
-                                    HorizontalAlignment="Left" VerticalAlignment="Center"
-                                    Width="200" Height="24" 
-                                    Text="{Binding State, Mode=TwoWay}"/>
-                                <TextBlock
-                                    Grid.Column="0" Grid.Row="4"
-                                    Margin="{StaticResource SmallContentMargin}"
-                                    HorizontalAlignment="Left" VerticalAlignment="Center"
-                                    Text="Postcode:">
-                                </TextBlock>
-                                <TextBox 
-                                    Grid.Column="1" Grid.Row="4" 
-                                    x:Name="txtPostcode" 
-                                    HorizontalAlignment="Left" VerticalAlignment="Center"
-                                    Width="200" Height="24" 
-                                    Text="{Binding Postcode, Mode=TwoWay}"/>
-                                <TextBlock
-                                    Grid.Column="0" Grid.Row="5"
-                                    Margin="{StaticResource SmallContentMargin}"
-                                    HorizontalAlignment="Left" VerticalAlignment="Center"
-                                    Text="Country:">
-                                </TextBlock>
-                                <telerik:RadComboBox
-                                    x:Name="uiCountry"
-                                    Grid.Column="1"
-                                    Grid.Row="5"
-                                    Width="200"
-                                    HorizontalAlignment="Left" VerticalAlignment="Center"
-                                    DisplayMemberPath="Name"
-                                    SelectedValuePath="CountryId"
-                                    SelectedValue="{Binding CountryId, Mode=TwoWay}">
-                                </telerik:RadComboBox>
-                                <TextBlock
-                                    Grid.Column="0" Grid.Row="6"
-                                    Margin="{StaticResource SmallContentMargin}"
-                                    HorizontalAlignment="Left" VerticalAlignment="Center"
-                                    Text="Phone:">
-                                </TextBlock>
-                                <TextBox 
-                                    Grid.Column="1" Grid.Row="6" 
-                                    x:Name="txtPhone" 
-                                    HorizontalAlignment="Left" VerticalAlignment="Center"
-                                    Width="200" Height="24" 
-                                    Text="{Binding PhoneNumber, Mode=TwoWay}"/>
-                                <TextBlock
-                                    Grid.Column="0" Grid.Row="7"
-                                    Margin="{StaticResource SmallContentMargin}"
-                                    HorizontalAlignment="Left" VerticalAlignment="Center"
-                                    Text="Fax:">
-                                </TextBlock>
-                                <TextBox 
-                                    Grid.Column="1" Grid.Row="7" 
-                                    x:Name="txtFax" 
-                                    HorizontalAlignment="Left" VerticalAlignment="Center"
-                                    Width="200" Height="24" 
-                                    Text="{Binding FaxNumber, Mode=TwoWay}"/>
-
-                            </Grid>
+                        <Grid Grid.Row="1" Margin="0,5,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <local:SingleClickButton x:Name="btnSaveCustomer" Height="25" Width="80" Grid.Column="1" Content="Save" 
+                            HorizontalAlignment="Right" Margin="10,0,5,10"/>
+                            <Button x:Name="btnCancelCustomer" Height="25" Width="80" Grid.Column="2" Content="Cancel" 
+                            HorizontalAlignment="Left" Margin="10,0,5,10"/>
                         </Grid>
 
                     </Grid>
+                    
                     <Grid x:Name="gridDetails" Margin="10,10,10,10" Grid.Row="1">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"></RowDefinition>
@@ -373,24 +307,15 @@
                                 </telerik:GridViewDataColumn>
                             </telerik:RadGridView.Columns>
                         </telerik:RadGridView>
+
                         <local:SingleClickButton x:Name="btnNewContract" Height="25" Width="80" Grid.Row="2" Content="New Contract" 
                             HorizontalAlignment="Right" Margin="10,0,5,10"/>
                     </Grid>
-                    <Grid Grid.Row="2" Margin="0,5,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="Auto"></ColumnDefinition>
-                            <ColumnDefinition Width="Auto"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <local:SingleClickButton x:Name="btnSaveCustomer" Height="25" Width="80" Grid.Column="1" Content="Save" 
-                            HorizontalAlignment="Right" Margin="10,0,5,10"/>
-                        <Button x:Name="btnCancelCustomer" Height="25" Width="80" Grid.Column="2" Content="Cancel" 
-                            HorizontalAlignment="Left" Margin="10,0,5,10"/>
-                    </Grid>
+
+
                 </local:ClippedGrid>
             </local:ClippedGrid>
         </Grid>
     </Grid>
-    
+
 </navigation:Page>

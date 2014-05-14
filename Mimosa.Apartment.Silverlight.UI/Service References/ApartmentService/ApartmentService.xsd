@@ -266,7 +266,8 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="customerId" nillable="true" type="xs:int" />
-        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="firstName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="lastName" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="includeLegacy" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
@@ -287,14 +288,16 @@
   </xs:element>
   <xs:element name="SaveCustomerResponse">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="SaveCustomerResult" nillable="true" type="q25:ArrayOfCustomer" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ListAspUser">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="orgId" nillable="true" type="xs:int" />
-        <xs:element xmlns:q25="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="userId" nillable="true" type="q25:guid" />
+        <xs:element xmlns:q26="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="userId" nillable="true" type="q26:guid" />
         <xs:element minOccurs="0" name="isLegacy" nillable="true" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
@@ -302,7 +305,7 @@
   <xs:element name="ListAspUserResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListAspUserResult" nillable="true" type="q26:ArrayOfAspUser" />
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListAspUserResult" nillable="true" type="q27:ArrayOfAspUser" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -318,7 +321,7 @@
   <xs:element name="ListUserNameResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q27="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ListUserNameResult" nillable="true" type="q27:ArrayOfstring" />
+        <xs:element xmlns:q28="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ListUserNameResult" nillable="true" type="q28:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -348,14 +351,14 @@
   <xs:element name="ListComponentResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListComponentResult" nillable="true" type="q28:ArrayOfComponent" />
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListComponentResult" nillable="true" type="q29:ArrayOfComponent" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ListRoleComponentPermission">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q29="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="roleId" nillable="true" type="q29:guid" />
+        <xs:element xmlns:q30="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="roleId" nillable="true" type="q30:guid" />
         <xs:element minOccurs="0" name="componentId" nillable="true" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -363,28 +366,28 @@
   <xs:element name="ListRoleComponentPermissionResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListRoleComponentPermissionResult" nillable="true" type="q30:ArrayOfRoleComponentPermission" />
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListRoleComponentPermissionResult" nillable="true" type="q31:ArrayOfRoleComponentPermission" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ListRoleComponentPermissionByUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q31="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="userId" nillable="true" type="q31:guid" />
+        <xs:element xmlns:q32="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="userId" nillable="true" type="q32:guid" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ListRoleComponentPermissionByUserResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListRoleComponentPermissionByUserResult" nillable="true" type="q32:ArrayOfRoleComponentPermission" />
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListRoleComponentPermissionByUserResult" nillable="true" type="q33:ArrayOfRoleComponentPermission" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveRoleComponentPermission">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q33:ArrayOfRoleComponentPermission" />
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q34:ArrayOfRoleComponentPermission" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -396,21 +399,21 @@
   <xs:element name="ListAspRole">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q34="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="roleId" nillable="true" type="q34:guid" />
+        <xs:element xmlns:q35="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="roleId" nillable="true" type="q35:guid" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ListAspRoleResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListAspRoleResult" nillable="true" type="q35:ArrayOfAspRole" />
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListAspRoleResult" nillable="true" type="q36:ArrayOfAspRole" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveAspRole">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q36:ArrayOfAspRole" />
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q37:ArrayOfAspRole" />
         <xs:element minOccurs="0" name="currentUser" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -424,22 +427,22 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="orgId" nillable="true" type="xs:int" />
-        <xs:element xmlns:q37="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="userId" nillable="true" type="q37:guid" />
-        <xs:element xmlns:q38="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="roleId" nillable="true" type="q38:guid" />
+        <xs:element xmlns:q38="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="userId" nillable="true" type="q38:guid" />
+        <xs:element xmlns:q39="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="roleId" nillable="true" type="q39:guid" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ListUserRoleAuthResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListUserRoleAuthResult" nillable="true" type="q39:ArrayOfUserRoleAuth" />
+        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListUserRoleAuthResult" nillable="true" type="q40:ArrayOfUserRoleAuth" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveUserRoleAuth">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q40:ArrayOfUserRoleAuth" />
+        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q41:ArrayOfUserRoleAuth" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -460,14 +463,14 @@
   <xs:element name="ListEquipmentResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListEquipmentResult" nillable="true" type="q41:ArrayOfEquipment" />
+        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListEquipmentResult" nillable="true" type="q42:ArrayOfEquipment" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveEquipment">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q42:ArrayOfEquipment" />
+        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q43:ArrayOfEquipment" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -488,14 +491,14 @@
   <xs:element name="ListServiceResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListServiceResult" nillable="true" type="q43:ArrayOfService" />
+        <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListServiceResult" nillable="true" type="q44:ArrayOfService" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveService">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q44:ArrayOfService" />
+        <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q45:ArrayOfService" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -516,14 +519,14 @@
   <xs:element name="ListRoomTypeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListRoomTypeResult" nillable="true" type="q45:ArrayOfRoomType" />
+        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListRoomTypeResult" nillable="true" type="q46:ArrayOfRoomType" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveRoomType">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q46:ArrayOfRoomType" />
+        <xs:element xmlns:q47="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q47:ArrayOfRoomType" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -549,14 +552,14 @@
   <xs:element name="ListRoomResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q47="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListRoomResult" nillable="true" type="q47:ArrayOfRoom" />
+        <xs:element xmlns:q48="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListRoomResult" nillable="true" type="q48:ArrayOfRoom" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveRoom">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q48="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q48:ArrayOfRoom" />
+        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q49:ArrayOfRoom" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -576,14 +579,14 @@
   <xs:element name="ListRoomEquipmentResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListRoomEquipmentResult" nillable="true" type="q49:ArrayOfRoomEquipment" />
+        <xs:element xmlns:q50="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListRoomEquipmentResult" nillable="true" type="q50:ArrayOfRoomEquipment" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveRoomEquipment">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q50="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q50:ArrayOfRoomEquipment" />
+        <xs:element xmlns:q51="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q51:ArrayOfRoomEquipment" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -603,14 +606,14 @@
   <xs:element name="ListRoomServiceResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q51="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListRoomServiceResult" nillable="true" type="q51:ArrayOfRoomService" />
+        <xs:element xmlns:q52="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListRoomServiceResult" nillable="true" type="q52:ArrayOfRoomService" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveRoomService">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q52="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q52:ArrayOfRoomService" />
+        <xs:element xmlns:q53="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q53:ArrayOfRoomService" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -632,14 +635,14 @@
   <xs:element name="ListImageResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q53="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListImageResult" nillable="true" type="q53:ArrayOfImage" />
+        <xs:element xmlns:q54="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListImageResult" nillable="true" type="q54:ArrayOfImage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveImage">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q54="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q54:ArrayOfImage" />
+        <xs:element xmlns:q55="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q55:ArrayOfImage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -666,14 +669,14 @@
   <xs:element name="ListBookingResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q55="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListBookingResult" nillable="true" type="q55:ArrayOfBooking" />
+        <xs:element xmlns:q56="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListBookingResult" nillable="true" type="q56:ArrayOfBooking" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveBooking">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q56="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q56:ArrayOfBooking" />
+        <xs:element xmlns:q57="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q57:ArrayOfBooking" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -694,14 +697,14 @@
   <xs:element name="ListBookingRoomEquipmentResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q57="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListBookingRoomEquipmentResult" nillable="true" type="q57:ArrayOfBookingRoomEquipment" />
+        <xs:element xmlns:q58="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListBookingRoomEquipmentResult" nillable="true" type="q58:ArrayOfBookingRoomEquipment" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveBookingRoomEquipment">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q58="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q58:ArrayOfBookingRoomEquipment" />
+        <xs:element xmlns:q59="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q59:ArrayOfBookingRoomEquipment" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -722,14 +725,14 @@
   <xs:element name="ListBookingRoomServiceResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q59="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListBookingRoomServiceResult" nillable="true" type="q59:ArrayOfBookingRoomService" />
+        <xs:element xmlns:q60="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListBookingRoomServiceResult" nillable="true" type="q60:ArrayOfBookingRoomService" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveBookingRoomService">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q60="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q60:ArrayOfBookingRoomService" />
+        <xs:element xmlns:q61="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q61:ArrayOfBookingRoomService" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

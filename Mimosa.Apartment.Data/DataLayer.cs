@@ -356,11 +356,11 @@ namespace Mimosa.Apartment.Data
 
         #region Customer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
-        public List<Customer> ListCustomer(int? customerId, string name, bool includeLegacy)
+        public List<Customer> ListCustomer(int? customerId, string firstName, string lastName, bool includeLegacy)
         {
             List<Customer> result = new List<Customer>();
 
-            using (IDataReader reader = _db.ExecuteReader("procListCustomer", customerId, name, includeLegacy))
+            using (IDataReader reader = _db.ExecuteReader("procListCustomer", customerId, firstName, lastName, includeLegacy))
             {
                 Factory.FillCustomerList(result, reader);
             }

@@ -20,59 +20,10 @@ namespace Mimosa.Apartment.Common
 
     public static class Enums
     {
-        public enum UtilityType
+        public enum Gender
         {
-            None,
-            Electricity,
-            Gas
-        }
-
-        public enum UtilityValueType
-        {
-            Usage,
-            Cost
-        }
-
-        public enum SiteStructureLevel
-        {
-            None = 0,
-            Site,
-            Department,
-            RosterCentre,
-            Centre,
-            SubCentre
-        }
-
-        public enum DistributionChannelType
-        {
-           DistributionChannel,
-           DistributionChannelBalance,
-           CompanyAgent,
-           CompanyAgentBalance,
-           Division,
-           DivisionBalance,
-           PnL
-        }
-
-        public enum MailTemplateType
-        {
-            Payroll = 1,
-            EmployeeFeedback = 2,
-            OvertimeNotification = 3
-        }
-
-
-        public enum ExchangeServiceResult
-        {
-            ServerConnectionFailed = 1,
-            AuthenticationFailed = 2,
-            AppointmentAdded = 5,
-        }
-
-        public enum PMSSystemType
-        {
-            Protel,
-            CRS
+            Male = 1,
+            Female = 2,            
         }
     }
 }

@@ -118,6 +118,7 @@
           <xs:element minOccurs="0" name="ContactInformationId" type="xs:int" />
           <xs:element minOccurs="0" name="ContactTypeId" type="xs:int" />
           <xs:element minOccurs="0" name="CountryId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="District" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="FaxNumber" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
@@ -476,6 +477,7 @@
           <xs:element minOccurs="0" name="ContractDateStart" nillable="true" type="xs:dateTime" />
           <xs:element minOccurs="0" name="ContractTotalPrice" nillable="true" type="xs:decimal" />
           <xs:element minOccurs="0" name="CustomerId" type="xs:int" />
+          <xs:element minOccurs="0" name="CustomerItem" nillable="true" type="tns:Customer" />
           <xs:element minOccurs="0" name="CustomerName" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
