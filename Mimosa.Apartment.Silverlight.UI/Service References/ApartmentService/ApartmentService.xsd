@@ -265,6 +265,7 @@
   <xs:element name="ListCustomer">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="orgId" nillable="true" type="xs:int" />
         <xs:element minOccurs="0" name="customerId" nillable="true" type="xs:int" />
         <xs:element minOccurs="0" name="firstName" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="lastName" nillable="true" type="xs:string" />

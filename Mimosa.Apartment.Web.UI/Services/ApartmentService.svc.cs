@@ -344,9 +344,9 @@ namespace Mimosa.Apartment.Web.UI
 
         #region Customer
         [OperationContract]
-        public List<Customer> ListCustomer(int? customerId,  string firstName, string lastName, bool includeLegacy)
+        public List<Customer> ListCustomer(int? orgId, int? customerId,  string firstName, string lastName, bool includeLegacy)
         {
-            return ApartmentMethods.ListCustomer(customerId, firstName, lastName, includeLegacy);
+            return ApartmentMethods.ListCustomer(orgId, customerId, firstName, lastName, includeLegacy);
         }
 
         [OperationContract]

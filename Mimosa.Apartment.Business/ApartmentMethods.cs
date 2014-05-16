@@ -306,10 +306,10 @@ namespace Mimosa.Apartment.Business
         #endregion
 
         #region Customer
-        public static List<Customer> ListCustomer(int? customerId, string firstName, string lastName, bool includeLegacy)
+        public static List<Customer> ListCustomer(int? ordId, int? customerId, string firstName, string lastName, bool includeLegacy)
         {
             DataLayer dl = new DataLayer();
-            List<Customer> result = dl.ListCustomer(customerId, firstName, lastName, includeLegacy);
+            List<Customer> result = dl.ListCustomer(ordId, customerId, firstName, lastName, includeLegacy);
             if (result != null)
             {
                 foreach (Customer cus in result)

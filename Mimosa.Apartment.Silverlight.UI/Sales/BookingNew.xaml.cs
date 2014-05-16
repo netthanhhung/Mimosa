@@ -142,6 +142,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                 newItem.CustomerItem.ContactInformation = new ContactInformation();
             }
             newItem.CustomerItem.ContactInformation.ContactTypeId = (int)ContactType.Customer;
+            newItem.CustomerItem.OrganisationId = Globals.UserLogin.UserOrganisationId;
             newItem.CustomerItem.FirstName = txtFirstName.Text;
             newItem.CustomerItem.LastName = txtLastName.Text;
             newItem.CustomerItem.Gender = radMale.IsChecked == true ? 1 : 0;

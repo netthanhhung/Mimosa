@@ -57,7 +57,7 @@ namespace Mimosa.Apartment.Silverlight.UI
         private void BeginRebindCustomer()
         {
             Globals.IsBusy = true;
-            DataServiceHelper.ListCustomerAsync(null, txtFirstName.Text.Trim(), txtLastName.Text.Trim(), chkShowInactive.IsChecked == true, ListCustomerCompleted);
+            DataServiceHelper.ListCustomerAsync(Globals.UserLogin.UserOrganisationId, null, txtFirstName.Text.Trim(), txtLastName.Text.Trim(), chkShowInactive.IsChecked == true, ListCustomerCompleted);
         }
 
         void ListCustomerCompleted(List<Customer> customerList)
@@ -125,6 +125,7 @@ namespace Mimosa.Apartment.Silverlight.UI
         {
             Customer newItem = new Customer();
             newItem.RecordId = null;
+            newItem.OrganisationId = Globals.UserLogin.UserOrganisationId;
             newItem.CreatedBy = Globals.UserLogin.UserName;
             newItem.DateCreated = Globals.Now;
             newItem.ContactInformation = new ContactInformation();

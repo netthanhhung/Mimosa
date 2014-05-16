@@ -334,12 +334,12 @@ namespace Mimosa.Apartment.Silverlight.UI
 
         // ListCustomer
         internal delegate void ListCustomerCallback(List<Customer> itemSource);
-        internal static void ListCustomerAsync(int? customerId, string firstName, string lastName, bool includeLegacy, ListCustomerCallback callback)
+        internal static void ListCustomerAsync(int? orgId, int? customerId, string firstName, string lastName, bool includeLegacy, ListCustomerCallback callback)
         {
             Guid callerKey = Guid.NewGuid();
             ApartmentServiceClient proxy = GetProxy(callerKey, callback);
             proxy.ListCustomerCompleted += new EventHandler<ListCustomerCompletedEventArgs>(proxy_ListCustomerCompleted);
-            proxy.ListCustomerAsync(customerId, firstName, lastName, includeLegacy, callerKey);
+            proxy.ListCustomerAsync(orgId, customerId, firstName, lastName, includeLegacy, callerKey);
         }
 
         static void proxy_ListCustomerCompleted(object sender, ListCustomerCompletedEventArgs e)

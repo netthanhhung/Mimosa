@@ -18,6 +18,7 @@ namespace Mimosa.Apartment.Common
         public static class ColumnNames
         {
             public const string CustomerId = "CustomerId";
+            public const string OrganisationId = "OrganisationID";
             public const string FirstName = "FirstName";
             public const string LastName = "LastName";
             public const string IsLegacy = "IsLegacy";
@@ -33,6 +34,10 @@ namespace Mimosa.Apartment.Common
 
         [DataMember]
         public int CustomerId { get { return Utilities.ToInt(RecordId); } set { RecordId = value; RaisePropertyChanged("CustomerId"); } }
+
+        private int _organisationId;
+        [DataMember]
+        public int OrganisationId { get { return _organisationId; } set { if (!this.OrganisationId.Equals(value)) { _organisationId = value; RaisePropertyChanged("OrganisationId"); } } }
 
         private string _firstName;
         [DataMember]

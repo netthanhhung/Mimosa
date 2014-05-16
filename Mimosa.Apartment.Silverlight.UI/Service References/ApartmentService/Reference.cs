@@ -689,7 +689,7 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         void EndSaveSite(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:ApartmentService/ListCustomer", ReplyAction="urn:ApartmentService/ListCustomerResponse")]
-        System.IAsyncResult BeginListCustomer(System.Nullable<int> customerId, string firstName, string lastName, bool includeLegacy, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginListCustomer(System.Nullable<int> orgId, System.Nullable<int> customerId, string firstName, string lastName, bool includeLegacy, System.AsyncCallback callback, object asyncState);
         
         System.Collections.Generic.List<Mimosa.Apartment.Common.Customer> EndListCustomer(System.IAsyncResult result);
         
@@ -2895,8 +2895,8 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService.BeginListCustomer(System.Nullable<int> customerId, string firstName, string lastName, bool includeLegacy, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginListCustomer(customerId, firstName, lastName, includeLegacy, callback, asyncState);
+        System.IAsyncResult Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService.BeginListCustomer(System.Nullable<int> orgId, System.Nullable<int> customerId, string firstName, string lastName, bool includeLegacy, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginListCustomer(orgId, customerId, firstName, lastName, includeLegacy, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -2905,11 +2905,12 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         }
         
         private System.IAsyncResult OnBeginListCustomer(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            System.Nullable<int> customerId = ((System.Nullable<int>)(inValues[0]));
-            string firstName = ((string)(inValues[1]));
-            string lastName = ((string)(inValues[2]));
-            bool includeLegacy = ((bool)(inValues[3]));
-            return ((Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService)(this)).BeginListCustomer(customerId, firstName, lastName, includeLegacy, callback, asyncState);
+            System.Nullable<int> orgId = ((System.Nullable<int>)(inValues[0]));
+            System.Nullable<int> customerId = ((System.Nullable<int>)(inValues[1]));
+            string firstName = ((string)(inValues[2]));
+            string lastName = ((string)(inValues[3]));
+            bool includeLegacy = ((bool)(inValues[4]));
+            return ((Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService)(this)).BeginListCustomer(orgId, customerId, firstName, lastName, includeLegacy, callback, asyncState);
         }
         
         private object[] OnEndListCustomer(System.IAsyncResult result) {
@@ -2925,11 +2926,11 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
             }
         }
         
-        public void ListCustomerAsync(System.Nullable<int> customerId, string firstName, string lastName, bool includeLegacy) {
-            this.ListCustomerAsync(customerId, firstName, lastName, includeLegacy, null);
+        public void ListCustomerAsync(System.Nullable<int> orgId, System.Nullable<int> customerId, string firstName, string lastName, bool includeLegacy) {
+            this.ListCustomerAsync(orgId, customerId, firstName, lastName, includeLegacy, null);
         }
         
-        public void ListCustomerAsync(System.Nullable<int> customerId, string firstName, string lastName, bool includeLegacy, object userState) {
+        public void ListCustomerAsync(System.Nullable<int> orgId, System.Nullable<int> customerId, string firstName, string lastName, bool includeLegacy, object userState) {
             if ((this.onBeginListCustomerDelegate == null)) {
                 this.onBeginListCustomerDelegate = new BeginOperationDelegate(this.OnBeginListCustomer);
             }
@@ -2940,6 +2941,7 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
                 this.onListCustomerCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnListCustomerCompleted);
             }
             base.InvokeAsync(this.onBeginListCustomerDelegate, new object[] {
+                        orgId,
                         customerId,
                         firstName,
                         lastName,
@@ -4807,12 +4809,13 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
                 base.EndInvoke("SaveSite", _args, result);
             }
             
-            public System.IAsyncResult BeginListCustomer(System.Nullable<int> customerId, string firstName, string lastName, bool includeLegacy, System.AsyncCallback callback, object asyncState) {
-                object[] _args = new object[4];
-                _args[0] = customerId;
-                _args[1] = firstName;
-                _args[2] = lastName;
-                _args[3] = includeLegacy;
+            public System.IAsyncResult BeginListCustomer(System.Nullable<int> orgId, System.Nullable<int> customerId, string firstName, string lastName, bool includeLegacy, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[5];
+                _args[0] = orgId;
+                _args[1] = customerId;
+                _args[2] = firstName;
+                _args[3] = lastName;
+                _args[4] = includeLegacy;
                 System.IAsyncResult _result = base.BeginInvoke("ListCustomer", _args, callback, asyncState);
                 return _result;
             }
