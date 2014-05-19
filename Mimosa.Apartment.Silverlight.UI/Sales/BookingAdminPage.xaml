@@ -79,10 +79,10 @@
                                 <local:SitePicker
                                     x:Name="ucSitePicker"
                                     Grid.Row="0" Margin="5,10,5,5"
-                                    DataListWidth="200" ShowInactiveCheck="True" InactiveMessage="Show Inactive" ShowAllSitesItem="True"
+                                    DataListWidth="150" ShowInactiveCheck="True" InactiveMessage="Show Inactive" ShowAllSitesItem="True"
                                     Style="{StaticResource InputControlStyle}"></local:SitePicker>
                                 <TextBlock
-                                    Margin="20,10,5,5"
+                                    Margin="10,10,5,5"
                                     VerticalAlignment="Center"
                                     Text="From date:">
                                 </TextBlock>
@@ -91,7 +91,7 @@
                                     Margin="5,10,5,5"
                                     Style="{StaticResource InputControlStyle}"></telerik:RadDatePicker>
                                 <TextBlock
-                                    Margin="20,10,5,5"
+                                    Margin="10,10,5,5"
                                     VerticalAlignment="Center"
                                     Text="To date:">
                                 </TextBlock>
@@ -100,7 +100,7 @@
                                     Margin="5,10,5,5"
                                     Style="{StaticResource InputControlStyle}"></telerik:RadDatePicker>
                                 <TextBlock
-                                    Margin="20,10,5,5"
+                                    Margin="10,10,5,5"
                                     VerticalAlignment="Center"
                                     Text="Customer:">
                                 </TextBlock>
@@ -110,7 +110,7 @@
                                 </TextBox>
                                 
                                 <TextBlock
-                                    Margin="20,10,5,5"
+                                    Margin="10,10,5,5"
                                     VerticalAlignment="Center"
                                     Text="Booking Status:">
                                 </TextBlock>
