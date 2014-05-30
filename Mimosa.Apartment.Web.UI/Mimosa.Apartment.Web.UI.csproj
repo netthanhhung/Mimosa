@@ -135,6 +135,7 @@
     <Content Include="Images\PaleBlueBorderTopLeft.gif" />
     <Content Include="Images\PaleBlueBorderTopMiddle.gif" />
     <Content Include="Images\PaleBlueBorderTopRight.gif" />
+    <Content Include="Images\RubyLogo.png" />
     <Content Include="Logon.aspx" />
     <Content Include="Logout.aspx" />
     <Content Include="Mimosa.Apartment.Silverlight.UITestPage.aspx" />

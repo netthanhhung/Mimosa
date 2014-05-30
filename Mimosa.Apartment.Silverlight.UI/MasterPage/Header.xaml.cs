@@ -31,7 +31,7 @@ namespace Mimosa.Apartment.Silverlight.UI
         void Header_Loaded(object sender, RoutedEventArgs e)
         {
             uiDeploymentInfo.Text = DeploymentInfo.ToString();
-            uiBtnLogo.DataContext = this;
+            //uiBtnLogo.DataContext = this;
             SiteMapHelper.SelectWeb1SiteMapAsync(LoadMenuItems);
         }
 
@@ -138,7 +138,7 @@ namespace Mimosa.Apartment.Silverlight.UI
             {
                 if (parentItem.Title == "Logo")
                 {
-                    uiContextMenu.ItemsSource = parentItem.Items.ToList();
+                    //uiContextMenu.ItemsSource = parentItem.Items.ToList();
                     continue;
                 }
 
@@ -203,8 +203,8 @@ namespace Mimosa.Apartment.Silverlight.UI
                 if (moduleType.HasValue && parentItem.Title == moduleType.ToString())
                 {
                     // set logo
-                    string resourceName = String.Format("Logo{0}SourceUrl", moduleType.ToString());
-                    uiLogo.Source = new BitmapImage(new Uri(App.Current.Resources[resourceName].ToString(), UriKind.Relative));
+                    //string resourceName = String.Format("Logo{0}SourceUrl", moduleType.ToString());
+                    //uiLogo.Source = new BitmapImage(new Uri(App.Current.Resources[resourceName].ToString(), UriKind.Relative));
 
                     foreach (SiteMapMenuItem item in parentItem.Items)
                     {
@@ -231,7 +231,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                 }
             }
 
-            uiContextMenu.ItemsSource = modules;
+            //uiContextMenu.ItemsSource = modules;
         }
     }
 }

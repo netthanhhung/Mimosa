@@ -23,7 +23,10 @@ namespace Mimosa.Apartment.Common
             public const string PhoneNumber = "PhoneNumber";
             public const string FaxNumber = "FaxNumber";
             public const string Email = "Email";
-
+            public const string DoB = "DoB";
+            public const string Visa = "Visa";
+            public const string VisaValidFrom = "VisaValidFrom";
+            public const string VisaValidTo = "VisaValidTo";
         }
 
 		#region Public Constructors
@@ -86,6 +89,22 @@ namespace Mimosa.Apartment.Common
         private string _email;
         [DataMember]
         public string Email { get { return _email; } set { if (!object.ReferenceEquals(this.Email, value)) { _email = value; RaisePropertyChanged("Email"); } } }
+
+        private DateTime? _doB;
+        [DataMember]
+        public DateTime? DoB { get { return _doB; } set { if (!this.DoB.Equals(value)) { _doB = value; RaisePropertyChanged("DoB"); } } }
+
+        private string _visa;
+        [DataMember]
+        public string Visa { get { return _visa; } set { if (!object.ReferenceEquals(this.Visa, value)) { _visa = value; RaisePropertyChanged("Visa"); } } }
+
+        private DateTime? _visaValidFrom;
+        [DataMember]
+        public DateTime? VisaValidFrom { get { return _visaValidFrom; } set { if (!this.VisaValidFrom.Equals(value)) { _visaValidFrom = value; RaisePropertyChanged("VisaValidFrom"); } } }
+
+        private DateTime? _visaValidTo;
+        [DataMember]
+        public DateTime? VisaValidTo { get { return _visaValidTo; } set { if (!this.VisaValidTo.Equals(value)) { _visaValidTo = value; RaisePropertyChanged("VisaValidTo"); } } }
 
 		#endregion
 	}

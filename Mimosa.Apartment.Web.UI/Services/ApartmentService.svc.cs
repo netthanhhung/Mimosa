@@ -344,9 +344,10 @@ namespace Mimosa.Apartment.Web.UI
 
         #region Customer
         [OperationContract]
-        public List<Customer> ListCustomer(int? orgId, int? customerId,  string firstName, string lastName, bool includeLegacy)
+        public List<Customer> ListCustomer(int? orgId, int? customerId,  string firstName, string lastName, 
+            int? siteId, bool hasContracts, DateTime? contractDateStart, DateTime? contractDateEnd, bool includeLegacy)
         {
-            return ApartmentMethods.ListCustomer(orgId, customerId, firstName, lastName, includeLegacy);
+            return ApartmentMethods.ListCustomer(orgId, customerId, firstName, lastName, siteId, hasContracts, contractDateStart, contractDateEnd, includeLegacy);
         }
 
         [OperationContract]
@@ -523,10 +524,10 @@ namespace Mimosa.Apartment.Web.UI
         #region Booking
         [OperationContract]
         public List<Booking> ListBooking(int orgId, int? siteId, int? roomId, string roomName, int? bookingId, string bookingStatusIds,
-            string customerName, DateTime? bookDateStart, DateTime? bookDateEnd)
+            int? customerId, string customerName, DateTime? bookDateStart, DateTime? bookDateEnd)
         {
             return ApartmentMethods.ListBooking(orgId, siteId, roomId, roomName, bookingId, bookingStatusIds,
-                customerName, bookDateStart, bookDateEnd);
+                customerId, customerName, bookDateStart, bookDateEnd);
         }
 
         [OperationContract]
@@ -550,6 +551,20 @@ namespace Mimosa.Apartment.Web.UI
         }
         #endregion
 
+        #region BookingRoomEquipmentDetail
+        [OperationContract]
+        public List<BookingRoomEquipmentDetail> ListBookingRoomEquipmentDetail(int? bookingRoomEquipmentDetailId, int? bookingRoomEquipmentId)
+        {
+            return ApartmentMethods.ListBookingRoomEquipmentDetail(bookingRoomEquipmentDetailId, bookingRoomEquipmentId);
+        }
+
+        [OperationContract]
+        public void SaveBookingRoomEquipmentDetail(List<BookingRoomEquipmentDetail> saveList)
+        {
+            ApartmentMethods.SaveBookingRoomEquipmentDetail(saveList);
+        }
+        #endregion
+
         #region BookingRoomService
         [OperationContract]
         public List<BookingRoomService> ListBookingRoomService(int? bookingRoomServiceId, int? bookingId, int? roomServiceId)
@@ -561,6 +576,52 @@ namespace Mimosa.Apartment.Web.UI
         public void SaveBookingRoomService(List<BookingRoomService> saveList)
         {
             ApartmentMethods.SaveBookingRoomService(saveList);
+        }
+        #endregion
+
+        #region BookingRoomServiceDetail
+        [OperationContract]
+        public List<BookingRoomServiceDetail> ListBookingRoomServiceDetail(int? bookingRoomServiceDetailId, int? bookingRoomServiceId)
+        {
+            return ApartmentMethods.ListBookingRoomServiceDetail(bookingRoomServiceDetailId, bookingRoomServiceId);
+        }
+
+        [OperationContract]
+        public void SaveBookingRoomServiceDetail(List<BookingRoomServiceDetail> saveList)
+        {
+            ApartmentMethods.SaveBookingRoomServiceDetail(saveList);
+        }
+        #endregion
+
+        #region SiteGroup
+        [OperationContract]
+        public List<SiteGroup> ListSiteGroup(int? orgId, int? siteGroupId)
+        {
+            return ApartmentMethods.ListSiteGroup(orgId, siteGroupId);
+        }
+
+        [OperationContract]
+        public void SaveSiteGroups(List<SiteGroup> saveList)
+        {
+            ApartmentMethods.SaveSiteGroups(saveList);
+        }
+
+        [OperationContract]
+        public List<Site> ListSiteBySiteGroup(int? siteGroupId, bool? showLegacy)
+        {
+            return ApartmentMethods.ListSiteBySiteGroup(siteGroupId, showLegacy);
+        }
+
+        [OperationContract]
+        public List<SiteGroupSite> ListSiteGroupSite(int? siteGroupId, int? siteId)
+        {
+            return ApartmentMethods.ListSiteGroupSite(siteGroupId, siteId);
+        }
+
+        [OperationContract]
+        public void SaveSiteGroupSites(List<SiteGroupSite> saveList)
+        {
+            ApartmentMethods.SaveSiteGroupSites(saveList);
         }
         #endregion
     }

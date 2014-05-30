@@ -1,10 +1,15 @@
-﻿<navigation:Page x:Class="Mimosa.Apartment.Silverlight.UI.RoomAdminPage" Title="Mimosa"
+﻿<navigation:Page x:Class="Mimosa.Apartment.Silverlight.UI.RoomAdminPage" Title="Ruby Home"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
     xmlns:local="clr-namespace:Mimosa.Apartment.Silverlight.UI"
     xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"             
     xmlns:bg="clr-namespace:TiledBG;assembly=TiledBG"
-    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation">
+    xmlns:telerik="clr-namespace:Telerik.Windows.Controls.Animation;assembly=Telerik.Windows.Controls"
+    xmlns:telerikInput="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input"
+    xmlns:telerikGrid="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.GridView"
+    xmlns:telerikGridView="clr-namespace:Telerik.Windows.Controls.GridView;assembly=Telerik.Windows.Controls.GridView"
+    xmlns:telerikChart="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Charting"
+    xmlns:telerikNavigation="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Navigation">
     <Grid x:Name="LayoutRoot" Style="{StaticResource LayoutRootGridStyle}">
         <Grid.RowDefinitions>
             <RowDefinition
@@ -137,7 +142,7 @@
                             </StackPanel>
 
 
-                            <telerik:RadGridView
+                            <telerikGrid:RadGridView
                             x:Name="gvwRoom"
                             Grid.Row="1"
                             AutoGenerateColumns="False" Margin="10,20,10,20" 
@@ -147,65 +152,65 @@
                             CanUserSortColumns="True" CanUserFreezeColumns="False"
                             CanUserResizeColumns="False" CanUserInsertRows="True" ShowInsertRow="True"
                             CanUserDeleteRows="False" CanUserReorderColumns="False">
-                                <telerik:RadGridView.Resources>
+                                <telerikGrid:RadGridView.Resources>
                                     <Style TargetType="TextBlock" BasedOn="{x:Null}"/>
-                                </telerik:RadGridView.Resources>
-                                <telerik:RadGridView.Columns>
-                                    <telerik:GridViewDataColumn
+                                </telerikGrid:RadGridView.Resources>
+                                <telerikGrid:RadGridView.Columns>
+                                    <telerikGrid:GridViewDataColumn
                                         DataMemberBinding="{Binding RoomName}" UniqueName="RoomName"
                                         Header="Room Name" HeaderTextAlignment="Center"
                                         Width="200">
-                                    </telerik:GridViewDataColumn>
-                                    <telerik:GridViewDataColumn
+                                    </telerikGrid:GridViewDataColumn>
+                                    <telerikGrid:GridViewDataColumn
                                         DataMemberBinding="{Binding Description}" UniqueName="Description"
                                         Header="Description" HeaderTextAlignment="Center"
                                         Width="*">
-                                    </telerik:GridViewDataColumn>
-                                    <telerik:GridViewDataColumn
+                                    </telerikGrid:GridViewDataColumn>
+                                    <telerikGrid:GridViewDataColumn
                                         DataMemberBinding="{Binding Floor}"
                                         Width="70" ShowFieldFilters="False" HeaderTextAlignment="Center"
-                                        DataFormatString="{} {0:0}" Header="Floor">
-                                    </telerik:GridViewDataColumn>
-                                    <telerik:GridViewComboBoxColumn
+                                        DataFormatString="{} {0:0}" TextAlignment="Right" Header="Floor">
+                                    </telerikGrid:GridViewDataColumn>
+                                    <telerikGrid:GridViewComboBoxColumn
                                        DataMemberBinding="{Binding RoomStatusId}"
                                        UniqueName="RoomStatus" Header="Room Status"
                                        SelectedValueMemberPath="Key" HeaderTextAlignment="Center"
                                        DisplayMemberPath="Value" 
                                        Width="100">
-                                    </telerik:GridViewComboBoxColumn>
-                                    <telerik:GridViewComboBoxColumn
+                                    </telerikGrid:GridViewComboBoxColumn>
+                                    <telerikGrid:GridViewComboBoxColumn
                                        DataMemberBinding="{Binding RoomTypeId}"
                                        UniqueName="RoomType" Header="Room Type"
                                        SelectedValueMemberPath="RoomTypeId" HeaderTextAlignment="Center"
                                        DisplayMemberPath="Name" 
                                         Width="150">
-                                    </telerik:GridViewComboBoxColumn>
-                                    <telerik:GridViewDataColumn
+                                    </telerikGrid:GridViewComboBoxColumn>
+                                    <telerikGrid:GridViewDataColumn
                                         DataMemberBinding="{Binding Width}"
                                         Width="70" ShowFieldFilters="False" HeaderTextAlignment="Center"
-                                        DataFormatString="{} {0:0.0}" Header="Width">
-                                    </telerik:GridViewDataColumn>
-                                    <telerik:GridViewDataColumn
+                                        DataFormatString="{} {0:0.0}" TextAlignment="Right" Header="Width">
+                                    </telerikGrid:GridViewDataColumn>
+                                    <telerikGrid:GridViewDataColumn
                                         DataMemberBinding="{Binding Height}"
                                         Width="70" ShowFieldFilters="False" HeaderTextAlignment="Center"
-                                        DataFormatString="{} {0:0.0}" Header="Height">
-                                    </telerik:GridViewDataColumn>
-                                    <telerik:GridViewDataColumn
+                                        DataFormatString="{} {0:0.0}" TextAlignment="Right" Header="Height">
+                                    </telerikGrid:GridViewDataColumn>
+                                    <telerikGrid:GridViewDataColumn
                                         DataMemberBinding="{Binding MeterSquare}"
                                         Width="100" ShowFieldFilters="False" HeaderTextAlignment="Center"
-                                        DataFormatString="{} {0:0.0}" Header="Meter Square">
-                                    </telerik:GridViewDataColumn>
-                                    <telerik:GridViewDataColumn
+                                        DataFormatString="{} {0:0.0}" TextAlignment="Right" Header="Meter Square">
+                                    </telerikGrid:GridViewDataColumn>
+                                    <telerikGrid:GridViewDataColumn
                                         DataMemberBinding="{Binding BasePrice}"
                                         Width="70" ShowFieldFilters="False" HeaderTextAlignment="Center"
-                                        DataFormatString="{} {0:C2}" Header="Base Price">
-                                    </telerik:GridViewDataColumn>
-                                    <telerik:GridViewDataColumn Width="70" Header="Inactive">
-                                        <telerik:GridViewDataColumn.CellStyle>
-                                            <Style TargetType="telerik:GridViewCell">
+                                        DataFormatString="{} {0:C2}" TextAlignment="Right" Header="Base Price">
+                                    </telerikGrid:GridViewDataColumn>
+                                    <telerikGrid:GridViewDataColumn Width="70" Header="Inactive">
+                                        <telerikGrid:GridViewDataColumn.CellStyle>
+                                            <Style TargetType="telerikGridView:GridViewCell">
                                                 <Setter Property="Template">
                                                     <Setter.Value>
-                                                        <ControlTemplate TargetType="telerik:GridViewCell">
+                                                        <ControlTemplate TargetType="telerikGridView:GridViewCell">
                                                             <StackPanel>
                                                                 <CheckBox Margin="5, 0, 0, 0"
                                                                         VerticalAlignment="Center"
@@ -215,10 +220,10 @@
                                                     </Setter.Value>
                                                 </Setter>
                                             </Style>
-                                        </telerik:GridViewDataColumn.CellStyle>
-                                    </telerik:GridViewDataColumn>
-                                </telerik:RadGridView.Columns>
-                            </telerik:RadGridView>
+                                        </telerikGrid:GridViewDataColumn.CellStyle>
+                                    </telerikGrid:GridViewDataColumn>
+                                </telerikGrid:RadGridView.Columns>
+                            </telerikGrid:RadGridView>
 
                             <Grid Grid.Row="2">
                                 <Grid.ColumnDefinitions>
@@ -254,37 +259,45 @@
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
 
-                            <telerik:RadGridView
+                            <telerikGrid:RadGridView
                                 Margin="10,15,10,10"
                                 x:Name="gvwRoomEquipment"
                                 AutoGenerateColumns="False"
                                 ShowGroupPanel="False"
                                 CanUserDeleteRows="True" CanUserInsertRows="False" ShowInsertRow="False"                               
                                 Grid.Row="0" Grid.ColumnSpan="2">
-                                <telerik:RadGridView.Resources>
+                                <telerikGrid:RadGridView.Resources>
                                     <Style TargetType="TextBlock" BasedOn="{x:Null}"/>
                                     <Style TargetType="CheckBox" BasedOn="{x:Null}"/>
-                                </telerik:RadGridView.Resources>
-                                <telerik:RadGridView.Columns>
-                                    <telerik:GridViewDataColumn
+                                </telerikGrid:RadGridView.Resources>
+                                <telerikGrid:RadGridView.Columns>
+                                    <telerikGrid:GridViewDataColumn
                                         UniqueName="Equipment"
                                         DataMemberBinding="{Binding Equipment}"
                                         Header="Equipment" IsReadOnly="True"
                                         Width="200">
-                                    </telerik:GridViewDataColumn>
-                                    <telerik:GridViewDataColumn
+                                    </telerikGrid:GridViewDataColumn>
+                                    <telerikGrid:GridViewDataColumn
                                         UniqueName="Description"
                                         DataMemberBinding="{Binding Description}"
                                         Header="Description"  ShowFieldFilters="False"
                                         Width="*">
-                                    </telerik:GridViewDataColumn>
-                                    <telerik:GridViewDataColumn
+                                    </telerikGrid:GridViewDataColumn>
+
+                                    <telerikGrid:GridViewDataColumn
+                                        UniqueName="Unit" IsReadOnly="True"
+                                        DataMemberBinding="{Binding Unit}"
+                                        Header="Unit"  ShowFieldFilters="False"
+                                        Width="70">
+                                    </telerikGrid:GridViewDataColumn>
+                                    
+                                    <telerikGrid:GridViewDataColumn
                                         DataMemberBinding="{Binding Price}"
-                                        Width="100" ShowFieldFilters="False" Header="Price"
+                                        Width="100" ShowFieldFilters="False" Header="Unit Price"
                                         DataFormatString="{} {0:C2}">
-                                    </telerik:GridViewDataColumn>
-                                </telerik:RadGridView.Columns>
-                            </telerik:RadGridView>
+                                    </telerikGrid:GridViewDataColumn>
+                                </telerikGrid:RadGridView.Columns>
+                            </telerikGrid:RadGridView>
 
                             <ComboBox
                             x:Name="uiEquipmentList" Width="200" Height="25"
@@ -318,37 +331,44 @@
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <telerik:RadGridView
+                            <telerikGrid:RadGridView
                                 Margin="10,15,10,10"
                                 x:Name="gvwRoomService"
                                 AutoGenerateColumns="False"
                                 ShowGroupPanel="False"
                                 CanUserDeleteRows="True" CanUserInsertRows="False" ShowInsertRow="False"                               
                                 Grid.Row="0" Grid.ColumnSpan="2">
-                                <telerik:RadGridView.Resources>
+                                <telerikGrid:RadGridView.Resources>
                                     <Style TargetType="TextBlock" BasedOn="{x:Null}"/>
                                     <Style TargetType="CheckBox" BasedOn="{x:Null}"/>
-                                </telerik:RadGridView.Resources>
-                                <telerik:RadGridView.Columns>
-                                    <telerik:GridViewDataColumn
+                                </telerikGrid:RadGridView.Resources>
+                                <telerikGrid:RadGridView.Columns>
+                                    <telerikGrid:GridViewDataColumn
                                         UniqueName="Service"
                                         DataMemberBinding="{Binding Service}"
                                         Header="Service" IsReadOnly="True"
                                         Width="200">
-                                    </telerik:GridViewDataColumn>
-                                    <telerik:GridViewDataColumn
+                                    </telerikGrid:GridViewDataColumn>
+                                    <telerikGrid:GridViewDataColumn
                                         UniqueName="Description"
                                         DataMemberBinding="{Binding Description}"
                                         Header="Description"  ShowFieldFilters="False"
                                         Width="*">
-                                    </telerik:GridViewDataColumn>
-                                    <telerik:GridViewDataColumn
+                                    </telerikGrid:GridViewDataColumn>
+
+                                    <telerikGrid:GridViewDataColumn
+                                        UniqueName="Unit" IsReadOnly="True"
+                                        DataMemberBinding="{Binding Unit}"
+                                        Header="Unit"  ShowFieldFilters="False"
+                                        Width="70">
+                                    </telerikGrid:GridViewDataColumn>
+                                    <telerikGrid:GridViewDataColumn
                                         DataMemberBinding="{Binding Price}"
-                                        Width="100" ShowFieldFilters="False" Header="Price"
+                                        Width="100" ShowFieldFilters="False" Header="Unit Price"
                                         DataFormatString="{} {0:C2}">
-                                    </telerik:GridViewDataColumn>
-                                </telerik:RadGridView.Columns>
-                            </telerik:RadGridView>
+                                    </telerikGrid:GridViewDataColumn>
+                                </telerikGrid:RadGridView.Columns>
+                            </telerikGrid:RadGridView>
 
                             <ComboBox
                             x:Name="uiServiceList" Width="200" Height="25"

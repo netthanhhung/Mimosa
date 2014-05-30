@@ -454,6 +454,24 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ListBookingRoomEquipmentDetail">
+      <soap:operation soapAction="urn:ApartmentService/ListBookingRoomEquipmentDetail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveBookingRoomEquipmentDetail">
+      <soap:operation soapAction="urn:ApartmentService/SaveBookingRoomEquipmentDetail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ListBookingRoomService">
       <soap:operation soapAction="urn:ApartmentService/ListBookingRoomService" style="document" />
       <wsdl:input>
@@ -465,6 +483,69 @@
     </wsdl:operation>
     <wsdl:operation name="SaveBookingRoomService">
       <soap:operation soapAction="urn:ApartmentService/SaveBookingRoomService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListBookingRoomServiceDetail">
+      <soap:operation soapAction="urn:ApartmentService/ListBookingRoomServiceDetail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveBookingRoomServiceDetail">
+      <soap:operation soapAction="urn:ApartmentService/SaveBookingRoomServiceDetail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListSiteGroup">
+      <soap:operation soapAction="urn:ApartmentService/ListSiteGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveSiteGroups">
+      <soap:operation soapAction="urn:ApartmentService/SaveSiteGroups" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListSiteBySiteGroup">
+      <soap:operation soapAction="urn:ApartmentService/ListSiteBySiteGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListSiteGroupSite">
+      <soap:operation soapAction="urn:ApartmentService/ListSiteGroupSite" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveSiteGroupSites">
+      <soap:operation soapAction="urn:ApartmentService/SaveSiteGroupSites" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

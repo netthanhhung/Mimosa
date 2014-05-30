@@ -135,19 +135,29 @@ namespace Mimosa.Apartment.Silverlight.UI
             newItem.ContractDateEnd = uiDateTo.SelectedDate;
             newItem.BookingEquipments = new List<BookingRoomEquipment>();
             newItem.BookingServices = new List<BookingRoomService>();
-            newItem.CustomerItem = new Customer();
-            newItem.CustomerItem.ContactInformation = ucCntactInfoPanel.DataContext as ContactInformation;
-            if (newItem.CustomerItem.ContactInformation == null)
+            Customer customer = panelCustomer.DataContext as Customer;
+            if (customer != null)
             {
-                newItem.CustomerItem.ContactInformation = new ContactInformation();
+                newItem.CustomerItem = customer;
+                newItem.CustomerId = customer.CustomerId;
+                newItem.CustomerName = customer.FullName;
             }
-            newItem.CustomerItem.ContactInformation.ContactTypeId = (int)ContactType.Customer;
-            newItem.CustomerItem.OrganisationId = Globals.UserLogin.UserOrganisationId;
-            newItem.CustomerItem.FirstName = txtFirstName.Text;
-            newItem.CustomerItem.LastName = txtLastName.Text;
-            newItem.CustomerItem.Gender = radMale.IsChecked == true ? 1 : 0;
-            newItem.CustomerItem.Age = uiAge.Value.HasValue ? Convert.ToInt32(uiAge.Value.Value) : 0;
-            
+            else
+            {
+                newItem.CustomerItem = new Customer();
+                newItem.CustomerItem.ContactInformation = ucCntactInfoPanel.DataContext as ContactInformation;
+                if (newItem.CustomerItem.ContactInformation == null)
+                {
+                    newItem.CustomerItem.ContactInformation = new ContactInformation();
+                }
+                newItem.CustomerItem.ContactInformation.ContactTypeId = (int)ContactType.Customer;
+                newItem.CustomerItem.OrganisationId = Globals.UserLogin.UserOrganisationId;
+                newItem.CustomerItem.FirstName = newItem.FirstName = txtFirstName.Text;
+                newItem.CustomerItem.LastName = newItem.LastName = txtLastName.Text;
+                newItem.CustomerName = newItem.FirstName + " " + newItem.LastName;
+                newItem.CustomerItem.Gender = radMale.IsChecked == true ? 1 : 0;
+                newItem.CustomerItem.Age = uiAge.Value.HasValue ? Convert.ToInt32(uiAge.Value.Value) : 0;
+            }
             newItem.IsChanged = true;
 
             return newItem;

@@ -24,8 +24,9 @@ namespace Mimosa.Apartment.Common
             public const string IsLegacy = "IsLegacy";
             public const string Gender = "Gender";
             public const string Age = "Age";
+            public const string SiteName = "SiteName";
+            public const string RoomName = "RoomName";
             public const string ContactInformationId = "ContactInformationId";
-
         }
 
         #endregion

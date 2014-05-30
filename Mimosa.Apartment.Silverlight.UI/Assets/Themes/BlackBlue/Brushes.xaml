@@ -83,7 +83,7 @@
 
     <!-- ******STRINGS****** -->
     <!-- **************************** -->
-    <System:String x:Key="LogoSourceUrl">/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/mimosa.jpg</System:String>
+    <System:String x:Key="LogoSourceUrl">/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/RubyLogo.png</System:String>
     <BitmapImage
         x:Key="CarbonFiberImage"
         UriSource="/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/carbon-fiber-10x10.png">

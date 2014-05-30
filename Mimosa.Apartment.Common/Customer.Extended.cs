@@ -20,6 +20,15 @@ namespace Mimosa.Apartment.Common
             get { return this.FirstName + " " + this.LastName; }
             set { }
         }
+
+        private string _siteName;
+        [DataMember]
+        public string SiteName { get { return _siteName; } set { if (!object.ReferenceEquals(this.SiteName, value)) { _siteName = value; RaisePropertyChanged("SiteName"); } } }
+
+        private string _roomName;
+        [DataMember]
+        public string RoomName { get { return _roomName; } set { if (!object.ReferenceEquals(this.SiteName, value)) { _roomName = value; RaisePropertyChanged("RoomName"); } } }
+
         #endregion
     }
 }

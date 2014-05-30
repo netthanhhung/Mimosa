@@ -22,7 +22,7 @@
                     x:Name="uiMenuBar"
                     Orientation="Horizontal"
                     VerticalAlignment="Bottom">
-                    <Button x:Name="uiBtnLogo" Margin="0" Padding="0">
+                    <!--<Button x:Name="uiBtnLogo" Margin="0" Padding="0">
                         <Button.Content>
                             <Grid>
                                 <Image x:Name="uiLogo" Width="80" Height="40"
@@ -44,7 +44,7 @@
                                 HorizontalOffset="5">
                             </telerikNavigation:RadContextMenu>
                         </telerikNavigation:RadContextMenu.ContextMenu>
-                    </Button>
+                    </Button>-->
 
                     <!--<local:HeaderMenuButton
                     x:Name="uiSales"
@@ -84,7 +84,10 @@
                     HighlightBrush="{StaticResource BudgetBrush}"></local:HeaderMenuButton>-->
                 </StackPanel>
 
-                <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Bottom" HorizontalAlignment="Right">                    
+                <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                    <Image x:Name="uiLogo" Width="80" Height="40"
+                                Source="{StaticResource LogoSourceUrl}"
+                                Margin="0"></Image>
                     <TextBlock
                         x:Name="uiDeploymentInfo"
                         Foreground="#BBA598"

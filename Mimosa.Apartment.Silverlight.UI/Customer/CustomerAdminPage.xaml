@@ -1,10 +1,16 @@
-﻿<navigation:Page x:Class="Mimosa.Apartment.Silverlight.UI.CustomerAdminPage" Title="Mimosa"
+﻿<navigation:Page x:Class="Mimosa.Apartment.Silverlight.UI.CustomerAdminPage" Title="Ruby Home"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
     xmlns:local="clr-namespace:Mimosa.Apartment.Silverlight.UI"
     xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"             
     xmlns:bg="clr-namespace:TiledBG;assembly=TiledBG"
-    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation">
+    xmlns:telerik="clr-namespace:Telerik.Windows.Controls.Animation;assembly=Telerik.Windows.Controls"
+    xmlns:telerikInput="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input"
+    xmlns:telerikGrid="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.GridView"
+    xmlns:telerikGridView="clr-namespace:Telerik.Windows.Controls.GridView;assembly=Telerik.Windows.Controls.GridView"                 
+    xmlns:telerikChart="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Charting"
+    xmlns:telerikNavigation="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Navigation"
+    xmlns:telerikData="clr-namespace:Telerik.Windows.Data;assembly=Telerik.Windows.Data">
 
     <Grid Style="{StaticResource LayoutRootGridStyle}">
         <Grid.RowDefinitions>
@@ -12,310 +18,235 @@
                 Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition
+        <ScrollViewer x:Name="scrollViewerCustomers" HorizontalScrollBarVisibility="Disabled" 
+                              VerticalScrollBarVisibility="Auto"
+                              BorderThickness="0" Padding="0">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition
                     Height="Auto"></RowDefinition>
-                <RowDefinition
+                    <RowDefinition
                     Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
+                </Grid.RowDefinitions>
 
-            <local:ClippedGrid
+                <local:ClippedGrid
                 Background="{StaticResource DefaultBackgroundGradientBrush}">
-                <local:Highlight
+                    <local:Highlight
                     HighlightBrush="{StaticResource CustomerBrush}"></local:Highlight>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition
                             Width="*"></ColumnDefinition>
-                        <ColumnDefinition
+                            <ColumnDefinition
                             Width="Auto"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
+                        </Grid.ColumnDefinitions>
 
-                    <StackPanel Margin="20,0,0,0" Orientation="Horizontal">
-                        <TextBlock
+                        <StackPanel Margin="20,0,0,0" Orientation="Horizontal">
+                            <TextBlock
                             x:Name="uiTitle"
                             VerticalAlignment="Center"
                             Foreground="White"
                             Text="Customer Administrattion"></TextBlock>
-                        <TextBlock
+                            <TextBlock
                             x:Name="uiParamsDisplay"
                             VerticalAlignment="Center"
                             Foreground="White"
                             Text=""></TextBlock>
-                    </StackPanel>
+                        </StackPanel>
 
-                </Grid>
-            </local:ClippedGrid>
-            <local:ClippedGrid Background="{StaticResource EmployeeImageBrush}"
+                    </Grid>
+                </local:ClippedGrid>
+                <local:ClippedGrid Background="{StaticResource EmployeeImageBrush}"
                                Grid.Row="1" Grid.ColumnSpan="6"/>
-            <local:ClippedGrid
+                <local:ClippedGrid
                     Grid.Row="1" Grid.ColumnSpan="6"
                     Margin="10" Opacity="0.9">
-                <bg:TiledBGControl BorderThickness="0" TiledImageSource="/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/carbon-fiber-10x10.png"/>
 
-                <local:ClippedGrid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="2*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Grid x:Name="gridCustomer">
+                    <local:ClippedGrid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
                             <RowDefinition Height="Auto"></RowDefinition>
                         </Grid.RowDefinitions>
-                        
-                        <Grid>
+
+                        <bg:TiledBGControl BorderThickness="0" TiledImageSource="/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/carbon-fiber-10x10.png"/>
+                        <Grid x:Name="gridCustomer">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
                             </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
 
-                            <StackPanel  Orientation="Horizontal" >
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
 
-                                <TextBlock
-                                    Margin="20,10,5,5"
-                                    VerticalAlignment="Center"
-                                    Text="First name:">
-                                </TextBlock>
-                                <TextBox x:Name="txtFirstName"
-                                    Margin="5,10,5,5" Width="100"
-                                    VerticalAlignment="Center">
-                                </TextBox>
-                                <TextBlock
-                                    Margin="20,10,5,5"
-                                    VerticalAlignment="Center"
-                                    Text="Last name:">
-                                </TextBlock>
-                                <TextBox x:Name="txtLastName"
-                                    Margin="5,10,5,5" Width="100"
-                                    VerticalAlignment="Center">
-                                </TextBox>
+                                <StackPanel  Orientation="Horizontal" Grid.ColumnSpan="2" >
 
-                                <CheckBox x:Name="chkShowInactive" Content="Show Inactive"
-                                      Margin="10,5,0,5" Grid.Column="2" VerticalAlignment="Center"></CheckBox>
+                                    <TextBlock
+                                        Margin="20,10,5,5"
+                                        VerticalAlignment="Center"
+                                        Text="First name:">
+                                        </TextBlock>
+                                        <TextBox x:Name="txtFirstName"
+                                        Margin="5,10,5,5" Width="100"
+                                        VerticalAlignment="Center">
+                                        </TextBox>
+                                        <TextBlock
+                                        Margin="20,10,5,5"
+                                        VerticalAlignment="Center"
+                                        Text="Last name:">
+                                        </TextBlock>
+                                        <TextBox x:Name="txtLastName"
+                                        Margin="5,10,5,5" Width="100"
+                                        VerticalAlignment="Center">
+                                    </TextBox>
 
-                                <Button x:Name="btnSearch" Width="70" Height="25" Margin="20,10,5,5"  Content="Search"></Button>
-                            </StackPanel>
+                                    <CheckBox x:Name="chkHasContract" Content="Has Contract in Site :" IsChecked="True"
+                                      Margin="10,5,0,5" VerticalAlignment="Center"></CheckBox>
+                                    <StackPanel x:Name="panelHasContract" Orientation="Horizontal">
+                                        <!--<TextBlock
+                                            Margin="10,10,5,5"
+                                            VerticalAlignment="Center"
+                                            Text="Site:">
+                                        </TextBlock>-->
+                                        <local:SitePicker
+                                            x:Name="ucSitePicker"
+                                            Grid.Row="0" Margin="5,10,5,5"
+                                            DataListWidth="200" ShowAllSitesItem="True" 
+                                            Style="{StaticResource InputControlStyle}"></local:SitePicker>
+                                        <TextBlock
+                                            Margin="10,10,5,5"
+                                            VerticalAlignment="Center"
+                                            Text="From date:">
+                                        </TextBlock>
+                                        <telerikInput:RadDatePicker
+                                            x:Name="uiDateFrom"
+                                            Margin="5,10,5,5"
+                                            Style="{StaticResource InputControlStyle}">
+                                        </telerikInput:RadDatePicker>
+                                        <TextBlock
+                                            Margin="10,10,5,5"
+                                            VerticalAlignment="Center"
+                                            Text="To date:">
+                                        </TextBlock>
+                                        <telerikInput:RadDatePicker
+                                            x:Name="uiDateTo"
+                                            Margin="5,10,5,5"
+                                            Style="{StaticResource InputControlStyle}"></telerikInput:RadDatePicker>
+                                    </StackPanel>
 
-                            <telerik:RadGridView
+
+
+                                    <CheckBox x:Name="chkShowInactive" Content="Show Inactive"
+                                      Margin="10,5,0,5" VerticalAlignment="Center"></CheckBox>
+
+                                    <Button x:Name="btnSearch" Width="70" Height="25" Margin="20,10,5,5"  Content="Search"></Button>
+                                </StackPanel>
+
+                                <telerikGrid:RadGridView
                                 Margin="10,5,0,5"
                                 x:Name="gvwCustomers"
                                 AutoGenerateColumns="False"
                                 ShowGroupPanel="False" SelectionMode="Single"
                                 CanUserDeleteRows="False" CanUserInsertRows="True" ShowInsertRow="True"
                                 Grid.Row="1" Grid.Column="0">
-                                <telerik:RadGridView.Resources>
-                                    <Style TargetType="TextBlock" BasedOn="{x:Null}"/>
-                                    <Style TargetType="CheckBox" BasedOn="{x:Null}"/>
-                                </telerik:RadGridView.Resources>
-                                <telerik:RadGridView.Columns>
-                                    <telerik:GridViewDataColumn
+                                    <telerikGrid:RadGridView.Resources>
+                                        <Style TargetType="TextBlock" BasedOn="{x:Null}"/>
+                                        <Style TargetType="CheckBox" BasedOn="{x:Null}"/>
+                                    </telerikGrid:RadGridView.Resources>
+                                    <telerikGrid:RadGridView.Columns>
+                                        <telerikGrid:GridViewDataColumn
                                         UniqueName="FirstName"
                                         DataMemberBinding="{Binding FirstName}"
                                         Header="First Name" 
                                         Width="150">
-                                    </telerik:GridViewDataColumn>
-                                    <telerik:GridViewDataColumn
+                                        </telerikGrid:GridViewDataColumn>
+                                        <telerikGrid:GridViewDataColumn
                                         UniqueName="LastName"
                                         DataMemberBinding="{Binding LastName}"
                                         Header="Last Name"
                                         Width="150">
-                                    </telerik:GridViewDataColumn>
-                                    <telerik:GridViewDataColumn
+                                        </telerikGrid:GridViewDataColumn>
+                                        <telerikGrid:GridViewDataColumn
+                                        UniqueName="SiteName"
+                                        DataMemberBinding="{Binding SiteName}"
+                                        Header="Site" IsReadOnly="True"
+                                        Width="150">
+                                        </telerikGrid:GridViewDataColumn>
+                                        <telerikGrid:GridViewDataColumn
                                         UniqueName="Age"
                                         DataMemberBinding="{Binding Age}"
-                                        Header="Age"
+                                        Header="Age" TextAlignment="Right"
                                         Width="70">
-                                    </telerik:GridViewDataColumn>
-                                    <telerik:GridViewComboBoxColumn
+                                        </telerikGrid:GridViewDataColumn>
+                                        <telerikGrid:GridViewComboBoxColumn
                                        DataMemberBinding="{Binding Gender}"
                                        UniqueName="Gender" Header="Gender"
                                        SelectedValueMemberPath="Key" HeaderTextAlignment="Center"
                                        DisplayMemberPath="Value" 
                                        Width="100">
-                                    </telerik:GridViewComboBoxColumn>
+                                        </telerikGrid:GridViewComboBoxColumn>
 
-                                    <telerik:GridViewDataColumn Width="100" Header="Inactive">
-                                        <telerik:GridViewDataColumn.CellStyle>
-                                            <Style TargetType="telerik:GridViewCell">
-                                                <Setter Property="Template">
-                                                    <Setter.Value>
-                                                        <ControlTemplate TargetType="telerik:GridViewCell">
-                                                            <StackPanel>
-                                                                <CheckBox Margin="5, 0, 0, 0"
+                                        <telerikGrid:GridViewDataColumn Width="100" Header="Inactive">
+                                            <telerikGrid:GridViewDataColumn.CellStyle>
+                                                <Style TargetType="telerikGridView:GridViewCell">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="telerikGridView:GridViewCell">
+                                                                <StackPanel>
+                                                                    <CheckBox Margin="5, 0, 0, 0"
                                                                     VerticalAlignment="Center"
                                                                     IsChecked="{Binding IsLegacy, Mode=TwoWay}" />
-                                                            </StackPanel>
-                                                        </ControlTemplate>
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </Style>
-                                        </telerik:GridViewDataColumn.CellStyle>
-                                    </telerik:GridViewDataColumn>
-                                </telerik:RadGridView.Columns>
-                            </telerik:RadGridView>
+                                                                </StackPanel>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </telerikGrid:GridViewDataColumn.CellStyle>
+                                        </telerikGrid:GridViewDataColumn>
+                                    </telerikGrid:RadGridView.Columns>
+                                </telerikGrid:RadGridView>
 
-                            <local:ContactInformationPanel x:Name="ucCntactInfoPanel" Margin="25,5,5,5" 
+                                <local:ContactInformationPanel x:Name="ucCntactInfoPanel" Margin="25,5,5,5" 
                                                         Grid.Row="1" Grid.Column="1"></local:ContactInformationPanel>
 
-                        </Grid>
+                            </Grid>
 
-                        <Grid Grid.Row="1" Margin="0,5,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <local:SingleClickButton x:Name="btnSaveCustomer" Height="25" Width="80" Grid.Column="1" Content="Save" 
+                            <Grid Grid.Row="1" Margin="0,5,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <local:SingleClickButton x:Name="btnSaveCustomer" Height="25" Width="80" Grid.Column="1" Content="Save" 
                             HorizontalAlignment="Right" Margin="10,0,5,10"/>
-                            <Button x:Name="btnCancelCustomer" Height="25" Width="80" Grid.Column="2" Content="Cancel" 
+                                <Button x:Name="btnCancelCustomer" Height="25" Width="80" Grid.Column="2" Content="Cancel" 
                             HorizontalAlignment="Left" Margin="10,0,5,10"/>
+                            </Grid>
+
                         </Grid>
 
-                    </Grid>
-                    
-                    <Grid x:Name="gridDetails" Margin="10,10,10,10" Grid.Row="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"></RowDefinition>
-                            <RowDefinition Height="Auto"></RowDefinition>
-                            <RowDefinition Height="Auto"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <TextBlock Text="Contracts" Margin="0,0,5,5"></TextBlock>
-                        <telerik:RadGridView
-                            Margin="0,0,5,5"
-                            x:Name="gvwContracts"
-                            AutoGenerateColumns="False"
-                            ShowGroupPanel="False" IsReadOnly="True" ShowColumnFooters="True"
-                            CanUserDeleteRows="False" CanUserInsertRows="False" ShowInsertRow="False"
-                            Grid.Row="1">
-                            <telerik:RadGridView.Resources>
-                                <Style TargetType="TextBlock" BasedOn="{x:Null}"/>
-                                <Style TargetType="CheckBox" BasedOn="{x:Null}"/>
-                            </telerik:RadGridView.Resources>
-                            <telerik:RadGridView.Columns>
-                                <telerik:GridViewDataColumn
-                                    UniqueName="Date"
-                                    DataMemberBinding="{Binding Date}"
-                                    DataFormatString="{} {0:dd/MM/yyyy}"
-                                    Header="Date" Footer="Total:"
-                                    Width="70">
-                                </telerik:GridViewDataColumn>
-                                <telerik:GridViewDataColumn
-                                    UniqueName="LicenseKey"
-                                    DataMemberBinding="{Binding LicenseKey}"
-                                    Header="License Key"
-                                    Width="200">
-                                </telerik:GridViewDataColumn>
-                                <telerik:GridViewDataColumn
-                                    UniqueName="DomainName"
-                                    DataMemberBinding="{Binding DomainName}"
-                                    Header="Domain Name"
-                                    Width="*">
-                                </telerik:GridViewDataColumn>
-
-                                <telerik:GridViewDataColumn
-                                    UniqueName="NbrSites"
-                                    DataMemberBinding="{Binding NbrSites}"
-                                    DataFormatString="{} {0:0}"
-                                    Header="Nbr. Sites"
-                                    Width="70">
-                                </telerik:GridViewDataColumn>
-                                <telerik:GridViewDataColumn
-                                    UniqueName="ActivatedDate"
-                                    DataMemberBinding="{Binding ActivatedDate}"                                    
-                                    DataFormatString="{} {0:dd/MM/yyyy}"
-                                    Header="Activated Date"
-                                    Width="100">
-                                </telerik:GridViewDataColumn>
-                                <telerik:GridViewDataColumn
-                                    UniqueName="ExpiredDate"
-                                    DataMemberBinding="{Binding ExpiredDate}"
-                                    DataFormatString="{} {0:dd/MM/yyyy}"
-                                    Header="Expired Date"
-                                    Width="100">
-                                </telerik:GridViewDataColumn>
-                                <telerik:GridViewDataColumn
-                                    UniqueName="Package"
-                                    DataMemberBinding="{Binding Package.Name}"
-                                    Header="Package"
-                                    Width="100">
-                                </telerik:GridViewDataColumn>
-                                <telerik:GridViewDataColumn
-                                    UniqueName="AdditionalModules"
-                                    DataMemberBinding="{Binding AdditionalModulesString}"
-                                    Header="Additional Modules"
-                                    Width="150">
-                                </telerik:GridViewDataColumn>
-                                <telerik:GridViewDataColumn
-                                    UniqueName="CompetitorSources"
-                                    DataMemberBinding="{Binding CompetitorSourcesString}"
-                                    Header="Competitor Sources"
-                                    Width="150">
-                                </telerik:GridViewDataColumn>
-                                <telerik:GridViewDataColumn
-                                    UniqueName="TotalPrice"
-                                    DataMemberBinding="{Binding TotalPrice}"
-                                    DataFormatString="{} {0:#,##0.00}"
-                                    Header="Total Price"
-                                    Width="100">
-                                    <telerik:GridViewDataColumn.AggregateFunctions>
-                                        <telerik:SumFunction ResultFormatString="{} {0:#,##0.00}"/>
-                                    </telerik:GridViewDataColumn.AggregateFunctions>
-                                </telerik:GridViewDataColumn>
-                                <telerik:GridViewDataColumn Width="50" Header="Inactive">
-                                    <telerik:GridViewDataColumn.CellStyle>
-                                        <Style TargetType="telerik:GridViewCell">
-                                            <Setter Property="Template">
-                                                <Setter.Value>
-                                                    <ControlTemplate TargetType="telerik:GridViewCell">
-                                                        <StackPanel>
-                                                            <CheckBox Margin="5, 0, 0, 0"
-                                                            VerticalAlignment="Center" IsEnabled="False"
-                                                            IsChecked="{Binding IsLegacy, Mode=TwoWay}" />
-                                                        </StackPanel>
-                                                    </ControlTemplate>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Style>
-                                    </telerik:GridViewDataColumn.CellStyle>
-                                </telerik:GridViewDataColumn>
-                                <telerik:GridViewDataColumn Width="25">
-                                    <telerik:GridViewDataColumn.CellStyle>
-                                        <Style TargetType="telerik:GridViewCell">
-                                            <Setter Property="Template">
-                                                <Setter.Value>
-                                                    <ControlTemplate TargetType="telerik:GridViewCell">
-                                                        <StackPanel>
-                                                            <Button x:Name="btnSelectContract" Width="23" Tag="{Binding ContractId}" >
-                                                                <Image x:Name="imgSelectContract" Source="/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/grid-select.png" Stretch="Fill"/>
-                                                                <ToolTipService.ToolTip>
-                                                                    <ToolTip x:Name="tooltipContract" Content="Click to see contract details"></ToolTip>
-                                                                </ToolTipService.ToolTip>
-                                                            </Button>
-                                                        </StackPanel>
-                                                    </ControlTemplate>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Style>
-                                    </telerik:GridViewDataColumn.CellStyle>
-                                </telerik:GridViewDataColumn>
-                            </telerik:RadGridView.Columns>
-                        </telerik:RadGridView>
-
-                        <local:SingleClickButton x:Name="btnNewContract" Height="25" Width="80" Grid.Row="2" Content="New Contract" 
-                            HorizontalAlignment="Right" Margin="10,0,5,10"/>
-                    </Grid>
+                        <Grid x:Name="gridDetails" Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <local:BookingAdmin x:Name="ucBookingAdmin" Grid.Row="1"></local:BookingAdmin>
+                        </Grid>
 
 
+                    </local:ClippedGrid>
                 </local:ClippedGrid>
-            </local:ClippedGrid>
-        </Grid>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 
 </navigation:Page>

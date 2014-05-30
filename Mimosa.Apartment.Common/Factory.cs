@@ -311,6 +311,10 @@ namespace Mimosa.Apartment.Common
             input.PhoneNumber = Utilities.ToString(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.PhoneNumber]);
             input.FaxNumber = Utilities.ToString(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.FaxNumber]);
             input.Email = Utilities.ToString(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.Email]);
+            input.DoB = Utilities.ToNDateTime(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.DoB]);
+            input.Visa = Utilities.ToString(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.Visa]);
+            input.VisaValidFrom = Utilities.ToNDateTime(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.VisaValidFrom]);
+            input.VisaValidTo = Utilities.ToNDateTime(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.VisaValidTo]);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
@@ -378,6 +382,84 @@ namespace Mimosa.Apartment.Common
             }
         }
         #endregion
+
+        #region SiteGroup
+
+        public static SiteGroup SiteGroup(System.Data.IDataReader reader)
+        {
+            SiteGroup result = null;
+
+            if (null != reader && reader.Read())
+            {
+                result = new SiteGroup();
+                PopulateSiteGroup(result, reader);
+            }
+
+            return result;
+        }
+
+        public static void PopulateSiteGroup(SiteGroup input, System.Data.IDataReader reader)
+        {
+            PopulateRecord(input, reader);
+            input.RecordId = input.SiteGroupId = Utilities.ToInt(reader[Mimosa.Apartment.Common.SiteGroup.ColumnNames.SiteGroupId]);
+            input.GroupName = Utilities.ToString(reader[Mimosa.Apartment.Common.SiteGroup.ColumnNames.GroupName]);
+            input.CanDelete = Utilities.ToBool(reader[Mimosa.Apartment.Common.SiteGroup.ColumnNamesExtended.CanDelete]);
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public static void FillSiteGroupList(List<SiteGroup> list, System.Data.IDataReader reader)
+        {
+            list.Clear();
+            SiteGroup item;
+            while (true)
+            {
+                item = Factory.SiteGroup(reader);
+                if (null == item) break;
+                list.Add(item);
+            }
+        }
+        #endregion
+
+        #region SiteGroupSite
+
+        public static SiteGroupSite SiteGroupSite(System.Data.IDataReader reader)
+        {
+            SiteGroupSite result = null;
+
+            if (null != reader && reader.Read())
+            {
+                result = new SiteGroupSite();
+                PopulateSiteGroupSite(result, reader);
+            }
+
+            return result;
+        }
+
+        public static void PopulateSiteGroupSite(SiteGroupSite input, System.Data.IDataReader reader)
+        {
+            PopulateRecord(input, reader);
+            input.RecordId = input.SiteGroupSiteId = Utilities.ToInt(reader[Mimosa.Apartment.Common.SiteGroupSite.ColumnNames.SiteGroupSiteId]);
+            input.SiteGroupId = Utilities.ToInt(reader[Mimosa.Apartment.Common.SiteGroupSite.ColumnNames.SiteGroupId]);
+            input.SiteId = Utilities.ToInt(reader[Mimosa.Apartment.Common.SiteGroupSite.ColumnNames.SiteId]);
+
+            input.SiteName = Utilities.ToString(reader[Mimosa.Apartment.Common.SiteGroupSite.ColumnNamesExtended.SiteName]);
+            input.GroupName = Utilities.ToString(reader[Mimosa.Apartment.Common.SiteGroupSite.ColumnNamesExtended.GroupName]);
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public static void FillSiteGroupSiteList(List<SiteGroupSite> list, System.Data.IDataReader reader)
+        {
+            list.Clear();
+            SiteGroupSite item;
+            while (true)
+            {
+                item = Factory.SiteGroupSite(reader);
+                if (null == item) break;
+                list.Add(item);
+            }
+        }
+        #endregion
+
 
         #region Site
         /// <summary>
@@ -455,12 +537,15 @@ namespace Mimosa.Apartment.Common
         {
             PopulateRecord(input, reader);
             input.RecordId = Utilities.ToInt(reader[Mimosa.Apartment.Common.Customer.ColumnNames.CustomerId]);
+            input.OrganisationId = Utilities.ToInt(reader[Mimosa.Apartment.Common.Customer.ColumnNames.OrganisationId]);
             input.FirstName = Utilities.ToString(reader[Mimosa.Apartment.Common.Customer.ColumnNames.FirstName]);
             input.LastName = Utilities.ToString(reader[Mimosa.Apartment.Common.Customer.ColumnNames.LastName]);
             input.IsLegacy = Utilities.ToBool(reader[Mimosa.Apartment.Common.Customer.ColumnNames.IsLegacy]);
             input.Gender = Utilities.ToNInt(reader[Mimosa.Apartment.Common.Customer.ColumnNames.Gender]);
             input.Age = Utilities.ToNInt(reader[Mimosa.Apartment.Common.Customer.ColumnNames.Age]);
-            input.ContactInformationId = Utilities.ToInt(reader[Mimosa.Apartment.Common.Customer.ColumnNames.ContactInformationId]);            
+            input.ContactInformationId = Utilities.ToInt(reader[Mimosa.Apartment.Common.Customer.ColumnNames.ContactInformationId]);
+            input.SiteName = Utilities.ToString(reader[Mimosa.Apartment.Common.Customer.ColumnNames.SiteName]);
+            input.RoomName = Utilities.ToString(reader[Mimosa.Apartment.Common.Customer.ColumnNames.RoomName]);            
             
         }
 
@@ -540,7 +625,7 @@ namespace Mimosa.Apartment.Common
             input.IsLegacy = Utilities.ToBool(reader[Mimosa.Apartment.Common.Equipment.ColumnNames.IsLegacy]);
             input.RealPrice = Utilities.ToNDecimal(reader[Mimosa.Apartment.Common.Equipment.ColumnNames.RealPrice]);
             input.RentPrice = Utilities.ToNDecimal(reader[Mimosa.Apartment.Common.Equipment.ColumnNames.RentPrice]);
-
+            input.Unit = Utilities.ToString(reader[Mimosa.Apartment.Common.Equipment.ColumnNames.Unit]);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
@@ -581,6 +666,7 @@ namespace Mimosa.Apartment.Common
             input.Description = Utilities.ToString(reader[Mimosa.Apartment.Common.Service.ColumnNames.Description]);
             input.IsLegacy = Utilities.ToBool(reader[Mimosa.Apartment.Common.Service.ColumnNames.IsLegacy]);
             input.Price = Utilities.ToNDecimal(reader[Mimosa.Apartment.Common.Service.ColumnNames.Price]);
+            input.Unit = Utilities.ToString(reader[Mimosa.Apartment.Common.Equipment.ColumnNames.Unit]);
 
         }
 
@@ -711,6 +797,7 @@ namespace Mimosa.Apartment.Common
             input.Equipment = Utilities.ToString(reader[Mimosa.Apartment.Common.RoomEquipment.ColumnNames.Equipment]);
             input.Price = Utilities.ToNDecimal(reader[Mimosa.Apartment.Common.RoomEquipment.ColumnNames.Price]);
             input.Description = Utilities.ToString(reader[Mimosa.Apartment.Common.RoomEquipment.ColumnNames.Description]);
+            input.Unit = Utilities.ToString(reader[Mimosa.Apartment.Common.RoomEquipment.ColumnNames.Unit]);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
@@ -751,6 +838,7 @@ namespace Mimosa.Apartment.Common
             input.Service = Utilities.ToString(reader[Mimosa.Apartment.Common.RoomService.ColumnNames.Service]);
             input.Price = Utilities.ToNDecimal(reader[Mimosa.Apartment.Common.RoomService.ColumnNames.Price]);
             input.Description = Utilities.ToString(reader[Mimosa.Apartment.Common.RoomService.ColumnNames.Description]);
+            input.Unit = Utilities.ToString(reader[Mimosa.Apartment.Common.RoomService.ColumnNames.Unit]);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
@@ -834,8 +922,10 @@ namespace Mimosa.Apartment.Common
             input.RoomName = Utilities.ToString(reader[Mimosa.Apartment.Common.Booking.ColumnNames.RoomName]);
             input.CustomerId = Utilities.ToInt(reader[Mimosa.Apartment.Common.Booking.ColumnNames.CustomerId]);
             input.FirstName = Utilities.ToString(reader[Mimosa.Apartment.Common.Booking.ColumnNames.FirstName]);
-            input.LastName = Utilities.ToString(reader[Mimosa.Apartment.Common.Booking.ColumnNames.LastName]);
+            input.LastName = Utilities.ToString(reader[Mimosa.Apartment.Common.Booking.ColumnNames.LastName]);            
             input.CustomerName = Utilities.ToString(reader[Mimosa.Apartment.Common.Booking.ColumnNames.CustomerName]);
+            input.Customer2Id = Utilities.ToNInt(reader[Mimosa.Apartment.Common.Booking.ColumnNames.Customer2Id]);
+            input.Customer2Name = Utilities.ToString(reader[Mimosa.Apartment.Common.Booking.ColumnNames.Customer2Name]);
             input.BookDate = Utilities.ToDateTime(reader[Mimosa.Apartment.Common.Booking.ColumnNames.BookDate]);
             input.BookingStatusId = Utilities.ToInt(reader[Mimosa.Apartment.Common.Booking.ColumnNames.BookingStatusId]);
             input.BookingStatus = Utilities.ToString(reader[Mimosa.Apartment.Common.Booking.ColumnNames.BookingStatus]);
@@ -890,6 +980,7 @@ namespace Mimosa.Apartment.Common
             input.Equipment = Utilities.ToString(reader[Mimosa.Apartment.Common.BookingRoomEquipment.ColumnNames.Equipment]);
             input.Price = Utilities.ToNDecimal(reader[Mimosa.Apartment.Common.BookingRoomEquipment.ColumnNames.Price]);
             input.Description = Utilities.ToString(reader[Mimosa.Apartment.Common.BookingRoomEquipment.ColumnNames.Description]);
+            input.Unit = Utilities.ToString(reader[Mimosa.Apartment.Common.BookingRoomEquipment.ColumnNames.Unit]);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
@@ -900,6 +991,50 @@ namespace Mimosa.Apartment.Common
             while (true)
             {
                 item = Factory.BookingRoomEquipment(reader);
+                if (null == item) break;
+                list.Add(item);
+            }
+        }
+        #endregion
+
+        #region BookingRoomEquipmentDetail
+
+        public static BookingRoomEquipmentDetail BookingRoomEquipmentDetail(System.Data.IDataReader reader)
+        {
+            BookingRoomEquipmentDetail result = null;
+
+            if (null != reader && reader.Read())
+            {
+                result = new BookingRoomEquipmentDetail();
+                PopulateBookingRoomEquipmentDetail(result, reader);
+            }
+
+            return result;
+        }
+
+        public static void PopulateBookingRoomEquipmentDetail(BookingRoomEquipmentDetail input, System.Data.IDataReader reader)
+        {
+            PopulateRecord(input, reader);
+            input.RecordId = input.BookingRoomEquipmentDetailId = Utilities.ToInt(reader[Mimosa.Apartment.Common.BookingRoomEquipmentDetail.ColumnNames.BookingRoomEquipmentDetailId]);
+            input.BookingRoomEquipmentId = Utilities.ToInt(reader[Mimosa.Apartment.Common.BookingRoomEquipmentDetail.ColumnNames.BookingRoomEquipmentId]);
+            input.Quantity = Utilities.ToNDecimal(reader[Mimosa.Apartment.Common.BookingRoomEquipmentDetail.ColumnNames.Quantity]);
+            input.DateStart = Utilities.ToNDateTime(reader[Mimosa.Apartment.Common.BookingRoomEquipmentDetail.ColumnNames.DateStart]);
+            input.DateEnd = Utilities.ToNDateTime(reader[Mimosa.Apartment.Common.BookingRoomEquipmentDetail.ColumnNames.DateEnd]);
+            input.Unit = Utilities.ToString(reader[Mimosa.Apartment.Common.BookingRoomEquipmentDetail.ColumnNames.Unit]);
+            input.Price = Utilities.ToNDecimal(reader[Mimosa.Apartment.Common.BookingRoomEquipmentDetail.ColumnNames.Price]);
+            input.TotalPrice = Utilities.ToNDecimal(reader[Mimosa.Apartment.Common.BookingRoomEquipmentDetail.ColumnNames.TotalPrice]);
+            input.Payment = Utilities.ToBool(reader[Mimosa.Apartment.Common.BookingRoomEquipmentDetail.ColumnNames.Payment]);
+            input.Description = Utilities.ToString(reader[Mimosa.Apartment.Common.BookingRoomEquipmentDetail.ColumnNames.Description]);
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public static void FillBookingRoomEquipmentDetailList(List<BookingRoomEquipmentDetail> list, System.Data.IDataReader reader)
+        {
+            list.Clear();
+            BookingRoomEquipmentDetail item;
+            while (true)
+            {
+                item = Factory.BookingRoomEquipmentDetail(reader);
                 if (null == item) break;
                 list.Add(item);
             }
@@ -931,6 +1066,7 @@ namespace Mimosa.Apartment.Common
             input.Service = Utilities.ToString(reader[Mimosa.Apartment.Common.BookingRoomService.ColumnNames.Service]);
             input.Price = Utilities.ToNDecimal(reader[Mimosa.Apartment.Common.BookingRoomService.ColumnNames.Price]);
             input.Description = Utilities.ToString(reader[Mimosa.Apartment.Common.BookingRoomService.ColumnNames.Description]);
+            input.Unit = Utilities.ToString(reader[Mimosa.Apartment.Common.BookingRoomEquipment.ColumnNames.Unit]);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
@@ -946,5 +1082,50 @@ namespace Mimosa.Apartment.Common
             }
         }
         #endregion
+
+        #region BookingRoomServiceDetail
+
+        public static BookingRoomServiceDetail BookingRoomServiceDetail(System.Data.IDataReader reader)
+        {
+            BookingRoomServiceDetail result = null;
+
+            if (null != reader && reader.Read())
+            {
+                result = new BookingRoomServiceDetail();
+                PopulateBookingRoomServiceDetail(result, reader);
+            }
+
+            return result;
+        }
+
+        public static void PopulateBookingRoomServiceDetail(BookingRoomServiceDetail input, System.Data.IDataReader reader)
+        {
+            PopulateRecord(input, reader);
+            input.RecordId = input.BookingRoomServiceDetailId = Utilities.ToInt(reader[Mimosa.Apartment.Common.BookingRoomServiceDetail.ColumnNames.BookingRoomServiceDetailId]);
+            input.BookingRoomServiceId = Utilities.ToInt(reader[Mimosa.Apartment.Common.BookingRoomServiceDetail.ColumnNames.BookingRoomServiceId]);
+            input.Quantity = Utilities.ToNDecimal(reader[Mimosa.Apartment.Common.BookingRoomServiceDetail.ColumnNames.Quantity]);
+            input.DateStart = Utilities.ToNDateTime(reader[Mimosa.Apartment.Common.BookingRoomServiceDetail.ColumnNames.DateStart]);
+            input.DateEnd = Utilities.ToNDateTime(reader[Mimosa.Apartment.Common.BookingRoomServiceDetail.ColumnNames.DateEnd]);
+            input.Unit = Utilities.ToString(reader[Mimosa.Apartment.Common.BookingRoomServiceDetail.ColumnNames.Unit]);
+            input.Price = Utilities.ToNDecimal(reader[Mimosa.Apartment.Common.BookingRoomServiceDetail.ColumnNames.Price]);
+            input.TotalPrice = Utilities.ToNDecimal(reader[Mimosa.Apartment.Common.BookingRoomServiceDetail.ColumnNames.TotalPrice]);
+            input.Payment = Utilities.ToBool(reader[Mimosa.Apartment.Common.BookingRoomServiceDetail.ColumnNames.Payment]);
+            input.Description = Utilities.ToString(reader[Mimosa.Apartment.Common.BookingRoomServiceDetail.ColumnNames.Description]);
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public static void FillBookingRoomServiceDetailList(List<BookingRoomServiceDetail> list, System.Data.IDataReader reader)
+        {
+            list.Clear();
+            BookingRoomServiceDetail item;
+            while (true)
+            {
+                item = Factory.BookingRoomServiceDetail(reader);
+                if (null == item) break;
+                list.Add(item);
+            }
+        }
+        #endregion
+
     }
 }

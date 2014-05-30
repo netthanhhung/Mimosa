@@ -94,6 +94,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                 OriginalImageList.Add(item);
                 ImageItem imageItem = new ImageItem(item);
                 imageItem.btnDelete.Click += new RoutedEventHandler(btnDelete_Click);
+                imageItem.btnDelete.Visibility = this.IsReadOnly ? Visibility.Collapsed : Visibility.Visible;
                 listImages.Items.Add(imageItem);
             }
 
@@ -241,6 +242,7 @@ namespace Mimosa.Apartment.Silverlight.UI
 
             ImageItem imageItem = new ImageItem(newImage);
             imageItem.btnDelete.Click += new RoutedEventHandler(btnDelete_Click);
+            imageItem.btnDelete.Visibility = this.IsReadOnly ? Visibility.Collapsed : Visibility.Visible;
             listImages.Items.Add(imageItem);
 
             uiPopupUpload.Close();

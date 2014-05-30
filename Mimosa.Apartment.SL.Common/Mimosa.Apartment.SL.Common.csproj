@@ -68,8 +68,14 @@
     <Compile Include="..\Mimosa.Apartment.Common\BookingRoomEquipment.Generated.cs">
       <Link>BookingRoomEquipment.Generated.cs</Link>
     </Compile>
+    <Compile Include="..\Mimosa.Apartment.Common\BookingRoomEquipmentDetail.Generated.cs">
+      <Link>BookingRoomEquipmentDetail.Generated.cs</Link>
+    </Compile>
     <Compile Include="..\Mimosa.Apartment.Common\BookingRoomService.Generated.cs">
       <Link>BookingRoomService.Generated.cs</Link>
+    </Compile>
+    <Compile Include="..\Mimosa.Apartment.Common\BookingRoomServiceDetail.Generated.cs">
+      <Link>BookingRoomServiceDetail.Generated.cs</Link>
     </Compile>
     <Compile Include="..\Mimosa.Apartment.Common\BookingStatus.cs">
       <Link>BookingStatus.cs</Link>

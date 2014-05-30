@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
   <siteMapNode
-	title="Logo"
-	description="Mimosa Logo">
+	title="[A]dmin"
+	description="Administration">
 	<siteMapNode
 	  url="/HomePage.xaml"
 	  title="Home"
@@ -27,6 +27,10 @@
 		  url="/Administration/PortalAdminPage.xaml"
 		  title="Organisagion Administration"
 		  description="Organisagion Administration"/>
+		<siteMapNode
+		  url="/Administration/SiteGroupAdminPage.xaml"
+		  title="Site Group Administration"
+		  description="Site Group Administration"/>
 		<siteMapNode
 		  url="/Administration/SiteAdminPage.xaml"
 		  title="Site Administration"

@@ -136,6 +136,9 @@
     <Compile Include="Administration\SiteAdminPage.xaml.cs">
       <DependentUpon>SiteAdminPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Administration\SiteGroupAdminPage.xaml.cs">
+      <DependentUpon>SiteGroupAdminPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Common\LayoutComponentType.cs" />
     <Compile Include="Administration\PortalAdminPage.xaml.cs">
       <DependentUpon>PortalAdminPage.xaml</DependentUpon>
@@ -247,6 +250,18 @@
     <Compile Include="Sales\BookingNew.xaml.cs">
       <DependentUpon>BookingNew.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Sales\BookingAdmin.xaml.cs">
+      <DependentUpon>BookingAdmin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\ServiceDetails.xaml.cs">
+      <DependentUpon>ServiceDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\EquipmentDetails.xaml.cs">
+      <DependentUpon>EquipmentDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\CustomerDetails.xaml.cs">
+      <DependentUpon>CustomerDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Service References\ApartmentService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -255,11 +270,31 @@
     <Compile Include="ViewModels\LoginVM.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Administration\SiteGroupAdminPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Sales\BookingAdminPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Sales\BookingNew.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Sales\BookingAdmin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Sales\ServiceDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Sales\EquipmentDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Sales\CustomerDetails.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -444,7 +479,9 @@
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.AspUser.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.Booking.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.BookingRoomEquipment.datasource" />
+    <None Include="Properties\DataSources\Mimosa.Apartment.Common.BookingRoomEquipmentDetail.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.BookingRoomService.datasource" />
+    <None Include="Properties\DataSources\Mimosa.Apartment.Common.BookingRoomServiceDetail.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.Component.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.ContactInformation.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.Country.datasource" />
@@ -459,6 +496,7 @@
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.RoomType.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.Service.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.Site.datasource" />
+    <None Include="Properties\DataSources\Mimosa.Apartment.Common.SiteGroup.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.UserRoleAuth.datasource" />
     <None Include="Service References\ApartmentService\ApartmentService.wsdl" />
     <None Include="Service References\ApartmentService\ApartmentService.xsd">
@@ -481,6 +519,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ApartmentService\Mimosa.Apartment.Silverlight.UI.ApartmentService.GlobalVariable.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ApartmentService\Mimosa.Apartment.Silverlight.UI.ApartmentService.SiteGroupSite.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ApartmentService\Mimosa.Apartment.Silverlight.UI.ApartmentService.UserLogin.datasource">
@@ -526,6 +567,7 @@
     <Resource Include="Assets\Images\StepForward.png" />
     <Resource Include="Assets\Images\Transparent.png" />
     <Resource Include="Assets\Images\uncle-scrooge.png" />
+    <Resource Include="Assets\Images\RubyLogo.png" />
     <Content Include="Properties\AppManifest.xml" />
     <Content Include="ServiceReferences.ClientConfig">
       <SubType>Designer</SubType>

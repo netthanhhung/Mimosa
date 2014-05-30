@@ -29,8 +29,9 @@ namespace Mimosa.Apartment.Silverlight.UI
 
         public CustomerAdminPage()
         {
-            InitializeComponent();            
-            
+            InitializeComponent();
+            ucSitePicker.Init();
+            ucSitePicker.InitComplete += new EventHandler(ucSitePicker_InitComplete);
             btnSaveCustomer.Click += new RoutedEventHandler(btnSaveCustomer_Click);
             btnCancelCustomer.Click += new RoutedEventHandler(btnCancelCustomer_Click);
             gvwCustomers.SelectionChanged += new EventHandler<Telerik.Windows.Controls.SelectionChangeEventArgs>(gvwCustomers_SelectionChanged);
@@ -39,7 +40,7 @@ namespace Mimosa.Apartment.Silverlight.UI
             gvwCustomers.RowEditEnded += new EventHandler<GridViewRowEditEndedEventArgs>(gvwCustomers_RowEditEnded);
 
             Dictionary<int, string> genderDic = new Dictionary<int, string>();
-            genderDic.Add(0, string.Empty);
+            genderDic.Add(-1, string.Empty);
             genderDic.Add((int)Enums.Gender.Male, Enums.Gender.Male.ToString());
             genderDic.Add((int)Enums.Gender.Female, Enums.Gender.Female.ToString());
             ((GridViewComboBoxColumn)this.gvwCustomers.Columns["Gender"]).ItemsSource = genderDic;
@@ -47,6 +48,25 @@ namespace Mimosa.Apartment.Silverlight.UI
             ucCntactInfoPanel.btnSaveContact.Visibility = Visibility.Collapsed;
 
             btnSearch.Click += new RoutedEventHandler(btnSearch_Click);
+            chkHasContract.Checked += new RoutedEventHandler(chkHasContract_CheckChanged);
+            chkHasContract.Unchecked += new RoutedEventHandler(chkHasContract_CheckChanged);
+            uiDateFrom.SelectedDate = DateTime.Today;
+
+            gridDetails.Visibility = ucCntactInfoPanel.Visibility = System.Windows.Visibility.Collapsed;
+
+            ucBookingAdmin.RebindBookingList +=new EventHandler(ucBookingAdmin_RebindBookingList);
+
+            UiHelper.ApplyMouseWheelScrollViewer(scrollViewerCustomers);
+        }
+
+        void ucSitePicker_InitComplete(object sender, EventArgs e)
+        {
+            BeginRebindCustomer();
+        }
+
+        void chkHasContract_CheckChanged(object sender, RoutedEventArgs e)
+        {
+            panelHasContract.Visibility = chkHasContract.IsChecked == true ? Visibility.Visible : Visibility.Collapsed;
         }
 
         void btnSearch_Click(object sender, RoutedEventArgs e)
@@ -57,7 +77,14 @@ namespace Mimosa.Apartment.Silverlight.UI
         private void BeginRebindCustomer()
         {
             Globals.IsBusy = true;
-            DataServiceHelper.ListCustomerAsync(Globals.UserLogin.UserOrganisationId, null, txtFirstName.Text.Trim(), txtLastName.Text.Trim(), chkShowInactive.IsChecked == true, ListCustomerCompleted);
+            int? siteId = null;
+            if (ucSitePicker.SiteId > 0)
+            {
+                siteId = ucSitePicker.SiteId;
+            }
+            DataServiceHelper.ListCustomerAsync(Globals.UserLogin.UserOrganisationId, null, txtFirstName.Text.Trim(), txtLastName.Text.Trim(), 
+                siteId, chkHasContract.IsChecked == true, uiDateFrom.SelectedDate, uiDateTo.SelectedDate,
+                chkShowInactive.IsChecked == true, ListCustomerCompleted);
         }
 
         void ListCustomerCompleted(List<Customer> customerList)
@@ -183,10 +210,33 @@ namespace Mimosa.Apartment.Silverlight.UI
                     ucCntactInfoPanel.DataContext = selectedCustomer.ContactInformation;
 
                     gridDetails.Visibility = ucCntactInfoPanel.Visibility = System.Windows.Visibility.Visible;
-                    //txtContactInfo.Text = string.Format(UserMessages.ContactInfoFor, selectedCustomer.Name);
+
+                    ucBookingAdmin.CustomerItem = selectedCustomer;
+                    RebindBookingData();
                 }
             }
         }
+
+        void ucBookingAdmin_RebindBookingList(object sender, EventArgs e)
+        {
+            RebindBookingData();
+        }
+
+        private void RebindBookingData()
+        {
+            if (_seletedCustomerId > 0)
+            {
+                Globals.IsBusy = true;
+                DataServiceHelper.ListBookingAsync(Globals.UserLogin.UserOrganisationId, null, null, null, null, null, _seletedCustomerId, null, null, null, ListBookingCompleted);
+            }
+        }
+
+        void ListBookingCompleted(List<Booking> itemSource)
+        {
+            Globals.IsBusy = false;
+            ucBookingAdmin.BindBookingList(itemSource);
+        }
+
 
         void CustomerItem_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {

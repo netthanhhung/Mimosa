@@ -16,6 +16,7 @@ namespace Mimosa.Apartment.Common
                 , Utilities.MakeInputParameter(ColumnNames.IsLegacy, IsLegacy)
                 , Utilities.MakeInputParameter(ColumnNames.RealPrice, RealPrice)
                 , Utilities.MakeInputParameter(ColumnNames.RentPrice, RentPrice)
+                , Utilities.MakeInputParameter(ColumnNames.Unit, Unit)
 			};
         }
     }

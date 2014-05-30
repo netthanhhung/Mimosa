@@ -24,9 +24,11 @@ namespace Mimosa.Apartment.Common
             public const string RoomId = "RoomId";
             public const string RoomName = "RoomName";
             public const string CustomerId = "CustomerId";
+            public const string Customer2Id = "Customer2Id";
             public const string FirstName = "FirstName";
             public const string LastName = "LastName";
             public const string CustomerName = "CustomerName";
+            public const string Customer2Name = "Customer2Name";
             public const string BookDate = "BookDate";
             public const string BookingStatusId = "BookingStatusId";
             public const string BookingStatus = "BookingStatus";
@@ -63,13 +65,21 @@ namespace Mimosa.Apartment.Common
         [DataMember]
         public string RoomName { get { return _roomName; } set { if (!object.ReferenceEquals(this.RoomName, value)) { _roomName = value; RaisePropertyChanged("RoomName"); } } }
 
-        private int _customerId;
+        private int? _customerId;
         [DataMember]
-        public int CustomerId { get { return _customerId; } set { if (!this.CustomerId.Equals(value)) { _customerId = value; RaisePropertyChanged("CustomerId"); } } }
+        public int? CustomerId { get { return _customerId; } set { if (!this.CustomerId.Equals(value)) { _customerId = value; RaisePropertyChanged("CustomerId"); } } }
 
-        private string _CustomerName;
+        private int? _customer2Id;
         [DataMember]
-        public string CustomerName { get { return _CustomerName; } set { if (!object.ReferenceEquals(this.CustomerName, value)) { _CustomerName = value; RaisePropertyChanged("CustomerName"); } } }
+        public int? Customer2Id { get { return _customer2Id; } set { if (!this.Customer2Id.Equals(value)) { _customer2Id = value; RaisePropertyChanged("Customer2Id"); } } }
+
+        private string _customerName;
+        [DataMember]
+        public string CustomerName { get { return _customerName; } set { if (!object.ReferenceEquals(this.CustomerName, value)) { _customerName = value; RaisePropertyChanged("CustomerName"); } } }
+
+        private string _customer2Name;
+        [DataMember]
+        public string Customer2Name { get { return _customer2Name; } set { if (!object.ReferenceEquals(this.Customer2Name, value)) { _customer2Name = value; RaisePropertyChanged("Customer2Name"); } } }
 
         private string _firstName;
         [DataMember]

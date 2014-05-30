@@ -106,67 +106,70 @@
                     VerticalAlignment="Center"
                     Text="Customer:">
             </TextBlock>
-            
-            <Grid VerticalAlignment="Top" Grid.Row="1" Margin="5">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="145"></ColumnDefinition>
-                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
 
-                <TextBlock
+            <ContentControl x:Name="panelCustomer"  Grid.Row="1" Margin="5">
+                <Grid VerticalAlignment="Top">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="145"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock
                         Grid.Column="0" Grid.Row="0"
                         Margin="{StaticResource SmallContentMargin}"
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                         Text="First Name:">
-                </TextBlock>
-                <TextBox 
+                    </TextBlock>
+                    <TextBox 
                         Grid.Column="1" Grid.Row="0" 
                         x:Name="txtFirstName" 
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                         Width="300" Height="24" Margin="5"
                         Text="{Binding FirstName, Mode=TwoWay}"/>
-                <TextBlock
+                    <TextBlock
                         Grid.Column="0" Grid.Row="1"
                         Margin="{StaticResource SmallContentMargin}"
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                         Text="Last Name:">
-                </TextBlock>
-                <TextBox 
+                    </TextBlock>
+                    <TextBox 
                         Grid.Column="1" Grid.Row="1" 
                         x:Name="txtLastName" 
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                         Width="300" Height="24" Margin="5"
                         Text="{Binding LastName, Mode=TwoWay}"/>
-                <TextBlock
+                    <TextBlock
                         Grid.Column="0" Grid.Row="2"
                         Margin="{StaticResource SmallContentMargin}"
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                         Text="Gender:">
-                </TextBlock>
-                <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" Margin="5">
-                    <RadioButton x:Name="radMale" Content="Male" IsChecked="True" GroupName="Gender" Foreground="White"></RadioButton>
-                    <RadioButton x:Name="radFemale" Content="Female" IsChecked="False" GroupName="Gender"  Foreground="White"></RadioButton>
-                </StackPanel>
-                <TextBlock
+                    </TextBlock>
+                    <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" Margin="5">
+                        <RadioButton x:Name="radMale" Content="Male" IsChecked="True" GroupName="Gender" Foreground="White"></RadioButton>
+                        <RadioButton x:Name="radFemale" Content="Female" IsChecked="False" GroupName="Gender"  Foreground="White"></RadioButton>
+                    </StackPanel>
+                    <TextBlock
                         Grid.Column="0" Grid.Row="3"
                         Margin="{StaticResource SmallContentMargin}"
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                         Text="Age:">
-                </TextBlock>
-                <telerik:RadNumericUpDown
+                    </TextBlock>
+                    <telerik:RadNumericUpDown
                         x:Name="uiAge" Grid.Column="1" Grid.Row="3"
-                        HorizontalAlignment="Left" Value="0" NumberDecimalDigits="0" Height="25" Margin="5"
+                        HorizontalAlignment="Left" Value="{Binding Age, Mode=TwoWay}" NumberDecimalDigits="0" Height="25" Margin="5"
                         Minimum="0" Maximum="1000" Width="300"></telerik:RadNumericUpDown>
-            </Grid>
+                </Grid>
+            </ContentControl>
+            
 
             <local:ContactInformationPanel x:Name="ucCntactInfoPanel" Margin="5,5,5,5" Grid.Row="2"></local:ContactInformationPanel>
 

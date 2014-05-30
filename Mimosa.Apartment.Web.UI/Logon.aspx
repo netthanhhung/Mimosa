@@ -14,7 +14,7 @@
         <div style="height: 90px;">
             &nbsp;</div>
         <div style="text-align: center;">
-            <img id="Img2" src="Images/mimosa.gif" alt="Mimosa" /></div>
+            <img id="Img2" src="Images/RubyLogo.png" alt="Mimosa" width="300" /></div>
         <table style="width: 100%;">
             <colgroup>
                 <col />

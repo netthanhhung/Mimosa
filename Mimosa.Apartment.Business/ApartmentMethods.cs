@@ -306,10 +306,11 @@ namespace Mimosa.Apartment.Business
         #endregion
 
         #region Customer
-        public static List<Customer> ListCustomer(int? ordId, int? customerId, string firstName, string lastName, bool includeLegacy)
+        public static List<Customer> ListCustomer(int? orgId, int? customerId, string firstName, string lastName,
+            int? siteId, bool hasContracts, DateTime? contractDateStart, DateTime? contractDateEnd, bool includeLegacy)
         {
             DataLayer dl = new DataLayer();
-            List<Customer> result = dl.ListCustomer(ordId, customerId, firstName, lastName, includeLegacy);
+            List<Customer> result = dl.ListCustomer(orgId, customerId, firstName, lastName, siteId, hasContracts, contractDateStart, contractDateEnd, includeLegacy);
             if (result != null)
             {
                 foreach (Customer cus in result)
@@ -622,10 +623,10 @@ namespace Mimosa.Apartment.Business
 
         #region Booking
         public static List<Booking> ListBooking(int orgId, int? siteId, int? roomId, string roomName, int? bookingId, string bookingStatusIds,
-            string customerName, DateTime? bookDateStart, DateTime? bookDateEnd)
+            int? customerId, string customerName, DateTime? bookDateStart, DateTime? bookDateEnd)
         {
             return new DataLayer().ListBooking(orgId, siteId, roomId, roomName, bookingId, bookingStatusIds,
-                customerName, bookDateStart, bookDateEnd);
+                customerId, customerName, bookDateStart, bookDateEnd);
         }
 
         public static void SaveBooking(List<Booking> saveList)
@@ -635,8 +636,8 @@ namespace Mimosa.Apartment.Business
                 foreach (Booking item in saveList)
                 {
                     if (item.IsChanged)
-                    {                        
-                        if (item.CustomerItem != null)
+                    {
+                        if (item.CustomerItem != null && item.CustomerItem.CustomerId == 0)
                         {
                             if (item.CustomerItem.ContactInformation != null)
                             {
@@ -679,6 +680,30 @@ namespace Mimosa.Apartment.Business
         }
         #endregion
 
+        #region BookingRoomEquipmentDetail
+        public static List<BookingRoomEquipmentDetail> ListBookingRoomEquipmentDetail(int? bookingRoomEquipmentDetailId, int? bookingRoomEquipmentId)
+        {
+            return new DataLayer().ListBookingRoomEquipmentDetail(bookingRoomEquipmentDetailId, bookingRoomEquipmentId);
+        }
+
+        public static void SaveBookingRoomEquipmentDetail(List<BookingRoomEquipmentDetail> saveList)
+        {
+            if (saveList != null)
+            {
+                foreach (BookingRoomEquipmentDetail item in saveList)
+                {
+                    if (item.IsDeleted && item.NullableRecordId != null)
+                    {
+                        DeleteRecord((Record)item);
+                    }
+                    else if (item.IsChanged)
+                    {
+                        SaveRecord((Record)item);
+                    }
+                }
+            }
+        }
+        #endregion
 
         #region BookingRoomService
         public static List<BookingRoomService> ListBookingRoomService(int? bookingRoomServiceId, int? bookingId, int? roomServiceId)
@@ -691,6 +716,133 @@ namespace Mimosa.Apartment.Business
             if (saveList != null)
             {
                 foreach (BookingRoomService item in saveList)
+                {
+                    if (item.IsDeleted && item.NullableRecordId != null)
+                    {
+                        DeleteRecord((Record)item);
+                    }
+                    else if (item.IsChanged)
+                    {
+                        SaveRecord((Record)item);
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region BookingRoomServiceDetail
+        public static List<BookingRoomServiceDetail> ListBookingRoomServiceDetail(int? bookingRoomServiceDetailId, int? bookingRoomServiceId)
+        {
+            return new DataLayer().ListBookingRoomServiceDetail(bookingRoomServiceDetailId, bookingRoomServiceId);
+        }
+
+        public static void SaveBookingRoomServiceDetail(List<BookingRoomServiceDetail> saveList)
+        {
+            if (saveList != null)
+            {
+                foreach (BookingRoomServiceDetail item in saveList)
+                {
+                    if (item.IsDeleted && item.NullableRecordId != null)
+                    {
+                        DeleteRecord((Record)item);
+                    }
+                    else if (item.IsChanged)
+                    {
+                        SaveRecord((Record)item);
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region SiteGroup
+        public static List<SiteGroup> ListSiteGroup(int? orgId, int? siteGroupId)
+        {
+            DataLayer dataLayer = new DataLayer();
+            List<SiteGroup> result = dataLayer.ListSiteGroup(orgId, siteGroupId);
+            if (result != null && result.Count > 0)
+            {
+                foreach (SiteGroup siteGroup in result)
+                {
+                    siteGroup.Sites = dataLayer.ListSiteBySiteGroup(siteGroup.SiteGroupId, null);
+                }
+            }
+            return result;
+        }
+
+        public static void SaveSiteGroups(List<SiteGroup> saveList)
+        {
+            if (saveList != null)
+            {
+                foreach (SiteGroup item in saveList)
+                {
+                    if (item.IsDeleted && item.NullableRecordId != null)
+                    {
+                        DeleteRecord((Record)item);
+                    }
+                    else if (item.IsChanged)
+                    {
+                        SaveRecord((Record)item);
+                        if (item.SiteGroupId > 0) //update
+                        {
+                            List<SiteGroupSite> sgsList = ListSiteGroupSite(item.SiteGroupId, null);
+                            foreach (SiteGroupSite sgs in sgsList)
+                            {
+                                if (item.Sites == null || item.Sites.Count(i => i.SiteId == sgs.SiteId) == 0)
+                                {
+                                    DeleteRecord((Record)sgs);
+                                }
+                            }
+                            if (item.Sites != null)
+                            {
+                                foreach (Site site in item.Sites)
+                                {
+                                    if (sgsList.Count(i => i.SiteId == site.SiteId) == 0)
+                                    {
+                                        SiteGroupSite newSGS = new SiteGroupSite();
+                                        newSGS.SiteGroupId = item.SiteGroupId;
+                                        newSGS.SiteId = site.SiteId;
+                                        newSGS.CreatedBy = newSGS.UpdatedBy = item.UpdatedBy;
+                                        SaveRecord((Record)newSGS);
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            item.SiteGroupId = Convert.ToInt32(item.RecordId);
+                            if (item.Sites != null)
+                            {
+                                foreach (Site site in item.Sites)
+                                {
+                                    SiteGroupSite newSGS = new SiteGroupSite();
+                                    newSGS.SiteGroupId = item.SiteGroupId;
+                                    newSGS.SiteId = site.SiteId;
+                                    newSGS.CreatedBy = newSGS.UpdatedBy = item.UpdatedBy;
+                                    SaveRecord((Record)newSGS);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        public static List<Site> ListSiteBySiteGroup(int? siteGroupId, bool? showLegacy)
+        {
+            return new DataLayer().ListSiteBySiteGroup(siteGroupId, showLegacy);
+        }
+
+        public static List<SiteGroupSite> ListSiteGroupSite(int? siteGroupId, int? siteId)
+        {
+            return new DataLayer().ListSiteGroupSite(siteGroupId, siteId);
+        }
+
+        public static void SaveSiteGroupSites(List<SiteGroupSite> saveList)
+        {
+            if (saveList != null)
+            {
+                foreach (SiteGroupSite item in saveList)
                 {
                     if (item.IsDeleted && item.NullableRecordId != null)
                     {

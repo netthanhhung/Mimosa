@@ -22,7 +22,11 @@ namespace Mimosa.Apartment.Common
 				Utilities.MakeInputParameter(ColumnNames.CountryId, CountryId),
 				Utilities.MakeInputParameter(ColumnNames.PhoneNumber, PhoneNumber),
 				Utilities.MakeInputParameter(ColumnNames.FaxNumber, FaxNumber),
-                Utilities.MakeInputParameter(ColumnNames.Email, Email)
+                Utilities.MakeInputParameter(ColumnNames.Email, Email),
+                Utilities.MakeInputParameter(ColumnNames.DoB, DoB),
+                Utilities.MakeInputParameter(ColumnNames.Visa, Visa),
+                Utilities.MakeInputParameter(ColumnNames.VisaValidFrom, VisaValidFrom),
+                Utilities.MakeInputParameter(ColumnNames.VisaValidTo, VisaValidTo),
 			};
         }
     }

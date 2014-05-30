@@ -23,6 +23,7 @@ namespace Mimosa.Apartment.Common
             public const string Description = "Description";
             public const string IsLegacy = "IsLegacy";
             public const string Price = "Price";
+            public const string Unit = "Unit";    
         }
 
         #endregion
@@ -52,6 +53,10 @@ namespace Mimosa.Apartment.Common
         private decimal? _price;
         [DataMember]
         public decimal? Price { get { return _price; } set { if (!this.Price.Equals(value)) { _price = value; RaisePropertyChanged("Price"); } } }
+
+        private string _unit;
+        [DataMember]
+        public string Unit { get { return _unit; } set { if (!object.ReferenceEquals(this.Unit, value)) { _unit = value; RaisePropertyChanged("Unit"); } } }
 
         #endregion
     }
