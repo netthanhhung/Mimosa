@@ -33,12 +33,18 @@ namespace Mimosa.Apartment.Silverlight.UI
             
             //ucSitePicker.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(ucSitePicker_SelectionChanged);
             ucSitePicker.Init();
+            ucSitePicker.InitComplete += new EventHandler(ucSitePicker_InitComplete);
             btnSearch.Click += new RoutedEventHandler(btnSearch_Click);
             uiDateFrom.SelectedDate = DateTime.Today.AddMonths(-1);
 
             ucBookingAdmin.RebindBookingList += new EventHandler(ucBookingAdmin_RebindBookingList);
 
             UiHelper.ApplyMouseWheelScrollViewer(scrollViewerBookings);
+        }
+
+        void ucSitePicker_InitComplete(object sender, EventArgs e)
+        {
+            RebindBookingData();
         }
 
         void ucBookingAdmin_RebindBookingList(object sender, EventArgs e)
