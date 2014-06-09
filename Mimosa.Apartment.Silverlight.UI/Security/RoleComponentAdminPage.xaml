@@ -1,0 +1,130 @@
+﻿<navigation:Page 
+    x:Class="Mimosa.Apartment.Silverlight.UI.RoleComponentAdminPage" Title="Ruby Home"
+    xmlns:data="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:local="clr-namespace:Mimosa.Apartment.Silverlight.UI"
+    xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"             
+    xmlns:bg="clr-namespace:TiledBG;assembly=TiledBG"
+    xmlns:telerik="clr-namespace:Telerik.Windows.Controls.Animation;assembly=Telerik.Windows.Controls"
+    xmlns:telerikInput="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input"
+    xmlns:telerikGrid="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.GridView"
+    xmlns:telerikGridView="clr-namespace:Telerik.Windows.Controls.GridView;assembly=Telerik.Windows.Controls.GridView"                 
+    xmlns:telerikChart="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Charting"
+    xmlns:telerikNavigation="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Navigation">
+    <Grid x:Name="LayoutRootOrgAdmin" Style="{StaticResource LayoutRootGridStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="Auto"></RowDefinition>
+                <RowDefinition
+                    Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <local:ClippedGrid
+                Background="{StaticResource DefaultBackgroundGradientBrush}">
+                <local:Highlight
+                    HighlightBrush="{StaticResource AdminBrush}"></local:Highlight>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="*"></ColumnDefinition>
+                        <ColumnDefinition
+                            Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Margin="20,0,0,0" Orientation="Horizontal">
+                        <TextBlock
+                            x:Name="uiTitle"
+                            VerticalAlignment="Center"
+                            Foreground="{StaticResource TitleForeground}"
+                            Text="Role Component Permission"></TextBlock>
+                        <TextBlock
+                            x:Name="uiParamsDisplay"
+                            VerticalAlignment="Center"
+                            Foreground="{StaticResource TitleForeground}"
+                            Text=""></TextBlock>
+                    </StackPanel>
+
+                </Grid>
+            </local:ClippedGrid>
+
+            <local:ClippedGrid Background="{StaticResource ImageBackgroundBrush}" Grid.Row="1"/>
+            <local:ClippedGrid
+                x:Name="layoutContent"
+                Grid.Row="1"
+                Margin="10" Opacity="0.9">
+
+                <local:ClippedGrid>
+                    <bg:TiledBGControl TiledImageSource="{StaticResource CarbonFiberImage}"/>
+                    <local:ClippedGrid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Row="0" Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                               VerticalAlignment="Center"
+                               Margin="20,0,0,0"
+                               Text="Role"></TextBlock>
+                            <ComboBox
+                                x:Name="uiRoles"
+                                Grid.Column="1" 
+                                Margin="5,5,5,5" Width="200" 
+                                DisplayMemberPath="RoleName"
+                                SelectedValuePath="RoleId">
+                            </ComboBox>
+
+                        </Grid>
+                        <TextBlock  Grid.Row="0" Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Margin="20,0,0,0"
+                                Text="Users that have this role :"></TextBlock>
+
+                        <local:ContextComponentTree x:Name="ucContextComponentTree"
+                                Grid.Row="1" Grid.Column="0"></local:ContextComponentTree>
+
+                        <Border 
+                                BorderThickness="1" 
+                                BorderBrush="{StaticResource ContainerBorderBrush}"
+                                Grid.Row="1" Grid.Column="1"
+                                Margin="20,5,5,5">
+                            <telerikNavigation:RadTreeView 
+                                    x:Name="uiUsersTreeView"
+                                    Padding="10"
+                                    SelectionMode="Single"
+                                    IsLineEnabled="True" IsRootLinesEnabled="True" 
+                                    IsOptionElementsEnabled="True" ItemsOptionListType="None"  Foreground="White"
+				                    IsTriStateMode="False">
+                            </telerikNavigation:RadTreeView>
+                        </Border>
+                        
+                        <local:SingleClickButton x:Name="btnSave" Height="25" Width="80" Grid.Row="2" Grid.Column="0" Content="Save" 
+                            HorizontalAlignment="Right" Margin="10,10,5,10"/>
+                        <Button x:Name="btnCancel" Height="25" Width="80" Grid.Row="2" Grid.Column="1" Content="Cancel" 
+                            HorizontalAlignment="Left" Margin="10,10,5,10"/>
+
+
+                    </local:ClippedGrid>
+                </local:ClippedGrid>
+
+            </local:ClippedGrid>
+
+        </Grid>
+    </Grid>
+</navigation:Page>

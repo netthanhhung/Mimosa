@@ -28,6 +28,51 @@ namespace Mimosa.Apartment.Silverlight.UI
          *      EVENTS AND DELEGATES
          *  ====================================================================== */
         public int? SiteId { get; set; }
+        public int? BoookingId { get; set; }
+
+        public bool ShowOKCancel
+        {
+            get
+            {
+                return gridOKCancel.Visibility == Visibility.Visible;
+            }
+            set
+            {
+                gridOKCancel.Visibility = ucCntactInfoPanel.btnSaveContact.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
+                
+            }
+        }
+
+        public Customer CustomerItem
+        {
+            get
+            {
+                Customer result = this.DataContext as Customer;
+                if (result != null)
+                {
+                    result.Gender = radMale.IsChecked == true ? 1 : 0;
+                }
+                return result;
+            }
+            set
+            {
+                if (value != null && value.Gender == 1)
+                {
+                    radMale.IsChecked = true;
+                }
+                else
+                {
+                    radFemale.IsChecked = true;
+                }
+                if (value.ContactInformation == null)
+                {
+                    value.ContactInformation = new ContactInformation();
+                    value.ContactInformation.ContactTypeId = (int)ContactType.Customer;
+                }
+                this.DataContext = value;                
+                this.ucCntactInfoPanel.DataContext = value.ContactInformation;
+            }
+        }
         /*  ======================================================================            
          *      EVENT HANDLERS
          *  ====================================================================== */
@@ -35,7 +80,6 @@ namespace Mimosa.Apartment.Silverlight.UI
         {
             InitializeComponent();
             
-            ucCntactInfoPanel.btnSaveContact.Visibility = Visibility.Collapsed;
             txtFirstName.LostFocus += new RoutedEventHandler(txtFirstName_LostFocus);
             txtLastName.LostFocus += new RoutedEventHandler(txtLastName_LostFocus);
         }
@@ -54,6 +98,19 @@ namespace Mimosa.Apartment.Silverlight.UI
             {
                 ucCntactInfoPanel.txtFirstName.Text = txtFirstName.Text;
             }
+        }
+
+        public bool CheckValidation()
+        {
+            bool result = true;
+            
+            if (string.IsNullOrEmpty(txtFirstName.Text) && string.IsNullOrEmpty(txtLastName.Text))
+            {
+                result = false;
+                MessageBox.Show(UserMessages.CustomerNotValid, Globals.UserMessages.ValidationError, MessageBoxButton.OK);
+            }
+            
+            return result;
         }
 
     }

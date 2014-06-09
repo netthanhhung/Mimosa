@@ -22,7 +22,6 @@ namespace Mimosa.Apartment.Common
             public const string RoleName = "RoleName";           
             public const string LoweredRoleName = "LoweredRoleName";           
             public const string Description = "Description";           
-            public const string IsCustom = "IsCustom";
             public const string CanDelete = "CanDelete"; 
         }
 

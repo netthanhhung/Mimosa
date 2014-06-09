@@ -151,6 +151,11 @@ namespace Mimosa.Apartment.Data
             return result;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public void UpdateAspUserOrganisationId(Guid userId, int? organisationId)
+        {
+            _db.ExecuteNonQuery("procUpdateAspUserOrganisationId", userId, organisationId);
+        }
 
         #endregion
 

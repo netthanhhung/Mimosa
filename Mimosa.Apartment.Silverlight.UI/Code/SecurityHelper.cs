@@ -111,6 +111,39 @@ namespace Mimosa.Apartment.Silverlight.UI
             }
         }
 
+        internal static List<common.AspUser> FilterUserList(List<common.AspUser> userList, List<common.SiteGroup> allSiteGroups)
+        {
+            List<common.AspUser> result = new List<common.AspUser>();
+            if (Globals.UserLogin.UserRoleAuths != null && Globals.UserLogin.UserRoleAuths.Count > 0
+               && Globals.UserLogin.IsUserSecurityAdministrator)
+            {
+                var auths = Globals.UserLogin.UserRoleAuths.Where(i => i.RoleId == SecurityHelper.SecurityAdminRoleId);
+                foreach (common.AspUser user in userList)
+                {
+                    if (!result.Contains(user))
+                    {
+                        foreach (common.UserRoleAuth auth in auths)
+                        {
+                            if (!auth.SiteGroupId.HasValue && !auth.SiteId.HasValue 
+                                || auth.SiteGroupId.HasValue && !auth.SiteId.HasValue && SiteInSiteGroup(user.SiteId.Value, auth.SiteGroupId.Value, allSiteGroups)
+                                )
+                            {
+                                if (user.UserId == Globals.UserLogin.UserUserId || user.MinRoleLevel > Globals.UserLogin.AspUser.MinRoleLevel)
+                                {
+                                    result.Add(user);
+                                    break;
+                                }
+                            }
+
+                           
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+
+
         internal static bool SiteInSiteGroup(int? userSiteId, int siteGroupId, List<common.SiteGroup> allSiteGroup)
         {
             foreach (common.SiteGroup siteGroup in allSiteGroup)

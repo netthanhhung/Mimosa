@@ -139,15 +139,11 @@
     <Compile Include="Administration\SiteGroupAdminPage.xaml.cs">
       <DependentUpon>SiteGroupAdminPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Code\IComponent.cs" />
+    <Compile Include="Code\IParam.cs" />
     <Compile Include="Common\LayoutComponentType.cs" />
     <Compile Include="Administration\PortalAdminPage.xaml.cs">
       <DependentUpon>PortalAdminPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Administration\UserAccountPage.xaml.cs">
-      <DependentUpon>UserAccountPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Administration\ChangePasswordPage.xaml.cs">
-      <DependentUpon>ChangePasswordPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -262,12 +258,34 @@
     <Compile Include="Sales\CustomerDetails.xaml.cs">
       <DependentUpon>CustomerDetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Security\ChangePasswordPage.xaml.cs">
+      <DependentUpon>ChangePasswordPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Security\ContextComponentTree.xaml.cs">
+      <DependentUpon>ContextComponentTree.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Security\OneUserRoleAuth.xaml.cs">
+      <DependentUpon>OneUserRoleAuth.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Security\RoleAdminPage.xaml.cs">
+      <DependentUpon>RoleAdminPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Security\RoleComponentAdminPage.xaml.cs">
+      <DependentUpon>RoleComponentAdminPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Security\UserAccountPage.xaml.cs">
+      <DependentUpon>UserAccountPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Security\UserRoleAuthAdminPage.xaml.cs">
+      <DependentUpon>UserRoleAuthAdminPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Service References\ApartmentService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\LoginVM.cs" />
+    <Compile Include="ViewModels\RoleComponentVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Administration\SiteGroupAdminPage.xaml">
@@ -298,6 +316,34 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Security\ChangePasswordPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Security\ContextComponentTree.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Security\OneUserRoleAuth.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Security\RoleAdminPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Security\RoleComponentAdminPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Security\UserAccountPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Security\UserRoleAuthAdminPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Resource Include="Assets\Images\background.png" />
     <Resource Include="Assets\Images\carbon-fiber-10x10.png" />
     <Resource Include="Assets\Images\carbon-fiber-13x23.png" />
@@ -305,10 +351,6 @@
     <Resource Include="Assets\Images\employee-bg.png" />
     <Resource Include="Assets\Images\Office_BlackChartBackground.jpg" />
     <Resource Include="Assets\Images\shinyblue-bg.png" />
-    <Page Include="Administration\ChangePasswordPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Administration\RoomAdminPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -326,10 +368,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Administration\PortalAdminPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Administration\UserAccountPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -568,6 +606,7 @@
     <Resource Include="Assets\Images\Transparent.png" />
     <Resource Include="Assets\Images\uncle-scrooge.png" />
     <Resource Include="Assets\Images\RubyLogo.png" />
+    <Resource Include="Assets\Images\green-cross.png" />
     <Content Include="Properties\AppManifest.xml" />
     <Content Include="ServiceReferences.ClientConfig">
       <SubType>Designer</SubType>

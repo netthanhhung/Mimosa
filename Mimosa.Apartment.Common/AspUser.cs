@@ -170,6 +170,9 @@ namespace Mimosa.Apartment.Common
         [DataMember]
         public int? OrganisationId { get { return _organisationId; } set { if (!this.OrganisationId.Equals(value)) { _organisationId = value; RaisePropertyChanged("OrganisationId"); } } }
 
+        private int? _siteId;
+        [DataMember]
+        public int? SiteId { get { return _siteId; } set { if (!this.SiteId.Equals(value)) { _siteId = value; RaisePropertyChanged("SiteId"); } } }
 
         private bool _isOnline;
         [DataMember]

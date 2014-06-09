@@ -21,7 +21,7 @@ namespace Mimosa.Apartment.Silverlight.UI
             InitializeComponent();
             
             ucUserAccount.IsEditable = true;
-            ucUserAccount.RebindData(Globals.UserLogin.UserOrganisationId);
+            ucUserAccount.RebindData();
         }
 
     }

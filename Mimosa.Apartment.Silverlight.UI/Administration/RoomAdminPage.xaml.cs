@@ -34,16 +34,18 @@ namespace Mimosa.Apartment.Silverlight.UI
         public RoomAdminPage()
         {
             InitializeComponent();
-            //UserRoleAuths = ucSitePicker.UserRoleAuths = SecurityHelper.GetUserRoleAuths((int)LayoutComponentType.DaymarkerAdmin);
-            //if (this.UserRoleAuths == null)
-            //{
-            //    this.Content = SecurityHelper.GetNoPermissionInfoPanel();
-            //    return;
-            //}
-            //btnSaveRoom.IsEnabled = this.UserRoleAuths.Count(i => i.WriteRight == true) > 0;
-            
+            UserRoleAuths = ucSitePicker.UserRoleAuths = SecurityHelper.GetUserRoleAuths((int)LayoutComponentType.RoomAdmin);
+            if (this.UserRoleAuths == null)
+            {
+                this.Content = SecurityHelper.GetNoPermissionInfoPanel();
+                return;
+            }
+            btnSaveRoom.IsEnabled = btnSaveRoomEquipment.IsEnabled = btnSaveRoomService.IsEnabled = this.UserRoleAuths.Count(i => i.WriteRight == true) > 0;
+            ucImageUpload.IsReadOnly = !btnSaveRoom.IsEnabled;
+
             //ucSitePicker.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(ucSitePicker_SelectionChanged);
             ucSitePicker.Init();
+            ucSitePicker.InitComplete += new EventHandler(ucSitePicker_InitComplete);
             ucRoomTypes.Init();
             ucRoomTypes.InitComplete += new EventHandler(ucRoomTypes_InitComplete);
             gvwRoom.AddingNewDataItem += new EventHandler<Telerik.Windows.Controls.GridView.GridViewAddingNewEventArgs>(gvwRoom_AddingNewDataItem);
@@ -79,10 +81,24 @@ namespace Mimosa.Apartment.Silverlight.UI
             //Common
             UiHelper.ApplyMouseWheelScrollViewer(scrollViewerRooms);
         }
+
+        void ucSitePicker_InitComplete(object sender, EventArgs e)
+        {
+            List<RoomType> roomTypes = ((GridViewComboBoxColumn)this.gvwRoom.Columns["RoomType"]).ItemsSource as List<RoomType>;
+            if (roomTypes != null)
+            {
+                RebindRoomData();
+            }
+        }
+
         #region Room
 
         void ucRoomTypes_InitComplete(object sender, EventArgs e)
         {
+            if (ucSitePicker.SiteId > 0)
+            {
+                RebindRoomData();
+            }
             ((GridViewComboBoxColumn)this.gvwRoom.Columns["RoomType"]).ItemsSource = ucRoomTypes.RoomTypeList;
         }
 
@@ -166,6 +182,10 @@ namespace Mimosa.Apartment.Silverlight.UI
             else if (itemSource.Count > 0)
             {
                 gvwRoom.SelectedItem = itemSource[0];
+            }
+            if (itemSource == null || itemSource.Count == 0)
+            {             
+                gridEquipmentService.Visibility = gridImages.Visibility = System.Windows.Visibility.Collapsed;
             }
         }
 
@@ -384,6 +404,9 @@ namespace Mimosa.Apartment.Silverlight.UI
                     newRoomEquipment.RoomId = _selectedRoomId;
                     newRoomEquipment.EquipmentId = equipment.EquipmentId;
                     newRoomEquipment.Equipment = equipment.EquipmentName;
+                    newRoomEquipment.Unit = equipment.Unit;
+                    newRoomEquipment.Price = equipment.RentPrice;
+                    newRoomEquipment.Description = equipment.Description;
                     newRoomEquipment.IsChanged = true;
                     list.Add(newRoomEquipment);
                     gvwRoomEquipment.ItemsSource = null;
@@ -498,7 +521,10 @@ namespace Mimosa.Apartment.Silverlight.UI
                     newRoomService.RoomId = _selectedRoomId;
                     newRoomService.ServiceId = service.ServiceId;
                     newRoomService.Service = service.Name;
-                    newRoomService.IsChanged = true;                 
+                    newRoomService.IsChanged = true;
+                    newRoomService.Unit = service.Unit;
+                    newRoomService.Price = service.Price;
+                    newRoomService.Description = service.Description;
                     list.Add(newRoomService);
                     gvwRoomService.ItemsSource = null;
                     gvwRoomService.ItemsSource = list;

@@ -11,14 +11,30 @@
 	  url="Logon.aspx?Logout=true"
 	  title="Logout"
 	  description="Logout"/>
-    <siteMapNode
-	  url="/Administration/ChangePasswordPage.xaml"
-	  title="Change Password"
-	  description="Change Password"/>
-	<siteMapNode
-	  url="/Administration/UserAccountPage.xaml"
-	  title="User Account Administration"
-	  description="User Account Administration"/>	
+   <siteMapNode
+	  title="Security"
+	  description="Security">
+		<siteMapNode
+		  url="/Security/ChangePasswordPage.xaml"
+		  title="Change Password"
+		  description="Change Password"/>
+		<siteMapNode
+		  url="/Security/UserAccountPage.xaml"
+		  title="User Account Admin"
+		  description="User Account Admin"/>	
+		<siteMapNode
+		  url="/Security/RoleAdminPage.xaml"
+		  title="Role Admin"
+		  description="Role Admin"/>			  
+	    <siteMapNode
+			url="/Security/RoleComponentAdminPage.xaml"
+			title="Role Component Permission"
+			description="Role Component Permission"/>	
+		<siteMapNode
+		  url="/Security/UserRoleAuthAdminPage.xaml"
+		  title="User Role Auth Admin"
+		  description="User Role Auth Admin"/>	
+	</siteMapNode>
     <siteMapNode
 	  title="Administration"
 	  description="Administration">

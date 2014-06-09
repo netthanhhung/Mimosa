@@ -909,13 +909,13 @@ namespace Mimosa.Apartment.Silverlight.UI
 
         // ListSiteBySiteGroup
         internal delegate void ListSiteBySiteGroupCallBack(List<Site> itemSource);
-        internal static void ListSiteBySiteGroupAsync(int? siteGroupId, bool? showLegacy, ListSiteBySiteGroupCallBack callback)
+        internal static void ListSiteBySiteGroupAsync(int? siteGroupId, bool? showLegacy, bool loadContact, ListSiteBySiteGroupCallBack callback)
         {
             Guid callerKey = Guid.NewGuid();
 
             ApartmentServiceClient proxy = GetProxy(callerKey, callback);
             proxy.ListSiteBySiteGroupCompleted += new EventHandler<ListSiteBySiteGroupCompletedEventArgs>(proxy_ListSiteBySiteGroupCompleted);
-            proxy.ListSiteBySiteGroupAsync(siteGroupId, showLegacy, callerKey);
+            proxy.ListSiteBySiteGroupAsync(siteGroupId, showLegacy, loadContact, callerKey);
         }
 
         static void proxy_ListSiteBySiteGroupCompleted(object sender, ListSiteBySiteGroupCompletedEventArgs e)

@@ -370,7 +370,7 @@
 
         <telerikNavigation:RadWindow x:Name="uiPopupNewBooking"
                 WindowStartupLocation="CenterOwner"
-                Header="New Booking" Width="1100" Height="650">
+                Header="New Booking" Width="1300" Height="650">
             <Grid>
                 <bg:TiledBGControl BorderThickness="0" TiledImageSource="{StaticResource CarbonFiberImage}"/>
                 <Grid>
@@ -381,7 +381,7 @@
 
         <telerikNavigation:RadWindow x:Name="uiPopupCustomer"
                 WindowStartupLocation="CenterOwner"
-                Header="Customer Details" Width="600" Height="600">
+                Header="Customer Details" Width="650" Height="650">
             <Grid>
                 <bg:TiledBGControl BorderThickness="0" TiledImageSource="{StaticResource CarbonFiberImage}"/>
                 <Grid>

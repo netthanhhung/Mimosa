@@ -28,10 +28,65 @@ ContactInformation : add DoB, Visa, VisaValidFrom, VisaValidTo
 [procListContactInformation]: alter
 [procSaveContactInformation]: alter
 
+[procListAspUser] : alter
+[procUpdateAspUserOrganisationId] : new
 *************************************************************************************/
 
 
 /***********************HT Start*******************************/
+update BookingRoomService Set ServiceId = 1
+
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_BookingRoomEquipment_RoomEquipment]') AND parent_object_id = OBJECT_ID(N'[dbo].[BookingRoomEquipment]'))
+ALTER TABLE [dbo].[BookingRoomEquipment] DROP CONSTRAINT [FK_BookingRoomEquipment_RoomEquipment]
+GO
+
+GO
+EXEC sp_rename 'dbo.BookingRoomEquipment.RoomEquipmentId', 'EquipmentId', 'COLUMN';
+GO
+
+update BookingRoomEquipment Set EquipmentId = 1
+GO
+
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_BookingRoomEquipment_Equipment]') AND parent_object_id = OBJECT_ID(N'[dbo].[BookingRoomEquipment]'))
+ALTER TABLE [dbo].[BookingRoomEquipment] DROP CONSTRAINT [FK_BookingRoomEquipment_Equipment]
+GO
+
+
+ALTER TABLE [dbo].[BookingRoomEquipment]  WITH CHECK ADD  CONSTRAINT [FK_BookingRoomEquipment_Equipment] FOREIGN KEY([EquipmentId])
+REFERENCES [dbo].[Equipment] ([EquipmentId])
+GO
+
+ALTER TABLE [dbo].[BookingRoomEquipment] CHECK CONSTRAINT [FK_BookingRoomEquipment_Equipment]
+GO
+
+
+
+
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_BookingRoomService_RoomService]') AND parent_object_id = OBJECT_ID(N'[dbo].[BookingRoomService]'))
+ALTER TABLE [dbo].[BookingRoomService] DROP CONSTRAINT [FK_BookingRoomService_RoomService]
+GO
+
+GO
+EXEC sp_rename 'dbo.BookingRoomService.RoomServiceId', 'ServiceId', 'COLUMN';
+GO
+
+update BookingRoomService Set ServiceId = 1
+GO
+
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_BookingRoomService_Service]') AND parent_object_id = OBJECT_ID(N'[dbo].[BookingRoomService]'))
+ALTER TABLE [dbo].[BookingRoomService] DROP CONSTRAINT [FK_BookingRoomService_Service]
+GO
+
+
+ALTER TABLE [dbo].[BookingRoomService]  WITH CHECK ADD  CONSTRAINT [FK_BookingRoomService_Service] FOREIGN KEY([ServiceId])
+REFERENCES [dbo].[Service] ([ServiceId])
+GO
+
+ALTER TABLE [dbo].[BookingRoomService] CHECK CONSTRAINT [FK_BookingRoomService_Service]
+GO
+
+
+
 
 IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS
 WHERE TABLE_NAME = 'Booking' AND COLUMN_NAME = 'Customer2Id')
@@ -586,6 +641,69 @@ GO
 
 
 
+/****** Object:  StoredProcedure [dbo].[procSaveBookingRoomEquipment]    Script Date: 06/05/2014 16:59:06 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[procSaveBookingRoomEquipment]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[procSaveBookingRoomEquipment]
+GO
+
+CREATE PROCEDURE [dbo].[procSaveBookingRoomEquipment]
+
+@BookingRoomEquipmentId int OUTPUT,
+@BookingId int,
+@EquipmentId int,
+@Price decimal(20,8),
+@Description varchar(128),
+@CurrentUser varchar(128)
+AS
+	BEGIN
+	SET NOCOUNT ON
+
+	IF NOT EXISTS (SELECT * FROM BookingRoomEquipment WHERE BookingId = @BookingId AND EquipmentId = @EquipmentId)
+	BEGIN
+
+		INSERT INTO BookingRoomEquipment(
+		BookingId,
+		EquipmentId,
+		Price,
+		Description,	
+		DateCreated,
+		DateUpdated,
+		CreatedBy,
+		UpdatedBy
+		) VALUES (
+		@BookingId,
+		@EquipmentId,
+		@Price,
+		@Description,
+		GETDATE(),
+		GETDATE(),
+		@CurrentUser,
+		@CurrentUser
+		)
+
+		SET @BookingRoomEquipmentId = SCOPE_IDENTITY()
+
+	END ELSE BEGIN
+
+		UPDATE BookingRoomEquipment SET
+		BookingId = @BookingId,
+		EquipmentId = @EquipmentId,
+		Price = @Price,
+		Description = @Description,	
+		DateUpdated = GETDATE(),
+		UpdatedBy = @CurrentUser
+
+		WHERE BookingId = @BookingId AND EquipmentId = @EquipmentId
+
+	END
+
+	SELECT Concurrency FROM BookingRoomEquipment WHERE BookingId = @BookingId AND EquipmentId = @EquipmentId
+END
+
+GO
+
+
+
 /****** Object:  StoredProcedure [dbo].[procListBookingRoomEquipment]    Script Date: 05/30/2014 10:53:29 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[procListBookingRoomEquipment]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[procListBookingRoomEquipment]
@@ -595,27 +713,88 @@ GO
 CREATE PROCEDURE [dbo].[procListBookingRoomEquipment]	
 @BookingRoomEquipmentId int = null,
 @BookingId int = null,
-@RoomEquipmentId int = null
+@EquipmentId int = null
 AS
 BEGIN
 	SET NOCOUNT ON
 
-	SELECT	BRE.BookingRoomEquipmentId, BRE.BookingId, BRE.RoomEquipmentId, RE.EquipmentId, E.EquipmentName as Equipment, E.Unit,
+	SELECT	BRE.BookingRoomEquipmentId, BRE.BookingId, BRE.EquipmentId, E.EquipmentName as Equipment, E.Unit,
 		BRE.Price, BRE.Description,
 		BRE.Concurrency, BRE.DateCreated, BRE.DateUpdated, BRE.CreatedBy, BRE.UpdatedBy
 	FROM	BookingRoomEquipment BRE
-	INNER JOIN RoomEquipment RE on BRE.RoomEquipmentId = RE.RoomEquipmentId
-	INNER JOIN Equipment E on RE.EquipmentId = e.EquipmentId
+	INNER JOIN Equipment E on BRE.EquipmentId = E.EquipmentId
 	WHERE	(@BookingRoomEquipmentId is null OR BRE.BookingRoomEquipmentId = @BookingRoomEquipmentId)
 	AND	(@BookingId is null OR BRE.BookingId = @BookingId)
-	AND	(@RoomEquipmentId is null OR BRE.RoomEquipmentId = @RoomEquipmentId)
+	AND	(@EquipmentId is null OR BRE.EquipmentId = @EquipmentId)
 
 END
 
 GO
 
 
-/****** Object:  StoredProcedure [dbo].[procListBookingRoomService]    Script Date: 05/30/2014 10:54:21 ******/
+/****** Object:  StoredProcedure [dbo].[procSaveBookingRoomService]    Script Date: 06/05/2014 16:59:06 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[procSaveBookingRoomService]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[procSaveBookingRoomService]
+GO
+
+CREATE PROCEDURE [dbo].[procSaveBookingRoomService]
+
+@BookingRoomServiceId int OUTPUT,
+@BookingId int,
+@ServiceId int,
+@Price decimal(20,8),
+@Description varchar(128),
+@CurrentUser varchar(128)
+AS
+	BEGIN
+	SET NOCOUNT ON
+
+	IF NOT EXISTS (SELECT * FROM BookingRoomService WHERE BookingId = @BookingId AND ServiceId = @ServiceId)
+	BEGIN
+
+		INSERT INTO BookingRoomService(
+		BookingId,
+		ServiceId,
+		Price,
+		Description,	
+		DateCreated,
+		DateUpdated,
+		CreatedBy,
+		UpdatedBy
+		) VALUES (
+		@BookingId,
+		@ServiceId,
+		@Price,
+		@Description,
+		GETDATE(),
+		GETDATE(),
+		@CurrentUser,
+		@CurrentUser
+		)
+
+		SET @BookingRoomServiceId = SCOPE_IDENTITY()
+
+	END ELSE BEGIN
+
+		UPDATE BookingRoomService SET
+		BookingId = @BookingId,
+		ServiceId = @ServiceId,
+		Price = @Price,
+		Description = @Description,	
+		DateUpdated = GETDATE(),
+		UpdatedBy = @CurrentUser
+
+		WHERE BookingId = @BookingId AND ServiceId = @ServiceId
+
+	END
+
+	SELECT Concurrency FROM BookingRoomService WHERE BookingId = @BookingId AND ServiceId = @ServiceId
+END
+
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[procListBookingRoomService]    Script Date: 05/30/2014 10:53:29 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[procListBookingRoomService]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[procListBookingRoomService]
 GO
@@ -624,20 +803,19 @@ GO
 CREATE PROCEDURE [dbo].[procListBookingRoomService]	
 @BookingRoomServiceId int = null,
 @BookingId int = null,
-@RoomServiceId int = null
+@ServiceId int = null
 AS
 BEGIN
 	SET NOCOUNT ON
 
-	SELECT	BRE.BookingRoomServiceId, BRE.BookingId, BRE.RoomServiceId, RE.ServiceId, E.Name as Service, E.Unit,
-	BRE.Price, BRE.Description,
-	BRE.Concurrency, BRE.DateCreated, BRE.DateUpdated, BRE.CreatedBy, BRE.UpdatedBy
+	SELECT	BRE.BookingRoomServiceId, BRE.BookingId, BRE.ServiceId, E.Name as Service, E.Unit,
+		BRE.Price, BRE.Description,
+		BRE.Concurrency, BRE.DateCreated, BRE.DateUpdated, BRE.CreatedBy, BRE.UpdatedBy
 	FROM	BookingRoomService BRE
-	INNER JOIN RoomService RE on BRE.RoomServiceId = RE.RoomServiceId
-	INNER JOIN Service E on RE.ServiceId = e.ServiceId
+	INNER JOIN Service E on BRE.ServiceId = E.ServiceId
 	WHERE	(@BookingRoomServiceId is null OR BRE.BookingRoomServiceId = @BookingRoomServiceId)
 	AND	(@BookingId is null OR BRE.BookingId = @BookingId)
-	AND	(@RoomServiceId is null OR BRE.RoomServiceId = @RoomServiceId)
+	AND	(@ServiceId is null OR BRE.ServiceId = @ServiceId)
 
 END
 
@@ -866,8 +1044,7 @@ SET NOCOUNT ON
 			BRE.Concurrency, BRE.DateCreated, BRE.DateUpdated, BRE.CreatedBy, BRE.UpdatedBy
 	FROM	BookingRoomEquipmentDetail D
 	INNER JOIN BookingRoomEquipment BRE on BRE.BookingRoomEquipmentId = D.BookingRoomEquipmentId
-	INNER JOIN RoomEquipment RE on RE.RoomEquipmentId = BRE.RoomEquipmentId
-	INNER JOIN Equipment E on RE.EquipmentId = e.EquipmentId
+	INNER JOIN Equipment E on BRE.EquipmentId = e.EquipmentId
 	WHERE	(@BookingRoomEquipmentDetailId is null OR D.BookingRoomEquipmentDetailId = @BookingRoomEquipmentDetailId)
 	AND	(@BookingRoomEquipmentId is null OR BRE.BookingRoomEquipmentId = @BookingRoomEquipmentId)
 	ORDER BY D.DateStart DESC, D.DateEnd DESC
@@ -894,8 +1071,7 @@ SET NOCOUNT ON
 			BRE.Concurrency, BRE.DateCreated, BRE.DateUpdated, BRE.CreatedBy, BRE.UpdatedBy
 	FROM	BookingRoomServiceDetail D
 	INNER JOIN BookingRoomService BRE on BRE.BookingRoomServiceId = D.BookingRoomServiceId
-	INNER JOIN RoomService RE on RE.RoomServiceId = BRE.RoomServiceId
-	INNER JOIN Service E on RE.ServiceId = e.ServiceId
+	INNER JOIN Service E on BRE.ServiceId = e.ServiceId
 	WHERE	(@BookingRoomServiceDetailId is null OR D.BookingRoomServiceDetailId = @BookingRoomServiceDetailId)
 	AND	(@BookingRoomServiceId is null OR BRE.BookingRoomServiceId = @BookingRoomServiceId)
 	ORDER BY D.DateStart DESC, D.DateEnd DESC
@@ -1223,6 +1399,65 @@ BEGIN
 END
 
 GO
+
+
+
+
+/****** Object:  StoredProcedure [dbo].[procListAspUser]    Script Date: 06/02/2014 15:34:13 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[procListAspUser]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[procListAspUser]
+GO
+
+
+CREATE PROCEDURE [dbo].[procListAspUser]	
+@OrganisationId int = null	
+, @UserID uniqueidentifier = null
+, @IsLegacy bit = null
+AS
+BEGIN
+	SET NOCOUNT ON
+	SELECT distinct M.ApplicationId,M.UserId,Password,PasswordFormat,PasswordSalt,MobilePIN
+		,Email,LoweredEmail,PasswordQuestion,PasswordAnswer,IsApproved,IsLockedOut
+		,CreateDate,LastLoginDate,LastPasswordChangedDate,LastLockoutDate
+		,FailedPasswordAttemptCount,FailedPasswordAttemptWindowStart,FailedPasswordAnswerAttemptCount
+		,FailedPasswordAnswerAttemptWindowStart,NULL as Comment
+		,U.UserName,U.LoweredUserName,U.MobileAlias, U.IsAnonymous,U.LastActivityDate, U.OrganisationID	
+		,URA.SiteId
+		,dbo.[ufnUserRoleMinLevel](M.UserId) as MinRoleLevel
+	FROM aspnet_Membership M
+	INNER JOIN aspnet_Users U on M.UserId = U.UserId	
+	LEFT OUTER JOIN UserRoleAuth URA on U.UserId = URA.UserId
+	WHERE (@OrganisationId is null or U.OrganisationId = @OrganisationId)
+	AND (@UserID is null OR M.UserId = @UserID)
+	ORDER BY U.UserName
+
+
+	-- ======================================================================
+	-- Change History
+	-- ======================================================================
+	-- 23-Feb-2013 HT
+	-- INIT
+END
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[procUpdateAspUserOrganisationId]    Script Date: 06/02/2014 16:35:23 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[procUpdateAspUserOrganisationId]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[procUpdateAspUserOrganisationId]
+GO
+
+
+CREATE PROCEDURE [dbo].[procUpdateAspUserOrganisationId]	
+	@UserID uniqueidentifier
+	, @OrganisationId int = null		
+AS
+BEGIN
+	UPDATE aspnet_Users SET OrganisationId = @OrganisationId
+	WHERE UserId = @UserId
+END
+
+GO
+
 
 
 

@@ -19,7 +19,7 @@ namespace Mimosa.Apartment.Silverlight.UI
         private int _seletedSiteId;
         private List<Site> _originalItemSource = new List<Site>();
         
-        //public List<UserRoleAuth> UserRoleAuths { get; set; }
+        public List<UserRoleAuth> UserRoleAuths { get; set; }
 
         private static class UserMessages
         {
@@ -30,14 +30,14 @@ namespace Mimosa.Apartment.Silverlight.UI
         public SiteAdminPage()
         {
             InitializeComponent();
-            //UserRoleAuths = SecurityHelper.GetUserRoleAuths((int)LayoutComponentType.PortalAdmin);
+            UserRoleAuths = SecurityHelper.GetUserRoleAuths((int)LayoutComponentType.SiteAdmin);
 
-            if (!Globals.UserLogin.IsUserOrganisationAdministrator)
+            if (this.UserRoleAuths == null)
             {
                 this.Content = SecurityHelper.GetNoPermissionInfoPanel();
                 return;
             }
-
+            SecurityChecking();
             BeginRebindSite();
             
             //Sites
@@ -56,29 +56,56 @@ namespace Mimosa.Apartment.Silverlight.UI
             UiHelper.ApplyMouseWheelScrollViewer(scrollViewerSite);
         }
 
+        void SecurityChecking()
+        {
+            //Security
+            btnSaveSite.IsEnabled = ucCntactInfoPanel.btnSaveContact.IsEnabled = this.UserRoleAuths.Count(i => i.WriteRight == true) > 0;
+        }
+
         private void BeginRebindSite()
         {
             Globals.IsBusy = true;
-            DataServiceHelper.ListSiteAsync(Globals.UserLogin.UserOrganisationId, null, true, true, ListSiteCompleted);
+            if (this.UserRoleAuths == null || this.UserRoleAuths.Count(i => !i.SiteGroupId.HasValue) > 0)
+            {
+                DataServiceHelper.ListSiteAsync(Globals.UserLogin.UserOrganisationId, null, true, true, ListSiteCompleted);
+            }
+            else
+            {
+                int siteGroupId = this.UserRoleAuths.First(i => i.SiteGroupId.HasValue).SiteGroupId.Value;
+                DataServiceHelper.ListSiteBySiteGroupAsync(siteGroupId, true, true, ListSiteCompleted);
+            }
+
+            
+            //DataServiceHelper.ListSiteAsync(Globals.UserLogin.UserOrganisationId, null, true, true, ListSiteCompleted);
         }
 
-        void ListSiteCompleted(List<Site> orgList)
+        void ListSiteCompleted(List<Site> sites)
         {
             Globals.IsBusy = false;
             _originalItemSource.Clear();
-            foreach (Site item in orgList)
+
+            if (this.UserRoleAuths.Count(i => !i.SiteId.HasValue) == 0)
+            {
+                var abc = (from item in this.UserRoleAuths
+                           select item.SiteId).Distinct();
+                sites = (from s in sites
+                         join a in abc on s.SiteId equals a.Value
+                         select s).ToList();
+            }
+
+            foreach (Site item in sites)
             {
                 item.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(SiteItem_PropertyChanged);
                 _originalItemSource.Add(item);
             }
-            gvwSites.ItemsSource = orgList;
-            if (_seletedSiteId > 0 && orgList.Count(i => i.SiteId == _seletedSiteId) > 0)
+            gvwSites.ItemsSource = sites;
+            if (_seletedSiteId > 0 && sites.Count(i => i.SiteId == _seletedSiteId) > 0)
             {
-                gvwSites.SelectedItem = orgList.First(i => i.SiteId == _seletedSiteId);
+                gvwSites.SelectedItem = sites.First(i => i.SiteId == _seletedSiteId);
             }
-            else if (orgList.Count > 0)
+            else if (sites.Count > 0)
             {
-                gvwSites.SelectedItem = orgList[0];
+                gvwSites.SelectedItem = sites[0];
             }
         }
 

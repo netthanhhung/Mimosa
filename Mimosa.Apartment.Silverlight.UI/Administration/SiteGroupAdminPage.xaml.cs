@@ -29,13 +29,13 @@ namespace Mimosa.Apartment.Silverlight.UI
         public SiteGroupAdminPage()
         {
             InitializeComponent();
-            //UserRoleAuths = ucSitePicker.UserRoleAuths = SecurityHelper.GetUserRoleAuths((int)LayoutComponentType.SiteGroupAdmin);
-            //if (this.UserRoleAuths == null)
-            //{
-            //    this.Content = SecurityHelper.GetNoPermissionInfoPanel();
-            //    return;
-            //}
-            //btnSave.IsEnabled = this.UserRoleAuths.Count(i => i.WriteRight == true) > 0;
+            UserRoleAuths = ucSitePicker.UserRoleAuths = SecurityHelper.GetUserRoleAuths((int)LayoutComponentType.SiteGroupAdmin);
+            if (this.UserRoleAuths == null)
+            {
+                this.Content = SecurityHelper.GetNoPermissionInfoPanel();
+                return;
+            }
+            btnSave.IsEnabled = this.UserRoleAuths.Count(i => i.WriteRight == true) > 0;
 
             ucSitePicker.Init();
             RebindSiteGroups();

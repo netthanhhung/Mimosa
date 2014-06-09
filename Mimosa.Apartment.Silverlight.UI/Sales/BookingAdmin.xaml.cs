@@ -28,8 +28,7 @@ namespace Mimosa.Apartment.Silverlight.UI
         internal event EventHandler RebindBookingList;
         /*  ======================================================================            
          *      EVENTS AND DELEGATES
-         *  ====================================================================== */        
-        private int _newId = -1;
+         *  ====================================================================== */                
         private int _selectedBookingId = -1;
         private List<Booking> _originalItemSource = new List<Booking>();
         private List<BookingRoomEquipment> _currentBookingEquipments = new List<BookingRoomEquipment>();
@@ -102,6 +101,8 @@ namespace Mimosa.Apartment.Silverlight.UI
                 item.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(item_PropertyChanged);
                 _originalItemSource.Add(item);
             }
+            FillEmptyCustomerName();
+
             gvwBooking.ItemsSource = itemSource;
 
             if (_selectedBookingId > 0 && itemSource.Count(i => i.BookingId == _selectedBookingId) > 0)
@@ -111,6 +112,20 @@ namespace Mimosa.Apartment.Silverlight.UI
             else if (itemSource.Count > 0)
             {
                 gvwBooking.SelectedItem = itemSource[0];
+            }
+        }
+
+        void FillEmptyCustomerName()
+        {
+            if (_originalItemSource != null)
+            {
+                foreach (Booking item in _originalItemSource)
+                {
+                    if (!item.Customer2Id.HasValue || item.Customer2Id == 0)
+                    {
+                        item.Customer2Name = "(Add)";
+                    }
+                }
             }
         }
 
@@ -194,13 +209,46 @@ namespace Mimosa.Apartment.Silverlight.UI
         {
             if (this.CustomerItem != null)
             {
-                ucBookingNew.panelCustomer.DataContext = this.CustomerItem;
-                if (this.CustomerItem.ContactInformation != null)
+                if (this.CustomerItem.ContactInformation == null)
                 {
-                    ucBookingNew.ucCntactInfoPanel.DataContext = this.CustomerItem.ContactInformation;
+                    this.CustomerItem.ContactInformation = new ContactInformation();
+                    this.CustomerItem.ContactInformation.IsChanged = true;
+                    this.CustomerItem.ContactInformation.ContactTypeId = (int)ContactType.Customer;
                 }
-                ucBookingNew.panelCustomer.IsEnabled = ucBookingNew.ucCntactInfoPanel.IsEnabled = false;
+                ucBookingNew.ucCustomerDetails.CustomerItem = this.CustomerItem;
+                
+                Customer customer2 = new Customer();
+                customer2.IsChanged = true;
+                customer2.OrganisationId = Globals.UserLogin.UserOrganisationId;
+                customer2.ContactInformation = new ContactInformation();
+                customer2.ContactInformation.IsChanged = true;
+                customer2.ContactInformation.ContactTypeId = (int)ContactType.Customer;
+                ucBookingNew.ucCustomerDetails2.CustomerItem = customer2;                
+
+                ucBookingNew.ucCustomerDetails.IsEnabled = ucBookingNew.ucCustomerDetails2.IsEnabled = false;
+                ucBookingNew.ucCustomerDetails.ucCntactInfoPanel.IsEnabled = ucBookingNew.ucCustomerDetails2.ucCntactInfoPanel.IsEnabled = false;
             }
+            else
+            {
+                Customer customer1 = new Customer();
+                customer1.IsChanged = true;
+                customer1.OrganisationId = Globals.UserLogin.UserOrganisationId;
+                customer1.ContactInformation = new ContactInformation();
+                customer1.ContactInformation.ContactTypeId = (int)ContactType.Customer;
+                ucBookingNew.ucCustomerDetails.CustomerItem = customer1;
+                Customer customer2 = new Customer();
+                customer2.IsChanged = true;
+                customer2.OrganisationId = Globals.UserLogin.UserOrganisationId;
+                customer2.ContactInformation = new ContactInformation();
+                customer2.ContactInformation.IsChanged = true;
+                customer2.ContactInformation.ContactTypeId = (int)ContactType.Customer;
+                ucBookingNew.ucCustomerDetails2.CustomerItem = customer2;
+                
+            }
+            ucBookingNew.ucCustomerDetails.radMale.GroupName = ucBookingNew.ucCustomerDetails.radFemale.GroupName = "GenderGroup1";
+
+            ucBookingNew.ucCustomerDetails.lblCustomerTitle.Text = "Customer 1";
+            ucBookingNew.ucCustomerDetails2.lblCustomerTitle.Text = "Customer 2";
             uiPopupNewBooking.ShowDialog();
         }
 
@@ -341,11 +389,11 @@ namespace Mimosa.Apartment.Silverlight.UI
                 {
                     BookingRoomEquipment newBookingEquipment = new BookingRoomEquipment();
                     newBookingEquipment.BookingId = _selectedBookingId;
-                    newBookingEquipment.RoomEquipmentId = equipment.RoomEquipmentId;
                     newBookingEquipment.EquipmentId = equipment.EquipmentId;
                     newBookingEquipment.Equipment = equipment.Equipment;
                     newBookingEquipment.IsChanged = true;
                     newBookingEquipment.Price = equipment.Price;
+                    newBookingEquipment.Unit = equipment.Unit;
                     newBookingEquipment.Description = equipment.Description;
                     list.Add(newBookingEquipment);
                     gvwBookingEquipment.ItemsSource = null;
@@ -498,11 +546,11 @@ namespace Mimosa.Apartment.Silverlight.UI
                 {
                     BookingRoomService newBookingService = new BookingRoomService();
                     newBookingService.BookingId = _selectedBookingId;
-                    newBookingService.RoomServiceId = service.RoomServiceId;
                     newBookingService.ServiceId = service.ServiceId;
                     newBookingService.Service = service.Service;
                     newBookingService.IsChanged = true;
                     newBookingService.Price = service.Price;
+                    newBookingService.Unit = service.Unit;
                     newBookingService.Description = service.Description;
                     list.Add(newBookingService);
                     gvwBookingService.ItemsSource = null;
@@ -545,21 +593,57 @@ namespace Mimosa.Apartment.Silverlight.UI
         private void CustomerButton_Click(object sender, RoutedEventArgs e)
         {
             HyperlinkButton button = sender as HyperlinkButton;
-            if (button != null && button.Tag != null)
+            bool isNewCustomer = false;
+            if (button != null)
             {
-                int customerId = Convert.ToInt32(button.Tag);
-                DataServiceHelper.ListCustomerAsync(Globals.UserLogin.UserOrganisationId, customerId, null, null, null, false, null, null, true, ListCustomerCompleted);
+                if (button.Tag == null)
+                {
+                    isNewCustomer = true;
+                }
+                else
+                {
+                    int customerId = Convert.ToInt32(button.Tag);
+                    if (customerId > 0)
+                    {
+                        ucCustomerDetails.BoookingId = null;
+                        DataServiceHelper.ListCustomerAsync(Globals.UserLogin.UserOrganisationId, customerId, null, null, null, false, null, null, true, ListCustomerCompleted);
+                    }
+                    else
+                    {
+                        isNewCustomer = true;
+                    }
+                }                                
+            }
+
+            if (isNewCustomer)
+            {
+                Booking booking = button.DataContext as Booking;
+                if (booking != null)
+                {
+                    Customer newCustomer = new Customer();
+                    newCustomer.IsChanged = true;
+                    newCustomer.OrganisationId = Globals.UserLogin.UserOrganisationId;
+                    newCustomer.ContactInformation = new ContactInformation();
+                    newCustomer.ContactInformation.IsChanged = true;
+                    newCustomer.ContactInformation.ContactTypeId = (int)ContactType.Customer;
+
+                    ucCustomerDetails.BoookingId = booking.BookingId;
+                    ucCustomerDetails.DataContext = newCustomer;
+                    ucCustomerDetails.ucCntactInfoPanel.DataContext = newCustomer.ContactInformation;
+                    ucCustomerDetails.ucCntactInfoPanel.btnSaveContact.Visibility = Visibility.Collapsed;
+                    uiPopupCustomer.ShowDialog();
+                }
             }
         }        
+
 
         private void ListCustomerCompleted(List<Customer> customers)
         {
             if (customers != null && customers.Count > 0)
             {
                 ucCustomerDetails.DataContext = customers[0];
-                ucCustomerDetails.radMale.IsChecked = customers[0].Gender == 1;
-                ucCustomerDetails.radFemale.IsChecked = customers[0].Gender == 0;
                 ucCustomerDetails.ucCntactInfoPanel.DataContext = customers[0].ContactInformation;
+                ucCustomerDetails.ucCntactInfoPanel.btnSaveContact.Visibility = Visibility.Collapsed;
                 uiPopupCustomer.ShowDialog();
             }
         }
@@ -571,13 +655,12 @@ namespace Mimosa.Apartment.Silverlight.UI
 
         void btnCustomerOK_Click(object sender, RoutedEventArgs e)
         {
-            Customer saveItem = ucCustomerDetails.DataContext as Customer;
+            Customer saveItem = ucCustomerDetails.CustomerItem;
             if (saveItem != null)
             {
                 List<Customer> saveList = new List<Customer>();
                 saveItem.UpdatedBy = Globals.UserLogin.UserName;
                 saveItem.IsChanged = true;
-                saveItem.Gender = ucCustomerDetails.radMale.IsChecked == true ? 1 : 0;
                 if (saveItem.ContactInformation != null)
                 {
                     saveItem.ContactInformation.IsChanged = true;
@@ -585,7 +668,6 @@ namespace Mimosa.Apartment.Silverlight.UI
                 saveList.Add(saveItem);
                 Globals.IsBusy = true;
                 DataServiceHelper.SaveCustomerAsync(saveList, SaveCustomerComplelted);
-
             }
 
         }
@@ -594,6 +676,39 @@ namespace Mimosa.Apartment.Silverlight.UI
         {
             Globals.IsBusy = false;
             MessageBox.Show(Globals.UserMessages.RecordsSaved);
+            foreach (Customer item in saveList)
+            {
+                List<Booking> itemsSource = gvwBooking.ItemsSource as List<Booking>;
+                if (itemsSource != null)
+                {
+                    if (ucCustomerDetails.BoookingId > 0)
+                    {
+                        Booking booking = itemsSource.FirstOrDefault(i => i.BookingId == ucCustomerDetails.BoookingId);
+                        if (booking != null)
+                        {
+                            booking.CustomerItem2 = item;
+                            booking.Customer2Name = item.FullName;
+                            booking.Customer2Id = item.CustomerId;
+                        }
+                    }
+                    else
+                    {
+
+                        Booking booking = itemsSource.FirstOrDefault(i => i.CustomerId == item.CustomerId);
+                        if (booking != null)
+                        {
+                            booking.CustomerName = item.FullName;
+                        }
+
+                        Booking booking2 = itemsSource.FirstOrDefault(i => i.Customer2Id == item.CustomerId);
+                        if (booking2 != null)
+                        {
+                            booking2.Customer2Name = item.FullName;
+                        }
+                    }
+                }
+
+            }
             uiPopupCustomer.Close();
         }
         #endregion

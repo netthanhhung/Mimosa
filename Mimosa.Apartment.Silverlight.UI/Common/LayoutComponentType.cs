@@ -19,6 +19,12 @@ namespace Mimosa.Apartment.Silverlight.UI
         UserRoleAuthorisation = 3,
         SiteAdmin = 4,
         SiteGroupAdmin = 5,
-        
+        EquipmentAdmin = 6,
+        ServiceAdmin = 7,
+        RoomAdmin = 8,
+
+        BookingAdmin = 101,
+
+        CustomerAdmin = 201,
     }
 }

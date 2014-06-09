@@ -23,13 +23,15 @@ namespace Mimosa.Apartment.Silverlight.UI
         public BookingAdminPage()
         {
             InitializeComponent();
-            //UserRoleAuths = ucSitePicker.UserRoleAuths = SecurityHelper.GetUserRoleAuths((int)LayoutComponentType.DaymarkerAdmin);
-            //if (this.UserRoleAuths == null)
-            //{
-            //    this.Content = SecurityHelper.GetNoPermissionInfoPanel();
-            //    return;
-            //}
-            //btnSaveBooking.IsEnabled = this.UserRoleAuths.Count(i => i.WriteRight == true) > 0;
+            UserRoleAuths = ucSitePicker.UserRoleAuths = ucBookingAdmin.ucBookingNew.ucSitePicker.UserRoleAuths = SecurityHelper.GetUserRoleAuths((int)LayoutComponentType.BookingAdmin);
+            if (this.UserRoleAuths == null)
+            {
+                this.Content = SecurityHelper.GetNoPermissionInfoPanel();
+                return;
+            }
+            ucBookingAdmin.btnSaveBooking.IsEnabled = ucBookingAdmin.btnSaveBookingEquipment.IsEnabled = ucBookingAdmin.btnSaveBookingService.IsEnabled
+                = ucBookingAdmin.btnNewBooking.IsEnabled = ucBookingAdmin.btnInsertBookingEquipment.IsEnabled = ucBookingAdmin.btnInsertBookingService.IsEnabled
+                = this.UserRoleAuths.Count(i => i.WriteRight == true) > 0;
             
             //ucSitePicker.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(ucSitePicker_SelectionChanged);
             ucSitePicker.Init();

@@ -19,7 +19,6 @@ namespace Mimosa.Apartment.Common
         {
             public const string BookingRoomEquipmentId = "BookingRoomEquipmentId";
             public const string BookingId = "BookingId";
-            public const string RoomEquipmentId = "RoomEquipmentId";
             public const string EquipmentId = "EquipmentId";
             public const string Equipment = "Equipment";
             public const string Description = "Description";
@@ -38,10 +37,6 @@ namespace Mimosa.Apartment.Common
         private int _bookingId;
         [DataMember]
         public int BookingId { get { return _bookingId; } set { if (!this.BookingId.Equals(value)) { _bookingId = value; RaisePropertyChanged("BookingId"); } } }
-
-        private int _roomEquipmentId;
-        [DataMember]
-        public int RoomEquipmentId { get { return _roomEquipmentId; } set { if (!this.RoomEquipmentId.Equals(value)) { _roomEquipmentId = value; RaisePropertyChanged("RoomEquipmentId"); } } }
 
         private int _equipmentId;
         [DataMember]

@@ -4,108 +4,120 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:bg="clr-namespace:TiledBG;assembly=TiledBG"
-    xmlns:local="clr-namespace:Mimosa.Apartment.Silverlight.UI"
-    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
-    mc:Ignorable="d">
+    xmlns:local="clr-namespace:Mimosa.Apartment.Silverlight.UI"    
+    mc:Ignorable="d"    
+    xmlns:telerik="clr-namespace:Telerik.Windows.Controls.Animation;assembly=Telerik.Windows.Controls"
+    xmlns:telerikInput="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input"
+    xmlns:telerikGrid="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.GridView"
+    xmlns:telerikGridView="clr-namespace:Telerik.Windows.Controls.GridView;assembly=Telerik.Windows.Controls.GridView"                 
+    xmlns:telerikChart="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Charting"
+    xmlns:telerikNavigation="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Navigation">
 
-    <Grid x:Name="uiLayoutRoot" Margin="5">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>     
-
-        <Grid>
+    <ScrollViewer x:Name="scrollViewerCustomerDetails" HorizontalScrollBarVisibility="Disabled" 
+                              VerticalScrollBarVisibility="Auto"
+                              BorderThickness="0" Padding="0">
+        <Grid x:Name="uiLayoutRoot">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <TextBlock
-                    Margin="10,10,5,5" Grid.Column="0" Grid.Row="0"
-                    VerticalAlignment="Center"
-                    Text="Customer:">
-            </TextBlock>
-            
-            <Grid VerticalAlignment="Top" Grid.Row="1" Margin="5">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="145"></ColumnDefinition>
-                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
 
-                <TextBlock
-                        Grid.Column="0" Grid.Row="0"
-                        Margin="{StaticResource SmallContentMargin}"
-                        HorizontalAlignment="Left" VerticalAlignment="Center"
-                        Text="First Name:">
+                <TextBlock x:Name="lblCustomerTitle"
+                    Margin="10,5,5,5" Grid.Column="0" Grid.Row="0"
+                    VerticalAlignment="Center"
+                    Text="Customer:">
                 </TextBlock>
-                <TextBox 
-                        Grid.Column="1" Grid.Row="0" 
-                        x:Name="txtFirstName" 
-                        HorizontalAlignment="Left" VerticalAlignment="Center"
-                        Width="300" Height="24" Margin="5"
-                        Text="{Binding FirstName, Mode=TwoWay}"/>
-                <TextBlock
-                        Grid.Column="0" Grid.Row="1"
-                        Margin="{StaticResource SmallContentMargin}"
-                        HorizontalAlignment="Left" VerticalAlignment="Center"
-                        Text="Last Name:">
-                </TextBlock>
-                <TextBox 
-                        Grid.Column="1" Grid.Row="1" 
-                        x:Name="txtLastName" 
-                        HorizontalAlignment="Left" VerticalAlignment="Center"
-                        Width="300" Height="24" Margin="5"
-                        Text="{Binding LastName, Mode=TwoWay}"/>
-                <TextBlock
-                        Grid.Column="0" Grid.Row="2"
-                        Margin="{StaticResource SmallContentMargin}"
-                        HorizontalAlignment="Left" VerticalAlignment="Center"
-                        Text="Gender:">
-                </TextBlock>
-                <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" Margin="5">
-                    <RadioButton x:Name="radMale" Content="Male" IsChecked="True" GroupName="Gender" Foreground="White"></RadioButton>
-                    <RadioButton x:Name="radFemale" Content="Female" IsChecked="False" GroupName="Gender"  Foreground="White"></RadioButton>
-                </StackPanel>
-                <TextBlock
-                        Grid.Column="0" Grid.Row="3"
-                        Margin="{StaticResource SmallContentMargin}"
-                        HorizontalAlignment="Left" VerticalAlignment="Center"
-                        Text="Age:">
-                </TextBlock>
-                <telerik:RadNumericUpDown
-                        x:Name="uiAge" Grid.Column="1" Grid.Row="3"
-                        HorizontalAlignment="Left" Value="{Binding Age, Mode=TwoWay}" NumberDecimalDigits="0" Height="25" Margin="5"
-                        Minimum="0" Maximum="1000" Width="300"></telerik:RadNumericUpDown>
+
+                <ContentControl x:Name="panelCustomer" Grid.Row="1">
+                    <Grid VerticalAlignment="Top">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="130"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock
+                            Grid.Column="0" Grid.Row="0"
+                            Margin="{StaticResource SmallContentMargin}"
+                            HorizontalAlignment="Left" VerticalAlignment="Center"
+                            Text="First Name:">
+                        </TextBlock>
+                        <TextBox 
+                            Grid.Column="1" Grid.Row="0" 
+                            x:Name="txtFirstName" 
+                            HorizontalAlignment="Left" VerticalAlignment="Center"
+                            Width="250" Height="24"
+                            Text="{Binding FirstName, Mode=TwoWay}"/>
+                        <TextBlock
+                            Grid.Column="0" Grid.Row="1"
+                            Margin="{StaticResource SmallContentMargin}"
+                            HorizontalAlignment="Left" VerticalAlignment="Center"
+                            Text="Last Name:">
+                        </TextBlock>
+                        <TextBox 
+                            Grid.Column="1" Grid.Row="1" 
+                            x:Name="txtLastName" 
+                            HorizontalAlignment="Left" VerticalAlignment="Center"
+                            Width="250" Height="24"
+                            Text="{Binding LastName, Mode=TwoWay}"/>
+                        
+                        <TextBlock
+                            Grid.Column="0" Grid.Row="2"
+                            Margin="{StaticResource SmallContentMargin}"
+                            HorizontalAlignment="Left" VerticalAlignment="Center"
+                            Text="Age:">
+                        </TextBlock>
+                        <telerikInput:RadNumericUpDown
+                            x:Name="uiAge" Grid.Column="1" Grid.Row="2"
+                            HorizontalAlignment="Left" Value="{Binding Age, Mode=TwoWay}" NumberDecimalDigits="0" Height="25"
+                            Minimum="0" Maximum="1000" Width="250"></telerikInput:RadNumericUpDown>
+                        <TextBlock
+                            Grid.Column="0" Grid.Row="3"
+                            Margin="{StaticResource SmallContentMargin}"
+                            HorizontalAlignment="Left" VerticalAlignment="Center"
+                            Text="Gender:">
+                        </TextBlock>
+                        <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal" Margin="5">
+                            <RadioButton x:Name="radMale" Content="Male" IsChecked="True" GroupName="Gender" Foreground="White"></RadioButton>
+                            <RadioButton x:Name="radFemale" Content="Female" IsChecked="False" GroupName="Gender"  Foreground="White"></RadioButton>
+                        </StackPanel>
+                    </Grid>
+                </ContentControl>
+                <local:ContactInformationPanel x:Name="ucCntactInfoPanel" Margin="0,5,5,5" Grid.Row="2"></local:ContactInformationPanel>
+
             </Grid>
 
-            <local:ContactInformationPanel x:Name="ucCntactInfoPanel" Margin="5,5,5,5" Grid.Row="2"></local:ContactInformationPanel>
-
-        </Grid>
-        
-        <Grid Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Center">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="20"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <local:SingleClickButton x:Name="btnOK" 
+            <Grid x:Name="gridOKCancel" Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="20"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <local:SingleClickButton x:Name="btnOK" 
                                            Margin="10,10,2,10" VerticalAlignment="Top"
                                            Content="Save" Width="70" />
-            <local:SingleClickButton x:Name="btnCancel" Grid.Column="2"
+                <local:SingleClickButton x:Name="btnCancel" Grid.Column="2"
                                            Margin="10,10,2,10" VerticalAlignment="Top"
                                            Content="Cancel" Width="70" />
 
-        </Grid>
+            </Grid>
 
-    </Grid>
+        </Grid>
+    </ScrollViewer>
 </UserControl>

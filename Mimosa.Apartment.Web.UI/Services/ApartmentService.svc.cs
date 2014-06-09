@@ -171,6 +171,7 @@ namespace Mimosa.Apartment.Web.UI
                     if (status == MembershipCreateStatus.Success)
                     {
                         Guid newUserId = Utilities.ToGuid(newUser.ProviderUserKey);
+                        ApartmentMethods.UpdateAspUserOrganisationId(newUserId, saveUser.OrganisationId);
                         saveUser = GetAspUser(newUserId);
                     }
                     else
@@ -607,9 +608,9 @@ namespace Mimosa.Apartment.Web.UI
         }
 
         [OperationContract]
-        public List<Site> ListSiteBySiteGroup(int? siteGroupId, bool? showLegacy)
+        public List<Site> ListSiteBySiteGroup(int? siteGroupId, bool? showLegacy, bool loadContact)
         {
-            return ApartmentMethods.ListSiteBySiteGroup(siteGroupId, showLegacy);
+            return ApartmentMethods.ListSiteBySiteGroup(siteGroupId, showLegacy, loadContact);
         }
 
         [OperationContract]

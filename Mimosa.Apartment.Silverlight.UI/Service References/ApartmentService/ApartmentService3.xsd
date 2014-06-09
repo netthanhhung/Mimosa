@@ -41,6 +41,7 @@
       <xs:element minOccurs="0" name="PasswordSalt" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ProviderName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ProviderUserKey" nillable="true" type="xs:anyType" />
+      <xs:element minOccurs="0" name="SiteId" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="UserId" type="ser:guid" />
       <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
     </xs:sequence>
@@ -119,6 +120,7 @@
           <xs:element minOccurs="0" name="ContactTypeId" type="xs:int" />
           <xs:element minOccurs="0" name="CountryId" nillable="true" type="xs:int" />
           <xs:element minOccurs="0" name="District" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DoB" nillable="true" type="xs:dateTime" />
           <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="FaxNumber" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
@@ -126,6 +128,9 @@
           <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="Postcode" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="State" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Visa" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="VisaValidFrom" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="VisaValidTo" nillable="true" type="xs:dateTime" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -256,6 +261,8 @@
           <xs:element minOccurs="0" name="IsLegacy" type="xs:boolean" />
           <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="OrganisationId" type="xs:int" />
+          <xs:element minOccurs="0" name="RoomName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SiteName" nillable="true" type="xs:string" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>

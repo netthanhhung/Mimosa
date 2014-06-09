@@ -142,6 +142,10 @@ namespace Mimosa.Apartment.Common
         [DataMember]
         public Customer CustomerItem { get { return _customerItem; } set { if (!object.ReferenceEquals(this.CustomerItem, value)) { _customerItem = value; RaisePropertyChanged("CustomerItem"); } } }
 
+        private Customer _customerItem2;
+        [DataMember]
+        public Customer CustomerItem2 { get { return _customerItem2; } set { if (!object.ReferenceEquals(this.CustomerItem2, value)) { _customerItem2 = value; RaisePropertyChanged("CustomerItem2"); } } }
+
         #endregion
     }
 }

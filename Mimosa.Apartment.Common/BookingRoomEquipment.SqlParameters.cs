@@ -11,7 +11,7 @@ namespace Mimosa.Apartment.Common
 			{
 				Utilities.MakeInputOutputParameter(ColumnNames.BookingRoomEquipmentId, NullableRecordId)
                 , Utilities.MakeInputParameter(ColumnNames.BookingId, BookingId)
-                , Utilities.MakeInputParameter(ColumnNames.RoomEquipmentId, RoomEquipmentId)
+                , Utilities.MakeInputParameter(ColumnNames.EquipmentId, EquipmentId)
 				, Utilities.MakeInputParameter(ColumnNames.Price, Price)
                 , Utilities.MakeInputParameter(ColumnNames.Description, Description)
                 

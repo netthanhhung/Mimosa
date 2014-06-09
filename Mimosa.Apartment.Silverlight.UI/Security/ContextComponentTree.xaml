@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="Mimosa.Apartment.Silverlight.UI.ContextComponentTree"
+    xmlns:data="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:local="clr-namespace:Mimosa.Apartment.Silverlight.UI"
+    xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"             
+    xmlns:bg="clr-namespace:TiledBG;assembly=TiledBG"
+    xmlns:telerik="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls"
+    xmlns:telerikInput="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input"
+    xmlns:telerikGrid="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.GridView"
+    xmlns:telerikGridView="clr-namespace:Telerik.Windows.Controls.GridView;assembly=Telerik.Windows.Controls.GridView"                 
+    xmlns:telerikChart="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Charting"
+    xmlns:telerikNavigation="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Navigation">
+    <UserControl.Resources>
+
+        <telerik:ContainerBindingCollection
+            x:Key="TreeViewItemContainerBindings">
+            <telerik:ContainerBinding
+                PropertyName="IsExpanded"
+                Binding="{Binding IsExpanded}" />
+        </telerik:ContainerBindingCollection>
+
+        <telerik:HierarchicalDataTemplate x:Key="RoleComponentTemplate"  
+            ItemsSource="{Binding RoleComponentChildVMList}"
+            telerik:ContainerBinding.ContainerBindings="{StaticResource TreeViewItemContainerBindings}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Name}" Visibility="{Binding TextVisibility}" Foreground="White" />
+                <CheckBox BorderBrush="Black" Width="250" 
+                          Checked="ChildTreeViewItem_CheckChanged" Unchecked="ChildTreeViewItem_CheckChanged"
+                          IsChecked="{Binding HasAccess, Mode=TwoWay}" 
+                          Tag="{Binding RoleIdCompIdString}" 
+                          Content="{Binding Name}"
+                          Visibility="{Binding CheckVisibility}"
+                          IsEnabled="{Binding IsEnabled}"/>
+                <CheckBox BorderBrush="Blue" Margin="20,0,0,0" 
+                          Checked="WriteCheckBox_Checked" Unchecked="WriteCheckBox_Checked"
+                          IsChecked="{Binding HasWriteRight, Mode=TwoWay}" 
+                          Tag="{Binding RoleIdCompIdString}"
+                          Content="Write"
+                          Visibility="{Binding CheckVisibility}"
+                          IsEnabled="{Binding IsEnabled}"/>
+            </StackPanel>
+        </telerik:HierarchicalDataTemplate>
+    </UserControl.Resources>
+    <Border 
+        BorderThickness="1" 
+        BorderBrush="{StaticResource ContainerBorderBrush}"        
+        Margin="5,5,5,5">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <CheckBox x:Name="chkExpandAll"
+                Margin="5,5,5,5" VerticalAlignment="Center"
+                Content="Expand All" Checked="chkExpandAll_Checked" Unchecked="chkExpandAll_Checked"></CheckBox>
+
+
+            <telerikNavigation:RadTreeView   
+                x:Name="uiRoleComponentTreeView" Grid.Row="1"
+                Padding="10"
+                SelectionMode="Single"
+                IsLineEnabled="True" IsRootLinesEnabled="True" 
+                IsOptionElementsEnabled="True" ItemsOptionListType="None" 
+		        IsTriStateMode="False"
+                ItemTemplate="{StaticResource RoleComponentTemplate}"></telerikNavigation:RadTreeView>
+        </Grid>
+    </Border>
+
+
+</UserControl>

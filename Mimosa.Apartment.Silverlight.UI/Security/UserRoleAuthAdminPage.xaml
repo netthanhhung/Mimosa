@@ -1,0 +1,194 @@
+﻿<navigation:Page x:Class="Mimosa.Apartment.Silverlight.UI.UserRoleAuthAdminPage" Title="Ruby Home"
+    xmlns:data="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:local="clr-namespace:Mimosa.Apartment.Silverlight.UI"
+    xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"             
+    xmlns:bg="clr-namespace:TiledBG;assembly=TiledBG"
+    xmlns:telerik="clr-namespace:Telerik.Windows.Controls.Animation;assembly=Telerik.Windows.Controls"
+    xmlns:telerikInput="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input"
+    xmlns:telerikGrid="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.GridView"
+    xmlns:telerikGridView="clr-namespace:Telerik.Windows.Controls.GridView;assembly=Telerik.Windows.Controls.GridView"                 
+    xmlns:telerikChart="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Charting"
+    xmlns:telerikNavigation="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Navigation">
+    <Grid x:Name="LayoutRootOrgAdmin" Style="{StaticResource LayoutRootGridStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="Auto"></RowDefinition>
+                <RowDefinition
+                    Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <local:ClippedGrid
+                Background="{StaticResource DefaultBackgroundGradientBrush}">
+                <local:Highlight
+                    HighlightBrush="{StaticResource AdminBrush}"></local:Highlight>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="*"></ColumnDefinition>
+                        <ColumnDefinition
+                            Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Margin="20,0,0,0" Orientation="Horizontal">
+                        <TextBlock
+                            x:Name="uiTitle"
+                            VerticalAlignment="Center"
+                            Foreground="{StaticResource TitleForeground}"
+                            Text="User Role Auth Admin"></TextBlock>
+                        <TextBlock
+                            x:Name="uiParamsDisplay"
+                            VerticalAlignment="Center"
+                            Foreground="{StaticResource TitleForeground}"
+                            Text=""></TextBlock>
+                    </StackPanel>
+
+                </Grid>
+            </local:ClippedGrid>
+
+            <local:ClippedGrid Background="{StaticResource ImageBackgroundBrush}" Grid.Row="1"/>
+            <local:ClippedGrid
+                x:Name="layoutContent"
+                Grid.Row="1"
+                Margin="10" Opacity="0.9">
+
+                <local:ClippedGrid>
+                    <bg:TiledBGControl TiledImageSource="{StaticResource CarbonFiberImage}"/>
+                    <local:ClippedGrid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Grid Grid.Row="0" Grid.ColumnSpan="2" Visibility="Collapsed">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <RadioButton x:Name="radByUser" Grid.Column="0" Margin="10,5,5,5"
+                                         Content="By User" GroupName="UserRole" IsChecked="True"></RadioButton>
+                            <RadioButton x:Name="radByRole" Grid.Column="1" Margin="10,5,5,5"
+                                         Content="By Role" GroupName="UserRole" IsChecked="False"></RadioButton>
+
+                        </Grid>
+                        
+                        <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="10,10,10,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock x:Name="lblUser"
+                                Grid.Column="0"
+                                Text="Username:"
+                                VerticalAlignment="Center"></TextBlock>
+                            
+                            <telerikInput:RadComboBox
+                                x:Name="uiUsers"
+                                Grid.Column="1" 
+                                IsEditable="True"
+                                Margin="5,5,5,5" Width="200"
+                                DisplayMemberPath="DisplayName"
+                                SelectedValuePath="UserId"
+                                Style="{StaticResource InputControlStyle}">
+                            </telerikInput:RadComboBox>
+                            
+                        </Grid>
+
+                        <telerikNavigation:RadTabControl 
+                            x:Name="mStrip" Grid.Row="2" Grid.ColumnSpan="2"
+                            Background="{StaticResource CarbonFiberImageBrush}" Opacity="0.9"
+                            Margin="10" >
+
+                            <telerikNavigation:RadTabItem x:Name="uiTabRoles" Header="Roles" Width="110" IsSelected="True">                                
+                                <Grid  Margin="5,5,5,5">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="190"></ColumnDefinition>
+                                        <ColumnDefinition Width="110"></ColumnDefinition>
+                                        <ColumnDefinition Width="160"></ColumnDefinition>
+                                        <ColumnDefinition Width="160"></ColumnDefinition>
+                                        <ColumnDefinition Width="190"></ColumnDefinition>
+                                        <ColumnDefinition Width="190"></ColumnDefinition>
+                                        <ColumnDefinition Width="190"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock x:Name="lblRole" Grid.Column="0"
+                                        Text="Role" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="2"
+                                        Text="Site Group" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="3"
+                                        Text="Site" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+
+                                    <ScrollViewer x:Name="scrollViewerPanels" Grid.Row="1" Grid.ColumnSpan="8" Margin="1,0,1,5"
+                                        VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"></RowDefinition>
+                                                <RowDefinition Height="Auto"></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <ListBox x:Name="uiUserRoleAuthList" 
+                                                BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
+                                                VerticalAlignment="Top" HorizontalAlignment="Left" >
+                                                <ListBox.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <StackPanel Orientation="Vertical" />
+                                                    </ItemsPanelTemplate>
+                                                </ListBox.ItemsPanel>
+                                            </ListBox>
+
+                                            <Button x:Name="btnNew" Grid.Row="1"
+                                                HorizontalAlignment="Right"
+                                                BorderThickness="0" Margin="1000,10,5,5"
+                                                Style="{StaticResource CustomButtonStyle}" 
+                                                ToolTipService.ToolTip="Click to add new">
+                                                <Button.Content>
+                                                    <Image  Width="20" Height="20" Source="/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/green-cross.png"/>
+                                                </Button.Content>
+                                            </Button>
+                                        </Grid>
+
+                                    </ScrollViewer>
+                                </Grid>
+
+                            </telerikNavigation:RadTabItem>
+
+                            <telerikNavigation:RadTabItem x:Name="uiTabComponents" Header="Components" Width="110">
+                                <local:ContextComponentTree x:Name="ucContextComponentTree"></local:ContextComponentTree>
+                            </telerikNavigation:RadTabItem>
+
+                        </telerikNavigation:RadTabControl>
+                                                
+                        <local:SingleClickButton x:Name="btnSave" Height="25" Width="80" Grid.Row="3" Grid.Column="0" Content="Save" 
+                            HorizontalAlignment="Right" Margin="10,10,5,10"/>
+                        <Button x:Name="btnCancel" Height="25" Width="80" Grid.Row="3" Grid.Column="1" Content="Cancel" 
+                            HorizontalAlignment="Left" Margin="10,10,5,10"/>
+
+
+                    </local:ClippedGrid>
+                </local:ClippedGrid>
+
+            </local:ClippedGrid>
+
+        </Grid>
+    </Grid>
+</navigation:Page>

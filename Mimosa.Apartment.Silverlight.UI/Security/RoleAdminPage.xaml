@@ -1,0 +1,116 @@
+﻿<navigation:Page x:Class="Mimosa.Apartment.Silverlight.UI.RoleAdminPage"
+    xmlns:data="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data" Title="Ruby Home"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:local="clr-namespace:Mimosa.Apartment.Silverlight.UI"
+    xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"             
+    xmlns:bg="clr-namespace:TiledBG;assembly=TiledBG"
+    xmlns:telerik="clr-namespace:Telerik.Windows.Controls.Animation;assembly=Telerik.Windows.Controls"
+    xmlns:telerikInput="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input"
+    xmlns:telerikGrid="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.GridView"
+    xmlns:telerikGridView="clr-namespace:Telerik.Windows.Controls.GridView;assembly=Telerik.Windows.Controls.GridView"                 
+    xmlns:telerikChart="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Charting"
+    xmlns:telerikNavigation="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Navigation">
+    <Grid x:Name="LayoutRootOrgAdmin" Style="{StaticResource LayoutRootGridStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="Auto"></RowDefinition>
+                <RowDefinition
+                    Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <local:ClippedGrid
+                Background="{StaticResource DefaultBackgroundGradientBrush}">
+                <local:Highlight
+                    HighlightBrush="{StaticResource AdminBrush}"></local:Highlight>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="*"></ColumnDefinition>
+                        <ColumnDefinition
+                            Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Margin="20,0,0,0" Orientation="Horizontal">
+                        <TextBlock
+                            x:Name="uiTitle"
+                            VerticalAlignment="Center"
+                            Foreground="{StaticResource TitleForeground}"
+                            Text="Site Administrattion"></TextBlock>
+                        <TextBlock
+                            x:Name="uiParamsDisplay"
+                            VerticalAlignment="Center"
+                            Foreground="{StaticResource TitleForeground}"
+                            Text=""></TextBlock>
+                    </StackPanel>
+
+                </Grid>
+            </local:ClippedGrid>
+
+            <local:ClippedGrid Background="{StaticResource ImageBackgroundBrush}" Grid.Row="1"/>
+            <local:ClippedGrid
+                x:Name="layoutContent"
+                Grid.Row="1"
+                Margin="10" Opacity="0.9">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <local:ClippedGrid>
+                    <bg:TiledBGControl TiledImageSource="{StaticResource CarbonFiberImage}"/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <telerikGrid:RadGridView x:Name="gvwRole" Grid.ColumnSpan="2" Grid.Row="0"
+                            AutoGenerateColumns="False" Margin="10,10,10,20" 
+                            VerticalAlignment="Top"
+                            ShowGroupPanel="False" 
+                            IsFilteringAllowed="False" 
+                            CanUserSortColumns="True" CanUserFreezeColumns="False"
+                            CanUserResizeColumns="False" CanUserInsertRows="True" ShowInsertRow="True"
+                            CanUserDeleteRows="True" CanUserReorderColumns="False">
+                            <telerikGrid:RadGridView.Resources>
+                                <Style TargetType="TextBlock" BasedOn="{x:Null}"/>
+                            </telerikGrid:RadGridView.Resources>
+                            <telerikGrid:RadGridView.Columns>
+                                <telerikGrid:GridViewDataColumn
+                                    DataMemberBinding="{Binding RoleName}" UniqueName="RoleName"
+                                    Header="Role Name" HeaderTextAlignment="Center" TextAlignment="Left"
+                                    Width="200">
+                                </telerikGrid:GridViewDataColumn>
+                                <telerikGrid:GridViewDataColumn
+                                    DataMemberBinding="{Binding Description}" UniqueName="Description"
+                                    Header="Description" HeaderTextAlignment="Center" TextAlignment="Left"
+                                    Width="*">
+                                </telerikGrid:GridViewDataColumn>
+                            </telerikGrid:RadGridView.Columns>
+                        </telerikGrid:RadGridView>
+
+                        <local:SingleClickButton x:Name="btnSave" Height="25" Width="80" Grid.Row="1" Grid.Column="0" Content="Save" 
+                            HorizontalAlignment="Right" Margin="10,10,5,10"/>
+                        <Button x:Name="btnCancel" Height="25" Width="80" Grid.Row="1" Grid.Column="1" Content="Cancel" 
+                            HorizontalAlignment="Left" Margin="10,10,5,10"/>
+
+
+                    </Grid>
+                </local:ClippedGrid>
+
+            </local:ClippedGrid>
+
+        </Grid>
+    </Grid>
+</navigation:Page>

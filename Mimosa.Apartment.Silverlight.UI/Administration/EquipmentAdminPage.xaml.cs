@@ -19,7 +19,7 @@ namespace Mimosa.Apartment.Silverlight.UI
         private int _selectedEquipmentId;
         private List<Equipment> _originalItemSource = new List<Equipment>();
         
-        //public List<UserRoleAuth> UserRoleAuths { get; set; }
+        public List<UserRoleAuth> UserRoleAuths { get; set; }
 
         private static class UserMessages
         {
@@ -29,14 +29,14 @@ namespace Mimosa.Apartment.Silverlight.UI
         public EquipmentAdminPage()
         {
             InitializeComponent();
-            //UserRoleAuths = SecurityHelper.GetUserRoleAuths((int)LayoutComponentType.RoleAdmin);
+            UserRoleAuths = SecurityHelper.GetUserRoleAuths((int)LayoutComponentType.EquipmentAdmin);
 
             if (!Globals.UserLogin.IsUserOrganisationAdministrator)
             {
                 this.Content = SecurityHelper.GetNoPermissionInfoPanel();
                 return;
             }
-
+            SecurityChecking();
             BeginRebindEquipment();
             
             //Equipments
@@ -52,6 +52,13 @@ namespace Mimosa.Apartment.Silverlight.UI
             
             //Common
             UiHelper.ApplyMouseWheelScrollViewer(scrollViewerEquipment);
+        }
+
+        void SecurityChecking()
+        {
+            //Security
+            btnSaveEquipment.IsEnabled =  this.UserRoleAuths.Count(i => i.WriteRight == true) > 0;
+            ucImageUpload.IsReadOnly = !btnSaveEquipment.IsEnabled;
         }
 
         private void BeginRebindEquipment()

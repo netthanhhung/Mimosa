@@ -186,6 +186,10 @@ namespace Mimosa.Apartment.Business
             return new DataLayer().UpdateMemberhipUserName(applicationName, userName, newUserName);
         }
 
+        public static void UpdateAspUserOrganisationId(Guid userId, int? organisationId)
+        {
+            new DataLayer().UpdateAspUserOrganisationId(userId, organisationId);
+        }
         #endregion
 
         #region Security
@@ -637,16 +641,34 @@ namespace Mimosa.Apartment.Business
                 {
                     if (item.IsChanged)
                     {
-                        if (item.CustomerItem != null && item.CustomerItem.CustomerId == 0)
+                        if (item.CustomerItem != null)
                         {
-                            if (item.CustomerItem.ContactInformation != null)
+                            if (item.CustomerItem.ContactInformation != null && item.CustomerItem.ContactInformation.IsChanged)
                             {
                                 SaveRecord((Record)item.CustomerItem.ContactInformation);
-                                item.CustomerItem.ContactInformationId = item.CustomerItem.ContactInformation.ContactInformationId;
-                                SaveRecord((Record)item.CustomerItem);
-                                item.CustomerId = item.CustomerItem.CustomerId;
+                                item.CustomerItem.ContactInformationId = item.CustomerItem.ContactInformation.ContactInformationId;                                                                
                             }
+                            if (item.CustomerItem.IsChanged)
+                            {
+                                SaveRecord((Record)item.CustomerItem);
+                            }
+                            item.CustomerId = item.CustomerItem.CustomerId;
                         }
+
+                        if (item.CustomerItem2 != null)
+                        {
+                            if (item.CustomerItem2.ContactInformation != null && item.CustomerItem2.ContactInformation.IsChanged)
+                            {
+                                SaveRecord((Record)item.CustomerItem2.ContactInformation);
+                                item.CustomerItem2.ContactInformationId = item.CustomerItem2.ContactInformation.ContactInformationId;
+                            }
+                            if (item.CustomerItem2.IsChanged)
+                            {
+                                SaveRecord((Record)item.CustomerItem2);
+                            }
+                            item.Customer2Id = item.CustomerItem2.CustomerId;
+                        }
+
                         SaveRecord((Record)item);
 
                     }
@@ -828,9 +850,25 @@ namespace Mimosa.Apartment.Business
             }
         }
 
-        public static List<Site> ListSiteBySiteGroup(int? siteGroupId, bool? showLegacy)
+        public static List<Site> ListSiteBySiteGroup(int? siteGroupId, bool? showLegacy, bool loadContact)
         {
-            return new DataLayer().ListSiteBySiteGroup(siteGroupId, showLegacy);
+            DataLayer dataLayer = new DataLayer();
+            List<Site> result = dataLayer.ListSiteBySiteGroup(siteGroupId, showLegacy);
+            if (loadContact)
+            {
+                foreach (Site site in result)
+                {
+                    if (site.ContactInformationID > 0)
+                    {
+                        List<ContactInformation> contacts = dataLayer.ListContactInformation(site.ContactInformationID);
+                        if (contacts.Count > 0)
+                        {
+                            site.ContactInformation = contacts[0];
+                        }
+                    }
+                }
+            }
+            return result;
         }
 
         public static List<SiteGroupSite> ListSiteGroupSite(int? siteGroupId, int? siteId)

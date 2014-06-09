@@ -19,7 +19,7 @@ namespace Mimosa.Apartment.Silverlight.UI
         private int _selectedServiceId;
         private List<Service> _originalItemSource = new List<Service>();
         
-        //public List<UserRoleAuth> UserRoleAuths { get; set; }
+        public List<UserRoleAuth> UserRoleAuths { get; set; }
 
         private static class UserMessages
         {
@@ -29,14 +29,14 @@ namespace Mimosa.Apartment.Silverlight.UI
         public ServiceAdminPage()
         {
             InitializeComponent();
-            //UserRoleAuths = SecurityHelper.GetUserRoleAuths((int)LayoutComponentType.RoleAdmin);
+            UserRoleAuths = SecurityHelper.GetUserRoleAuths((int)LayoutComponentType.ServiceAdmin);
 
             if (!Globals.UserLogin.IsUserOrganisationAdministrator)
             {
                 this.Content = SecurityHelper.GetNoPermissionInfoPanel();
                 return;
             }
-
+            SecurityChecking();
             BeginRebindService();
             
             //Services
@@ -52,6 +52,14 @@ namespace Mimosa.Apartment.Silverlight.UI
             
             //Common
             UiHelper.ApplyMouseWheelScrollViewer(scrollViewerService);
+        }
+
+
+        void SecurityChecking()
+        {
+            //Security
+            btnSaveService.IsEnabled = this.UserRoleAuths.Count(i => i.WriteRight == true) > 0;
+            ucImageUpload.IsReadOnly = !btnSaveService.IsEnabled;
         }
 
         private void BeginRebindService()

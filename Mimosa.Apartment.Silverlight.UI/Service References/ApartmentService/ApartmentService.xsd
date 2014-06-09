@@ -833,6 +833,7 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="siteGroupId" nillable="true" type="xs:int" />
         <xs:element minOccurs="0" name="showLegacy" nillable="true" type="xs:boolean" />
+        <xs:element minOccurs="0" name="loadContact" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

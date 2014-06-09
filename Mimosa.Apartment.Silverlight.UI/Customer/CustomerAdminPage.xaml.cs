@@ -26,10 +26,24 @@ namespace Mimosa.Apartment.Silverlight.UI
             internal const string NameErrorMessage2 = "The string may not exceed 128 characters in length.";
             
         }
+        public List<UserRoleAuth> UserRoleAuths { get; set; }
 
         public CustomerAdminPage()
         {
             InitializeComponent();
+
+            UserRoleAuths = ucSitePicker.UserRoleAuths = SecurityHelper.GetUserRoleAuths((int)LayoutComponentType.BookingAdmin);
+            if (this.UserRoleAuths == null)
+            {
+                this.Content = SecurityHelper.GetNoPermissionInfoPanel();
+                return;
+            }
+            btnSaveCustomer.IsEnabled = ucCntactInfoPanel.IsEnabled
+                = ucBookingAdmin.btnSaveBooking.IsEnabled = ucBookingAdmin.btnSaveBookingEquipment.IsEnabled = ucBookingAdmin.btnSaveBookingService.IsEnabled
+                = ucBookingAdmin.btnNewBooking.IsEnabled = ucBookingAdmin.btnInsertBookingEquipment.IsEnabled = ucBookingAdmin.btnInsertBookingService.IsEnabled
+                = this.UserRoleAuths.Count(i => i.WriteRight == true) > 0;
+            
+
             ucSitePicker.Init();
             ucSitePicker.InitComplete += new EventHandler(ucSitePicker_InitComplete);
             btnSaveCustomer.Click += new RoutedEventHandler(btnSaveCustomer_Click);

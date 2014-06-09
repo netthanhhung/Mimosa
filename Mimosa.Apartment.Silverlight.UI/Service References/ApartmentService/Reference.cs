@@ -1014,7 +1014,7 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         void EndSaveSiteGroups(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:ApartmentService/ListSiteBySiteGroup", ReplyAction="urn:ApartmentService/ListSiteBySiteGroupResponse")]
-        System.IAsyncResult BeginListSiteBySiteGroup(System.Nullable<int> siteGroupId, System.Nullable<bool> showLegacy, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginListSiteBySiteGroup(System.Nullable<int> siteGroupId, System.Nullable<bool> showLegacy, bool loadContact, System.AsyncCallback callback, object asyncState);
         
         System.Collections.Generic.List<Mimosa.Apartment.Common.Site> EndListSiteBySiteGroup(System.IAsyncResult result);
         
@@ -5119,8 +5119,8 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService.BeginListSiteBySiteGroup(System.Nullable<int> siteGroupId, System.Nullable<bool> showLegacy, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginListSiteBySiteGroup(siteGroupId, showLegacy, callback, asyncState);
+        System.IAsyncResult Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService.BeginListSiteBySiteGroup(System.Nullable<int> siteGroupId, System.Nullable<bool> showLegacy, bool loadContact, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginListSiteBySiteGroup(siteGroupId, showLegacy, loadContact, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -5131,7 +5131,8 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         private System.IAsyncResult OnBeginListSiteBySiteGroup(object[] inValues, System.AsyncCallback callback, object asyncState) {
             System.Nullable<int> siteGroupId = ((System.Nullable<int>)(inValues[0]));
             System.Nullable<bool> showLegacy = ((System.Nullable<bool>)(inValues[1]));
-            return ((Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService)(this)).BeginListSiteBySiteGroup(siteGroupId, showLegacy, callback, asyncState);
+            bool loadContact = ((bool)(inValues[2]));
+            return ((Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService)(this)).BeginListSiteBySiteGroup(siteGroupId, showLegacy, loadContact, callback, asyncState);
         }
         
         private object[] OnEndListSiteBySiteGroup(System.IAsyncResult result) {
@@ -5147,11 +5148,11 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
             }
         }
         
-        public void ListSiteBySiteGroupAsync(System.Nullable<int> siteGroupId, System.Nullable<bool> showLegacy) {
-            this.ListSiteBySiteGroupAsync(siteGroupId, showLegacy, null);
+        public void ListSiteBySiteGroupAsync(System.Nullable<int> siteGroupId, System.Nullable<bool> showLegacy, bool loadContact) {
+            this.ListSiteBySiteGroupAsync(siteGroupId, showLegacy, loadContact, null);
         }
         
-        public void ListSiteBySiteGroupAsync(System.Nullable<int> siteGroupId, System.Nullable<bool> showLegacy, object userState) {
+        public void ListSiteBySiteGroupAsync(System.Nullable<int> siteGroupId, System.Nullable<bool> showLegacy, bool loadContact, object userState) {
             if ((this.onBeginListSiteBySiteGroupDelegate == null)) {
                 this.onBeginListSiteBySiteGroupDelegate = new BeginOperationDelegate(this.OnBeginListSiteBySiteGroup);
             }
@@ -5163,7 +5164,8 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
             }
             base.InvokeAsync(this.onBeginListSiteBySiteGroupDelegate, new object[] {
                         siteGroupId,
-                        showLegacy}, this.onEndListSiteBySiteGroupDelegate, this.onListSiteBySiteGroupCompletedDelegate, userState);
+                        showLegacy,
+                        loadContact}, this.onEndListSiteBySiteGroupDelegate, this.onListSiteBySiteGroupCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -6124,10 +6126,11 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
                 base.EndInvoke("SaveSiteGroups", _args, result);
             }
             
-            public System.IAsyncResult BeginListSiteBySiteGroup(System.Nullable<int> siteGroupId, System.Nullable<bool> showLegacy, System.AsyncCallback callback, object asyncState) {
-                object[] _args = new object[2];
+            public System.IAsyncResult BeginListSiteBySiteGroup(System.Nullable<int> siteGroupId, System.Nullable<bool> showLegacy, bool loadContact, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[3];
                 _args[0] = siteGroupId;
                 _args[1] = showLegacy;
+                _args[2] = loadContact;
                 System.IAsyncResult _result = base.BeginInvoke("ListSiteBySiteGroup", _args, callback, asyncState);
                 return _result;
             }

@@ -38,10 +38,6 @@ namespace Mimosa.Apartment.Silverlight.UI
             ucSitePicker.InitComplete += new EventHandler(ucSitePicker_InitComplete);
             ucSitePicker.SelectionChanged += new SelectionChangedEventHandler(ucSitePicker_SelectionChanged);
             uiRoom.SelectionChanged += new SelectionChangedEventHandler(uiRoom_SelectionChanged);
-
-            ucCntactInfoPanel.btnSaveContact.Visibility = Visibility.Collapsed;
-            txtFirstName.LostFocus += new RoutedEventHandler(txtFirstName_LostFocus);
-            txtLastName.LostFocus += new RoutedEventHandler(txtLastName_LostFocus);
         }
 
         void uiRoom_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -72,26 +68,11 @@ namespace Mimosa.Apartment.Silverlight.UI
         void ucSitePicker_InitComplete(object sender, EventArgs e)
         {
             ContactInformation newContact = new ContactInformation();
-            ucCntactInfoPanel.DataContext = newContact;
+            ucCustomerDetails.ucCntactInfoPanel.DataContext = newContact;
+
             if (this.SiteId > 0)
             {
                 ucSitePicker.SiteId = this.SiteId.Value;
-            }
-        }
-
-        void txtLastName_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrEmpty(ucCntactInfoPanel.txtLastName.Text))
-            {
-                ucCntactInfoPanel.txtLastName.Text = txtLastName.Text;
-            }
-        }
-
-        void txtFirstName_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrEmpty(ucCntactInfoPanel.txtFirstName.Text))
-            {
-                ucCntactInfoPanel.txtFirstName.Text = txtFirstName.Text;
             }
         }
 
@@ -102,16 +83,16 @@ namespace Mimosa.Apartment.Silverlight.UI
             {
                 result = false;
                 MessageBox.Show(UserMessages.RoomNotValid, Globals.UserMessages.ValidationError, MessageBoxButton.OK);
-            }
-            if (string.IsNullOrEmpty(txtFirstName.Text) && string.IsNullOrEmpty(txtLastName.Text))
-            {
-                result = false;
-                MessageBox.Show(UserMessages.CustomerNotValid, Globals.UserMessages.ValidationError, MessageBoxButton.OK);
-            }
+            }            
             if (uiDateFrom.SelectedDate.HasValue && uiDateTo.SelectedDate.HasValue && uiDateFrom.SelectedDate.Value > uiDateTo.SelectedDate.Value)
             {
                 result = false;
                 MessageBox.Show(UserMessages.DateNotValid, Globals.UserMessages.ValidationError, MessageBoxButton.OK);
+            }
+
+            if (result)
+            {
+                result = ucCustomerDetails.CheckValidation();
             }
 
             return result;
@@ -135,29 +116,22 @@ namespace Mimosa.Apartment.Silverlight.UI
             newItem.ContractDateEnd = uiDateTo.SelectedDate;
             newItem.BookingEquipments = new List<BookingRoomEquipment>();
             newItem.BookingServices = new List<BookingRoomService>();
-            Customer customer = panelCustomer.DataContext as Customer;
+            Customer customer = ucCustomerDetails.CustomerItem;
             if (customer != null)
             {
                 newItem.CustomerItem = customer;
                 newItem.CustomerId = customer.CustomerId;
                 newItem.CustomerName = customer.FullName;
             }
-            else
+
+            Customer customer2 = ucCustomerDetails2.CustomerItem;
+            if (customer2 != null && !string.IsNullOrEmpty(customer2.FullName.Trim()))
             {
-                newItem.CustomerItem = new Customer();
-                newItem.CustomerItem.ContactInformation = ucCntactInfoPanel.DataContext as ContactInformation;
-                if (newItem.CustomerItem.ContactInformation == null)
-                {
-                    newItem.CustomerItem.ContactInformation = new ContactInformation();
-                }
-                newItem.CustomerItem.ContactInformation.ContactTypeId = (int)ContactType.Customer;
-                newItem.CustomerItem.OrganisationId = Globals.UserLogin.UserOrganisationId;
-                newItem.CustomerItem.FirstName = newItem.FirstName = txtFirstName.Text;
-                newItem.CustomerItem.LastName = newItem.LastName = txtLastName.Text;
-                newItem.CustomerName = newItem.FirstName + " " + newItem.LastName;
-                newItem.CustomerItem.Gender = radMale.IsChecked == true ? 1 : 0;
-                newItem.CustomerItem.Age = uiAge.Value.HasValue ? Convert.ToInt32(uiAge.Value.Value) : 0;
+                newItem.CustomerItem2 = customer2;
+                newItem.Customer2Id = customer2.CustomerId;
+                newItem.Customer2Name = customer2.FullName;
             }
+
             newItem.IsChanged = true;
 
             return newItem;

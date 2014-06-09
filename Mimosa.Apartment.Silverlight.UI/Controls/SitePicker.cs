@@ -128,7 +128,7 @@ namespace Mimosa.Apartment.Silverlight.UI
             }
             ItemsSource = newItemsource;
             this.SelectedIndex = 0;
-            //ApplySecurity();
+            ApplySecurity();
             
             RaiseInitCompleteEvent();
         }

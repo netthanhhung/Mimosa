@@ -4,8 +4,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:bg="clr-namespace:TiledBG;assembly=TiledBG"
-    xmlns:local="clr-namespace:Mimosa.Apartment.Silverlight.UI"
-    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+    xmlns:local="clr-namespace:Mimosa.Apartment.Silverlight.UI"    
+    xmlns:telerik="clr-namespace:Telerik.Windows.Controls.Animation;assembly=Telerik.Windows.Controls"
+    xmlns:telerikInput="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input"
+    xmlns:telerikGrid="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.GridView"
+    xmlns:telerikGridView="clr-namespace:Telerik.Windows.Controls.GridView;assembly=Telerik.Windows.Controls.GridView"                 
+    xmlns:telerikChart="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Charting"
+    xmlns:telerikNavigation="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Navigation"
     mc:Ignorable="d">
 
     <Grid x:Name="uiLayoutRoot" Margin="5">
@@ -15,7 +20,9 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="50"></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
@@ -27,154 +34,87 @@
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
                 
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"></ColumnDefinition>
+                <ColumnDefinition Width="130"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
             <TextBlock
-                    Margin="10,10,5,5" Grid.Column="0" Grid.Row="0"
+                    Margin="{StaticResource SmallContentMargin}" Grid.Column="0" Grid.Row="0"
+                    VerticalAlignment="Center"
+                    Text="Booking Info:">
+            </TextBlock>
+            
+            <TextBlock
+                    Margin="{StaticResource SmallContentMargin}" Grid.Column="0" Grid.Row="1"
                     VerticalAlignment="Center"
                     Text="Site:">
             </TextBlock>
             <local:SitePicker
                     x:Name="ucSitePicker" Height="25"
-                    Grid.Column="1" Grid.Row="0"
-                    DataListWidth="300" ShowInactiveCheck="False" ShowAllSitesItem="False"
-                    Margin="5,5,5,5"></local:SitePicker>
+                    Grid.Column="1" Grid.Row="1"
+                    DataListWidth="250" ShowInactiveCheck="False" ShowAllSitesItem="False"
+                    ></local:SitePicker>
             <TextBlock
-                    Margin="10,10,5,5" Grid.Column="0" Grid.Row="1"
+                    Margin="{StaticResource SmallContentMargin}" Grid.Column="0" Grid.Row="2"
                     VerticalAlignment="Center"
                     Text="Room:">
             </TextBlock>
             <ComboBox
-                    x:Name="uiRoom" Width="300" Height="25"
-                    Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"
-                    Margin="5,5,5,5"
+                    x:Name="uiRoom" Width="250" Height="25"
+                    Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left"                    
                     DisplayMemberPath="RoomName"
                     SelectedValuePath="RoomId" />
 
             <TextBlock
-                    Margin="10,10,5,5" Grid.Column="0" Grid.Row="2"
+                    Margin="{StaticResource SmallContentMargin}" Grid.Column="0" Grid.Row="3"
                     VerticalAlignment="Center"
                     Text="Room Price:">
             </TextBlock>
-            <telerik:RadNumericUpDown
-                    x:Name="uiRoomPrice" Grid.Column="1" Grid.Row="2" Height="25" Margin="5"
+            <telerikInput:RadNumericUpDown
+                    x:Name="uiRoomPrice" Grid.Column="1" Grid.Row="3" Height="25"
                     HorizontalAlignment="Left" Value="0" NumberDecimalDigits="0"
-                    Minimum="0" Maximum="1000" Width="100"></telerik:RadNumericUpDown>
+                    Minimum="0" Maximum="1000" Width="100"></telerikInput:RadNumericUpDown>
             <TextBlock
-                    Margin="10,10,5,5" Grid.Column="0" Grid.Row="3"
+                    Margin="{StaticResource SmallContentMargin}" Grid.Column="0" Grid.Row="4"
                     VerticalAlignment="Center"
                     Text="Date From:">
             </TextBlock>
-            <telerik:RadDatePicker  Grid.Column="1" Grid.Row="3"
+                <telerikInput:RadDatePicker  Grid.Column="1" Grid.Row="4"
                     x:Name="uiDateFrom"
-                    Margin="5" Width="100" HorizontalAlignment="Left"
-                    Style="{StaticResource InputControlStyle}"></telerik:RadDatePicker>
+                    Width="100" HorizontalAlignment="Left" Margin="0"
+                    Style="{StaticResource InputControlStyle}"></telerikInput:RadDatePicker>
             
             <TextBlock
-                    Margin="10,10,5,5" Grid.Column="0" Grid.Row="4"
+                    Margin="{StaticResource SmallContentMargin}" Grid.Column="0" Grid.Row="5"
                     VerticalAlignment="Center"
                     Text="Date To:">
             </TextBlock>
-            <telerik:RadDatePicker  Grid.Column="1" Grid.Row="4"
+            <telerikInput:RadDatePicker  Grid.Column="1" Grid.Row="5"
                     x:Name="uiDateTo"
-                    Margin="5" Width="100" HorizontalAlignment="Left"
-                    Style="{StaticResource InputControlStyle}"></telerik:RadDatePicker>
+                    Width="100" HorizontalAlignment="Left"  Margin="0"
+                    Style="{StaticResource InputControlStyle}"></telerikInput:RadDatePicker>
 
             <TextBlock
-                    Margin="10,10,5,5" Grid.Column="0" Grid.Row="5"
+                    Margin="{StaticResource SmallContentMargin}" Grid.Column="0" Grid.Row="6"
                     VerticalAlignment="Center"
                     Text="Description:">
             </TextBlock>
-            <TextBox x:Name="uiDescription"  Grid.Column="1" Grid.Row="5" Width="300" 
-                     Margin="5" HorizontalAlignment="Left"></TextBox>
+            <TextBox x:Name="uiDescription"  Grid.Column="1" Grid.Row="6" Width="250" 
+                     HorizontalAlignment="Left"></TextBox>
         </Grid>
 
         <Grid Grid.Column="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-            </Grid.RowDefinitions>
-
-            <TextBlock
-                    Margin="10,10,5,5" Grid.Column="0" Grid.Row="0"
-                    VerticalAlignment="Center"
-                    Text="Customer:">
-            </TextBlock>
-
-            <ContentControl x:Name="panelCustomer"  Grid.Row="1" Margin="5">
-                <Grid VerticalAlignment="Top">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="145"></ColumnDefinition>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock
-                        Grid.Column="0" Grid.Row="0"
-                        Margin="{StaticResource SmallContentMargin}"
-                        HorizontalAlignment="Left" VerticalAlignment="Center"
-                        Text="First Name:">
-                    </TextBlock>
-                    <TextBox 
-                        Grid.Column="1" Grid.Row="0" 
-                        x:Name="txtFirstName" 
-                        HorizontalAlignment="Left" VerticalAlignment="Center"
-                        Width="300" Height="24" Margin="5"
-                        Text="{Binding FirstName, Mode=TwoWay}"/>
-                    <TextBlock
-                        Grid.Column="0" Grid.Row="1"
-                        Margin="{StaticResource SmallContentMargin}"
-                        HorizontalAlignment="Left" VerticalAlignment="Center"
-                        Text="Last Name:">
-                    </TextBlock>
-                    <TextBox 
-                        Grid.Column="1" Grid.Row="1" 
-                        x:Name="txtLastName" 
-                        HorizontalAlignment="Left" VerticalAlignment="Center"
-                        Width="300" Height="24" Margin="5"
-                        Text="{Binding LastName, Mode=TwoWay}"/>
-                    <TextBlock
-                        Grid.Column="0" Grid.Row="2"
-                        Margin="{StaticResource SmallContentMargin}"
-                        HorizontalAlignment="Left" VerticalAlignment="Center"
-                        Text="Gender:">
-                    </TextBlock>
-                    <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" Margin="5">
-                        <RadioButton x:Name="radMale" Content="Male" IsChecked="True" GroupName="Gender" Foreground="White"></RadioButton>
-                        <RadioButton x:Name="radFemale" Content="Female" IsChecked="False" GroupName="Gender"  Foreground="White"></RadioButton>
-                    </StackPanel>
-                    <TextBlock
-                        Grid.Column="0" Grid.Row="3"
-                        Margin="{StaticResource SmallContentMargin}"
-                        HorizontalAlignment="Left" VerticalAlignment="Center"
-                        Text="Age:">
-                    </TextBlock>
-                    <telerik:RadNumericUpDown
-                        x:Name="uiAge" Grid.Column="1" Grid.Row="3"
-                        HorizontalAlignment="Left" Value="{Binding Age, Mode=TwoWay}" NumberDecimalDigits="0" Height="25" Margin="5"
-                        Minimum="0" Maximum="1000" Width="300"></telerik:RadNumericUpDown>
-                </Grid>
-            </ContentControl>
-            
-
-            <local:ContactInformationPanel x:Name="ucCntactInfoPanel" Margin="5,5,5,5" Grid.Row="2"></local:ContactInformationPanel>
-
+            <local:CustomerDetails x:Name="ucCustomerDetails" ShowOKCancel="False"></local:CustomerDetails>
         </Grid>
-        
+
+        <Grid Grid.Column="4">
+            <local:CustomerDetails x:Name="ucCustomerDetails2" ShowOKCancel="False"></local:CustomerDetails>
+        </Grid>
+
         <Grid Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>

@@ -47,6 +47,13 @@ namespace Mimosa.Apartment.Silverlight.UI
         private const string TransparentImage = "/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/Transparent.png";
 
         private int _currentOrgId;
+        private List<SiteGroup> _siteGroups = new List<SiteGroup>();
+        public List<SiteGroup> SiteGroups
+        {
+            get { return _siteGroups; }
+            set { _siteGroups = value; }
+        }
+
         private List<AspUser> _aspUsers = new List<AspUser>();        
 
         public Brush BackgroundColour {
@@ -115,11 +122,35 @@ namespace Mimosa.Apartment.Silverlight.UI
         public void RebindData(int orgId)
         {
             Globals.IsBusy = true;
+            _currentOrgId = orgId;
             ResetControlStatus();
             ucInformation.InfoMessage = UserMessages.NewRecord;
             DataServiceHelper.ListOrgAdminAspUserAsync(orgId, SecurityHelper.OrganisationAdministratorRoleId, ListAllAspUserCompleted);
         }
-       
+
+        public void RebindData()
+        {
+            Globals.IsBusy = true;
+            _currentOrgId = Globals.UserLogin.UserOrganisationId;
+            ResetControlStatus();
+            ucInformation.InfoMessage = UserMessages.NewRecord;
+            DataServiceHelper.ListSiteGroupAsync(Globals.UserLogin.UserOrganisationId, null, ListSiteGroupCompleted);
+        }
+
+        void ListSiteGroupCompleted(List<SiteGroup> siteGroupList)
+        {
+            _siteGroups = siteGroupList;
+            if (Globals.UserLogin.AspUser.OrganisationId.HasValue)
+            {
+                DataServiceHelper.ListAspUserAsync(Globals.UserLogin.AspUser.OrganisationId.Value, null, false, ListAllAspUserCompleted);
+            }
+            else
+            {
+                DataServiceHelper.ListAspUserAsync(null, null, false, ListAllAspUserCompleted);
+            }
+            //MembershipServiceHelper.ListUserRoleAuthAsync(null, SecurityHelper.SalesPersonRoleId, ListSalePersonsCompleted);
+        }
+
         void ListAllAspUserCompleted(List<AspUser> userList)
         {
             _aspUsers = userList;
@@ -127,20 +158,66 @@ namespace Mimosa.Apartment.Silverlight.UI
             Globals.IsBusy = false;
         }
 
+        //void FillUserNameCombobox()
+        //{
+        //    Dictionary<Guid, string> userItemSource = new Dictionary<Guid, string>();
+        //    foreach (AspUser user in _aspUsers)
+        //    {
+        //        if (!userItemSource.ContainsKey(user.UserId))
+        //        {
+        //            userItemSource.Add(user.UserId, user.UserName);
+        //        }
+        //    }
+        //    uiUsers.ItemsSource = userItemSource;
+        //    if(userItemSource.Count > 0)
+        //        uiUsers.SelectedIndex = 0;
+        //    RebindUserAccountData();
+        //}
+
         void FillUserNameCombobox()
         {
+            //if this user is Security Admin : user can create new, edit the user accounts.
             Dictionary<Guid, string> userItemSource = new Dictionary<Guid, string>();
-            foreach (AspUser user in _aspUsers)
+            if (Globals.UserLogin.IsUserPortalAdministrator)
             {
-                if (!userItemSource.ContainsKey(user.UserId))
+                foreach (AspUser user in _aspUsers)
                 {
-                    userItemSource.Add(user.UserId, user.UserName);
+                    if (!userItemSource.ContainsKey(user.UserId))
+                    {
+                        userItemSource.Add(user.UserId, user.UserName);
+                    }
                 }
-            }
-            uiUsers.ItemsSource = userItemSource;
-            if(userItemSource.Count > 0)
+                uiUsers.ItemsSource = userItemSource;
                 uiUsers.SelectedIndex = 0;
-            RebindUserAccountData();
+                RebindUserAccountData();
+            }
+            else if (Globals.UserLogin.IsUserSecurityAdministrator)
+            {
+                List<AspUser> filterUsers = SecurityHelper.FilterUserList(_aspUsers, _siteGroups);
+                foreach (AspUser user in filterUsers)
+                {
+                    if (!userItemSource.ContainsKey(user.UserId))
+                    {
+                        userItemSource.Add(user.UserId, user.UserName);
+                    }
+                }
+                
+                userItemSource.OrderBy(i => i.Value);
+                uiUsers.ItemsSource = userItemSource;
+
+            }
+            else
+            {
+                userItemSource.Add(Globals.UserLogin.UserUserId, Globals.UserLogin.UserName);
+                uiUsers.ItemsSource = userItemSource;
+                uiUsers.SelectedIndex = 0;
+                
+                RebindUserAccountData();
+                uiUsers.IsEnabled = false;                
+                chkAccountApproved.IsEnabled = false;
+                btnUnlock.IsEnabled = false;
+            }
+
         }
 
 
@@ -303,6 +380,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                     return;
                 }
                 AspUser newUser = new AspUser();
+                newUser.OrganisationId = Globals.UserLogin.UserOrganisationId;
                 newUser.UserName = uiUsers.Text;
                 newUser.Password = txtPassword.Password;
                 newUser = GetSaveAspUser(newUser);

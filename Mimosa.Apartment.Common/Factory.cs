@@ -226,7 +226,7 @@ namespace Mimosa.Apartment.Common
             input.IsAnonymous = Utilities.ToBool(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.IsAnonymous]);
             
             input.OrganisationId = Utilities.ToNInt(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.OrganisationId]);
-            //input.SiteId = Utilities.ToNInt(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.SiteId]);
+            input.SiteId = Utilities.ToNInt(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.SiteId]);
             if (reader.ColumnExists(Mimosa.Apartment.Common.AspUser.ColumnNames.MinRoleLevel))
                 input.MinRoleLevel = Utilities.ToNInt(reader[Mimosa.Apartment.Common.AspUser.ColumnNames.MinRoleLevel]);
             else
@@ -975,7 +975,6 @@ namespace Mimosa.Apartment.Common
             PopulateRecord(input, reader);
             input.RecordId = input.BookingRoomEquipmentId = Utilities.ToInt(reader[Mimosa.Apartment.Common.BookingRoomEquipment.ColumnNames.BookingRoomEquipmentId]);
             input.BookingId = Utilities.ToInt(reader[Mimosa.Apartment.Common.BookingRoomEquipment.ColumnNames.BookingId]);
-            input.RoomEquipmentId = Utilities.ToInt(reader[Mimosa.Apartment.Common.BookingRoomEquipment.ColumnNames.RoomEquipmentId]);
             input.EquipmentId = Utilities.ToInt(reader[Mimosa.Apartment.Common.BookingRoomEquipment.ColumnNames.EquipmentId]);
             input.Equipment = Utilities.ToString(reader[Mimosa.Apartment.Common.BookingRoomEquipment.ColumnNames.Equipment]);
             input.Price = Utilities.ToNDecimal(reader[Mimosa.Apartment.Common.BookingRoomEquipment.ColumnNames.Price]);
@@ -1061,7 +1060,6 @@ namespace Mimosa.Apartment.Common
             PopulateRecord(input, reader);
             input.RecordId = input.BookingRoomServiceId = Utilities.ToInt(reader[Mimosa.Apartment.Common.BookingRoomService.ColumnNames.BookingRoomServiceId]);
             input.BookingId = Utilities.ToInt(reader[Mimosa.Apartment.Common.BookingRoomService.ColumnNames.BookingId]);
-            input.RoomServiceId = Utilities.ToInt(reader[Mimosa.Apartment.Common.BookingRoomService.ColumnNames.RoomServiceId]);
             input.ServiceId = Utilities.ToInt(reader[Mimosa.Apartment.Common.BookingRoomService.ColumnNames.ServiceId]);
             input.Service = Utilities.ToString(reader[Mimosa.Apartment.Common.BookingRoomService.ColumnNames.Service]);
             input.Price = Utilities.ToNDecimal(reader[Mimosa.Apartment.Common.BookingRoomService.ColumnNames.Price]);
