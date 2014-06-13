@@ -30,6 +30,12 @@ ContactInformation : add DoB, Visa, VisaValidFrom, VisaValidTo
 
 [procListAspUser] : alter
 [procUpdateAspUserOrganisationId] : new
+
+[BookingPayment] : new table
+[procSaveBookingPayment] : new proc
+[ufnGetTotalEquipmentPrice] : new function
+[ufnGetTotalServicePrice] : new function
+[procListBookingPayment] : new proc
 *************************************************************************************/
 
 
@@ -120,6 +126,25 @@ ALTER PROCEDURE [dbo].[procListBooking]
 , @BookDateEnd smalldatetime = null
 AS
 BEGIN
+
+	
+	DECLARE @_BookingStatusId TABLE
+	(
+	BookingStatusId int
+	, BookingStatus varchar(128)
+	)
+	IF @BookingStatusIds IS NULL 
+	BEGIN
+		INSERT INTO @_BookingStatusId
+		SELECT BookingStatusId, Name
+		FROM BookingStatus
+	END ELSE BEGIN 
+		INSERT INTO @_BookingStatusId
+		SELECT BookingStatusId, Name
+		FROM BookingStatus B
+		INNER JOIN dbo.ufnSplitNumeric(',', @BookingStatusIds) N on B.BookingStatusId = N.Number	
+	END
+	
 	SELECT TOP 1000
 	B.[BookingId]
 	,S.SiteID, S.Name as SiteName
@@ -132,7 +157,7 @@ BEGIN
 	,C2.FirstName + ' ' + C2.LastName as Customer2Name
 	,B.[BookDate]
 	,B.[BookingStatusId]
-	,BS.Name as BookingStatus
+	,BS.BookingStatus
 	,B.[Description]
 	,B.[RoomPrice]
 	,B.[TotalPrice]
@@ -148,7 +173,7 @@ BEGIN
 	FROM [dbo].[Booking] B
 	INNER JOIN Room R on B.RoomId = R.RoomId
 	INNER JOIN Site S on R.SiteID = S.SiteID
-	INNER JOIN BookingStatus BS on B.BookingStatusId = BS.BookingStatusId
+	INNER JOIN @_BookingStatusId BS on B.BookingStatusId = BS.BookingStatusId
 	LEFT OUTER JOIN Customer C on C.CustomerId = B.CustomerId
 	LEFT OUTER JOIN Customer C2 on C2.CustomerId = B.Customer2Id
 	WHERE S.OrganisationID = @OrganisationId
@@ -703,8 +728,7 @@ END
 GO
 
 
-
-/****** Object:  StoredProcedure [dbo].[procListBookingRoomEquipment]    Script Date: 05/30/2014 10:53:29 ******/
+/****** Object:  StoredProcedure [dbo].[procListBookingRoomEquipment]    Script Date: 06/10/2014 16:32:54 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[procListBookingRoomEquipment]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[procListBookingRoomEquipment]
 GO
@@ -720,6 +744,8 @@ BEGIN
 
 	SELECT	BRE.BookingRoomEquipmentId, BRE.BookingId, BRE.EquipmentId, E.EquipmentName as Equipment, E.Unit,
 		BRE.Price, BRE.Description,
+		CASE WHEN (SELECT Count(*) FROM BookingRoomEquipmentDetail WHERE BookingRoomEquipmentId = BRE.BookingRoomEquipmentId) > 0
+		THEN 0 ELSE 1 END as CanDelete,
 		BRE.Concurrency, BRE.DateCreated, BRE.DateUpdated, BRE.CreatedBy, BRE.UpdatedBy
 	FROM	BookingRoomEquipment BRE
 	INNER JOIN Equipment E on BRE.EquipmentId = E.EquipmentId
@@ -728,8 +754,9 @@ BEGIN
 	AND	(@EquipmentId is null OR BRE.EquipmentId = @EquipmentId)
 
 END
-
 GO
+
+
 
 
 /****** Object:  StoredProcedure [dbo].[procSaveBookingRoomService]    Script Date: 06/05/2014 16:59:06 ******/
@@ -810,6 +837,8 @@ BEGIN
 
 	SELECT	BRE.BookingRoomServiceId, BRE.BookingId, BRE.ServiceId, E.Name as Service, E.Unit,
 		BRE.Price, BRE.Description,
+		CASE WHEN (SELECT Count(*) FROM BookingRoomServiceDetail WHERE BookingRoomServiceId = BRE.BookingRoomServiceId) > 0
+		THEN 0 ELSE 1 END as CanDelete,
 		BRE.Concurrency, BRE.DateCreated, BRE.DateUpdated, BRE.CreatedBy, BRE.UpdatedBy
 	FROM	BookingRoomService BRE
 	INNER JOIN Service E on BRE.ServiceId = E.ServiceId
@@ -1034,24 +1063,28 @@ GO
 
 CREATE PROCEDURE [dbo].[procListBookingRoomEquipmentDetail]	
 @BookingRoomEquipmentDetailId int = null,
-@BookingRoomEquipmentId int = null
+@BookingRoomEquipmentId int = null,
+@BookingId int = null,
+@DateStart smalldatetime = null,
+@DateEnd smalldatetime = null
 AS
 BEGIN
 SET NOCOUNT ON
 
-	SELECT	D.BookingRoomEquipmentDetailId, D.BookingRoomEquipmentId, D.DateStart, D.DateEnd,
-			D.Quantity, BRE.Price, E.Unit, D.TotalPrice, D.Payment, D.Description,
+	SELECT	D.BookingRoomEquipmentDetailId, D.BookingRoomEquipmentId, E.EquipmentId, E.EquipmentName as Equipment,
+			D.DateStart, D.DateEnd, D.Quantity, BRE.Price, E.Unit, D.TotalPrice, D.Payment, D.Description,			
 			BRE.Concurrency, BRE.DateCreated, BRE.DateUpdated, BRE.CreatedBy, BRE.UpdatedBy
 	FROM	BookingRoomEquipmentDetail D
 	INNER JOIN BookingRoomEquipment BRE on BRE.BookingRoomEquipmentId = D.BookingRoomEquipmentId
 	INNER JOIN Equipment E on BRE.EquipmentId = e.EquipmentId
 	WHERE	(@BookingRoomEquipmentDetailId is null OR D.BookingRoomEquipmentDetailId = @BookingRoomEquipmentDetailId)
-	AND	(@BookingRoomEquipmentId is null OR BRE.BookingRoomEquipmentId = @BookingRoomEquipmentId)
+	AND		(@BookingRoomEquipmentId is null OR BRE.BookingRoomEquipmentId = @BookingRoomEquipmentId)
+	AND		(@BookingId is null OR BRE.BookingId = @BookingId)
+	AND     (@DateStart IS NULL OR (D.DateStart <= @DateEnd AND D.DateEnd >= @DateStart))
 	ORDER BY D.DateStart DESC, D.DateEnd DESC
 END
 
 GO
-
 
 /****** Object:  StoredProcedure [dbo].[procListBookingRoomServiceDetail]    Script Date: 05/29/2014 17:56:30 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[procListBookingRoomServiceDetail]') AND type in (N'P', N'PC'))
@@ -1061,25 +1094,28 @@ GO
 
 CREATE PROCEDURE [dbo].[procListBookingRoomServiceDetail]	
 @BookingRoomServiceDetailId int = null,
-@BookingRoomServiceId int = null
+@BookingRoomServiceId int = null,
+@BookingId int = null,
+@DateStart smalldatetime = null,
+@DateEnd smalldatetime = null
 AS
 BEGIN
 SET NOCOUNT ON
 
-	SELECT	D.BookingRoomServiceDetailId, D.BookingRoomServiceId, D.DateStart, D.DateEnd,
-			D.Quantity, BRE.Price, E.Unit, D.TotalPrice, D.Payment, D.Description, 
+	SELECT	D.BookingRoomServiceDetailId, D.BookingRoomServiceId, E.ServiceId, E.Name as Service,
+			D.DateStart, D.DateEnd, D.Quantity, BRE.Price, E.Unit, D.TotalPrice, D.Payment, D.Description,			
 			BRE.Concurrency, BRE.DateCreated, BRE.DateUpdated, BRE.CreatedBy, BRE.UpdatedBy
 	FROM	BookingRoomServiceDetail D
 	INNER JOIN BookingRoomService BRE on BRE.BookingRoomServiceId = D.BookingRoomServiceId
-	INNER JOIN Service E on BRE.ServiceId = e.ServiceId
+	INNER JOIN dbo.Service E on BRE.ServiceId = e.ServiceId
 	WHERE	(@BookingRoomServiceDetailId is null OR D.BookingRoomServiceDetailId = @BookingRoomServiceDetailId)
-	AND	(@BookingRoomServiceId is null OR BRE.BookingRoomServiceId = @BookingRoomServiceId)
+	AND		(@BookingRoomServiceId is null OR BRE.BookingRoomServiceId = @BookingRoomServiceId)
+	AND		(@BookingId is null OR BRE.BookingId = @BookingId)
+	AND     (@DateStart IS NULL OR (D.DateStart <= @DateEnd AND D.DateEnd >= @DateStart))
 	ORDER BY D.DateStart DESC, D.DateEnd DESC
 END
 
 GO
-
-
 
 /****** Object:  StoredProcedure [dbo].[procSaveBookingRoomEquipmentDetail]    Script Date: 05/30/2014 09:34:00 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[procSaveBookingRoomEquipmentDetail]') AND type in (N'P', N'PC'))
@@ -1459,6 +1495,313 @@ END
 GO
 
 
+GO
+
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_BookingPayment_Booking]') AND parent_object_id = OBJECT_ID(N'[dbo].[BookingPayment]'))
+ALTER TABLE [dbo].[BookingPayment] DROP CONSTRAINT [FK_BookingPayment_Booking]
+GO
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_BookingPayment_DateCreated]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[BookingPayment] DROP CONSTRAINT [DF_BookingPayment_DateCreated]
+END
+
+GO
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_BookingPayment_DateUpdated]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[BookingPayment] DROP CONSTRAINT [DF_BookingPayment_DateUpdated]
+END
+
+GO
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_BookingPayment_CreatedBy]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[BookingPayment] DROP CONSTRAINT [DF_BookingPayment_CreatedBy]
+END
+
+GO
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_BookingPayment_UpdatedBy]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[BookingPayment] DROP CONSTRAINT [DF_BookingPayment_UpdatedBy]
+END
+GO
+
+/****** Object:  Table [dbo].[BookingPayment]    Script Date: 06/10/2014 16:57:44 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[BookingPayment]') AND type in (N'U'))
+DROP TABLE [dbo].[BookingPayment]
+GO
+
+CREATE TABLE [dbo].[BookingPayment](
+	[BookingPaymentId] [int] IDENTITY(1,1) NOT NULL,
+	[BookingId] [int] NOT NULL,
+	[DateStart] [smalldatetime] NOT NULL,
+	[DateEnd] [smalldatetime] NOT NULL,
+	[RoomPrice] [decimal](20, 8) NOT NULL,
+	[EquipmentPrice] [decimal](20, 8) NOT NULL,
+	[ServicePrice] [decimal](20, 8) NOT NULL,
+	[TotalPrice] [decimal](20, 8) NOT NULL,
+	[CustomerPaid] [decimal](20, 8) NOT NULL,
+	[Payment] [bit] NOT NULL,
+	[Concurrency] [timestamp] NOT NULL,
+	[DateCreated] [smalldatetime] NOT NULL,
+	[DateUpdated] [smalldatetime] NOT NULL,
+	[CreatedBy] [varchar](128) NOT NULL,
+	[UpdatedBy] [varchar](128) NOT NULL,
+ CONSTRAINT [PK_BookingPayment] PRIMARY KEY CLUSTERED 
+(
+	[BookingPaymentId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[BookingPayment]  WITH CHECK ADD  CONSTRAINT [FK_BookingPayment_Booking] FOREIGN KEY([BookingId])
+REFERENCES [dbo].[Booking] ([BookingId])
+GO
+
+ALTER TABLE [dbo].[BookingPayment] CHECK CONSTRAINT [FK_BookingPayment_Booking]
+GO
+
+ALTER TABLE [dbo].[BookingPayment] ADD  CONSTRAINT [DF_BookingPayment_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
+GO
+
+ALTER TABLE [dbo].[BookingPayment] ADD  CONSTRAINT [DF_BookingPayment_DateUpdated]  DEFAULT (getdate()) FOR [DateUpdated]
+GO
+
+ALTER TABLE [dbo].[BookingPayment] ADD  CONSTRAINT [DF_BookingPayment_CreatedBy]  DEFAULT (suser_sname()) FOR [CreatedBy]
+GO
+
+ALTER TABLE [dbo].[BookingPayment] ADD  CONSTRAINT [DF_BookingPayment_UpdatedBy]  DEFAULT (suser_sname()) FOR [UpdatedBy]
+GO
+
+
+
+/****** Object:  StoredProcedure [dbo].[procSaveBookingPayment]    Script Date: 06/10/2014 17:10:59 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[procSaveBookingPayment]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[procSaveBookingPayment]
+GO
+
+
+CREATE PROCEDURE [dbo].[procSaveBookingPayment]
+
+@BookingPaymentId int OUTPUT,
+@BookingId int,
+@DateStart smalldatetime,
+@DateEnd smalldatetime,
+@RoomPrice decimal(20, 8),
+@EquipmentPrice decimal(20, 8),
+@ServicePrice decimal(20, 8),
+@TotalPrice decimal(20,8),
+@CustomerPaid decimal(20,8),
+@Payment bit,
+@CurrentUser varchar(128)
+AS
+	BEGIN
+	SET NOCOUNT ON
+
+	IF NOT EXISTS (SELECT * FROM BookingPayment WHERE BookingPaymentId = @BookingPaymentId)
+	BEGIN
+
+		INSERT INTO BookingPayment(
+			BookingId,
+			DateStart,
+			DateEnd,
+			RoomPrice,
+			EquipmentPrice,
+			ServicePrice,
+			TotalPrice,
+			CustomerPaid,
+			Payment,
+			DateCreated,
+			DateUpdated,
+			CreatedBy,
+			UpdatedBy
+		) VALUES (
+			@BookingId,
+			@DateStart,
+			@DateEnd,
+			@RoomPrice,
+			@EquipmentPrice,
+			@ServicePrice,
+			@TotalPrice,
+			@CustomerPaid,
+			@Payment,
+			GETDATE(),
+			GETDATE(),
+			@CurrentUser,
+			@CurrentUser
+		)
+
+		SET @BookingPaymentId = SCOPE_IDENTITY()
+
+	END ELSE BEGIN
+
+		UPDATE BookingPayment SET
+			BookingId = @BookingId,
+			DateStart = @DateStart,
+			DateEnd = @DateEnd,
+			RoomPrice = @RoomPrice,
+			EquipmentPrice = @EquipmentPrice,
+			ServicePrice = @ServicePrice,
+			TotalPrice = @TotalPrice,
+			CustomerPaid = @CustomerPaid,
+			Payment = @Payment,
+			DateUpdated = GETDATE(),
+			UpdatedBy = @CurrentUser
+
+		WHERE BookingPaymentId = @BookingPaymentId
+
+	END
+
+	SELECT Concurrency FROM BookingPayment WHERE BookingPaymentId = @BookingPaymentId
+END
+
+
+GO
+
+
+
+
+/****** Object:  UserDefinedFunction [dbo].[ufnGetTotalEquipmentPrice]    Script Date: 06/10/2014 17:51:18 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ufnGetTotalEquipmentPrice]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
+DROP FUNCTION [dbo].[ufnGetTotalEquipmentPrice]
+GO
+
+CREATE FUNCTION [dbo].[ufnGetTotalEquipmentPrice]
+(
+@BookingId int,
+@DateStart smalldatetime,
+@DateEnd smalldatetime
+)
+RETURNS decimal(20,8)
+AS
+BEGIN
+	DECLARE @Result decimal(20,8)
+
+	SELECT @Result = SUM(TotalPrice)
+	FROM BookingRoomEquipmentDetail D
+	INNER JOIN BookingRoomEquipment E on D.BookingRoomEquipmentId = E.BookingRoomEquipmentId
+	WHERE E.BookingId = @BookingId
+	AND   D.DateStart <= @DateEnd
+	AND   D.DateEnd >= @DateStart
+
+	RETURN @Result
+
+END
+
+GO
+
+
+/****** Object:  UserDefinedFunction [dbo].[ufnGetTotalServicePrice]    Script Date: 06/10/2014 17:51:18 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ufnGetTotalServicePrice]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
+DROP FUNCTION [dbo].[ufnGetTotalServicePrice]
+GO
+
+CREATE FUNCTION [dbo].[ufnGetTotalServicePrice]
+(
+@BookingId int,
+@DateStart smalldatetime,
+@DateEnd smalldatetime
+)
+RETURNS decimal(20,8)
+AS
+BEGIN
+	DECLARE @Result decimal(20,8)
+
+	SELECT @Result = SUM(TotalPrice)
+	FROM BookingRoomServiceDetail D
+	INNER JOIN BookingRoomService E on D.BookingRoomServiceId = E.BookingRoomServiceId
+	WHERE E.BookingId = @BookingId
+	AND   D.DateStart <= @DateEnd
+	AND   D.DateEnd >= @DateStart
+
+	RETURN @Result
+
+END
+
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[procListBookingPayment]    Script Date: 06/10/2014 17:21:58 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[procListBookingPayment]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[procListBookingPayment]
+GO
+
+
+CREATE PROCEDURE [dbo].[procListBookingPayment]	
+@OrganisationId int = null,
+@SiteId int = null,
+@RoomId int = null,
+@BookingId int = null,
+@BookingPaymentId int = null,
+@DateStart smalldatetime,
+@DateEnd smalldatetime,
+@Payment int
+AS
+BEGIN
+	SET NOCOUNT ON
+	
+	DECLARE @_Contract TABLE
+	(
+	SiteId int
+	, SiteName varchar(128)
+	, BookingId int
+	, RoomId int
+	, RoomName varchar(128)
+	, CustomerId int
+	, Customer2Id int
+	, CustomerName varchar(128)
+	, Customer2Name varchar(128)
+	, RoomPrice decimal(20,8)
+	, ContractDateStart smalldatetime
+	, ContractDateEnd smalldatetime
+	)
+	
+	INSERT INTO @_Contract
+	SELECT R.SiteId, S.Name, B.BookingId, R.RoomId, R.RoomName, B.CustomerId, B.Customer2Id,
+			C1.FirstName + ' ' + C1.LastName as CustomerName,
+			C2.FirstName + ' ' + C2.LastName as Customer2Name,
+			B.ContractTotalPrice, B.ContractDateStart, B.ContractDateEnd
+	FROM Booking B
+	INNER JOIN Room R on B.RoomId = R.RoomId
+	INNER JOIN Site S on S.SiteID = R.SiteId
+	LEFT OUTER JOIN Customer C1 on B.CustomerId = C1.CustomerId
+	LEFT OUTER JOIN Customer C2 on B.Customer2Id = C2.CustomerId
+	WHERE (@OrganisationId IS NULL OR S.OrganisationID = @OrganisationId)
+	AND (@SiteId IS NULL OR S.SiteID = @SiteId)
+	AND (@RoomId IS NULL OR R.RoomId = @RoomId)
+	AND (@BookingId IS NULL OR B.BookingId = @BookingId)
+	AND (B.BookingStatusId = 3) -- Contract
+	AND (B.ContractDateStart IS NOT NULL AND B.ContractDateStart <= @DateEnd)
+	AND (B.ContractDateEnd IS NULL OR B.ContractDateEnd >= @DateStart)
+	
+	
+	SELECT	C.SiteId, C.SiteName, C.BookingId, C.RoomId, C.RoomName, C.CustomerId, C.CustomerName, C.Customer2Id, C.Customer2Name, 
+			BP.BookingPaymentId, 
+			C.RoomPrice,
+			[dbo].[ufnGetTotalEquipmentPrice](C.BookingId, @DateStart, @DateEnd) as EquipmentPrice,
+			[dbo].[ufnGetTotalServicePrice](C.BookingId, @DateStart, @DateEnd) as ServicePrice, 
+			BP.TotalPrice,				
+			BP.CustomerPaid,
+			CASE WHEN BP.BookingPaymentId IS NULL THEN @DateStart ELSE BP.DateStart END as DateStart, 
+			CASE WHEN BP.BookingPaymentId IS NULL THEN @DateEnd ELSE BP.DateEnd END as DateEnd, 
+			CASE WHEN BP.BookingPaymentId IS NULL THEN 0 ELSE BP.Payment END as Payment, 
+			BP.Concurrency, BP.DateCreated, BP.DateUpdated, BP.CreatedBy, BP.UpdatedBy
+	FROM	@_Contract C
+	LEFT OUTER JOIN BookingPayment BP 
+		on (C.BookingId = BP.BookingId 
+			AND BP.DateStart <= @DateEnd
+			AND BP.DateEnd >= @DateStart)
+	WHERE	(@BookingPaymentId is null OR BP.BookingPaymentId = @BookingPaymentId)
+	AND   (@Payment = 2 OR (@Payment = 1 AND BP.Payment = 1) OR (@Payment = 0 AND (BP.Payment IS NULL OR BP.Payment = 0)))
+END
+
+GO
 
 
 

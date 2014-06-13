@@ -776,6 +776,49 @@ namespace Mimosa.Apartment.Silverlight.UI
             proxy.SaveBookingAsync(saveList, callerKey);
         }
 
+        // ListBookingPayment
+        internal delegate void ListBookingPaymentCallBack(List<BookingPayment> itemSource);
+        internal static void ListBookingPaymentAsync(int? orgId, int? siteId, int? roomId, int? bookingId, 
+            int? bookingPaymentId, DateTime dateStart, DateTime dateEnd, int payment, ListBookingPaymentCallBack callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.ListBookingPaymentCompleted += new EventHandler<ListBookingPaymentCompletedEventArgs>(proxy_ListBookingPaymentCompleted);
+            proxy.ListBookingPaymentAsync(orgId, siteId, roomId, bookingId, bookingPaymentId, dateStart, dateEnd, payment, callerKey);
+        }
+
+        static void proxy_ListBookingPaymentCompleted(object sender, ListBookingPaymentCompletedEventArgs e)
+        {
+            Guid callerKey = (Guid)e.UserState;
+            if (_callbacks.ContainsKey(callerKey))
+            {
+                List<BookingPayment> itemSource = e.Result;
+                ((ListBookingPaymentCallBack)_callbacks[callerKey]).Invoke(itemSource);
+
+                _callbacks.Remove(callerKey);
+            }
+        }
+
+        //SaveBookingPayment
+        internal static void SaveBookingPaymentAsync(List<BookingPayment> saveList, EmptyCallback callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.SaveBookingPaymentCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(proxy_VoidMethodCompleted);
+            proxy.SaveBookingPaymentAsync(saveList, callerKey);
+        }
+
+        //SendBookingPaymentMail
+        internal static void SendBookingPaymentMailAsync(List<BookingPayment> paymentList, EmptyCallback callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.SendBookingPaymentMailCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(proxy_VoidMethodCompleted);
+            proxy.SendBookingPaymentMailAsync(paymentList, callerKey);
+        }
+
+
         // ListBookingRoomEquipment
         internal delegate void ListBookingRoomEquipmentCallBack(List<BookingRoomEquipment> itemSource);
         internal static void ListBookingRoomEquipmentAsync(int? bookingRoomEquipmentId, int? bookingId, int? roomEquipmentId, ListBookingRoomEquipmentCallBack callback)
@@ -811,13 +854,14 @@ namespace Mimosa.Apartment.Silverlight.UI
 
         // ListBookingRoomEquipmentDetail
         internal delegate void ListBookingRoomEquipmentDetailCallBack(List<BookingRoomEquipmentDetail> itemSource);
-        internal static void ListBookingRoomEquipmentDetailAsync(int? bookingRoomEquipmentDetailId, int? bookingRoomEquipmentId, ListBookingRoomEquipmentDetailCallBack callback)
+        internal static void ListBookingRoomEquipmentDetailAsync(int? bookingRoomEquipmentDetailId, int? bookingRoomEquipmentId,
+                int? bookingId, DateTime? dateStart, DateTime? dateEnd, ListBookingRoomEquipmentDetailCallBack callback)
         {
             Guid callerKey = Guid.NewGuid();
 
             ApartmentServiceClient proxy = GetProxy(callerKey, callback);
             proxy.ListBookingRoomEquipmentDetailCompleted += new EventHandler<ListBookingRoomEquipmentDetailCompletedEventArgs>(proxy_ListBookingRoomEquipmentDetailCompleted);
-            proxy.ListBookingRoomEquipmentDetailAsync(bookingRoomEquipmentDetailId, bookingRoomEquipmentId, callerKey);
+            proxy.ListBookingRoomEquipmentDetailAsync(bookingRoomEquipmentDetailId, bookingRoomEquipmentId, bookingId, dateStart, dateEnd, callerKey);
         }
 
         static void proxy_ListBookingRoomEquipmentDetailCompleted(object sender, ListBookingRoomEquipmentDetailCompletedEventArgs e)
@@ -876,13 +920,14 @@ namespace Mimosa.Apartment.Silverlight.UI
 
         // ListBookingRoomServiceDetail
         internal delegate void ListBookingRoomServiceDetailCallBack(List<BookingRoomServiceDetail> itemSource);
-        internal static void ListBookingRoomServiceDetailAsync(int? bookingRoomServiceDetailId, int? bookingRoomServiceId, ListBookingRoomServiceDetailCallBack callback)
+        internal static void ListBookingRoomServiceDetailAsync(int? bookingRoomServiceDetailId, int? bookingRoomServiceId,
+                int? bookingId, DateTime? dateStart, DateTime? dateEnd, ListBookingRoomServiceDetailCallBack callback)
         {
             Guid callerKey = Guid.NewGuid();
 
             ApartmentServiceClient proxy = GetProxy(callerKey, callback);
             proxy.ListBookingRoomServiceDetailCompleted += new EventHandler<ListBookingRoomServiceDetailCompletedEventArgs>(proxy_ListBookingRoomServiceDetailCompleted);
-            proxy.ListBookingRoomServiceDetailAsync(bookingRoomServiceDetailId, bookingRoomServiceId, callerKey);
+            proxy.ListBookingRoomServiceDetailAsync(bookingRoomServiceDetailId, bookingRoomServiceId, bookingId, dateStart, dateEnd, callerKey);
         }
 
         static void proxy_ListBookingRoomServiceDetailCompleted(object sender, ListBookingRoomServiceDetailCompletedEventArgs e)

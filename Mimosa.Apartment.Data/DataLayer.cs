@@ -511,6 +511,20 @@ namespace Mimosa.Apartment.Data
 
         #endregion
 
+        #region BookingPayment
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public List<BookingPayment> ListBookingPayment(int? orgId, int? siteId, int? roomId, int? bookingId, int? bookingPaymentId,  DateTime dateStart, DateTime dateEnd, int payment)
+        {
+            List<BookingPayment> result = new List<BookingPayment>();
+
+            using (IDataReader reader = _db.ExecuteReader("procListBookingPayment", orgId, siteId, roomId, bookingId, bookingPaymentId, dateStart, dateEnd, payment))
+            {
+                Factory.FillBookingPaymentList(result, reader);
+            }
+            return result;
+        }
+        #endregion
+
         #region BookingRoomEquipment
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         public List<BookingRoomEquipment> ListBookingRoomEquipment(int? bookingRoomEquipmentId, int? bookingId, int? roomEquipmentId)
@@ -527,11 +541,13 @@ namespace Mimosa.Apartment.Data
 
         #region BookingRoomEquipmentDetail
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
-        public List<BookingRoomEquipmentDetail> ListBookingRoomEquipmentDetail(int? bookingRoomEquipmentDetailId, int? bookingRoomEquipmentId)
+        public List<BookingRoomEquipmentDetail> ListBookingRoomEquipmentDetail(int? bookingRoomEquipmentDetailId, int? bookingRoomEquipmentId,
+                int? bookingId, DateTime? dateStart, DateTime? dateEnd)
         {
             List<BookingRoomEquipmentDetail> result = new List<BookingRoomEquipmentDetail>();
 
-            using (IDataReader reader = _db.ExecuteReader("procListBookingRoomEquipmentDetail", bookingRoomEquipmentDetailId, bookingRoomEquipmentId))
+            using (IDataReader reader = _db.ExecuteReader("procListBookingRoomEquipmentDetail", bookingRoomEquipmentDetailId, 
+                bookingRoomEquipmentId, bookingId, dateStart, dateEnd))
             {
                 Factory.FillBookingRoomEquipmentDetailList(result, reader);
             }
@@ -555,11 +571,13 @@ namespace Mimosa.Apartment.Data
 
         #region BookingRoomServiceDetail
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
-        public List<BookingRoomServiceDetail> ListBookingRoomServiceDetail(int? bookingRoomServiceDetailId, int? bookingRoomServiceId)
+        public List<BookingRoomServiceDetail> ListBookingRoomServiceDetail(int? bookingRoomServiceDetailId, int? bookingRoomServiceId,
+                int? bookingId, DateTime? dateStart, DateTime? dateEnd)
         {
             List<BookingRoomServiceDetail> result = new List<BookingRoomServiceDetail>();
 
-            using (IDataReader reader = _db.ExecuteReader("procListBookingRoomServiceDetail", bookingRoomServiceDetailId, bookingRoomServiceId))
+            using (IDataReader reader = _db.ExecuteReader("procListBookingRoomServiceDetail", bookingRoomServiceDetailId, 
+                bookingRoomServiceId, bookingId, dateStart, dateEnd))
             {
                 Factory.FillBookingRoomServiceDetailList(result, reader);
             }

@@ -280,11 +280,28 @@ namespace Mimosa.Apartment.Silverlight.UI
         #region BookingEquipment
         void gvwBookingEquipment_Deleting(object sender, GridViewDeletingEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show(Globals.UserMessages.ConfirmDeleteNoParam, Globals.UserMessages.ConfirmationRequired, MessageBoxButton.OKCancel);
-            if (result == MessageBoxResult.Cancel)
+
+            if (e.Items != null && e.Items.Count() > 0)
             {
-                e.Cancel = true;
+                BookingRoomEquipment deleteItem = e.Items.First() as BookingRoomEquipment;
+                if (deleteItem != null)
+                {
+                    if (deleteItem.CanDelete)
+                    {
+                        MessageBoxResult result = MessageBox.Show(Globals.UserMessages.ConfirmDeleteNoParam, Globals.UserMessages.ConfirmationRequired, MessageBoxButton.OKCancel);
+                        if (result == MessageBoxResult.Cancel)
+                        {
+                            e.Cancel = true;
+                        }
+                    }
+                    else
+                    {
+                        MessageBoxResult result = MessageBox.Show(string.Format(Globals.UserMessages.DeleteFailedBeingUsed, deleteItem.Equipment), Globals.UserMessages.OperationFailed, MessageBoxButton.OK);
+                        e.Cancel = true;
+                    }
+                }
             }
+            
         }
 
 
@@ -437,10 +454,25 @@ namespace Mimosa.Apartment.Silverlight.UI
         #region BookingService
         void gvwBookingService_Deleting(object sender, GridViewDeletingEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show(Globals.UserMessages.ConfirmDeleteNoParam, Globals.UserMessages.ConfirmationRequired, MessageBoxButton.OKCancel);
-            if (result == MessageBoxResult.Cancel)
+            if (e.Items != null && e.Items.Count() > 0)
             {
-                e.Cancel = true;
+                BookingRoomService deleteItem = e.Items.First() as BookingRoomService;
+                if (deleteItem != null)
+                {
+                    if (deleteItem.CanDelete)
+                    {
+                        MessageBoxResult result = MessageBox.Show(Globals.UserMessages.ConfirmDeleteNoParam, Globals.UserMessages.ConfirmationRequired, MessageBoxButton.OKCancel);
+                        if (result == MessageBoxResult.Cancel)
+                        {
+                            e.Cancel = true;
+                        }
+                    }
+                    else
+                    {
+                        MessageBoxResult result = MessageBox.Show(string.Format(Globals.UserMessages.DeleteFailedBeingUsed, deleteItem.Service), Globals.UserMessages.OperationFailed, MessageBoxButton.OK);
+                        e.Cancel = true;
+                    }
+                }
             }
         }
 

@@ -25,6 +25,9 @@
   <xs:element name="UserLogin" nillable="true" type="tns:UserLogin" />
   <xs:complexType name="AppSettings">
     <xs:sequence>
+      <xs:element minOccurs="0" name="DateTimeFormatCulture" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GloblaCulture" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NumberFormatCulture" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ReportLocalization" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ReportServerUrl" nillable="true" type="xs:string" />
     </xs:sequence>

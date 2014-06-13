@@ -42,6 +42,14 @@ namespace Mimosa.Apartment.Silverlight.UI
                 }
             }
 
+            internal static string EmailSent
+            {
+                get
+                {
+                    return "Emails sent: " + Globals.Now.ToShortTimeString();
+                }
+            }
+
 
             internal const string NewRecord = "New Record.";
 

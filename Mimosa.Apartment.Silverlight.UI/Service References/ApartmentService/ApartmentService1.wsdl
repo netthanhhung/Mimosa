@@ -309,6 +309,24 @@
   <wsdl:message name="ApartmentService_SaveBookingRoomEquipment_OutputMessage">
     <wsdl:part name="parameters" element="SaveBookingRoomEquipmentResponse" />
   </wsdl:message>
+  <wsdl:message name="ApartmentService_ListBookingPayment_InputMessage">
+    <wsdl:part name="parameters" element="ListBookingPayment" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListBookingPayment_OutputMessage">
+    <wsdl:part name="parameters" element="ListBookingPaymentResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_SaveBookingPayment_InputMessage">
+    <wsdl:part name="parameters" element="SaveBookingPayment" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_SaveBookingPayment_OutputMessage">
+    <wsdl:part name="parameters" element="SaveBookingPaymentResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_SendBookingPaymentMail_InputMessage">
+    <wsdl:part name="parameters" element="SendBookingPaymentMail" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_SendBookingPaymentMail_OutputMessage">
+    <wsdl:part name="parameters" element="SendBookingPaymentMailResponse" />
+  </wsdl:message>
   <wsdl:message name="ApartmentService_ListBookingRoomEquipmentDetail_InputMessage">
     <wsdl:part name="parameters" element="ListBookingRoomEquipmentDetail" />
   </wsdl:message>
@@ -575,6 +593,18 @@
     <wsdl:operation name="SaveBookingRoomEquipment">
       <wsdl:input wsaw:Action="urn:ApartmentService/SaveBookingRoomEquipment" message="ApartmentService_SaveBookingRoomEquipment_InputMessage" />
       <wsdl:output wsaw:Action="urn:ApartmentService/SaveBookingRoomEquipmentResponse" message="ApartmentService_SaveBookingRoomEquipment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListBookingPayment">
+      <wsdl:input wsaw:Action="urn:ApartmentService/ListBookingPayment" message="ApartmentService_ListBookingPayment_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/ListBookingPaymentResponse" message="ApartmentService_ListBookingPayment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveBookingPayment">
+      <wsdl:input wsaw:Action="urn:ApartmentService/SaveBookingPayment" message="ApartmentService_SaveBookingPayment_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/SaveBookingPaymentResponse" message="ApartmentService_SaveBookingPayment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendBookingPaymentMail">
+      <wsdl:input wsaw:Action="urn:ApartmentService/SendBookingPaymentMail" message="ApartmentService_SendBookingPaymentMail_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/SendBookingPaymentMailResponse" message="ApartmentService_SendBookingPaymentMail_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ListBookingRoomEquipmentDetail">
       <wsdl:input wsaw:Action="urn:ApartmentService/ListBookingRoomEquipmentDetail" message="ApartmentService_ListBookingRoomEquipmentDetail_InputMessage" />

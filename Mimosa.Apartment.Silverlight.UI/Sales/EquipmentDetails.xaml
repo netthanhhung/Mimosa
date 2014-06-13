@@ -60,14 +60,14 @@
                     <telerikGrid:GridViewDataColumn
                         DataMemberBinding="{Binding Price}"
                         Width="100" ShowFieldFilters="False" Header="Unit Price" IsReadOnly="True"
-                        DataFormatString="{} {0:C2}" TextAlignment="Right">
+                        DataFormatString="{} {0:C0}" TextAlignment="Right">
                     </telerikGrid:GridViewDataColumn>
                     <telerikGrid:GridViewDataColumn
                         DataMemberBinding="{Binding TotalPrice}"
                         Width="100" ShowFieldFilters="False" Header="Total Price" IsReadOnly="True"
-                        DataFormatString="{} {0:C2}" TextAlignment="Right">
+                        DataFormatString="{} {0:C0}" TextAlignment="Right">
                     </telerikGrid:GridViewDataColumn>
-                    <telerikGrid:GridViewDataColumn Width="80" Header="Payment">
+                    <telerikGrid:GridViewDataColumn Width="80" Header="Payment" IsVisible="False">
                         <telerikGrid:GridViewDataColumn.CellStyle>
                             <Style TargetType="telerikGridView:GridViewCell">
                                 <Setter Property="Template">

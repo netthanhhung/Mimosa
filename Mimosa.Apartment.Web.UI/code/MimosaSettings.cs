@@ -7,7 +7,6 @@ namespace Mimosa.Apartment.Web.UI
 {
     public partial class MimosaSettings
     {
-        
         public static int GetModuleCount
         {
             get { return System.Enum.GetNames(typeof(MimosaSettings.Modules)).Length; }
@@ -40,5 +39,27 @@ namespace Mimosa.Apartment.Web.UI
             return Convert.ToString(ConfigurationSettings.AppSettings["PortalAdminOrganisationCode"]);
 
         }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+        public static string GloblaCulture()
+        {
+            return Convert.ToString(ConfigurationSettings.AppSettings["GloblaCulture"]);
+
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+        public static string NumberFormatCulture()
+        {
+            return Convert.ToString(ConfigurationSettings.AppSettings["NumberFormatCulture"]);
+
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+        public static string DateTimeFormatCulture()
+        {
+            return Convert.ToString(ConfigurationSettings.AppSettings["DateTimeFormatCulture"]);
+
+        }
+
     }
 }

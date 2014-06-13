@@ -102,7 +102,7 @@
                                     <telerikGrid:GridViewDataColumn
                                         DataMemberBinding="{Binding RealPrice}"
                                         Width="100" ShowFieldFilters="False"
-                                        DataFormatString="{} {0:C2}" TextAlignment="Right">
+                                        DataFormatString="{} {0:C0}" TextAlignment="Right">
                                         <telerikGrid:GridViewDataColumn.Header>
                                             <TextBlock TextWrapping="Wrap" Text="Cost" />
                                         </telerikGrid:GridViewDataColumn.Header>
@@ -116,7 +116,7 @@
                                     <telerikGrid:GridViewDataColumn
                                         DataMemberBinding="{Binding RentPrice}"
                                         Width="100" ShowFieldFilters="False"
-                                        DataFormatString="{} {0:C2}" TextAlignment="Right">
+                                        DataFormatString="{} {0:C0}" TextAlignment="Right">
                                         <telerikGrid:GridViewDataColumn.Header>
                                             <TextBlock TextWrapping="Wrap" Text="Unit Price" />
                                         </telerikGrid:GridViewDataColumn.Header>

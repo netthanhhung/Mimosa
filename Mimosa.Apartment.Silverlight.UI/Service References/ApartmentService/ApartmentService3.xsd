@@ -492,6 +492,7 @@
           <xs:element minOccurs="0" name="Customer2Name" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="CustomerId" nillable="true" type="xs:int" />
           <xs:element minOccurs="0" name="CustomerItem" nillable="true" type="tns:Customer" />
+          <xs:element minOccurs="0" name="CustomerItem2" nillable="true" type="tns:Customer" />
           <xs:element minOccurs="0" name="CustomerName" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
@@ -523,7 +524,6 @@
           <xs:element minOccurs="0" name="Equipment" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="EquipmentId" type="xs:int" />
           <xs:element minOccurs="0" name="Price" nillable="true" type="xs:decimal" />
-          <xs:element minOccurs="0" name="RoomEquipmentId" type="xs:int" />
           <xs:element minOccurs="0" name="Unit" nillable="true" type="xs:string" />
         </xs:sequence>
       </xs:extension>
@@ -544,7 +544,6 @@
           <xs:element minOccurs="0" name="BookingRoomServiceId" type="xs:int" />
           <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="Price" nillable="true" type="xs:decimal" />
-          <xs:element minOccurs="0" name="RoomServiceId" type="xs:int" />
           <xs:element minOccurs="0" name="Service" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="ServiceId" type="xs:int" />
           <xs:element minOccurs="0" name="Unit" nillable="true" type="xs:string" />
@@ -553,6 +552,40 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="BookingRoomService" nillable="true" type="tns:BookingRoomService" />
+  <xs:complexType name="ArrayOfBookingPayment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BookingPayment" nillable="true" type="tns:BookingPayment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBookingPayment" nillable="true" type="tns:ArrayOfBookingPayment" />
+  <xs:complexType name="BookingPayment">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Record">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="BookingId" type="xs:int" />
+          <xs:element minOccurs="0" name="BookingPaymentId" type="xs:int" />
+          <xs:element minOccurs="0" name="Customer2Id" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="Customer2Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CustomerId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="CustomerName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CustomerPaid" type="xs:decimal" />
+          <xs:element minOccurs="0" name="DateEnd" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="DateStart" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="EquipmentPrice" type="xs:decimal" />
+          <xs:element minOccurs="0" name="MoneyLeft" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Payment" type="xs:boolean" />
+          <xs:element minOccurs="0" name="RoomId" type="xs:int" />
+          <xs:element minOccurs="0" name="RoomName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RoomPrice" type="xs:decimal" />
+          <xs:element minOccurs="0" name="ServicePrice" type="xs:decimal" />
+          <xs:element minOccurs="0" name="SiteId" type="xs:int" />
+          <xs:element minOccurs="0" name="SiteName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TotalPrice" type="xs:decimal" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BookingPayment" nillable="true" type="tns:BookingPayment" />
   <xs:complexType name="ArrayOfBookingRoomEquipmentDetail">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="BookingRoomEquipmentDetail" nillable="true" type="tns:BookingRoomEquipmentDetail" />
@@ -568,6 +601,8 @@
           <xs:element minOccurs="0" name="DateEnd" nillable="true" type="xs:dateTime" />
           <xs:element minOccurs="0" name="DateStart" nillable="true" type="xs:dateTime" />
           <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Equipment" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="EquipmentId" type="xs:int" />
           <xs:element minOccurs="0" name="Payment" type="xs:boolean" />
           <xs:element minOccurs="0" name="Price" nillable="true" type="xs:decimal" />
           <xs:element minOccurs="0" name="Quantity" nillable="true" type="xs:decimal" />
@@ -596,6 +631,8 @@
           <xs:element minOccurs="0" name="Payment" type="xs:boolean" />
           <xs:element minOccurs="0" name="Price" nillable="true" type="xs:decimal" />
           <xs:element minOccurs="0" name="Quantity" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Service" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ServiceId" type="xs:int" />
           <xs:element minOccurs="0" name="TotalPrice" nillable="true" type="xs:decimal" />
           <xs:element minOccurs="0" name="Unit" nillable="true" type="xs:string" />
         </xs:sequence>

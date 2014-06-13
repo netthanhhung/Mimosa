@@ -139,8 +139,10 @@
     <Compile Include="Administration\SiteGroupAdminPage.xaml.cs">
       <DependentUpon>SiteGroupAdminPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Code\DateHelper.cs" />
     <Compile Include="Code\IComponent.cs" />
     <Compile Include="Code\IParam.cs" />
+    <Compile Include="Code\ReportHelper.cs" />
     <Compile Include="Common\LayoutComponentType.cs" />
     <Compile Include="Administration\PortalAdminPage.xaml.cs">
       <DependentUpon>PortalAdminPage.xaml</DependentUpon>
@@ -211,8 +213,14 @@
     <Compile Include="Converters\TextBlockMultilineConverter.cs" />
     <Compile Include="Converters\TimeSpanStringConverter.cs" />
     <Compile Include="Converters\TypeTypeConverter.cs" />
+    <Compile Include="Customer\BookingPaymentPage.xaml.cs">
+      <DependentUpon>BookingPaymentPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Customer\CustomerAdminPage.xaml.cs">
       <DependentUpon>CustomerAdminPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Customer\BookingPaymentDetails.xaml.cs">
+      <DependentUpon>BookingPaymentDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
@@ -289,6 +297,14 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Administration\SiteGroupAdminPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Customer\BookingPaymentPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Customer\BookingPaymentDetails.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -516,6 +532,7 @@
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.AspRole.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.AspUser.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.Booking.datasource" />
+    <None Include="Properties\DataSources\Mimosa.Apartment.Common.BookingPayment.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.BookingRoomEquipment.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.BookingRoomEquipmentDetail.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.BookingRoomService.datasource" />

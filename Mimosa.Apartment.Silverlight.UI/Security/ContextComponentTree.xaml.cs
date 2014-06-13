@@ -92,6 +92,7 @@ namespace Mimosa.Apartment.Silverlight.UI
             List<RoleComponentVM> customerChildList = new List<RoleComponentVM>();
 
             customerChildList.Add(BuildOneTreeViewItem(null, LayoutComponentType.CustomerAdmin, null));
+            customerChildList.Add(BuildOneTreeViewItem(null, LayoutComponentType.MonthlyPayment, null));
             RoleComponentVM result = BuildOneTreeViewItem(ModuleNames.Customer, LayoutComponentType.None, customerChildList);
 
             return result;

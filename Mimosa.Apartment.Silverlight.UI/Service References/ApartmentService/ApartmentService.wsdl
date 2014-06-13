@@ -454,6 +454,33 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ListBookingPayment">
+      <soap:operation soapAction="urn:ApartmentService/ListBookingPayment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveBookingPayment">
+      <soap:operation soapAction="urn:ApartmentService/SaveBookingPayment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendBookingPaymentMail">
+      <soap:operation soapAction="urn:ApartmentService/SendBookingPaymentMail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ListBookingRoomEquipmentDetail">
       <soap:operation soapAction="urn:ApartmentService/ListBookingRoomEquipmentDetail" style="document" />
       <wsdl:input>

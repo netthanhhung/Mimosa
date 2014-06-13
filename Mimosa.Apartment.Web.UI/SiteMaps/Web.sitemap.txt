@@ -83,6 +83,12 @@
 		url="/Customer/CustomerAdminPage.xaml"
 		title="Customer Admin"
 		description="Customer Admin"/>
+	<siteMapNode
+		url="/Customer/BookingPaymentPage.xaml"
+		title="Monthly Payment"
+		description="Monthly Payment"/>
+
+		
   </siteMapNode>
  
   

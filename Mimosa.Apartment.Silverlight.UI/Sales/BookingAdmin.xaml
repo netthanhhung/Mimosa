@@ -118,19 +118,14 @@
                             </telerikGrid:GridViewDataColumn>
                             <telerikGrid:GridViewDataColumn
                                         DataMemberBinding="{Binding RoomPrice}"
-                                        Width="70" HeaderTextAlignment="Center" ShowFieldFilters="False"
-                                        DataFormatString="{} {0:C2}" TextAlignment="Right" Header="Room Price">
+                                        Width="100" HeaderTextAlignment="Center" ShowFieldFilters="False"
+                                        DataFormatString="{} {0:C0}" TextAlignment="Right" Header="Room Price">
                             </telerikGrid:GridViewDataColumn>
-                            <telerikGrid:GridViewDataColumn
+                            <!--<telerikGrid:GridViewDataColumn
                                         DataMemberBinding="{Binding TotalPrice}"
-                                        Width="70" HeaderTextAlignment="Center" ShowFieldFilters="False"
-                                        DataFormatString="{} {0:C2}" TextAlignment="Right" Header="Total Price">
-                            </telerikGrid:GridViewDataColumn>
-                            <telerikGrid:GridViewDataColumn
-                                        DataMemberBinding="{Binding ContractDateSign}"
-                                        Width="80" ShowFieldFilters="False" HeaderTextAlignment="Center"
-                                        Header="Contract Date" DataFormatString="{} {0:dd-MMM-yyyy}">
-                            </telerikGrid:GridViewDataColumn>
+                                        Width="100" HeaderTextAlignment="Center" ShowFieldFilters="False"
+                                        DataFormatString="{} {0:C0}" TextAlignment="Right" Header="Total Price">
+                            </telerikGrid:GridViewDataColumn>-->
                             <telerikGrid:GridViewDataColumn
                                         DataMemberBinding="{Binding ContractDateStart}"
                                         Width="80" ShowFieldFilters="False" HeaderTextAlignment="Center"
@@ -142,9 +137,14 @@
                                         Header="To Date" DataFormatString="{} {0:dd-MMM-yyyy}">
                             </telerikGrid:GridViewDataColumn>
                             <telerikGrid:GridViewDataColumn
+                                        DataMemberBinding="{Binding ContractDateSign}"
+                                        Width="80" ShowFieldFilters="False" HeaderTextAlignment="Center"
+                                        Header="Contract Date" DataFormatString="{} {0:dd-MMM-yyyy}">
+                            </telerikGrid:GridViewDataColumn>
+                            <telerikGrid:GridViewDataColumn
                                         DataMemberBinding="{Binding ContractTotalPrice}"
                                         Width="120" HeaderTextAlignment="Center" ShowFieldFilters="False"
-                                        DataFormatString="{} {0:C2}" Header="Contract Total Price">
+                                        DataFormatString="{} {0:C0}" Header="Contract Price">
                             </telerikGrid:GridViewDataColumn>
                         </telerikGrid:RadGridView.Columns>
                     </telerikGrid:RadGridView>
@@ -215,7 +215,7 @@
                             <telerikGrid:GridViewDataColumn
                                         DataMemberBinding="{Binding Price}"
                                         Width="100" ShowFieldFilters="False" Header="Unit Price"
-                                        DataFormatString="{} {0:C2}" TextAlignment="Right">
+                                        DataFormatString="{} {0:C0}" TextAlignment="Right">
                             </telerikGrid:GridViewDataColumn>
                             <telerikGrid:GridViewDataColumn Width="70" Header="Detail" UniqueName="Detail">
                                 <telerikGrid:GridViewDataColumn.CellStyle>
@@ -301,7 +301,7 @@
                             <telerikGrid:GridViewDataColumn
                                         DataMemberBinding="{Binding Price}"
                                         Width="100" ShowFieldFilters="False" Header="Unit Price"
-                                        DataFormatString="{} {0:C2}" TextAlignment="Right">
+                                        DataFormatString="{} {0:C0}" TextAlignment="Right">
                             </telerikGrid:GridViewDataColumn>
                             <telerikGrid:GridViewDataColumn Width="70" Header="Detail" UniqueName="Detail">
                                 <telerikGrid:GridViewDataColumn.CellStyle>

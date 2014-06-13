@@ -21,7 +21,10 @@ namespace Mimosa.Apartment.Web.UI
         public enum Setting
         {
             EnableAutoLoginComplete,
-            PortalAdminOrganisationCode
+            PortalAdminOrganisationCode,
+            GloblaCulture,
+            NumberFormatCulture,
+            DateTimeFormatCulture
         }
 
     }

@@ -27,6 +27,8 @@ namespace Mimosa.Apartment.Common
             public const string TotalPrice = "TotalPrice";
             public const string Payment = "Payment";
             public const string Description = "Description";
+            public const string EquipmentId = "EquipmentId";
+            public const string Equipment = "Equipment";
         }
 
         #endregion
@@ -72,6 +74,13 @@ namespace Mimosa.Apartment.Common
         [DataMember]
         public bool Payment { get { return _payment; } set { if (!this.Payment.Equals(value)) { _payment = value; RaisePropertyChanged("Payment"); } } }
 
+        private int _equipmentId;
+        [DataMember]
+        public int EquipmentId { get { return _equipmentId; } set { if (!this.EquipmentId.Equals(value)) { _equipmentId = value; RaisePropertyChanged("EquipmentId"); } } }
+
+        private string _equipment;
+        [DataMember]
+        public string Equipment { get { return _equipment; } set { if (!object.ReferenceEquals(this.Equipment, value)) { _equipment = value; RaisePropertyChanged("Equipment"); } } }
 
         #endregion
     }

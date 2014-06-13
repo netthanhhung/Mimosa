@@ -13,6 +13,8 @@ using System.Windows.Threading;
 using Telerik.Windows.Controls;
 using Mimosa.Apartment.Common;
 using Mimosa.Apartment.Silverlight.UI.ApartmentService;
+using System.Globalization;
+using System.Threading;
 
 namespace Mimosa.Apartment.Silverlight.UI
 {
@@ -74,7 +76,13 @@ namespace Mimosa.Apartment.Silverlight.UI
                 Globals.UserLogin.IsUserPortalAdministrator = SecurityHelper.HasRole(Globals.UserLogin.UserRoleAuths, SecurityHelper.PortalAdministratorRoleId);
                 Globals.UserLogin.IsUserSecurityAdministrator = SecurityHelper.HasRole(Globals.UserLogin.UserRoleAuths, SecurityHelper.SecurityAdminRoleId);
 
+                CultureInfo customCultureInfo = new CultureInfo(Globals.AppSettings.GloblaCulture);
+                customCultureInfo.NumberFormat = (new CultureInfo(Globals.AppSettings.NumberFormatCulture)).NumberFormat;
+                customCultureInfo.DateTimeFormat = (new CultureInfo(Globals.AppSettings.DateTimeFormatCulture)).DateTimeFormat;
+
+                Thread.CurrentThread.CurrentCulture = customCultureInfo;
                 
+
                 // Until their page has been converted to SL, redirect Portal admin to their aspx page (unless just loading the header).
                 string typeName = this.startupEventArgs.InitParams["TypeName"];
                 if (typeName == "MainPage")

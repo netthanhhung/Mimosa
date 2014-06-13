@@ -61,6 +61,8 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Mimosa.Apartment.Common.BookingRoomEquipment))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingRoomService>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Mimosa.Apartment.Common.BookingRoomService))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Mimosa.Apartment.Common.BookingPayment))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingRoomEquipmentDetail>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Mimosa.Apartment.Common.BookingRoomEquipmentDetail))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingRoomServiceDetail>))]
@@ -313,9 +315,54 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
     [System.Runtime.Serialization.DataContractAttribute(Name="AppSettings", Namespace="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Web.UI")]
     public partial class AppSettings : object, System.ComponentModel.INotifyPropertyChanged {
         
+        private string DateTimeFormatCultureField;
+        
+        private string GloblaCultureField;
+        
+        private string NumberFormatCultureField;
+        
         private string ReportLocalizationField;
         
         private string ReportServerUrlField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DateTimeFormatCulture {
+            get {
+                return this.DateTimeFormatCultureField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DateTimeFormatCultureField, value) != true)) {
+                    this.DateTimeFormatCultureField = value;
+                    this.RaisePropertyChanged("DateTimeFormatCulture");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string GloblaCulture {
+            get {
+                return this.GloblaCultureField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GloblaCultureField, value) != true)) {
+                    this.GloblaCultureField = value;
+                    this.RaisePropertyChanged("GloblaCulture");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NumberFormatCulture {
+            get {
+                return this.NumberFormatCultureField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NumberFormatCultureField, value) != true)) {
+                    this.NumberFormatCultureField = value;
+                    this.RaisePropertyChanged("NumberFormatCulture");
+                }
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string ReportLocalization {
@@ -577,6 +624,8 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.BookingRoomEquipment))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingRoomService>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.BookingRoomService))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.BookingPayment))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingRoomEquipmentDetail>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.BookingRoomEquipmentDetail))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingRoomServiceDetail>))]
@@ -636,6 +685,8 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.BookingRoomEquipment))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingRoomService>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.BookingRoomService))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.BookingPayment))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingRoomEquipmentDetail>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.BookingRoomEquipmentDetail))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingRoomServiceDetail>))]
@@ -695,6 +746,8 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.BookingRoomEquipment))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingRoomService>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.BookingRoomService))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.BookingPayment))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingRoomEquipmentDetail>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.BookingRoomEquipmentDetail))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingRoomServiceDetail>))]
@@ -754,6 +807,8 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.BookingRoomEquipment))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingRoomService>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.BookingRoomService))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.BookingPayment))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingRoomEquipmentDetail>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.BookingRoomEquipmentDetail))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingRoomServiceDetail>))]
@@ -973,8 +1028,23 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         
         void EndSaveBookingRoomEquipment(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:ApartmentService/ListBookingPayment", ReplyAction="urn:ApartmentService/ListBookingPaymentResponse")]
+        System.IAsyncResult BeginListBookingPayment(System.Nullable<int> orgId, System.Nullable<int> siteId, System.Nullable<int> roomId, System.Nullable<int> bookingId, System.Nullable<int> bookingPaymentId, System.DateTime dateStart, System.DateTime dateEnd, int payment, System.AsyncCallback callback, object asyncState);
+        
+        System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment> EndListBookingPayment(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:ApartmentService/SaveBookingPayment", ReplyAction="urn:ApartmentService/SaveBookingPaymentResponse")]
+        System.IAsyncResult BeginSaveBookingPayment(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment> saveList, System.AsyncCallback callback, object asyncState);
+        
+        void EndSaveBookingPayment(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:ApartmentService/SendBookingPaymentMail", ReplyAction="urn:ApartmentService/SendBookingPaymentMailResponse")]
+        System.IAsyncResult BeginSendBookingPaymentMail(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment> paymentList, System.AsyncCallback callback, object asyncState);
+        
+        void EndSendBookingPaymentMail(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:ApartmentService/ListBookingRoomEquipmentDetail", ReplyAction="urn:ApartmentService/ListBookingRoomEquipmentDetailResponse")]
-        System.IAsyncResult BeginListBookingRoomEquipmentDetail(System.Nullable<int> bookingRoomEquipmentDetailId, System.Nullable<int> bookingRoomEquipmentId, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginListBookingRoomEquipmentDetail(System.Nullable<int> bookingRoomEquipmentDetailId, System.Nullable<int> bookingRoomEquipmentId, System.Nullable<int> bookingId, System.Nullable<System.DateTime> dateStart, System.Nullable<System.DateTime> dateEnd, System.AsyncCallback callback, object asyncState);
         
         System.Collections.Generic.List<Mimosa.Apartment.Common.BookingRoomEquipmentDetail> EndListBookingRoomEquipmentDetail(System.IAsyncResult result);
         
@@ -994,7 +1064,7 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         void EndSaveBookingRoomService(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:ApartmentService/ListBookingRoomServiceDetail", ReplyAction="urn:ApartmentService/ListBookingRoomServiceDetailResponse")]
-        System.IAsyncResult BeginListBookingRoomServiceDetail(System.Nullable<int> bookingRoomServiceDetailId, System.Nullable<int> bookingRoomServiceId, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginListBookingRoomServiceDetail(System.Nullable<int> bookingRoomServiceDetailId, System.Nullable<int> bookingRoomServiceId, System.Nullable<int> bookingId, System.Nullable<System.DateTime> dateStart, System.Nullable<System.DateTime> dateEnd, System.AsyncCallback callback, object asyncState);
         
         System.Collections.Generic.List<Mimosa.Apartment.Common.BookingRoomServiceDetail> EndListBookingRoomServiceDetail(System.IAsyncResult result);
         
@@ -1700,6 +1770,25 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ListBookingPaymentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public ListBookingPaymentCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment>)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class ListBookingRoomEquipmentDetailCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
@@ -2116,6 +2205,24 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         
         private System.Threading.SendOrPostCallback onSaveBookingRoomEquipmentCompletedDelegate;
         
+        private BeginOperationDelegate onBeginListBookingPaymentDelegate;
+        
+        private EndOperationDelegate onEndListBookingPaymentDelegate;
+        
+        private System.Threading.SendOrPostCallback onListBookingPaymentCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginSaveBookingPaymentDelegate;
+        
+        private EndOperationDelegate onEndSaveBookingPaymentDelegate;
+        
+        private System.Threading.SendOrPostCallback onSaveBookingPaymentCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginSendBookingPaymentMailDelegate;
+        
+        private EndOperationDelegate onEndSendBookingPaymentMailDelegate;
+        
+        private System.Threading.SendOrPostCallback onSendBookingPaymentMailCompletedDelegate;
+        
         private BeginOperationDelegate onBeginListBookingRoomEquipmentDetailDelegate;
         
         private EndOperationDelegate onEndListBookingRoomEquipmentDetailDelegate;
@@ -2334,6 +2441,12 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         public event System.EventHandler<ListBookingRoomEquipmentCompletedEventArgs> ListBookingRoomEquipmentCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> SaveBookingRoomEquipmentCompleted;
+        
+        public event System.EventHandler<ListBookingPaymentCompletedEventArgs> ListBookingPaymentCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> SaveBookingPaymentCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> SendBookingPaymentMailCompleted;
         
         public event System.EventHandler<ListBookingRoomEquipmentDetailCompletedEventArgs> ListBookingRoomEquipmentDetailCompleted;
         
@@ -4745,8 +4858,158 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService.BeginListBookingRoomEquipmentDetail(System.Nullable<int> bookingRoomEquipmentDetailId, System.Nullable<int> bookingRoomEquipmentId, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginListBookingRoomEquipmentDetail(bookingRoomEquipmentDetailId, bookingRoomEquipmentId, callback, asyncState);
+        System.IAsyncResult Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService.BeginListBookingPayment(System.Nullable<int> orgId, System.Nullable<int> siteId, System.Nullable<int> roomId, System.Nullable<int> bookingId, System.Nullable<int> bookingPaymentId, System.DateTime dateStart, System.DateTime dateEnd, int payment, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginListBookingPayment(orgId, siteId, roomId, bookingId, bookingPaymentId, dateStart, dateEnd, payment, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment> Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService.EndListBookingPayment(System.IAsyncResult result) {
+            return base.Channel.EndListBookingPayment(result);
+        }
+        
+        private System.IAsyncResult OnBeginListBookingPayment(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            System.Nullable<int> orgId = ((System.Nullable<int>)(inValues[0]));
+            System.Nullable<int> siteId = ((System.Nullable<int>)(inValues[1]));
+            System.Nullable<int> roomId = ((System.Nullable<int>)(inValues[2]));
+            System.Nullable<int> bookingId = ((System.Nullable<int>)(inValues[3]));
+            System.Nullable<int> bookingPaymentId = ((System.Nullable<int>)(inValues[4]));
+            System.DateTime dateStart = ((System.DateTime)(inValues[5]));
+            System.DateTime dateEnd = ((System.DateTime)(inValues[6]));
+            int payment = ((int)(inValues[7]));
+            return ((Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService)(this)).BeginListBookingPayment(orgId, siteId, roomId, bookingId, bookingPaymentId, dateStart, dateEnd, payment, callback, asyncState);
+        }
+        
+        private object[] OnEndListBookingPayment(System.IAsyncResult result) {
+            System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment> retVal = ((Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService)(this)).EndListBookingPayment(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnListBookingPaymentCompleted(object state) {
+            if ((this.ListBookingPaymentCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.ListBookingPaymentCompleted(this, new ListBookingPaymentCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void ListBookingPaymentAsync(System.Nullable<int> orgId, System.Nullable<int> siteId, System.Nullable<int> roomId, System.Nullable<int> bookingId, System.Nullable<int> bookingPaymentId, System.DateTime dateStart, System.DateTime dateEnd, int payment) {
+            this.ListBookingPaymentAsync(orgId, siteId, roomId, bookingId, bookingPaymentId, dateStart, dateEnd, payment, null);
+        }
+        
+        public void ListBookingPaymentAsync(System.Nullable<int> orgId, System.Nullable<int> siteId, System.Nullable<int> roomId, System.Nullable<int> bookingId, System.Nullable<int> bookingPaymentId, System.DateTime dateStart, System.DateTime dateEnd, int payment, object userState) {
+            if ((this.onBeginListBookingPaymentDelegate == null)) {
+                this.onBeginListBookingPaymentDelegate = new BeginOperationDelegate(this.OnBeginListBookingPayment);
+            }
+            if ((this.onEndListBookingPaymentDelegate == null)) {
+                this.onEndListBookingPaymentDelegate = new EndOperationDelegate(this.OnEndListBookingPayment);
+            }
+            if ((this.onListBookingPaymentCompletedDelegate == null)) {
+                this.onListBookingPaymentCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnListBookingPaymentCompleted);
+            }
+            base.InvokeAsync(this.onBeginListBookingPaymentDelegate, new object[] {
+                        orgId,
+                        siteId,
+                        roomId,
+                        bookingId,
+                        bookingPaymentId,
+                        dateStart,
+                        dateEnd,
+                        payment}, this.onEndListBookingPaymentDelegate, this.onListBookingPaymentCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService.BeginSaveBookingPayment(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment> saveList, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginSaveBookingPayment(saveList, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        void Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService.EndSaveBookingPayment(System.IAsyncResult result) {
+            base.Channel.EndSaveBookingPayment(result);
+        }
+        
+        private System.IAsyncResult OnBeginSaveBookingPayment(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment> saveList = ((System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment>)(inValues[0]));
+            return ((Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService)(this)).BeginSaveBookingPayment(saveList, callback, asyncState);
+        }
+        
+        private object[] OnEndSaveBookingPayment(System.IAsyncResult result) {
+            ((Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService)(this)).EndSaveBookingPayment(result);
+            return null;
+        }
+        
+        private void OnSaveBookingPaymentCompleted(object state) {
+            if ((this.SaveBookingPaymentCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.SaveBookingPaymentCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void SaveBookingPaymentAsync(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment> saveList) {
+            this.SaveBookingPaymentAsync(saveList, null);
+        }
+        
+        public void SaveBookingPaymentAsync(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment> saveList, object userState) {
+            if ((this.onBeginSaveBookingPaymentDelegate == null)) {
+                this.onBeginSaveBookingPaymentDelegate = new BeginOperationDelegate(this.OnBeginSaveBookingPayment);
+            }
+            if ((this.onEndSaveBookingPaymentDelegate == null)) {
+                this.onEndSaveBookingPaymentDelegate = new EndOperationDelegate(this.OnEndSaveBookingPayment);
+            }
+            if ((this.onSaveBookingPaymentCompletedDelegate == null)) {
+                this.onSaveBookingPaymentCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnSaveBookingPaymentCompleted);
+            }
+            base.InvokeAsync(this.onBeginSaveBookingPaymentDelegate, new object[] {
+                        saveList}, this.onEndSaveBookingPaymentDelegate, this.onSaveBookingPaymentCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService.BeginSendBookingPaymentMail(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment> paymentList, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginSendBookingPaymentMail(paymentList, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        void Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService.EndSendBookingPaymentMail(System.IAsyncResult result) {
+            base.Channel.EndSendBookingPaymentMail(result);
+        }
+        
+        private System.IAsyncResult OnBeginSendBookingPaymentMail(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment> paymentList = ((System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment>)(inValues[0]));
+            return ((Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService)(this)).BeginSendBookingPaymentMail(paymentList, callback, asyncState);
+        }
+        
+        private object[] OnEndSendBookingPaymentMail(System.IAsyncResult result) {
+            ((Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService)(this)).EndSendBookingPaymentMail(result);
+            return null;
+        }
+        
+        private void OnSendBookingPaymentMailCompleted(object state) {
+            if ((this.SendBookingPaymentMailCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.SendBookingPaymentMailCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void SendBookingPaymentMailAsync(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment> paymentList) {
+            this.SendBookingPaymentMailAsync(paymentList, null);
+        }
+        
+        public void SendBookingPaymentMailAsync(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment> paymentList, object userState) {
+            if ((this.onBeginSendBookingPaymentMailDelegate == null)) {
+                this.onBeginSendBookingPaymentMailDelegate = new BeginOperationDelegate(this.OnBeginSendBookingPaymentMail);
+            }
+            if ((this.onEndSendBookingPaymentMailDelegate == null)) {
+                this.onEndSendBookingPaymentMailDelegate = new EndOperationDelegate(this.OnEndSendBookingPaymentMail);
+            }
+            if ((this.onSendBookingPaymentMailCompletedDelegate == null)) {
+                this.onSendBookingPaymentMailCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnSendBookingPaymentMailCompleted);
+            }
+            base.InvokeAsync(this.onBeginSendBookingPaymentMailDelegate, new object[] {
+                        paymentList}, this.onEndSendBookingPaymentMailDelegate, this.onSendBookingPaymentMailCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService.BeginListBookingRoomEquipmentDetail(System.Nullable<int> bookingRoomEquipmentDetailId, System.Nullable<int> bookingRoomEquipmentId, System.Nullable<int> bookingId, System.Nullable<System.DateTime> dateStart, System.Nullable<System.DateTime> dateEnd, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginListBookingRoomEquipmentDetail(bookingRoomEquipmentDetailId, bookingRoomEquipmentId, bookingId, dateStart, dateEnd, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -4757,7 +5020,10 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         private System.IAsyncResult OnBeginListBookingRoomEquipmentDetail(object[] inValues, System.AsyncCallback callback, object asyncState) {
             System.Nullable<int> bookingRoomEquipmentDetailId = ((System.Nullable<int>)(inValues[0]));
             System.Nullable<int> bookingRoomEquipmentId = ((System.Nullable<int>)(inValues[1]));
-            return ((Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService)(this)).BeginListBookingRoomEquipmentDetail(bookingRoomEquipmentDetailId, bookingRoomEquipmentId, callback, asyncState);
+            System.Nullable<int> bookingId = ((System.Nullable<int>)(inValues[2]));
+            System.Nullable<System.DateTime> dateStart = ((System.Nullable<System.DateTime>)(inValues[3]));
+            System.Nullable<System.DateTime> dateEnd = ((System.Nullable<System.DateTime>)(inValues[4]));
+            return ((Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService)(this)).BeginListBookingRoomEquipmentDetail(bookingRoomEquipmentDetailId, bookingRoomEquipmentId, bookingId, dateStart, dateEnd, callback, asyncState);
         }
         
         private object[] OnEndListBookingRoomEquipmentDetail(System.IAsyncResult result) {
@@ -4773,11 +5039,11 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
             }
         }
         
-        public void ListBookingRoomEquipmentDetailAsync(System.Nullable<int> bookingRoomEquipmentDetailId, System.Nullable<int> bookingRoomEquipmentId) {
-            this.ListBookingRoomEquipmentDetailAsync(bookingRoomEquipmentDetailId, bookingRoomEquipmentId, null);
+        public void ListBookingRoomEquipmentDetailAsync(System.Nullable<int> bookingRoomEquipmentDetailId, System.Nullable<int> bookingRoomEquipmentId, System.Nullable<int> bookingId, System.Nullable<System.DateTime> dateStart, System.Nullable<System.DateTime> dateEnd) {
+            this.ListBookingRoomEquipmentDetailAsync(bookingRoomEquipmentDetailId, bookingRoomEquipmentId, bookingId, dateStart, dateEnd, null);
         }
         
-        public void ListBookingRoomEquipmentDetailAsync(System.Nullable<int> bookingRoomEquipmentDetailId, System.Nullable<int> bookingRoomEquipmentId, object userState) {
+        public void ListBookingRoomEquipmentDetailAsync(System.Nullable<int> bookingRoomEquipmentDetailId, System.Nullable<int> bookingRoomEquipmentId, System.Nullable<int> bookingId, System.Nullable<System.DateTime> dateStart, System.Nullable<System.DateTime> dateEnd, object userState) {
             if ((this.onBeginListBookingRoomEquipmentDetailDelegate == null)) {
                 this.onBeginListBookingRoomEquipmentDetailDelegate = new BeginOperationDelegate(this.OnBeginListBookingRoomEquipmentDetail);
             }
@@ -4789,7 +5055,10 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
             }
             base.InvokeAsync(this.onBeginListBookingRoomEquipmentDetailDelegate, new object[] {
                         bookingRoomEquipmentDetailId,
-                        bookingRoomEquipmentId}, this.onEndListBookingRoomEquipmentDetailDelegate, this.onListBookingRoomEquipmentDetailCompletedDelegate, userState);
+                        bookingRoomEquipmentId,
+                        bookingId,
+                        dateStart,
+                        dateEnd}, this.onEndListBookingRoomEquipmentDetailDelegate, this.onListBookingRoomEquipmentDetailCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -4933,8 +5202,8 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService.BeginListBookingRoomServiceDetail(System.Nullable<int> bookingRoomServiceDetailId, System.Nullable<int> bookingRoomServiceId, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginListBookingRoomServiceDetail(bookingRoomServiceDetailId, bookingRoomServiceId, callback, asyncState);
+        System.IAsyncResult Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService.BeginListBookingRoomServiceDetail(System.Nullable<int> bookingRoomServiceDetailId, System.Nullable<int> bookingRoomServiceId, System.Nullable<int> bookingId, System.Nullable<System.DateTime> dateStart, System.Nullable<System.DateTime> dateEnd, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginListBookingRoomServiceDetail(bookingRoomServiceDetailId, bookingRoomServiceId, bookingId, dateStart, dateEnd, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -4945,7 +5214,10 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         private System.IAsyncResult OnBeginListBookingRoomServiceDetail(object[] inValues, System.AsyncCallback callback, object asyncState) {
             System.Nullable<int> bookingRoomServiceDetailId = ((System.Nullable<int>)(inValues[0]));
             System.Nullable<int> bookingRoomServiceId = ((System.Nullable<int>)(inValues[1]));
-            return ((Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService)(this)).BeginListBookingRoomServiceDetail(bookingRoomServiceDetailId, bookingRoomServiceId, callback, asyncState);
+            System.Nullable<int> bookingId = ((System.Nullable<int>)(inValues[2]));
+            System.Nullable<System.DateTime> dateStart = ((System.Nullable<System.DateTime>)(inValues[3]));
+            System.Nullable<System.DateTime> dateEnd = ((System.Nullable<System.DateTime>)(inValues[4]));
+            return ((Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService)(this)).BeginListBookingRoomServiceDetail(bookingRoomServiceDetailId, bookingRoomServiceId, bookingId, dateStart, dateEnd, callback, asyncState);
         }
         
         private object[] OnEndListBookingRoomServiceDetail(System.IAsyncResult result) {
@@ -4961,11 +5233,11 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
             }
         }
         
-        public void ListBookingRoomServiceDetailAsync(System.Nullable<int> bookingRoomServiceDetailId, System.Nullable<int> bookingRoomServiceId) {
-            this.ListBookingRoomServiceDetailAsync(bookingRoomServiceDetailId, bookingRoomServiceId, null);
+        public void ListBookingRoomServiceDetailAsync(System.Nullable<int> bookingRoomServiceDetailId, System.Nullable<int> bookingRoomServiceId, System.Nullable<int> bookingId, System.Nullable<System.DateTime> dateStart, System.Nullable<System.DateTime> dateEnd) {
+            this.ListBookingRoomServiceDetailAsync(bookingRoomServiceDetailId, bookingRoomServiceId, bookingId, dateStart, dateEnd, null);
         }
         
-        public void ListBookingRoomServiceDetailAsync(System.Nullable<int> bookingRoomServiceDetailId, System.Nullable<int> bookingRoomServiceId, object userState) {
+        public void ListBookingRoomServiceDetailAsync(System.Nullable<int> bookingRoomServiceDetailId, System.Nullable<int> bookingRoomServiceId, System.Nullable<int> bookingId, System.Nullable<System.DateTime> dateStart, System.Nullable<System.DateTime> dateEnd, object userState) {
             if ((this.onBeginListBookingRoomServiceDetailDelegate == null)) {
                 this.onBeginListBookingRoomServiceDetailDelegate = new BeginOperationDelegate(this.OnBeginListBookingRoomServiceDetail);
             }
@@ -4977,7 +5249,10 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
             }
             base.InvokeAsync(this.onBeginListBookingRoomServiceDetailDelegate, new object[] {
                         bookingRoomServiceDetailId,
-                        bookingRoomServiceId}, this.onEndListBookingRoomServiceDetailDelegate, this.onListBookingRoomServiceDetailCompletedDelegate, userState);
+                        bookingRoomServiceId,
+                        bookingId,
+                        dateStart,
+                        dateEnd}, this.onEndListBookingRoomServiceDetailDelegate, this.onListBookingRoomServiceDetailCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -6021,10 +6296,57 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
                 base.EndInvoke("SaveBookingRoomEquipment", _args, result);
             }
             
-            public System.IAsyncResult BeginListBookingRoomEquipmentDetail(System.Nullable<int> bookingRoomEquipmentDetailId, System.Nullable<int> bookingRoomEquipmentId, System.AsyncCallback callback, object asyncState) {
-                object[] _args = new object[2];
+            public System.IAsyncResult BeginListBookingPayment(System.Nullable<int> orgId, System.Nullable<int> siteId, System.Nullable<int> roomId, System.Nullable<int> bookingId, System.Nullable<int> bookingPaymentId, System.DateTime dateStart, System.DateTime dateEnd, int payment, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[8];
+                _args[0] = orgId;
+                _args[1] = siteId;
+                _args[2] = roomId;
+                _args[3] = bookingId;
+                _args[4] = bookingPaymentId;
+                _args[5] = dateStart;
+                _args[6] = dateEnd;
+                _args[7] = payment;
+                System.IAsyncResult _result = base.BeginInvoke("ListBookingPayment", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment> EndListBookingPayment(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment> _result = ((System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment>)(base.EndInvoke("ListBookingPayment", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginSaveBookingPayment(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment> saveList, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = saveList;
+                System.IAsyncResult _result = base.BeginInvoke("SaveBookingPayment", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public void EndSaveBookingPayment(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                base.EndInvoke("SaveBookingPayment", _args, result);
+            }
+            
+            public System.IAsyncResult BeginSendBookingPaymentMail(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment> paymentList, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = paymentList;
+                System.IAsyncResult _result = base.BeginInvoke("SendBookingPaymentMail", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public void EndSendBookingPaymentMail(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                base.EndInvoke("SendBookingPaymentMail", _args, result);
+            }
+            
+            public System.IAsyncResult BeginListBookingRoomEquipmentDetail(System.Nullable<int> bookingRoomEquipmentDetailId, System.Nullable<int> bookingRoomEquipmentId, System.Nullable<int> bookingId, System.Nullable<System.DateTime> dateStart, System.Nullable<System.DateTime> dateEnd, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[5];
                 _args[0] = bookingRoomEquipmentDetailId;
                 _args[1] = bookingRoomEquipmentId;
+                _args[2] = bookingId;
+                _args[3] = dateStart;
+                _args[4] = dateEnd;
                 System.IAsyncResult _result = base.BeginInvoke("ListBookingRoomEquipmentDetail", _args, callback, asyncState);
                 return _result;
             }
@@ -6074,10 +6396,13 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
                 base.EndInvoke("SaveBookingRoomService", _args, result);
             }
             
-            public System.IAsyncResult BeginListBookingRoomServiceDetail(System.Nullable<int> bookingRoomServiceDetailId, System.Nullable<int> bookingRoomServiceId, System.AsyncCallback callback, object asyncState) {
-                object[] _args = new object[2];
+            public System.IAsyncResult BeginListBookingRoomServiceDetail(System.Nullable<int> bookingRoomServiceDetailId, System.Nullable<int> bookingRoomServiceId, System.Nullable<int> bookingId, System.Nullable<System.DateTime> dateStart, System.Nullable<System.DateTime> dateEnd, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[5];
                 _args[0] = bookingRoomServiceDetailId;
                 _args[1] = bookingRoomServiceId;
+                _args[2] = bookingId;
+                _args[3] = dateStart;
+                _args[4] = dateEnd;
                 System.IAsyncResult _result = base.BeginInvoke("ListBookingRoomServiceDetail", _args, callback, asyncState);
                 return _result;
             }

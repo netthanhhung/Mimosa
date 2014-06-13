@@ -26,5 +26,6 @@ namespace Mimosa.Apartment.Silverlight.UI
         BookingAdmin = 101,
 
         CustomerAdmin = 201,
+        MonthlyPayment = 202,
     }
 }

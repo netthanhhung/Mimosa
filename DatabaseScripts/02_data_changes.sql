@@ -24,6 +24,7 @@ BEGIN TRY
 		UNION ALL SELECT  8, 'Room Admin', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser
 		UNION ALL SELECT  101, 'Booking Admin', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser
 		UNION ALL SELECT  201, 'Customer Admin', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser
+		UNION ALL SELECT  202, 'Monthly Payment', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser
 		SET IDENTITY_INSERT [Component] OFF
 	END
 	
@@ -47,6 +48,7 @@ BEGIN TRY
 	    UNION ALL SELECT '0DA03E27-E0F9-419E-A5F1-3FA7A1219AFB', 8, 1, @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser       
 	    UNION ALL SELECT '0DA03E27-E0F9-419E-A5F1-3FA7A1219AFB', 101, 1, @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser       
 	    UNION ALL SELECT '0DA03E27-E0F9-419E-A5F1-3FA7A1219AFB', 201, 1, @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser       
+	    UNION ALL SELECT '0DA03E27-E0F9-419E-A5F1-3FA7A1219AFB', 202, 1, @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser       
 	    
 	    UNION ALL SELECT '4030222F-1655-42D7-9C2A-4278E105228C', 3, 1, @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser       
 	    UNION ALL SELECT '4030222F-1655-42D7-9C2A-4278E105228C', 4, 1, @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser       
@@ -55,7 +57,7 @@ BEGIN TRY
 	    UNION ALL SELECT '4030222F-1655-42D7-9C2A-4278E105228C', 8, 1, @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser       
 	    UNION ALL SELECT '4030222F-1655-42D7-9C2A-4278E105228C', 101, 1, @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser       
 	    UNION ALL SELECT '4030222F-1655-42D7-9C2A-4278E105228C', 201, 1, @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser       
-	    
+	    UNION ALL SELECT '4030222F-1655-42D7-9C2A-4278E105228C', 202, 1, @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser       
 	    
 	END                  	        
     COMMIT TRANSACTION 

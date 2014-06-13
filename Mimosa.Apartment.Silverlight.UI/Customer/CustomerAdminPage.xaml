@@ -5,6 +5,7 @@
     xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"             
     xmlns:bg="clr-namespace:TiledBG;assembly=TiledBG"
     xmlns:telerik="clr-namespace:Telerik.Windows.Controls.Animation;assembly=Telerik.Windows.Controls"
+    xmlns:telerikCommon="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls"                 
     xmlns:telerikInput="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input"
     xmlns:telerikGrid="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.GridView"
     xmlns:telerikGridView="clr-namespace:Telerik.Windows.Controls.GridView;assembly=Telerik.Windows.Controls.GridView"                 
@@ -86,7 +87,7 @@
                                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
 
-                                <StackPanel  Orientation="Horizontal" Grid.ColumnSpan="2" >
+                                <telerikCommon:RadWrapPanel Orientation="Horizontal" Grid.ColumnSpan="2" >
 
                                     <TextBlock
                                         Margin="20,10,5,5"
@@ -147,7 +148,7 @@
                                       Margin="10,5,0,5" VerticalAlignment="Center"></CheckBox>
 
                                     <Button x:Name="btnSearch" Width="70" Height="25" Margin="20,10,5,5"  Content="Search"></Button>
-                                </StackPanel>
+                                </telerikCommon:RadWrapPanel>
 
                                 <telerikGrid:RadGridView
                                 Margin="10,5,0,5"

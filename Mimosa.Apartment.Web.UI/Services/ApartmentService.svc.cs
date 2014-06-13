@@ -10,6 +10,7 @@ using System.Web;
 using Mimosa.Apartment.Common;
 using Mimosa.Apartment.Business;
 using Mimosa.Apartment.Web.UI.code;
+using System.Net.Mail;
 
 namespace Mimosa.Apartment.Web.UI
 {
@@ -85,7 +86,9 @@ namespace Mimosa.Apartment.Web.UI
         public AppSettings GetAppSettings()
         {
             AppSettings appSettings = new AppSettings();
-
+            appSettings.GloblaCulture = MimosaSettings.GloblaCulture();
+            appSettings.NumberFormatCulture = MimosaSettings.NumberFormatCulture();
+            appSettings.DateTimeFormatCulture = MimosaSettings.DateTimeFormatCulture();
             return appSettings;
         }
 
@@ -552,11 +555,121 @@ namespace Mimosa.Apartment.Web.UI
         }
         #endregion
 
+        #region BookingPayment
+        [OperationContract]
+        public List<BookingPayment> ListBookingPayment(int? orgId, int? siteId, int? roomId, int? bookingId, int? bookingPaymentId,
+            DateTime dateStart, DateTime dateEnd, int payment)
+        {
+            return ApartmentMethods.ListBookingPayment(orgId, siteId, roomId, bookingId, bookingPaymentId, dateStart, dateEnd, payment);
+        }
+
+        [OperationContract]
+        public void SaveBookingPayment(List<BookingPayment> saveList)
+        {
+            ApartmentMethods.SaveBookingPayment(saveList);
+        }
+
+        [OperationContract]
+        public void SendBookingPaymentMail(List<BookingPayment> paymentList)
+        {
+            if (paymentList != null && paymentList.Count > 0)
+            {
+                SmtpClient smtpClient = new SmtpClient();
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+
+                foreach (BookingPayment paymentItem in paymentList)
+                {
+                    SendOnePaymentMail(smtpClient, paymentItem);
+                }
+            }
+        }
+
+        private void SendOnePaymentMail(SmtpClient smtpClient, BookingPayment paymentItem)
+        {
+            MailMessage message = new MailMessage();
+            List<Customer> customers = ApartmentMethods.ListCustomer(null, paymentItem.CustomerId, null, null, null, false, null, null, true);
+            string email = string.Empty;
+            if (customers.Count > 0 && customers[0].ContactInformation != null && !string.IsNullOrEmpty(customers[0].ContactInformation.Email))
+            {
+                email = customers[0].ContactInformation.Email;
+            }
+
+            if (!string.IsNullOrEmpty(email))
+            {
+                string dateFormat = "dd-MMM-yyyy";
+                message.To.Add(new MailAddress(email));
+                string subject = string.Format("Payment Details from {0} to {1}", paymentItem.DateStart.ToString(dateFormat), paymentItem.DateEnd.ToString(dateFormat));
+                message.Subject = subject;
+                message.IsBodyHtml = true;
+                string content = @"<html>
+                                    <body>
+                                        <h2>Dear {0}</h2>
+                                        <p>
+                                            Here is your {1}.
+                                        </p>                                        
+                                        <table>
+                                            <tr><td>Site:</td>
+                                                <td>{2}</td>
+                                            </tr>
+                                            <tr><td>Room:</td>
+                                                <td>{3}</td>
+                                            </tr>
+                                            <tr><td>Date From:</td>
+                                                <td>{4}</td>
+                                            </tr>
+                                            <tr><td>Date To:</td>
+                                                <td>{5}</td>
+                                            </tr>
+                                            <tr><td>Room Price:</td>
+                                                <td>{6}</td>
+                                            </tr>
+                                            <tr><td>Equipment Price:</td>
+                                                <td>{7}</td>
+                                            </tr>
+                                            <tr><td>Total Price:</td>
+                                                <td>{8}</td>
+                                            </tr>
+                                            <tr><td>Service Price:</td>
+                                                <td>{9}</td>
+                                            </tr>
+                                            <tr><td>Customer paid:</td>
+                                                <td>{10}</td>
+                                            </tr>
+                                            <tr><td>Total Left:</td>
+                                                <td>{11}</td>
+                                            </tr>
+                                        </table>
+                                        <p>
+                                            Thank you.
+                                        </p>
+                                    </body>
+                                    </html>
+                                    ";
+                content = string.Format(content, paymentItem.CustomerName, subject, paymentItem.SiteName, paymentItem.RoomName, paymentItem.DateStart.ToString(dateFormat), 
+                    paymentItem.DateEnd.ToString(dateFormat), paymentItem.RoomPrice, paymentItem.EquipmentPrice, paymentItem.ServicePrice, paymentItem.TotalPrice,
+                    paymentItem.CustomerPaid, paymentItem.MoneyLeft);
+                message.Body = content;
+            }
+
+            smtpClient.Send(message);
+
+        }
+
+        private string BuildBookingPaymentContent(BookingPayment paymentItem)
+        {
+            StringBuilder strBuilder = new StringBuilder();
+
+
+            return strBuilder.ToString();
+        }
+        #endregion
+
         #region BookingRoomEquipmentDetail
         [OperationContract]
-        public List<BookingRoomEquipmentDetail> ListBookingRoomEquipmentDetail(int? bookingRoomEquipmentDetailId, int? bookingRoomEquipmentId)
+        public List<BookingRoomEquipmentDetail> ListBookingRoomEquipmentDetail(int? bookingRoomEquipmentDetailId, int? bookingRoomEquipmentId,
+                int? bookingId, DateTime? dateStart, DateTime? dateEnd)
         {
-            return ApartmentMethods.ListBookingRoomEquipmentDetail(bookingRoomEquipmentDetailId, bookingRoomEquipmentId);
+            return ApartmentMethods.ListBookingRoomEquipmentDetail(bookingRoomEquipmentDetailId, bookingRoomEquipmentId, bookingId, dateStart, dateEnd);
         }
 
         [OperationContract]
@@ -582,9 +695,10 @@ namespace Mimosa.Apartment.Web.UI
 
         #region BookingRoomServiceDetail
         [OperationContract]
-        public List<BookingRoomServiceDetail> ListBookingRoomServiceDetail(int? bookingRoomServiceDetailId, int? bookingRoomServiceId)
+        public List<BookingRoomServiceDetail> ListBookingRoomServiceDetail(int? bookingRoomServiceDetailId, int? bookingRoomServiceId,
+                int? bookingId, DateTime? dateStart, DateTime? dateEnd)
         {
-            return ApartmentMethods.ListBookingRoomServiceDetail(bookingRoomServiceDetailId, bookingRoomServiceId);
+            return ApartmentMethods.ListBookingRoomServiceDetail(bookingRoomServiceDetailId, bookingRoomServiceId, bookingId, dateStart, dateEnd);
         }
 
         [OperationContract]
@@ -691,6 +805,15 @@ namespace Mimosa.Apartment.Web.UI
 
         [DataMember]
         public string ReportLocalization { set; get; }
+
+        [DataMember]
+        public string GloblaCulture { set; get; }
+
+        [DataMember]
+        public string NumberFormatCulture { set; get; }
+
+        [DataMember]
+        public string DateTimeFormatCulture { set; get; }
     }
 
     [DataContract]

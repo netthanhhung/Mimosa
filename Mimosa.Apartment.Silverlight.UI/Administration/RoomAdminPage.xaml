@@ -202,8 +202,8 @@
                                     </telerikGrid:GridViewDataColumn>
                                     <telerikGrid:GridViewDataColumn
                                         DataMemberBinding="{Binding BasePrice}"
-                                        Width="70" ShowFieldFilters="False" HeaderTextAlignment="Center"
-                                        DataFormatString="{} {0:C2}" TextAlignment="Right" Header="Base Price">
+                                        Width="100" ShowFieldFilters="False" HeaderTextAlignment="Center"
+                                        DataFormatString="{} {0:C0}" TextAlignment="Right" Header="Base Price">
                                     </telerikGrid:GridViewDataColumn>
                                     <telerikGrid:GridViewDataColumn Width="70" Header="Inactive">
                                         <telerikGrid:GridViewDataColumn.CellStyle>
@@ -294,7 +294,7 @@
                                     <telerikGrid:GridViewDataColumn
                                         DataMemberBinding="{Binding Price}"
                                         Width="100" ShowFieldFilters="False" Header="Unit Price"
-                                        DataFormatString="{} {0:C2}">
+                                        DataFormatString="{} {0:C0}">
                                     </telerikGrid:GridViewDataColumn>
                                 </telerikGrid:RadGridView.Columns>
                             </telerikGrid:RadGridView>
@@ -365,7 +365,7 @@
                                     <telerikGrid:GridViewDataColumn
                                         DataMemberBinding="{Binding Price}"
                                         Width="100" ShowFieldFilters="False" Header="Unit Price"
-                                        DataFormatString="{} {0:C2}">
+                                        DataFormatString="{} {0:C0}">
                                     </telerikGrid:GridViewDataColumn>
                                 </telerikGrid:RadGridView.Columns>
                             </telerikGrid:RadGridView>

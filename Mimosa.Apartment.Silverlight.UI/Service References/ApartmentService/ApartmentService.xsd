@@ -719,25 +719,73 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="ListBookingPayment">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="orgId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="siteId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="roomId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="bookingId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="bookingPaymentId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="dateStart" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="dateEnd" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="payment" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListBookingPaymentResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q60="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListBookingPaymentResult" nillable="true" type="q60:ArrayOfBookingPayment" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveBookingPayment">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q61="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q61:ArrayOfBookingPayment" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveBookingPaymentResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendBookingPaymentMail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q62="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="paymentList" nillable="true" type="q62:ArrayOfBookingPayment" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendBookingPaymentMailResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="ListBookingRoomEquipmentDetail">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="bookingRoomEquipmentDetailId" nillable="true" type="xs:int" />
         <xs:element minOccurs="0" name="bookingRoomEquipmentId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="bookingId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="dateStart" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="dateEnd" nillable="true" type="xs:dateTime" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ListBookingRoomEquipmentDetailResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q60="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListBookingRoomEquipmentDetailResult" nillable="true" type="q60:ArrayOfBookingRoomEquipmentDetail" />
+        <xs:element xmlns:q63="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListBookingRoomEquipmentDetailResult" nillable="true" type="q63:ArrayOfBookingRoomEquipmentDetail" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveBookingRoomEquipmentDetail">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q61="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q61:ArrayOfBookingRoomEquipmentDetail" />
+        <xs:element xmlns:q64="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q64:ArrayOfBookingRoomEquipmentDetail" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -758,14 +806,14 @@
   <xs:element name="ListBookingRoomServiceResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q62="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListBookingRoomServiceResult" nillable="true" type="q62:ArrayOfBookingRoomService" />
+        <xs:element xmlns:q65="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListBookingRoomServiceResult" nillable="true" type="q65:ArrayOfBookingRoomService" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveBookingRoomService">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q63="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q63:ArrayOfBookingRoomService" />
+        <xs:element xmlns:q66="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q66:ArrayOfBookingRoomService" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -779,20 +827,23 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="bookingRoomServiceDetailId" nillable="true" type="xs:int" />
         <xs:element minOccurs="0" name="bookingRoomServiceId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="bookingId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="dateStart" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="dateEnd" nillable="true" type="xs:dateTime" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ListBookingRoomServiceDetailResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q64="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListBookingRoomServiceDetailResult" nillable="true" type="q64:ArrayOfBookingRoomServiceDetail" />
+        <xs:element xmlns:q67="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListBookingRoomServiceDetailResult" nillable="true" type="q67:ArrayOfBookingRoomServiceDetail" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveBookingRoomServiceDetail">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q65="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q65:ArrayOfBookingRoomServiceDetail" />
+        <xs:element xmlns:q68="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q68:ArrayOfBookingRoomServiceDetail" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -812,14 +863,14 @@
   <xs:element name="ListSiteGroupResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q66="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListSiteGroupResult" nillable="true" type="q66:ArrayOfSiteGroup" />
+        <xs:element xmlns:q69="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListSiteGroupResult" nillable="true" type="q69:ArrayOfSiteGroup" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveSiteGroups">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q67="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q67:ArrayOfSiteGroup" />
+        <xs:element xmlns:q70="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q70:ArrayOfSiteGroup" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -840,7 +891,7 @@
   <xs:element name="ListSiteBySiteGroupResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q68="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListSiteBySiteGroupResult" nillable="true" type="q68:ArrayOfSite" />
+        <xs:element xmlns:q71="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListSiteBySiteGroupResult" nillable="true" type="q71:ArrayOfSite" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -855,14 +906,14 @@
   <xs:element name="ListSiteGroupSiteResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q69="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListSiteGroupSiteResult" nillable="true" type="q69:ArrayOfSiteGroupSite" />
+        <xs:element xmlns:q72="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="ListSiteGroupSiteResult" nillable="true" type="q72:ArrayOfSiteGroupSite" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveSiteGroupSites">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q70="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q70:ArrayOfSiteGroupSite" />
+        <xs:element xmlns:q73="http://schemas.datacontract.org/2004/07/Mimosa.Apartment.Common" minOccurs="0" name="saveList" nillable="true" type="q73:ArrayOfSiteGroupSite" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

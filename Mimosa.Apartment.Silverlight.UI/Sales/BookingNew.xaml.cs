@@ -109,7 +109,7 @@ namespace Mimosa.Apartment.Silverlight.UI
             newItem.RoomName = selectedRoom.RoomName;
             newItem.BookingStatus = BookingStatus.New.ToString();
             newItem.BookingStatusId = (int)BookingStatus.New;
-            newItem.RoomPrice = newItem.TotalPrice = uiRoomPrice.Value.HasValue ? Convert.ToDecimal(uiRoomPrice.Value.Value) : 0;
+            newItem.RoomPrice = newItem.TotalPrice = newItem.ContractTotalPrice = uiRoomPrice.Value.HasValue ? Convert.ToDecimal(uiRoomPrice.Value.Value) : 0;
             newItem.Description = uiDescription.Text;
             newItem.BookDate = DateTime.Now;
             newItem.ContractDateStart = uiDateFrom.SelectedDate;

@@ -677,6 +677,53 @@ namespace Mimosa.Apartment.Business
         }
         #endregion
 
+        #region BookingPayment
+        public static List<BookingPayment> ListBookingPayment(int? orgId, int? siteId, int? roomId, int? bookingId, int? bookingPaymentId,
+            DateTime dateStart, DateTime dateEnd, int payment)
+        {
+            DataLayer dataLayer = new DataLayer();
+            //Generate the payment first if not exist;
+            List<BookingPayment> firstList = dataLayer.ListBookingPayment(orgId, siteId, roomId, bookingId, bookingPaymentId, dateStart, dateEnd, payment);
+            List<BookingPayment> saveList = new List<BookingPayment>();
+            foreach (BookingPayment item in firstList)
+            {
+                if (!item.NullableRecordId.HasValue)
+                {
+                    item.IsChanged = true;
+                    item.TotalPrice = item.RoomPrice + item.EquipmentPrice + item.ServicePrice;
+                    item.CreatedBy = "Automation";
+                    saveList.Add(item);
+                }
+            }
+
+            if (saveList.Count > 0)
+            {
+                SaveBookingPayment(saveList);
+                firstList = dataLayer.ListBookingPayment(orgId, siteId, roomId, bookingId, bookingPaymentId, dateStart, dateEnd, payment);
+            }
+
+            return firstList;
+        }
+
+        public static void SaveBookingPayment(List<BookingPayment> saveList)
+        {
+            if (saveList != null)
+            {
+                foreach (BookingPayment item in saveList)
+                {
+                    if (item.IsDeleted && item.NullableRecordId != null)
+                    {
+                        DeleteRecord((Record)item);
+                    }
+                    else if (item.IsChanged)
+                    {
+                        SaveRecord((Record)item);
+                    }
+                }
+            }
+        }
+        #endregion
+
         #region BookingRoomEquipment
         public static List<BookingRoomEquipment> ListBookingRoomEquipment(int? bookingRoomEquipmentId, int? bookingId, int? roomEquipmentId)
         {
@@ -703,9 +750,10 @@ namespace Mimosa.Apartment.Business
         #endregion
 
         #region BookingRoomEquipmentDetail
-        public static List<BookingRoomEquipmentDetail> ListBookingRoomEquipmentDetail(int? bookingRoomEquipmentDetailId, int? bookingRoomEquipmentId)
+        public static List<BookingRoomEquipmentDetail> ListBookingRoomEquipmentDetail(int? bookingRoomEquipmentDetailId, int? bookingRoomEquipmentId,
+                int? bookingId, DateTime? dateStart, DateTime? dateEnd)
         {
-            return new DataLayer().ListBookingRoomEquipmentDetail(bookingRoomEquipmentDetailId, bookingRoomEquipmentId);
+            return new DataLayer().ListBookingRoomEquipmentDetail(bookingRoomEquipmentDetailId, bookingRoomEquipmentId, bookingId, dateStart, dateEnd);
         }
 
         public static void SaveBookingRoomEquipmentDetail(List<BookingRoomEquipmentDetail> saveList)
@@ -753,9 +801,10 @@ namespace Mimosa.Apartment.Business
         #endregion
 
         #region BookingRoomServiceDetail
-        public static List<BookingRoomServiceDetail> ListBookingRoomServiceDetail(int? bookingRoomServiceDetailId, int? bookingRoomServiceId)
+        public static List<BookingRoomServiceDetail> ListBookingRoomServiceDetail(int? bookingRoomServiceDetailId, int? bookingRoomServiceId,
+                int? bookingId, DateTime? dateStart, DateTime? dateEnd)
         {
-            return new DataLayer().ListBookingRoomServiceDetail(bookingRoomServiceDetailId, bookingRoomServiceId);
+            return new DataLayer().ListBookingRoomServiceDetail(bookingRoomServiceDetailId, bookingRoomServiceId, bookingId, dateStart, dateEnd);
         }
 
         public static void SaveBookingRoomServiceDetail(List<BookingRoomServiceDetail> saveList)

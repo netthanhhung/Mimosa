@@ -49,7 +49,7 @@ namespace Mimosa.Apartment.Silverlight.UI
             if (Services != null && Services.Count > 0)
             {
                 _bookingRoomServiceItem = Services[0];
-                DataServiceHelper.ListBookingRoomServiceDetailAsync(null, this.BookingServiceId, ListBookingRoomServiceDetailCompleted);
+                DataServiceHelper.ListBookingRoomServiceDetailAsync(null, this.BookingServiceId, null, null, null, ListBookingRoomServiceDetailCompleted);
             }
         }
 
