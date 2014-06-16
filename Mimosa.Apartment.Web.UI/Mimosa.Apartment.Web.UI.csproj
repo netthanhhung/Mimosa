@@ -125,6 +125,7 @@
     <Content Include="ClientBin\Mimosa.Apartment.Silverlight.UI.xap" />
     <Content Include="Default.aspx" />
     <Content Include="EmailTemplates\ChangePassword.htm" />
+    <Content Include="EmailTemplates\MonthlyPayment.htm" />
     <Content Include="EmailTemplates\PasswordRecovery.txt" />
     <Content Include="Images\mimosa.gif" />
     <Content Include="Images\PaleBlueBorderBottomLeft.gif" />

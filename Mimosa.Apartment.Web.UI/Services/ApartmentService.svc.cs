@@ -11,6 +11,9 @@ using Mimosa.Apartment.Common;
 using Mimosa.Apartment.Business;
 using Mimosa.Apartment.Web.UI.code;
 using System.Net.Mail;
+using System.IO;
+using System.Globalization;
+using System.Threading;
 
 namespace Mimosa.Apartment.Web.UI
 {
@@ -88,7 +91,8 @@ namespace Mimosa.Apartment.Web.UI
             AppSettings appSettings = new AppSettings();
             appSettings.GloblaCulture = MimosaSettings.GloblaCulture();
             appSettings.NumberFormatCulture = MimosaSettings.NumberFormatCulture();
-            appSettings.DateTimeFormatCulture = MimosaSettings.DateTimeFormatCulture();
+            appSettings.DateTimeFormatCulture = MimosaSettings.DateTimeFormatCulture();            
+                
             return appSettings;
         }
 
@@ -597,61 +601,42 @@ namespace Mimosa.Apartment.Web.UI
             if (!string.IsNullOrEmpty(email))
             {
                 string dateFormat = "dd-MMM-yyyy";
+                string moneyFormat = "C0";
                 message.To.Add(new MailAddress(email));
                 string subject = string.Format("Payment Details from {0} to {1}", paymentItem.DateStart.ToString(dateFormat), paymentItem.DateEnd.ToString(dateFormat));
                 message.Subject = subject;
                 message.IsBodyHtml = true;
-                string content = @"<html>
-                                    <body>
-                                        <h2>Dear {0}</h2>
-                                        <p>
-                                            Here is your {1}.
-                                        </p>                                        
-                                        <table>
-                                            <tr><td>Site:</td>
-                                                <td>{2}</td>
-                                            </tr>
-                                            <tr><td>Room:</td>
-                                                <td>{3}</td>
-                                            </tr>
-                                            <tr><td>Date From:</td>
-                                                <td>{4}</td>
-                                            </tr>
-                                            <tr><td>Date To:</td>
-                                                <td>{5}</td>
-                                            </tr>
-                                            <tr><td>Room Price:</td>
-                                                <td>{6}</td>
-                                            </tr>
-                                            <tr><td>Equipment Price:</td>
-                                                <td>{7}</td>
-                                            </tr>
-                                            <tr><td>Total Price:</td>
-                                                <td>{8}</td>
-                                            </tr>
-                                            <tr><td>Service Price:</td>
-                                                <td>{9}</td>
-                                            </tr>
-                                            <tr><td>Customer paid:</td>
-                                                <td>{10}</td>
-                                            </tr>
-                                            <tr><td>Total Left:</td>
-                                                <td>{11}</td>
-                                            </tr>
-                                        </table>
-                                        <p>
-                                            Thank you.
-                                        </p>
-                                    </body>
-                                    </html>
-                                    ";
-                content = string.Format(content, paymentItem.CustomerName, subject, paymentItem.SiteName, paymentItem.RoomName, paymentItem.DateStart.ToString(dateFormat), 
-                    paymentItem.DateEnd.ToString(dateFormat), paymentItem.RoomPrice, paymentItem.EquipmentPrice, paymentItem.ServicePrice, paymentItem.TotalPrice,
-                    paymentItem.CustomerPaid, paymentItem.MoneyLeft);
-                message.Body = content;
-            }
 
-            smtpClient.Send(message);
+                using (FileStream stream = File.OpenRead(HttpContext.Current.Server.MapPath("/EmailTemplates/MonthlyPayment.htm")))
+                {
+                    StringBuilder strb = new StringBuilder();
+                    byte[] b = new byte[stream.Length];
+                    UTF8Encoding temp = new UTF8Encoding(true);
+                    while (stream.Read(b, 0, b.Length) > 0)
+                    {
+                        strb.Append(temp.GetString(b));
+                    }
+                    string content = strb.ToString();
+
+                    CultureInfo customCultureInfo = new CultureInfo(MimosaSettings.GloblaCulture());
+                    customCultureInfo.NumberFormat = (new CultureInfo(MimosaSettings.NumberFormatCulture())).NumberFormat;
+                    customCultureInfo.DateTimeFormat = (new CultureInfo(MimosaSettings.DateTimeFormatCulture())).DateTimeFormat; 
+
+                    Thread.CurrentThread.CurrentCulture = customCultureInfo;
+
+                    content = string.Format(content, paymentItem.CustomerName, subject, paymentItem.SiteName, paymentItem.RoomName, 
+                        paymentItem.DateStart.ToString(dateFormat), paymentItem.DateEnd.ToString(dateFormat),
+                        paymentItem.RoomPrice.ToString(moneyFormat),
+                        paymentItem.EquipmentPrice.ToString(moneyFormat),
+                        paymentItem.ServicePrice.ToString(moneyFormat),
+                        paymentItem.TotalPrice.ToString(moneyFormat),
+                        paymentItem.CustomerPaid.ToString(moneyFormat), 
+                        paymentItem.MoneyLeft.ToString(moneyFormat));
+                    message.Body = content;
+
+                    smtpClient.Send(message);
+                }                
+            }
 
         }
 
