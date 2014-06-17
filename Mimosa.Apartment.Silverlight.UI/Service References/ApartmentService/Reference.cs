@@ -317,13 +317,19 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         
         private string DateTimeFormatCultureField;
         
+        private decimal ExchangeRateField;
+        
         private string GloblaCultureField;
+        
+        private string MainCurrencyField;
         
         private string NumberFormatCultureField;
         
         private string ReportLocalizationField;
         
         private string ReportServerUrlField;
+        
+        private string SecondCurrencyField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string DateTimeFormatCulture {
@@ -339,6 +345,19 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal ExchangeRate {
+            get {
+                return this.ExchangeRateField;
+            }
+            set {
+                if ((this.ExchangeRateField.Equals(value) != true)) {
+                    this.ExchangeRateField = value;
+                    this.RaisePropertyChanged("ExchangeRate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string GloblaCulture {
             get {
                 return this.GloblaCultureField;
@@ -347,6 +366,19 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
                 if ((object.ReferenceEquals(this.GloblaCultureField, value) != true)) {
                     this.GloblaCultureField = value;
                     this.RaisePropertyChanged("GloblaCulture");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string MainCurrency {
+            get {
+                return this.MainCurrencyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MainCurrencyField, value) != true)) {
+                    this.MainCurrencyField = value;
+                    this.RaisePropertyChanged("MainCurrency");
                 }
             }
         }
@@ -386,6 +418,19 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
                 if ((object.ReferenceEquals(this.ReportServerUrlField, value) != true)) {
                     this.ReportServerUrlField = value;
                     this.RaisePropertyChanged("ReportServerUrl");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SecondCurrency {
+            get {
+                return this.SecondCurrencyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SecondCurrencyField, value) != true)) {
+                    this.SecondCurrencyField = value;
+                    this.RaisePropertyChanged("SecondCurrency");
                 }
             }
         }

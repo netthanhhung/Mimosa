@@ -26,10 +26,13 @@
   <xs:complexType name="AppSettings">
     <xs:sequence>
       <xs:element minOccurs="0" name="DateTimeFormatCulture" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ExchangeRate" type="xs:decimal" />
       <xs:element minOccurs="0" name="GloblaCulture" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MainCurrency" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="NumberFormatCulture" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ReportLocalization" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ReportServerUrl" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SecondCurrency" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="AppSettings" nillable="true" type="tns:AppSettings" />

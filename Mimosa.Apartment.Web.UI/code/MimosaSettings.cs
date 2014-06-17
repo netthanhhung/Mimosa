@@ -55,6 +55,20 @@ namespace Mimosa.Apartment.Web.UI
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+        public static string MainCurrency()
+        {
+            return Convert.ToString(ConfigurationSettings.AppSettings["MainCurrency"]);
+
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+        public static string SecondCurrency()
+        {
+            return Convert.ToString(ConfigurationSettings.AppSettings["SecondCurrency"]);
+
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         public static string DateTimeFormatCulture()
         {
             return Convert.ToString(ConfigurationSettings.AppSettings["DateTimeFormatCulture"]);

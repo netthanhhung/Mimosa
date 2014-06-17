@@ -33,6 +33,8 @@ namespace Mimosa.Apartment.Silverlight.UI
             uiDeploymentInfo.Text = DeploymentInfo.ToString();
             //uiBtnLogo.DataContext = this;
             SiteMapHelper.SelectWeb1SiteMapAsync(LoadMenuItems);
+
+            uiCurrencyExchange.Text = string.Format("1 {0} = {1} {2}", Globals.AppSettings.SecondCurrency, Globals.AppSettings.ExchangeRate, Globals.AppSettings.MainCurrency);
         }
 
 

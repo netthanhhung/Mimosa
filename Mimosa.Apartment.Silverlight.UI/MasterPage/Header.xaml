@@ -15,13 +15,14 @@
                 VerticalAlignment="Bottom"
                 Background="{StaticResource HeaderBackgroundBrush}">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <StackPanel
                     x:Name="uiMenuBar"
                     Orientation="Horizontal"
-                    VerticalAlignment="Bottom">
+                    VerticalAlignment="Bottom" HorizontalAlignment="Left">
                     <!--<Button x:Name="uiBtnLogo" Margin="0" Padding="0">
                         <Button.Content>
                             <Grid>
@@ -84,7 +85,15 @@
                     HighlightBrush="{StaticResource BudgetBrush}"></local:HeaderMenuButton>-->
                 </StackPanel>
 
-                <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Right">
+                    <TextBlock
+                        x:Name="uiCurrencyExchange"
+                        Foreground="#BBA598"
+                        Margin="0,0,6,0"
+                        FontSize="8"></TextBlock>
+                </StackPanel>
+                
+                <StackPanel Grid.Column="2" Orientation="Vertical" VerticalAlignment="Bottom" HorizontalAlignment="Right">
                     <Image x:Name="uiLogo" Width="80" Height="40"
                                 Source="{StaticResource LogoSourceUrl}"
                                 Margin="0"></Image>

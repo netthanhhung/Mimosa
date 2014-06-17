@@ -14,6 +14,8 @@ using System.Net.Mail;
 using System.IO;
 using System.Globalization;
 using System.Threading;
+using System.Net;
+using System.Xml;
 
 namespace Mimosa.Apartment.Web.UI
 {
@@ -91,8 +93,11 @@ namespace Mimosa.Apartment.Web.UI
             AppSettings appSettings = new AppSettings();
             appSettings.GloblaCulture = MimosaSettings.GloblaCulture();
             appSettings.NumberFormatCulture = MimosaSettings.NumberFormatCulture();
-            appSettings.DateTimeFormatCulture = MimosaSettings.DateTimeFormatCulture();            
-                
+            appSettings.DateTimeFormatCulture = MimosaSettings.DateTimeFormatCulture();
+            appSettings.MainCurrency = MimosaSettings.MainCurrency();
+            appSettings.SecondCurrency = MimosaSettings.SecondCurrency();
+            decimal rate = ConvertCurrency(appSettings.SecondCurrency, appSettings.MainCurrency);
+            appSettings.ExchangeRate = rate;
             return appSettings;
         }
 
@@ -730,6 +735,22 @@ namespace Mimosa.Apartment.Web.UI
             ApartmentMethods.SaveSiteGroupSites(saveList);
         }
         #endregion
+
+        #region ExchangeRate
+        public decimal ConvertCurrency(string fromCurrency, string toCurrency)
+        {
+            string xmlResult = null;
+            string url = string.Format("http://www.webservicex.net/CurrencyConvertor.asmx/ConversionRate?FromCurrency={0}&ToCurrency={1}", fromCurrency.ToUpper(), toCurrency.ToUpper());
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            StreamReader resStream = new StreamReader(response.GetResponseStream());
+            XmlDocument doc = new XmlDocument();
+            xmlResult = resStream.ReadToEnd();
+            doc.LoadXml(xmlResult);
+            string rateStr = doc.GetElementsByTagName("double").Item(0).InnerText;
+            return Convert.ToDecimal(rateStr);
+        }
+        #endregion
     }
 
     /// <summary>
@@ -805,6 +826,15 @@ namespace Mimosa.Apartment.Web.UI
 
         [DataMember]
         public string DateTimeFormatCulture { set; get; }
+
+        [DataMember]
+        public string MainCurrency { set; get; }
+
+        [DataMember]
+        public string SecondCurrency { set; get; }
+
+        [DataMember]
+        public decimal ExchangeRate { set; get; }
     }
 
     [DataContract]
