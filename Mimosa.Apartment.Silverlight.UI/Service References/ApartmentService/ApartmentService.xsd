@@ -691,6 +691,22 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="CheckExistBooking">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="roomId" type="xs:int" />
+        <xs:element minOccurs="0" name="dateStart" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="dateEnd" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckExistBookingResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CheckExistBookingResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="ListBookingRoomEquipment">
     <xs:complexType>
       <xs:sequence>

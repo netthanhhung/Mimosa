@@ -77,7 +77,7 @@
             <telerikInput:RadNumericUpDown
                     x:Name="uiRoomPrice" Grid.Column="1" Grid.Row="3" Height="25"
                     HorizontalAlignment="Left" Value="0" NumberDecimalDigits="0"
-                    Minimum="0" Maximum="1000" Width="100"></telerikInput:RadNumericUpDown>
+                    Width="100"></telerikInput:RadNumericUpDown>
             <TextBlock
                     Margin="{StaticResource SmallContentMargin}" Grid.Column="0" Grid.Row="4"
                     VerticalAlignment="Center"

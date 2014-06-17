@@ -509,6 +509,12 @@ namespace Mimosa.Apartment.Data
             return result;
         }
 
+        public bool CheckExistBooking(int roomId, DateTime dateStart, DateTime dateEnd)
+        {
+            return (Utilities.ToInt(_db.ExecuteScalar("procCheckExistBooking", roomId, dateStart, dateEnd)) == 1);
+        }
+
+
         #endregion
 
         #region BookingPayment

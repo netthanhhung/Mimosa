@@ -543,6 +543,12 @@ namespace Mimosa.Apartment.Web.UI
         {
             ApartmentMethods.SaveBooking(saveList);
         }
+
+        [OperationContract]
+        public bool CheckExistBooking(int roomId, DateTime dateStart, DateTime dateEnd)
+        {
+            return ApartmentMethods.CheckExistBooking(roomId, dateStart, dateEnd);
+        }
         #endregion
 
         #region BookingRoomEquipment

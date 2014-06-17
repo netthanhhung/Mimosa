@@ -62,7 +62,11 @@ namespace Mimosa.Apartment.Silverlight.UI
 
         void ListRoomCompleted(List<Room> roomList)
         {
-            uiRoom.ItemsSource = roomList;            
+            uiRoom.ItemsSource = roomList;
+            if (roomList.Count > 0)
+            {
+                uiRoom.SelectedIndex = 0;
+            }
         }
 
         void ucSitePicker_InitComplete(object sender, EventArgs e)

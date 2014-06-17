@@ -1018,6 +1018,11 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         
         void EndSaveBooking(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:ApartmentService/CheckExistBooking", ReplyAction="urn:ApartmentService/CheckExistBookingResponse")]
+        System.IAsyncResult BeginCheckExistBooking(int roomId, System.DateTime dateStart, System.DateTime dateEnd, System.AsyncCallback callback, object asyncState);
+        
+        bool EndCheckExistBooking(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:ApartmentService/ListBookingRoomEquipment", ReplyAction="urn:ApartmentService/ListBookingRoomEquipmentResponse")]
         System.IAsyncResult BeginListBookingRoomEquipment(System.Nullable<int> bookingRoomEquipmentId, System.Nullable<int> bookingId, System.Nullable<int> roomEquipmentId, System.AsyncCallback callback, object asyncState);
         
@@ -1751,6 +1756,25 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class CheckExistBookingCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public CheckExistBookingCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public bool Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class ListBookingRoomEquipmentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
@@ -2193,6 +2217,12 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         
         private System.Threading.SendOrPostCallback onSaveBookingCompletedDelegate;
         
+        private BeginOperationDelegate onBeginCheckExistBookingDelegate;
+        
+        private EndOperationDelegate onEndCheckExistBookingDelegate;
+        
+        private System.Threading.SendOrPostCallback onCheckExistBookingCompletedDelegate;
+        
         private BeginOperationDelegate onBeginListBookingRoomEquipmentDelegate;
         
         private EndOperationDelegate onEndListBookingRoomEquipmentDelegate;
@@ -2437,6 +2467,8 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         public event System.EventHandler<ListBookingCompletedEventArgs> ListBookingCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> SaveBookingCompleted;
+        
+        public event System.EventHandler<CheckExistBookingCompletedEventArgs> CheckExistBookingCompleted;
         
         public event System.EventHandler<ListBookingRoomEquipmentCompletedEventArgs> ListBookingRoomEquipmentCompleted;
         
@@ -4763,6 +4795,56 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService.BeginCheckExistBooking(int roomId, System.DateTime dateStart, System.DateTime dateEnd, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginCheckExistBooking(roomId, dateStart, dateEnd, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        bool Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService.EndCheckExistBooking(System.IAsyncResult result) {
+            return base.Channel.EndCheckExistBooking(result);
+        }
+        
+        private System.IAsyncResult OnBeginCheckExistBooking(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            int roomId = ((int)(inValues[0]));
+            System.DateTime dateStart = ((System.DateTime)(inValues[1]));
+            System.DateTime dateEnd = ((System.DateTime)(inValues[2]));
+            return ((Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService)(this)).BeginCheckExistBooking(roomId, dateStart, dateEnd, callback, asyncState);
+        }
+        
+        private object[] OnEndCheckExistBooking(System.IAsyncResult result) {
+            bool retVal = ((Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService)(this)).EndCheckExistBooking(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnCheckExistBookingCompleted(object state) {
+            if ((this.CheckExistBookingCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.CheckExistBookingCompleted(this, new CheckExistBookingCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void CheckExistBookingAsync(int roomId, System.DateTime dateStart, System.DateTime dateEnd) {
+            this.CheckExistBookingAsync(roomId, dateStart, dateEnd, null);
+        }
+        
+        public void CheckExistBookingAsync(int roomId, System.DateTime dateStart, System.DateTime dateEnd, object userState) {
+            if ((this.onBeginCheckExistBookingDelegate == null)) {
+                this.onBeginCheckExistBookingDelegate = new BeginOperationDelegate(this.OnBeginCheckExistBooking);
+            }
+            if ((this.onEndCheckExistBookingDelegate == null)) {
+                this.onEndCheckExistBookingDelegate = new EndOperationDelegate(this.OnEndCheckExistBooking);
+            }
+            if ((this.onCheckExistBookingCompletedDelegate == null)) {
+                this.onCheckExistBookingCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnCheckExistBookingCompleted);
+            }
+            base.InvokeAsync(this.onBeginCheckExistBookingDelegate, new object[] {
+                        roomId,
+                        dateStart,
+                        dateEnd}, this.onEndCheckExistBookingDelegate, this.onCheckExistBookingCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.IAsyncResult Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService.BeginListBookingRoomEquipment(System.Nullable<int> bookingRoomEquipmentId, System.Nullable<int> bookingId, System.Nullable<int> roomEquipmentId, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginListBookingRoomEquipment(bookingRoomEquipmentId, bookingId, roomEquipmentId, callback, asyncState);
         }
@@ -6267,6 +6349,21 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
             public void EndSaveBooking(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 base.EndInvoke("SaveBooking", _args, result);
+            }
+            
+            public System.IAsyncResult BeginCheckExistBooking(int roomId, System.DateTime dateStart, System.DateTime dateEnd, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[3];
+                _args[0] = roomId;
+                _args[1] = dateStart;
+                _args[2] = dateEnd;
+                System.IAsyncResult _result = base.BeginInvoke("CheckExistBooking", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public bool EndCheckExistBooking(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                bool _result = ((bool)(base.EndInvoke("CheckExistBooking", _args, result)));
+                return _result;
             }
             
             public System.IAsyncResult BeginListBookingRoomEquipment(System.Nullable<int> bookingRoomEquipmentId, System.Nullable<int> bookingId, System.Nullable<int> roomEquipmentId, System.AsyncCallback callback, object asyncState) {

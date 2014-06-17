@@ -82,7 +82,7 @@
                                 </telerikGrid:GridViewDataColumn.CellStyle>
                             </telerikGrid:GridViewDataColumn>
 
-                            <telerikGrid:GridViewDataColumn Width="100" Header="Customer2" UniqueName="Customer2Name">
+                            <telerikGrid:GridViewDataColumn Width="100" Header="Customer 2" UniqueName="Customer2Name">
                                 <telerikGrid:GridViewDataColumn.CellStyle>
                                     <Style TargetType="telerikGridView:GridViewCell">
                                         <Setter Property="Template">

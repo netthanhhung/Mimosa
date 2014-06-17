@@ -23,6 +23,7 @@ namespace Mimosa.Apartment.Silverlight.UI
             internal const string DateNotValid = "Date End must be greater than Date Start";
             internal const string RoomNotValid = "Please choose a specific room";
             internal const string CustomerNotValid = "Please input customer's name";
+            internal const string BookingExist = "This room was booked/rented in that period. Please choose other room or date range";
         }
 
         internal event EventHandler RebindBookingList;
@@ -263,6 +264,20 @@ namespace Mimosa.Apartment.Silverlight.UI
             if (ucBookingNew.CheckValidation())
             {
                 Booking newBooking = ucBookingNew.GetSavedBooking();
+                DataServiceHelper.CheckExistBookingdAsync(newBooking.RoomId, newBooking.ContractDateStart.Value, newBooking.ContractDateEnd.Value, CheckExistBookingdCompleted);
+            }
+
+        }
+
+        private void CheckExistBookingdCompleted(bool bookingExists)
+        {
+            if (bookingExists)
+            {
+                MessageBox.Show(UserMessages.BookingExist, Globals.UserMessages.ValidationError, MessageBoxButton.OK);
+            }
+            else
+            {
+                Booking newBooking = ucBookingNew.GetSavedBooking();
                 List<Booking> itemSource = gvwBooking.ItemsSource as List<Booking>;
                 if (itemSource == null)
                 {
@@ -273,7 +288,6 @@ namespace Mimosa.Apartment.Silverlight.UI
                 gvwBooking.ItemsSource = itemSource;
                 uiPopupNewBooking.Close();
             }
-
         }
         #endregion
 

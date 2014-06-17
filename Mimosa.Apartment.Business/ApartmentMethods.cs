@@ -675,6 +675,11 @@ namespace Mimosa.Apartment.Business
                 }
             }
         }
+
+        public static bool CheckExistBooking(int roomId, DateTime dateStart, DateTime dateEnd)
+        {
+            return new DataLayer().CheckExistBooking(roomId, dateStart, dateEnd);
+        }
         #endregion
 
         #region BookingPayment

@@ -36,6 +36,8 @@ ContactInformation : add DoB, Visa, VisaValidFrom, VisaValidTo
 [ufnGetTotalEquipmentPrice] : new function
 [ufnGetTotalServicePrice] : new function
 [procListBookingPayment] : new proc
+
+[procCheckExistBooking] : new proc
 *************************************************************************************/
 
 
@@ -1804,6 +1806,27 @@ END
 GO
 
 
+
+/****** Object:  StoredProcedure [dbo].[procCheckExistBooking]    Script Date: 06/17/2014 11:20:49 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[procCheckExistBooking]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[procCheckExistBooking]
+GO
+CREATE PROCEDURE [dbo].[procCheckExistBooking] 
+	@RoomId int, 
+	@DateStart smalldatetime,
+	@DateEnd smalldatetime
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT CASE WHEN EXISTS(SELECT * FROM Booking
+							WHERE RoomId = @RoomId
+							AND   ContractDateStart <= @DateEnd
+							AND   (ContractDateEnd IS NULL OR ContractDateEnd >= @DateStart))
+			THEN 1 ELSE 0 END
+END
+
+GO
 
 /***********************HT End*******************************/
 GO

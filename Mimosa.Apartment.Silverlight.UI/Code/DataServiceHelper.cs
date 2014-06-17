@@ -776,6 +776,27 @@ namespace Mimosa.Apartment.Silverlight.UI
             proxy.SaveBookingAsync(saveList, callerKey);
         }
 
+        //CheckExistBooking
+        internal static void CheckExistBookingdAsync(int roomId, DateTime dateStart, DateTime dateEnd, DataServiceCallback<bool> callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.CheckExistBookingCompleted += new EventHandler<CheckExistBookingCompletedEventArgs>(proxy_CheckExistBookingCompleted);
+            proxy.CheckExistBookingAsync(roomId, dateStart, dateEnd, callerKey);
+        }
+
+        static void proxy_CheckExistBookingCompleted(object sender, CheckExistBookingCompletedEventArgs e)
+        {
+            Guid callerKey = (Guid)e.UserState;
+            if (_callbacks.ContainsKey(callerKey))
+            {
+                ((DataServiceCallback<bool>)_callbacks[callerKey]).Invoke(e.Result);
+
+                _callbacks.Remove(callerKey);
+            }
+        }
+
+
         // ListBookingPayment
         internal delegate void ListBookingPaymentCallBack(List<BookingPayment> itemSource);
         internal static void ListBookingPaymentAsync(int? orgId, int? siteId, int? roomId, int? bookingId, 

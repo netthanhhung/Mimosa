@@ -297,6 +297,12 @@
   <wsdl:message name="ApartmentService_SaveBooking_OutputMessage">
     <wsdl:part name="parameters" element="SaveBookingResponse" />
   </wsdl:message>
+  <wsdl:message name="ApartmentService_CheckExistBooking_InputMessage">
+    <wsdl:part name="parameters" element="CheckExistBooking" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_CheckExistBooking_OutputMessage">
+    <wsdl:part name="parameters" element="CheckExistBookingResponse" />
+  </wsdl:message>
   <wsdl:message name="ApartmentService_ListBookingRoomEquipment_InputMessage">
     <wsdl:part name="parameters" element="ListBookingRoomEquipment" />
   </wsdl:message>
@@ -585,6 +591,10 @@
     <wsdl:operation name="SaveBooking">
       <wsdl:input wsaw:Action="urn:ApartmentService/SaveBooking" message="ApartmentService_SaveBooking_InputMessage" />
       <wsdl:output wsaw:Action="urn:ApartmentService/SaveBookingResponse" message="ApartmentService_SaveBooking_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckExistBooking">
+      <wsdl:input wsaw:Action="urn:ApartmentService/CheckExistBooking" message="ApartmentService_CheckExistBooking_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/CheckExistBookingResponse" message="ApartmentService_CheckExistBooking_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ListBookingRoomEquipment">
       <wsdl:input wsaw:Action="urn:ApartmentService/ListBookingRoomEquipment" message="ApartmentService_ListBookingRoomEquipment_InputMessage" />
