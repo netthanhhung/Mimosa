@@ -12,6 +12,7 @@ Equipment, Service : add Unit column
 [procListService]: alter
 [procSaveEquipment]: alter
 [procSaveService]: alter
+[procListRoomEquipment] : alter
 [procListRoomService] : alter
 [procListBookingRoomEquipment] : alter
 [procListBookingRoomService] : alter
@@ -42,7 +43,6 @@ ContactInformation : add DoB, Visa, VisaValidFrom, VisaValidTo
 
 
 /***********************HT Start*******************************/
-update BookingRoomService Set ServiceId = 1
 
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_BookingRoomEquipment_RoomEquipment]') AND parent_object_id = OBJECT_ID(N'[dbo].[BookingRoomEquipment]'))
 ALTER TABLE [dbo].[BookingRoomEquipment] DROP CONSTRAINT [FK_BookingRoomEquipment_RoomEquipment]
@@ -641,6 +641,34 @@ GO
 
 
 
+/****** Object:  StoredProcedure [dbo].[procListRoomEquipment]    Script Date: 06/22/2014 15:28:56 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[procListRoomEquipment]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[procListRoomEquipment]
+GO
+
+
+CREATE PROCEDURE [dbo].[procListRoomEquipment]	
+@RoomEquipmentId int = null,
+@RoomId int = null
+AS
+BEGIN
+SET NOCOUNT ON
+
+	SELECT	RE.RoomEquipmentId, RE.RoomId, RE.EquipmentId, e.EquipmentName as Equipment,
+		RE.Price, RE.Description, E.Unit,
+		RE.Concurrency, RE.DateCreated, RE.DateUpdated, RE.CreatedBy, RE.UpdatedBy
+	FROM	RoomEquipment RE
+	INNER JOIN Equipment E on RE.EquipmentId = e.EquipmentId
+	WHERE	(@RoomEquipmentId is null OR RE.RoomEquipmentId = @RoomEquipmentId)
+	AND	(@RoomId is null OR RE.RoomId = @RoomId)
+
+END
+
+GO
+
+
+
+
 /****** Object:  StoredProcedure [dbo].[procListRoomService]    Script Date: 05/29/2014 17:06:25 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[procListRoomService]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[procListRoomService]
@@ -655,8 +683,8 @@ BEGIN
 SET NOCOUNT ON
 
 	SELECT	RE.RoomServiceId, RE.RoomId, RE.ServiceId, E.Name as Service,
-	RE.Price, RE.Description, E.Unit,
-	RE.Concurrency, RE.DateCreated, RE.DateUpdated, RE.CreatedBy, RE.UpdatedBy
+		RE.Price, RE.Description, E.Unit,
+		RE.Concurrency, RE.DateCreated, RE.DateUpdated, RE.CreatedBy, RE.UpdatedBy
 	FROM	RoomService RE
 	INNER JOIN Service E on RE.ServiceId = e.ServiceId
 	WHERE	(@RoomServiceId is null OR RE.RoomServiceId = @RoomServiceId)
