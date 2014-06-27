@@ -62,6 +62,10 @@
     <Compile Include="BookingRoomServiceDetail.SqlParameters.cs" />
     <Compile Include="BookingPayment.Generated.cs" />
     <Compile Include="BookingPayment.SqlParameters.cs" />
+    <Compile Include="City.Generated.cs" />
+    <Compile Include="City.SqlParameters.cs" />
+    <Compile Include="District.Generated.cs" />
+    <Compile Include="District.SqlParameters.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Image.Generated.cs" />
     <Compile Include="Image.SqlParameters.cs" />

@@ -331,7 +331,7 @@ namespace Mimosa.Apartment.Data
         }        
         #endregion        
 
-        #region Contact Information
+        #region Country
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         public List<Country> ListCountry(int? countryId)
         {
@@ -344,7 +344,39 @@ namespace Mimosa.Apartment.Data
 
             return result;
         }
+        #endregion
 
+        #region City
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public List<City> ListCity(int? countryid, int? cityId)
+        {
+            List<City> result = new List<City>();
+
+            using (IDataReader reader = _db.ExecuteReader("procListCity", countryid, cityId))
+            {
+                Factory.FillCityList(result, reader);
+            }
+
+            return result;
+        }
+        #endregion
+
+        #region District
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public List<District> ListDistrict(int? cityId, int? districtId)
+        {
+            List<District> result = new List<District>();
+
+            using (IDataReader reader = _db.ExecuteReader("procListDistrict", cityId, districtId))
+            {
+                Factory.FillDistrictList(result, reader);
+            }
+
+            return result;
+        }
+        #endregion
+
+        #region ContactInformation
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         public List<ContactInformation> ListContactInformation(int? contactInfoId)
         {

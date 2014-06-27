@@ -1330,145 +1330,6 @@ GO
 
 
 
-/****** Object:  StoredProcedure [dbo].[procListContactInformation]    Script Date: 05/30/2014 16:38:19 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[procListContactInformation]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[procListContactInformation]
-GO
-
-CREATE PROCEDURE [dbo].[procListContactInformation] (
-@ContactInformationId int = NULL
-)
-
-AS
-BEGIN
-	SET NOCOUNT ON
-
-	SELECT ContactInformationID, ContactTypeId, FirstName, LastName, Address, Address2, District, City, State, Postcode, CountryId,
-		PhoneNumber, FaxNumber, Email, DoB, Visa, VisaValidFrom, VisaValidTo,
-		Concurrency, DateCreated, DateUpdated, CreatedBy, UpdatedBy
-	FROM ContactInformation
-	WHERE (@ContactInformationID IS NULL OR ContactInformationId = @ContactInformationId)
-END
-
-GO
-
-
-/****** Object:  StoredProcedure [dbo].[procSaveContactInformation]    Script Date: 05/30/2014 16:40:52 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[procSaveContactInformation]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[procSaveContactInformation]
-GO
-
-
-CREATE PROCEDURE [dbo].[procSaveContactInformation]
-
-@ContactInformationID int OUTPUT
-,@ContactTypeId int
-,@FirstName varchar(128)
-,@LastName varchar(128)
-,@Address varchar(255)
-,@Address2 varchar(255)
-,@District varchar(255)
-,@City varchar(255)
-,@State varchar(255)
-,@Postcode varchar(255)
-,@CountryId int
-,@PhoneNumber varchar(128)
-,@FaxNumber varchar(128)
-,@Email varchar(255)
-,@DoB datetime
-,@Visa varchar(128)
-,@VisaValidFrom datetime
-,@VisaValidTo datetime
-,@CurrentUser varchar(255)
-AS
-BEGIN
-	SET NOCOUNT ON
-
-	IF @ContactInformationID IS NULL BEGIN
-
-	INSERT INTO ContactInformation(
-			[ContactTypeId]
-			,[FirstName]
-			,[LastName]
-			,[Address]
-			,[Address2]
-			,[District]
-			,[City]
-			,[State]
-			,[Postcode]
-			,[CountryId]
-			,[PhoneNumber]
-			,[FaxNumber]
-			,[Email]
-			,DoB
-			,Visa
-			,VisaValidFrom
-			,VisaValidTo
-			,DateCreated
-			,DateUpdated
-			,CreatedBy
-			,UpdatedBy
-		) VALUES (
-			@ContactTypeId
-			,@FirstName
-			,@LastName
-			,@Address
-			,@Address2
-			,@District
-			,@City
-			,@State
-			,@Postcode
-			,@CountryId
-			,@PhoneNumber
-			,@FaxNumber
-			,@Email
-			,@DoB
-			,@Visa
-			,@VisaValidFrom
-			,@VisaValidTo
-			,GETDATE()
-			,GETDATE()
-			,@CurrentUser
-			,@CurrentUser
-		)
-
-		SET @ContactInformationID = SCOPE_IDENTITY()
-
-	END ELSE BEGIN
-
-		UPDATE ContactInformation SET
-			ContactTypeId = @ContactTypeId,
-			FirstName = @FirstName,
-			LastName = @LastName,
-			Address = @Address,
-			Address2 = @Address2 ,
-			District = @District,
-			City = @City ,
-			State = @State ,
-			Postcode = @Postcode ,
-			CountryID = @CountryID ,
-			PhoneNumber = @PhoneNumber ,
-			FaxNumber = @FaxNumber ,
-			Email = @Email,
-			DoB = @DoB,
-			Visa = @Visa,
-			VisaValidFrom = @VisaValidFrom,
-			VisaValidTo = @VisaValidTo,
-			DateUpdated = GETDATE(),
-			UpdatedBy = @CurrentUser
-
-		WHERE ContactInformationID = @ContactInformationID
-
-	END
-
-	SELECT Concurrency FROM ContactInformation WHERE ContactInformationID = @ContactInformationID
-END
-
-GO
-
-
-
-
 /****** Object:  StoredProcedure [dbo].[procListAspUser]    Script Date: 06/02/2014 15:34:13 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[procListAspUser]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[procListAspUser]
@@ -1855,6 +1716,379 @@ BEGIN
 END
 
 GO
+
+
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_District_City]') AND parent_object_id = OBJECT_ID(N'[dbo].[GuestContact]'))
+ALTER TABLE [dbo].[District] DROP CONSTRAINT [FK_District_City]
+GO
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_District_DateCreated]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[District] DROP CONSTRAINT [DF_District_DateCreated]
+END
+
+GO
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_District_DateUpdated]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[District] DROP CONSTRAINT [DF_District_DateUpdated]
+END
+
+GO
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_District_CreatedBy]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[District] DROP CONSTRAINT [DF_District_CreatedBy]
+END
+
+GO
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_District_UpdatedBy]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[District] DROP CONSTRAINT [DF_District_UpdatedBy]
+END
+
+GO
+
+
+/****** Object:  Table [dbo].[District]    Script Date: 06/26/2014 17:13:29 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[District]') AND type in (N'U'))
+DROP TABLE [dbo].[District]
+GO
+
+
+CREATE TABLE [dbo].[District](
+	[DistrictId] [int] IDENTITY(1,1) NOT NULL,
+	[CityId] [int] NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+	[Concurrency] [timestamp] NULL,
+	[DateCreated] [smalldatetime] NULL,
+	[DateUpdated] [smalldatetime] NULL,
+	[CreatedBy] [varchar](128) NULL,
+	[UpdatedBy] [varchar](128) NULL,
+ CONSTRAINT [PK_District] PRIMARY KEY CLUSTERED 
+(
+	[DistrictId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[District] ADD  CONSTRAINT [DF_District_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
+GO
+
+ALTER TABLE [dbo].[District] ADD  CONSTRAINT [DF_District_DateUpdated]  DEFAULT (getdate()) FOR [DateUpdated]
+GO
+
+ALTER TABLE [dbo].[District] ADD  CONSTRAINT [DF_District_CreatedBy]  DEFAULT ('') FOR [CreatedBy]
+GO
+
+ALTER TABLE [dbo].[District] ADD  CONSTRAINT [DF_District_UpdatedBy]  DEFAULT ('') FOR [UpdatedBy]
+GO
+
+
+
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_City_Country]') AND parent_object_id = OBJECT_ID(N'[dbo].[City]'))
+ALTER TABLE [dbo].[City] DROP CONSTRAINT [FK_City_Country]
+GO
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_City_DateCreated]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[City] DROP CONSTRAINT [DF_City_DateCreated]
+END
+
+GO
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_City_DateUpdated]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[City] DROP CONSTRAINT [DF_City_DateUpdated]
+END
+
+GO
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_City_CreatedBy]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[City] DROP CONSTRAINT [DF_City_CreatedBy]
+END
+
+GO
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_City_UpdatedBy]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[City] DROP CONSTRAINT [DF_City_UpdatedBy]
+END
+
+GO
+
+/****** Object:  Table [dbo].[City]    Script Date: 06/26/2014 17:20:31 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[City]') AND type in (N'U'))
+DROP TABLE [dbo].[City]
+GO
+
+
+CREATE TABLE [dbo].[City](
+	[CityId] [int] IDENTITY(1,1) NOT NULL,
+	[CountryId] [int] NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+	[Concurrency] [timestamp] NULL,
+	[DateCreated] [smalldatetime] NULL,
+	[DateUpdated] [smalldatetime] NULL,
+	[CreatedBy] [varchar](128) NULL,
+	[UpdatedBy] [varchar](128) NULL,
+ CONSTRAINT [PK_City] PRIMARY KEY CLUSTERED 
+(
+	[CityId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[City]  WITH CHECK ADD  CONSTRAINT [FK_City_Country] FOREIGN KEY([CountryId])
+REFERENCES [dbo].[Country] ([CountryId])
+GO
+
+ALTER TABLE [dbo].[City] CHECK CONSTRAINT [FK_City_Country]
+GO
+
+ALTER TABLE [dbo].[City] ADD  CONSTRAINT [DF_City_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
+GO
+
+ALTER TABLE [dbo].[City] ADD  CONSTRAINT [DF_City_DateUpdated]  DEFAULT (getdate()) FOR [DateUpdated]
+GO
+
+ALTER TABLE [dbo].[City] ADD  CONSTRAINT [DF_City_CreatedBy]  DEFAULT ('') FOR [CreatedBy]
+GO
+
+ALTER TABLE [dbo].[City] ADD  CONSTRAINT [DF_City_UpdatedBy]  DEFAULT ('') FOR [UpdatedBy]
+GO
+
+
+ALTER TABLE [dbo].[District]  WITH CHECK ADD  CONSTRAINT [FK_District_City] FOREIGN KEY([CityId])
+REFERENCES [dbo].[City] ([CityId])
+GO
+
+ALTER TABLE [dbo].[District] CHECK CONSTRAINT [FK_District_City]
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[procListCity]    Script Date: 06/26/2014 17:21:44 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[procListCity]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[procListCity]
+GO
+
+
+CREATE PROCEDURE [dbo].[procListCity] 
+(
+	@CountryId int = NULL
+	, @CityId int = NULL
+)
+
+AS
+BEGIN
+	SET NOCOUNT ON
+
+	SELECT CityID, CountryId, Name, Concurrency, DateCreated, DateUpdated, CreatedBy, UpdatedBy
+	FROM City
+	WHERE (@CountryId IS NULL OR CountryId = @CountryId)
+	AND (@CityID IS NULL OR CityId = @CityId)
+END
+
+GO
+
+
+
+/****** Object:  StoredProcedure [dbo].[procListDistrict]    Script Date: 06/26/2014 17:21:44 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[procListDistrict]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[procListDistrict]
+GO
+
+
+CREATE PROCEDURE [dbo].[procListDistrict] 
+(
+	@CityId int = NULL
+	, @DistrictId int = NULL
+)
+
+AS
+BEGIN
+	SET NOCOUNT ON
+
+	SELECT DistrictID, CityId, Name, Concurrency, DateCreated, DateUpdated, CreatedBy, UpdatedBy
+	FROM District
+	WHERE (@CityId IS NULL OR CityId = @CityId)
+	AND (@DistrictID IS NULL OR DistrictId = @DistrictId)
+END
+
+GO
+
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = 'ContactInformation' AND COLUMN_NAME = 'CityId')
+BEGIN
+   ALTER TABLE ContactInformation ADD CityId int
+END
+GO
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = 'ContactInformation' AND COLUMN_NAME = 'DistrictId')
+BEGIN
+   ALTER TABLE ContactInformation ADD DistrictId int
+END
+GO
+
+
+
+/****** Object:  StoredProcedure [dbo].[procListContactInformation]    Script Date: 05/30/2014 16:38:19 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[procListContactInformation]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[procListContactInformation]
+GO
+
+CREATE PROCEDURE [dbo].[procListContactInformation] (
+@ContactInformationId int = NULL
+)
+
+AS
+BEGIN
+	SET NOCOUNT ON
+
+	SELECT ContactInformationID, ContactTypeId, FirstName, LastName, Address, Address2, District, DistrictId, City, CityId, State, Postcode, CountryId,
+		PhoneNumber, FaxNumber, Email, DoB, Visa, VisaValidFrom, VisaValidTo,
+		Concurrency, DateCreated, DateUpdated, CreatedBy, UpdatedBy
+	FROM ContactInformation
+	WHERE (@ContactInformationID IS NULL OR ContactInformationId = @ContactInformationId)
+END
+
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[procSaveContactInformation]    Script Date: 05/30/2014 16:40:52 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[procSaveContactInformation]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[procSaveContactInformation]
+GO
+
+
+CREATE PROCEDURE [dbo].[procSaveContactInformation]
+
+@ContactInformationID int OUTPUT
+,@ContactTypeId int
+,@FirstName varchar(128)
+,@LastName varchar(128)
+,@Address varchar(255)
+,@Address2 varchar(255)
+,@District varchar(255)
+,@DistrictId int
+,@City varchar(255)
+,@CityId int
+,@State varchar(255)
+,@Postcode varchar(255)
+,@CountryId int
+,@PhoneNumber varchar(128)
+,@FaxNumber varchar(128)
+,@Email varchar(255)
+,@DoB datetime
+,@Visa varchar(128)
+,@VisaValidFrom datetime
+,@VisaValidTo datetime
+,@CurrentUser varchar(255)
+AS
+BEGIN
+	SET NOCOUNT ON
+
+	IF @ContactInformationID IS NULL BEGIN
+
+	INSERT INTO ContactInformation(
+			[ContactTypeId]
+			,[FirstName]
+			,[LastName]
+			,[Address]
+			,[Address2]
+			,[District]
+			,[DistrictId]
+			,[City]
+			,[CityId]
+			,[State]
+			,[Postcode]
+			,[CountryId]
+			,[PhoneNumber]
+			,[FaxNumber]
+			,[Email]
+			,DoB
+			,Visa
+			,VisaValidFrom
+			,VisaValidTo
+			,DateCreated
+			,DateUpdated
+			,CreatedBy
+			,UpdatedBy
+		) VALUES (
+			@ContactTypeId
+			,@FirstName
+			,@LastName
+			,@Address
+			,@Address2
+			,@District
+			,@DistrictId
+			,@City
+			,@CityId
+			,@State
+			,@Postcode
+			,@CountryId
+			,@PhoneNumber
+			,@FaxNumber
+			,@Email
+			,@DoB
+			,@Visa
+			,@VisaValidFrom
+			,@VisaValidTo
+			,GETDATE()
+			,GETDATE()
+			,@CurrentUser
+			,@CurrentUser
+		)
+
+		SET @ContactInformationID = SCOPE_IDENTITY()
+
+	END ELSE BEGIN
+
+		UPDATE ContactInformation SET
+			ContactTypeId = @ContactTypeId,
+			FirstName = @FirstName,
+			LastName = @LastName,
+			Address = @Address,
+			Address2 = @Address2 ,
+			District = @District,
+			DistrictId = @DistrictId,
+			City = @City ,
+			CityId = @CityId ,
+			State = @State ,
+			Postcode = @Postcode ,
+			CountryID = @CountryID ,
+			PhoneNumber = @PhoneNumber ,
+			FaxNumber = @FaxNumber ,
+			Email = @Email,
+			DoB = @DoB,
+			Visa = @Visa,
+			VisaValidFrom = @VisaValidFrom,
+			VisaValidTo = @VisaValidTo,
+			DateUpdated = GETDATE(),
+			UpdatedBy = @CurrentUser
+
+		WHERE ContactInformationID = @ContactInformationID
+
+	END
+
+	SELECT Concurrency FROM ContactInformation WHERE ContactInformationID = @ContactInformationID
+END
+
+GO
+
+
 
 /***********************HT End*******************************/
 GO

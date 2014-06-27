@@ -215,7 +215,7 @@
                                 </telerikGrid:RadGridView>
 
                                 <local:ContactInformationPanel x:Name="ucCntactInfoPanel" Margin="25,5,5,5" 
-                                                        Grid.Row="1" Grid.Column="1"></local:ContactInformationPanel>
+                                                        Grid.Row="1" Grid.Column="1"  ContactTypeId="5"></local:ContactInformationPanel>
 
                             </Grid>
 

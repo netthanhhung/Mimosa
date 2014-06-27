@@ -83,6 +83,9 @@
     <Compile Include="..\Mimosa.Apartment.Common\BookingStatus.cs">
       <Link>BookingStatus.cs</Link>
     </Compile>
+    <Compile Include="..\Mimosa.Apartment.Common\City.Generated.cs">
+      <Link>City.Generated.cs</Link>
+    </Compile>
     <Compile Include="..\Mimosa.Apartment.Common\Component.Generated.cs">
       <Link>Component.Generated.cs</Link>
     </Compile>
@@ -103,6 +106,9 @@
     </Compile>
     <Compile Include="..\Mimosa.Apartment.Common\DeploymentInfo.cs">
       <Link>DeploymentInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Mimosa.Apartment.Common\District.Generated.cs">
+      <Link>District.Generated.cs</Link>
     </Compile>
     <Compile Include="..\Mimosa.Apartment.Common\Enums.cs">
       <Link>Enums.cs</Link>

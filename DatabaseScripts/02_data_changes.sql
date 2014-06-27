@@ -59,7 +59,71 @@ BEGIN TRY
 	    UNION ALL SELECT '4030222F-1655-42D7-9C2A-4278E105228C', 201, 1, @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser       
 	    UNION ALL SELECT '4030222F-1655-42D7-9C2A-4278E105228C', 202, 1, @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser       
 	    
-	END                  	        
+	END 
+	
+	IF NOT EXISTS (SELECT * FROM [City])
+	BEGIN
+		SET IDENTITY_INSERT [City] ON
+		INSERT INTO [dbo].[City]
+           ([CityId]
+           ,[CountryId]
+           ,[Name]
+           ,[DateCreated]
+           ,[DateUpdated]
+           ,[CreatedBy]
+           ,[UpdatedBy])
+		SELECT 1, 232, 'Ho Chi Minh', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser
+		UNION SELECT 2, 232, 'Ha Noi', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser
+		UNION SELECT 3, 232, 'Hue', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser		           
+        UNION SELECT 4, 232, 'Da Nang', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser		           
+        UNION SELECT 5, 232, 'Ha Long', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser		           
+        UNION SELECT 6, 232, 'Nha Trang', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser		           
+        UNION SELECT 7, 232, 'Phan Thiet', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser		           
+        UNION SELECT 8, 232, 'Da Lat', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser		           
+        UNION SELECT 9, 232, 'Dong Nai', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser		           
+        UNION SELECT 10, 232, 'Vung Tau', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser		           
+        UNION SELECT 11, 232, 'Ba Ria', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser		           
+        UNION SELECT 12, 232, 'Binh Duong', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser		           
+        UNION SELECT 13, 232, 'Long An', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser		           
+           
+		SET IDENTITY_INSERT [City] OFF      				
+	END
+	
+	IF NOT EXISTS (SELECT * FROM [District])
+	BEGIN
+		SET IDENTITY_INSERT [District] ON
+		INSERT INTO [dbo].[District]
+           ([DistrictId]
+           ,[CityId]
+           ,[Name]
+           ,[DateCreated]
+           ,[DateUpdated]
+           ,[CreatedBy]
+           ,[UpdatedBy])
+		SELECT 1, 1, '1', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser
+		UNION SELECT 2, 1, '2', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser
+		UNION SELECT 3, 1, '3', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser		           
+        UNION SELECT 4, 1, '4', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser		           
+        UNION SELECT 5, 1, '5', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser		           
+        UNION SELECT 6, 1, '6', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser		           
+        UNION SELECT 7, 1, '7', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser		           
+        UNION SELECT 8, 1, '8', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser		           
+        UNION SELECT 9, 1, '9', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser		           
+        UNION SELECT 10, 1, '10', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser		           
+        UNION SELECT 11, 1, '11', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser		           
+        UNION SELECT 12, 1, '12', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser		           
+        UNION SELECT 13, 1, 'Phu Nhuan', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser		           
+        UNION SELECT 14, 1, 'Tan Binh', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser		           
+        UNION SELECT 15, 1, 'Tan Phu', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser		           
+        UNION SELECT 16, 1, 'Go Vap', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser		           
+        UNION SELECT 17, 1, 'Thu Duc', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser		           
+        UNION SELECT 18, 1, 'Hoc Mon', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser		           
+        UNION SELECT 19, 1, 'Binh Chanh', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser		           
+        UNION SELECT 20, 1, 'Nha Be', @C_CurrentDate, @C_CurrentDate, @C_CurrentUser, @C_CurrentUser		           
+           
+		SET IDENTITY_INSERT [District] OFF      	
+	END
+	                            	        
     COMMIT TRANSACTION 
 	PRINT 'EXECUTED SUCCESSFULLY'
 

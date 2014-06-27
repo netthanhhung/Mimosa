@@ -537,10 +537,12 @@
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.BookingRoomEquipmentDetail.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.BookingRoomService.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.BookingRoomServiceDetail.datasource" />
+    <None Include="Properties\DataSources\Mimosa.Apartment.Common.City.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.Component.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.ContactInformation.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.Country.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.Customer.datasource" />
+    <None Include="Properties\DataSources\Mimosa.Apartment.Common.District.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.Equipment.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.Image.datasource" />
     <None Include="Properties\DataSources\Mimosa.Apartment.Common.Organisation.datasource" />

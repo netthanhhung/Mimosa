@@ -31,6 +31,10 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Mimosa.Apartment.Common.TagVersion))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.Country>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Mimosa.Apartment.Common.Country))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.City>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Mimosa.Apartment.Common.City))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.District>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Mimosa.Apartment.Common.District))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.ContactInformation>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.Organisation>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.AspUser>))]
@@ -639,6 +643,10 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.TagVersion))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.Country>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.Country))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.City>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.City))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.District>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.District))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.ContactInformation>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.Organisation>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.AspUser>))]
@@ -700,6 +708,10 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.TagVersion))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.Country>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.Country))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.City>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.City))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.District>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.District))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.ContactInformation>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.Organisation>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.AspUser>))]
@@ -761,6 +773,10 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.TagVersion))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.Country>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.Country))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.City>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.City))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.District>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.District))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.ContactInformation>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.Organisation>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.AspUser>))]
@@ -822,6 +838,10 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.TagVersion))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.Country>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.Country))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.City>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.City))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.District>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Mimosa.Apartment.Common.District))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.ContactInformation>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.Organisation>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Mimosa.Apartment.Common.AspUser>))]
@@ -872,6 +892,16 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         System.IAsyncResult BeginListCountry(System.Nullable<int> countryId, System.AsyncCallback callback, object asyncState);
         
         System.Collections.Generic.List<Mimosa.Apartment.Common.Country> EndListCountry(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:ApartmentService/ListCity", ReplyAction="urn:ApartmentService/ListCityResponse")]
+        System.IAsyncResult BeginListCity(System.Nullable<int> countryid, System.Nullable<int> cityId, System.AsyncCallback callback, object asyncState);
+        
+        System.Collections.Generic.List<Mimosa.Apartment.Common.City> EndListCity(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:ApartmentService/ListDistrict", ReplyAction="urn:ApartmentService/ListDistrictResponse")]
+        System.IAsyncResult BeginListDistrict(System.Nullable<int> cityId, System.Nullable<int> districtId, System.AsyncCallback callback, object asyncState);
+        
+        System.Collections.Generic.List<Mimosa.Apartment.Common.District> EndListDistrict(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:ApartmentService/ListContactInformation", ReplyAction="urn:ApartmentService/ListContactInformationResponse")]
         System.IAsyncResult BeginListContactInformation(System.Nullable<int> contactInfoId, System.AsyncCallback callback, object asyncState);
@@ -1339,6 +1369,44 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
             get {
                 base.RaiseExceptionIfNecessary();
                 return ((System.Collections.Generic.List<Mimosa.Apartment.Common.Country>)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ListCityCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public ListCityCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Collections.Generic.List<Mimosa.Apartment.Common.City> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Collections.Generic.List<Mimosa.Apartment.Common.City>)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ListDistrictCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public ListDistrictCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Collections.Generic.List<Mimosa.Apartment.Common.District> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Collections.Generic.List<Mimosa.Apartment.Common.District>)(this.results[0]));
             }
         }
     }
@@ -2034,6 +2102,18 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         
         private System.Threading.SendOrPostCallback onListCountryCompletedDelegate;
         
+        private BeginOperationDelegate onBeginListCityDelegate;
+        
+        private EndOperationDelegate onEndListCityDelegate;
+        
+        private System.Threading.SendOrPostCallback onListCityCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginListDistrictDelegate;
+        
+        private EndOperationDelegate onEndListDistrictDelegate;
+        
+        private System.Threading.SendOrPostCallback onListDistrictCompletedDelegate;
+        
         private BeginOperationDelegate onBeginListContactInformationDelegate;
         
         private EndOperationDelegate onEndListContactInformationDelegate;
@@ -2436,6 +2516,10 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         public event System.EventHandler<SaveAspUserCompletedEventArgs> SaveAspUserCompleted;
         
         public event System.EventHandler<ListCountryCompletedEventArgs> ListCountryCompleted;
+        
+        public event System.EventHandler<ListCityCompletedEventArgs> ListCityCompleted;
+        
+        public event System.EventHandler<ListDistrictCompletedEventArgs> ListDistrictCompleted;
         
         public event System.EventHandler<ListContactInformationCompletedEventArgs> ListContactInformationCompleted;
         
@@ -3005,6 +3089,102 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
             }
             base.InvokeAsync(this.onBeginListCountryDelegate, new object[] {
                         countryId}, this.onEndListCountryDelegate, this.onListCountryCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService.BeginListCity(System.Nullable<int> countryid, System.Nullable<int> cityId, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginListCity(countryid, cityId, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Collections.Generic.List<Mimosa.Apartment.Common.City> Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService.EndListCity(System.IAsyncResult result) {
+            return base.Channel.EndListCity(result);
+        }
+        
+        private System.IAsyncResult OnBeginListCity(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            System.Nullable<int> countryid = ((System.Nullable<int>)(inValues[0]));
+            System.Nullable<int> cityId = ((System.Nullable<int>)(inValues[1]));
+            return ((Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService)(this)).BeginListCity(countryid, cityId, callback, asyncState);
+        }
+        
+        private object[] OnEndListCity(System.IAsyncResult result) {
+            System.Collections.Generic.List<Mimosa.Apartment.Common.City> retVal = ((Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService)(this)).EndListCity(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnListCityCompleted(object state) {
+            if ((this.ListCityCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.ListCityCompleted(this, new ListCityCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void ListCityAsync(System.Nullable<int> countryid, System.Nullable<int> cityId) {
+            this.ListCityAsync(countryid, cityId, null);
+        }
+        
+        public void ListCityAsync(System.Nullable<int> countryid, System.Nullable<int> cityId, object userState) {
+            if ((this.onBeginListCityDelegate == null)) {
+                this.onBeginListCityDelegate = new BeginOperationDelegate(this.OnBeginListCity);
+            }
+            if ((this.onEndListCityDelegate == null)) {
+                this.onEndListCityDelegate = new EndOperationDelegate(this.OnEndListCity);
+            }
+            if ((this.onListCityCompletedDelegate == null)) {
+                this.onListCityCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnListCityCompleted);
+            }
+            base.InvokeAsync(this.onBeginListCityDelegate, new object[] {
+                        countryid,
+                        cityId}, this.onEndListCityDelegate, this.onListCityCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService.BeginListDistrict(System.Nullable<int> cityId, System.Nullable<int> districtId, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginListDistrict(cityId, districtId, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Collections.Generic.List<Mimosa.Apartment.Common.District> Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService.EndListDistrict(System.IAsyncResult result) {
+            return base.Channel.EndListDistrict(result);
+        }
+        
+        private System.IAsyncResult OnBeginListDistrict(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            System.Nullable<int> cityId = ((System.Nullable<int>)(inValues[0]));
+            System.Nullable<int> districtId = ((System.Nullable<int>)(inValues[1]));
+            return ((Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService)(this)).BeginListDistrict(cityId, districtId, callback, asyncState);
+        }
+        
+        private object[] OnEndListDistrict(System.IAsyncResult result) {
+            System.Collections.Generic.List<Mimosa.Apartment.Common.District> retVal = ((Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService)(this)).EndListDistrict(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnListDistrictCompleted(object state) {
+            if ((this.ListDistrictCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.ListDistrictCompleted(this, new ListDistrictCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void ListDistrictAsync(System.Nullable<int> cityId, System.Nullable<int> districtId) {
+            this.ListDistrictAsync(cityId, districtId, null);
+        }
+        
+        public void ListDistrictAsync(System.Nullable<int> cityId, System.Nullable<int> districtId, object userState) {
+            if ((this.onBeginListDistrictDelegate == null)) {
+                this.onBeginListDistrictDelegate = new BeginOperationDelegate(this.OnBeginListDistrict);
+            }
+            if ((this.onEndListDistrictDelegate == null)) {
+                this.onEndListDistrictDelegate = new EndOperationDelegate(this.OnEndListDistrict);
+            }
+            if ((this.onListDistrictCompletedDelegate == null)) {
+                this.onListDistrictCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnListDistrictCompleted);
+            }
+            base.InvokeAsync(this.onBeginListDistrictDelegate, new object[] {
+                        cityId,
+                        districtId}, this.onEndListDistrictDelegate, this.onListDistrictCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -5864,6 +6044,34 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
             public System.Collections.Generic.List<Mimosa.Apartment.Common.Country> EndListCountry(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 System.Collections.Generic.List<Mimosa.Apartment.Common.Country> _result = ((System.Collections.Generic.List<Mimosa.Apartment.Common.Country>)(base.EndInvoke("ListCountry", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginListCity(System.Nullable<int> countryid, System.Nullable<int> cityId, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[2];
+                _args[0] = countryid;
+                _args[1] = cityId;
+                System.IAsyncResult _result = base.BeginInvoke("ListCity", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public System.Collections.Generic.List<Mimosa.Apartment.Common.City> EndListCity(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                System.Collections.Generic.List<Mimosa.Apartment.Common.City> _result = ((System.Collections.Generic.List<Mimosa.Apartment.Common.City>)(base.EndInvoke("ListCity", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginListDistrict(System.Nullable<int> cityId, System.Nullable<int> districtId, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[2];
+                _args[0] = cityId;
+                _args[1] = districtId;
+                System.IAsyncResult _result = base.BeginInvoke("ListDistrict", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public System.Collections.Generic.List<Mimosa.Apartment.Common.District> EndListDistrict(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                System.Collections.Generic.List<Mimosa.Apartment.Common.District> _result = ((System.Collections.Generic.List<Mimosa.Apartment.Common.District>)(base.EndInvoke("ListDistrict", _args, result)));
                 return _result;
             }
             

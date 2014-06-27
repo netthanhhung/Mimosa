@@ -69,6 +69,18 @@
   <wsdl:message name="ApartmentService_ListCountry_OutputMessage">
     <wsdl:part name="parameters" element="ListCountryResponse" />
   </wsdl:message>
+  <wsdl:message name="ApartmentService_ListCity_InputMessage">
+    <wsdl:part name="parameters" element="ListCity" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListCity_OutputMessage">
+    <wsdl:part name="parameters" element="ListCityResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListDistrict_InputMessage">
+    <wsdl:part name="parameters" element="ListDistrict" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListDistrict_OutputMessage">
+    <wsdl:part name="parameters" element="ListDistrictResponse" />
+  </wsdl:message>
   <wsdl:message name="ApartmentService_ListContactInformation_InputMessage">
     <wsdl:part name="parameters" element="ListContactInformation" />
   </wsdl:message>
@@ -439,6 +451,14 @@
     <wsdl:operation name="ListCountry">
       <wsdl:input wsaw:Action="urn:ApartmentService/ListCountry" message="ApartmentService_ListCountry_InputMessage" />
       <wsdl:output wsaw:Action="urn:ApartmentService/ListCountryResponse" message="ApartmentService_ListCountry_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListCity">
+      <wsdl:input wsaw:Action="urn:ApartmentService/ListCity" message="ApartmentService_ListCity_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/ListCityResponse" message="ApartmentService_ListCity_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListDistrict">
+      <wsdl:input wsaw:Action="urn:ApartmentService/ListDistrict" message="ApartmentService_ListDistrict_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/ListDistrictResponse" message="ApartmentService_ListDistrict_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ListContactInformation">
       <wsdl:input wsaw:Action="urn:ApartmentService/ListContactInformation" message="ApartmentService_ListContactInformation_InputMessage" />

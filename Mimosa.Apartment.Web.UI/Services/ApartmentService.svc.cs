@@ -292,6 +292,18 @@ namespace Mimosa.Apartment.Web.UI
         {
             return ApartmentMethods.ListCountry(countryId);
         }
+
+        [OperationContract]
+        public List<City> ListCity(int? countryid, int? cityId)
+        {
+            return ApartmentMethods.ListCity(countryid, cityId);
+        }
+
+        [OperationContract]
+        public List<District> ListDistrict(int? cityId, int? districtId)
+        {
+            return ApartmentMethods.ListDistrict(cityId, districtId);
+        }
         #endregion
 
         #region Contact Information

@@ -108,6 +108,11 @@ namespace Mimosa.Apartment.Silverlight.UI
             foreach (Customer item in customerList)
             {
                 item.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(CustomerItem_PropertyChanged);
+                if (item.ContactInformation == null)
+                {
+                    item.ContactInformation = new ContactInformation();
+                    item.ContactInformation.ContactTypeId = (int)ContactType.Customer;
+                }
                 item.ContactInformation.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(ContactInformation_PropertyChanged);
                 _originalItemSource.Add(item);
             }

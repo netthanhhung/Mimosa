@@ -16,7 +16,9 @@ namespace Mimosa.Apartment.Common
             public const string Address = "Address";
             public const string Address2 = "Address2";
             public const string District = "District";
-            public const string City = "City";
+            public const string DistrictId = "DistrictId";
+            public const string City = "City";            
+            public const string CityId = "CityId";
             public const string State = "State";
             public const string Postcode = "Postcode";
             public const string CountryId = "CountryID";
@@ -62,9 +64,18 @@ namespace Mimosa.Apartment.Common
         [DataMember]
         public string District { get { return _district; } set { if (!object.ReferenceEquals(this.District, value)) { _district = value; RaisePropertyChanged("District"); } } }
 
+        private int? _districtId;
+        [DataMember]
+        public int? DistrictId { get { return _districtId; } set { if (!this.DistrictId.Equals(value)) { _districtId = value; RaisePropertyChanged("DistrictId"); } } }
+
         private string _city;
         [DataMember]
         public string City { get { return _city; } set { if (!object.ReferenceEquals(this.City, value)) { _city = value; RaisePropertyChanged("City"); } } }
+
+        private int? _cityId;
+        [DataMember]
+        public int? CityId { get { return _cityId; } set { if (!this.CityId.Equals(value)) { _cityId = value; RaisePropertyChanged("CityId"); } } }
+
 
         private string _state;
         [DataMember]

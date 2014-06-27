@@ -285,6 +285,16 @@ namespace Mimosa.Apartment.Business
             return new DataLayer().ListCountry(countryId);
         }
 
+        public static List<City> ListCity(int? countryid, int? cityId)
+        {
+            return new DataLayer().ListCity(countryid, cityId);
+        }
+
+        public static List<District> ListDistrict(int? cityId, int? districtId)
+        {
+            return new DataLayer().ListDistrict(cityId, districtId);
+        }
+
         public static List<ContactInformation> ListContactInformation(int? contactInfoId)
         {            
             return new DataLayer().ListContactInformation(contactInfoId);

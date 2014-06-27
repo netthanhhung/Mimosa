@@ -166,8 +166,8 @@
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            
-                            <local:ContactInformationPanel x:Name="ucCntactInfoPanel" Margin="5,5,5,5" Grid.RowSpan="2"></local:ContactInformationPanel>
+
+                            <local:ContactInformationPanel x:Name="ucCntactInfoPanel" Margin="5,5,5,5" Grid.RowSpan="2" ContactTypeId="2"></local:ContactInformationPanel>
                             
 
                         </Grid>

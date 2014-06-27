@@ -247,7 +247,7 @@ namespace Mimosa.Apartment.Common
         }
         #endregion
 
-        #region ContactInformation
+        #region Country
         public static Country Country(System.Data.IDataReader reader)
         {
             Country result = null;
@@ -280,7 +280,81 @@ namespace Mimosa.Apartment.Common
                 list.Add(item);
             }
         }
+        #endregion
 
+        #region City
+        public static City City(System.Data.IDataReader reader)
+        {
+            City result = null;
+
+            if (null != reader && reader.Read())
+            {
+                result = new City();
+                PopulateCity(result, reader);
+            }
+
+            return result;
+        }
+
+        public static void PopulateCity(City input, System.Data.IDataReader reader)
+        {
+            PopulateRecord(input, reader);
+            input.RecordId = input.CityId = Utilities.ToInt(reader[Mimosa.Apartment.Common.City.ColumnNames.CityId]);
+            input.CountryId = Utilities.ToInt(reader[Mimosa.Apartment.Common.City.ColumnNames.CountryId]);
+            input.Name = Utilities.ToString(reader[Mimosa.Apartment.Common.City.ColumnNames.Name]);
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public static void FillCityList(List<City> list, System.Data.IDataReader reader)
+        {
+            list.Clear();
+            City item;
+            while (true)
+            {
+                item = Factory.City(reader);
+                if (null == item) break;
+                list.Add(item);
+            }
+        }
+        #endregion
+
+        #region District
+        public static District District(System.Data.IDataReader reader)
+        {
+            District result = null;
+
+            if (null != reader && reader.Read())
+            {
+                result = new District();
+                PopulateDistrict(result, reader);
+            }
+
+            return result;
+        }
+
+        public static void PopulateDistrict(District input, System.Data.IDataReader reader)
+        {
+            PopulateRecord(input, reader);
+            input.RecordId = input.DistrictId = Utilities.ToInt(reader[Mimosa.Apartment.Common.District.ColumnNames.DistrictId]);
+            input.CityId = Utilities.ToInt(reader[Mimosa.Apartment.Common.District.ColumnNames.CityId]);
+            input.Name = Utilities.ToString(reader[Mimosa.Apartment.Common.District.ColumnNames.Name]);
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        public static void FillDistrictList(List<District> list, System.Data.IDataReader reader)
+        {
+            list.Clear();
+            District item;
+            while (true)
+            {
+                item = Factory.District(reader);
+                if (null == item) break;
+                list.Add(item);
+            }
+        }
+        #endregion
+
+        #region ContactInformation
         public static ContactInformation ContactInformation(System.Data.IDataReader reader)
         {
             ContactInformation result = null;
@@ -304,7 +378,9 @@ namespace Mimosa.Apartment.Common
             input.Address = Utilities.ToString(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.Address]);
             input.Address2 = Utilities.ToString(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.Address2]);
             input.District = Utilities.ToString(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.District]);
+            input.DistrictId = Utilities.ToNInt(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.DistrictId]);
             input.City = Utilities.ToString(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.City]);
+            input.CityId = Utilities.ToNInt(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.CityId]);
             input.State = Utilities.ToString(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.State]);
             input.Postcode = Utilities.ToString(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.Postcode]);
             input.CountryId = Utilities.ToNInt(reader[Mimosa.Apartment.Common.ContactInformation.ColumnNames.CountryId]);

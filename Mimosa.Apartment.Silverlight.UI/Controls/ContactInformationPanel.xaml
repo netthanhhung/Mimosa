@@ -105,6 +105,15 @@
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                         Width="250" Height="24" 
                         Text="{Binding District, Mode=TwoWay}"/>
+                <ComboBox
+                        x:Name="cbbDistrict"
+                        Grid.Column="1" Grid.Row="4" 
+                        Width="250"
+                        Margin="0"
+                        DisplayMemberPath="Name" Visibility="Collapsed"
+                        SelectedValuePath="DistrictId" HorizontalAlignment="Left"
+                        SelectedValue="{Binding DistrictId, Mode=TwoWay}">
+                </ComboBox>
                 <TextBlock
                         Grid.Column="0" Grid.Row="5"
                         Margin="{StaticResource SmallContentMargin}"
@@ -117,6 +126,15 @@
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                         Width="250" Height="24" 
                         Text="{Binding City, Mode=TwoWay}"/>
+                <ComboBox
+                        x:Name="cbbCity"
+                        Grid.Column="1" Grid.Row="5" 
+                        Width="250"
+                        Margin="0"
+                        DisplayMemberPath="Name" Visibility="Collapsed"
+                        SelectedValuePath="CityId" HorizontalAlignment="Left"
+                        SelectedValue="{Binding CityId, Mode=TwoWay}">
+                </ComboBox>
                 <TextBlock
                         Grid.Column="0" Grid.Row="6"
                         Margin="{StaticResource SmallContentMargin}"

@@ -215,6 +215,50 @@ namespace Mimosa.Apartment.Silverlight.UI
             }
         }
 
+        // ListCity
+        internal delegate void ListCityCallback(List<City> itemSource);
+        internal static void ListCityAsync(int? countryid, int? cityId, ListCityCallback callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.ListCityCompleted += new EventHandler<ListCityCompletedEventArgs>(proxy_ListCityCompleted);
+            proxy.ListCityAsync(countryid, cityId, callerKey);
+        }
+
+        static void proxy_ListCityCompleted(object sender, ListCityCompletedEventArgs e)
+        {
+            Guid callerKey = (Guid)e.UserState;
+            if (_callbacks.ContainsKey(callerKey))
+            {
+                List<City> itemSource = e.Result;
+                ((ListCityCallback)_callbacks[callerKey]).Invoke(itemSource);
+
+                _callbacks.Remove(callerKey);
+            }
+        }
+
+        // ListDistrict
+        internal delegate void ListDistrictCallback(List<District> itemSource);
+        internal static void ListDistrictAsync(int? cityId, int? districtId, ListDistrictCallback callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.ListDistrictCompleted += new EventHandler<ListDistrictCompletedEventArgs>(proxy_ListDistrictCompleted);
+            proxy.ListDistrictAsync(cityId, districtId, callerKey);
+        }
+
+        static void proxy_ListDistrictCompleted(object sender, ListDistrictCompletedEventArgs e)
+        {
+            Guid callerKey = (Guid)e.UserState;
+            if (_callbacks.ContainsKey(callerKey))
+            {
+                List<District> itemSource = e.Result;
+                ((ListDistrictCallback)_callbacks[callerKey]).Invoke(itemSource);
+
+                _callbacks.Remove(callerKey);
+            }
+        }
+
         internal delegate void ListOrganisationCallback(List<Organisation> itemSource);
         internal static void ListOrganisationAsync(Guid? roleId, ListOrganisationCallback callback)
         {
