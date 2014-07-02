@@ -335,6 +335,8 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         
         private string SecondCurrencyField;
         
+        private string VirtualDirectoryField;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string DateTimeFormatCulture {
             get {
@@ -435,6 +437,19 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
                 if ((object.ReferenceEquals(this.SecondCurrencyField, value) != true)) {
                     this.SecondCurrencyField = value;
                     this.RaisePropertyChanged("SecondCurrency");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string VirtualDirectory {
+            get {
+                return this.VirtualDirectoryField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.VirtualDirectoryField, value) != true)) {
+                    this.VirtualDirectoryField = value;
+                    this.RaisePropertyChanged("VirtualDirectory");
                 }
             }
         }

@@ -96,6 +96,7 @@ namespace Mimosa.Apartment.Web.UI
             appSettings.DateTimeFormatCulture = MimosaSettings.DateTimeFormatCulture();
             appSettings.MainCurrency = MimosaSettings.MainCurrency();
             appSettings.SecondCurrency = MimosaSettings.SecondCurrency();
+            appSettings.VirtualDirectory = MimosaSettings.VirtualDirectory();
             decimal rate = ConvertCurrency(appSettings.SecondCurrency, appSettings.MainCurrency);
             appSettings.ExchangeRate = rate;
             return appSettings;
@@ -844,6 +845,9 @@ namespace Mimosa.Apartment.Web.UI
 
         [DataMember]
         public string SecondCurrency { set; get; }
+
+        [DataMember]
+        public string VirtualDirectory { set; get; }
 
         [DataMember]
         public decimal ExchangeRate { set; get; }

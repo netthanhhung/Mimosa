@@ -27,7 +27,7 @@
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <SilverlightApplicationList>{C98F5BF3-14A0-4673-996E-22974451AEF0}|..\Mimosa.Apartment.Silverlight.UI\Mimosa.Apartment.Silverlight.UI.csproj|ClientBin|False</SilverlightApplicationList>
     <TargetFrameworkProfile />
     <UseIISExpress>false</UseIISExpress>
@@ -101,7 +101,6 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.Extensions" />
@@ -122,6 +121,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="clientaccesspolicy.xml" />
     <Content Include="ClientBin\Mimosa.Apartment.Silverlight.UI.xap" />
     <Content Include="Default.aspx" />
     <Content Include="EmailTemplates\ChangePassword.htm" />
@@ -139,8 +139,6 @@
     <Content Include="Images\RubyLogo.png" />
     <Content Include="Logon.aspx" />
     <Content Include="Logout.aspx" />
-    <Content Include="Mimosa.Apartment.Silverlight.UITestPage.aspx" />
-    <Content Include="Mimosa.Apartment.Silverlight.UITestPage.html" />
     <Content Include="RadControls\Combobox\Scripts\2_6_2\RadComboBox.js" />
     <Content Include="RadControls\Combobox\Skins\WindowsXP\DropArrow.gif" />
     <Content Include="RadControls\Combobox\Skins\WindowsXP\ScrollDown.gif" />

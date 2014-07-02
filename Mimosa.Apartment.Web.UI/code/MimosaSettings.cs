@@ -75,5 +75,11 @@ namespace Mimosa.Apartment.Web.UI
 
         }
 
+        public static string VirtualDirectory()
+        {
+            return Convert.ToString(ConfigurationSettings.AppSettings["VirtualDirectory"]);
+
+        }        
+
     }
 }

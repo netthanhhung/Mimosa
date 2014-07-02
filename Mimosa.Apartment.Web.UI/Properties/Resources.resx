@@ -216,4 +216,7 @@
   <data name="UserDoesNotExist" xml:space="preserve">
     <value>There is no user in the database with the username </value>
   </data>
+  <data name="UserLoginWrongOrg" xml:space="preserve">
+    <value>The user is not valid in this Organisation</value>
+  </data>
 </root>

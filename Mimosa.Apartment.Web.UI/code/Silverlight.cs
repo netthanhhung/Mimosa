@@ -51,17 +51,18 @@ namespace Mimosa.Apartment.Web.UI.Controls
             string content = string.Format(
                 @"<object data=""data:application/x-silverlight-2,"" type=""application/x-silverlight-2""
                     width=""100%"" height=""100%"">
-                    <param name=""source"" value=""/ClientBin/Mimosa.Apartment.Silverlight.UI.xap?v={0}"" />
+                    <param name=""source"" value=""{0}/ClientBin/Mimosa.Apartment.Silverlight.UI.xap?v={1}"" />
                     <param name=""onError"" value=""onSilverlightError"" />
                     <param name=""background"" value=""white"" />
-                    <param name=""minRuntimeVersion"" value=""{1}"" />
+                    <param name=""minRuntimeVersion"" value=""{2}"" />
                     <param name=""autoUpgrade"" value=""true"" />
-                    <param name=""InitParams"" value=""TypeName={2}{3}"" />
+                    <param name=""InitParams"" value=""TypeName={3}{4}"" />
                     <a href=""http://go.microsoft.com/fwlink/?LinkID=149156&v={1}"" style=""text-decoration: none"">
                         <img src=""http://go.microsoft.com/fwlink/?LinkId=108181"" alt=""Get Microsoft Silverlight"" style=""border-style: none"" />
                     </a>
                 </object>
                 <iframe id=""_sl_historyFrame"" style=""visibility: hidden; height: 0px; width: 0px; border: 0px""></iframe>"
+                , ("/" + MimosaSettings.VirtualDirectory())                
                 , DeploymentInfo.XapGuid
                 , DeploymentInfo.MinRuntimeVersion
                 , TypeName

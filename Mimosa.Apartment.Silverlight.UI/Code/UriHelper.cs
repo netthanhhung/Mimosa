@@ -26,6 +26,10 @@ namespace Mimosa.Apartment.Silverlight.UI
         internal static void NavigateTo(string page, string target)
         {
             Globals.IsBusy = false;
+            if (!string.IsNullOrEmpty(Globals.AppSettings.VirtualDirectory))
+            {
+                page = Globals.AppSettings.VirtualDirectory + "/" + page;
+            }
             Uri uri = page.StartsWith("http") ? new Uri(page) : FormatUri(page);
             if (string.IsNullOrEmpty(target))
             {
