@@ -68,12 +68,22 @@ namespace Mimosa.Apartment.Silverlight.UI
         public ImageUpload()
         {
             InitializeComponent();
-
+            FillLanguage();
             btnSave.Click += new RoutedEventHandler(btnSave_Click);
             btnAdd.Click += new RoutedEventHandler(btnAdd_Click);
             btnChooseImage.Click += new RoutedEventHandler(btnChooseImage_Click);
             btnUploadOK.Click += new RoutedEventHandler(btnUploadOK_Click);
             
+        }
+
+        void FillLanguage()
+        {
+            lblTitle.Text = ResourceHelper.GetReourceValue("ImageUpload_lblTitle");
+            lblPhoto.Text = ResourceHelper.GetReourceValue("ImageUpload_lblPhoto");
+            uiPopupUpload.Header = ResourceHelper.GetReourceValue("ImageUpload_uiPopupUpload");
+            btnChooseImage.Content = ResourceHelper.GetReourceValue("ImageUpload_btnChooseImage");
+            btnSave.Content = ResourceHelper.GetReourceValue("Common_btnSave");
+            btnAdd.Content = ResourceHelper.GetReourceValue("Common_btnAdd");
         }
 
         #region Image List
@@ -207,13 +217,13 @@ namespace Mimosa.Apartment.Silverlight.UI
                     }
                     else
                     {
-                        MessageBox.Show(UserMessages.FileTooLarge, Globals.UserMessages.ValidationError, MessageBoxButton.OK);
+                        MessageBox.Show(UserMessages.FileTooLarge, ResourceHelper.GetReourceValue("Common_ValidationError"), MessageBoxButton.OK);
                     }
 
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error Loading File : " + ex.Message, Globals.UserMessages.ValidationError, MessageBoxButton.OK);
+                    MessageBox.Show("Error Loading File : " + ex.Message, ResourceHelper.GetReourceValue("Common_ValidationError"), MessageBoxButton.OK);
                 }
             }
         }

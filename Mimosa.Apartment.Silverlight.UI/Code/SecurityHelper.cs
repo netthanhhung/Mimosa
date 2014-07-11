@@ -38,7 +38,7 @@ namespace Mimosa.Apartment.Silverlight.UI
         {
             Information infoPanel = new Information();
             infoPanel.Height = 30;
-            infoPanel.InfoMessage = Globals.UserMessages.NoPermission;
+            infoPanel.InfoMessage = ResourceHelper.GetReourceValue("Common_NoPermission");
             return infoPanel;
         }
 

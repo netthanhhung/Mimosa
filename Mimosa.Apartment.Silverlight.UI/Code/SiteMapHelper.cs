@@ -27,9 +27,20 @@ namespace Mimosa.Apartment.Silverlight.UI
          *      PAGE MEMBERS
          *  ====================================================================== */
         private static Dictionary<System.Guid, Delegate> _callbacks = new Dictionary<Guid, Delegate>();
-        private static Uri _siteMapUri { get { return UriHelper.FormatUri("/SiteMaps/Web.sitemap.txt?XapGuid=" + DeploymentInfo.XapGuid); } }
+        //private static Uri _siteMapUri { get { return UriHelper.FormatUri("/SiteMaps/Web.sitemap.txt?XapGuid=" + DeploymentInfo.XapGuid); } }
         internal static XName XNameSiteMapNode { get { return GetXName("siteMapNode"); } }
-
+        private static Uri _siteMapUri
+        {
+            get
+            {
+                string fileName = "/SiteMaps/Web.sitemap.txt?XapGuid=";
+                if (Globals.AppSettings.GloblaCulture == "vi-vn")
+                {
+                    fileName = "/SiteMaps/Web.sitemap_VN.txt?XapGuid=";
+                }
+                return UriHelper.FormatUri(fileName + DeploymentInfo.XapGuid);
+            }
+        }
 
 
         /*  ======================================================================            

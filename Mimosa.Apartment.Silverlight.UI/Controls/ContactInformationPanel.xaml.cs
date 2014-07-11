@@ -21,12 +21,35 @@ namespace Mimosa.Apartment.Silverlight.UI
         public ContactInformationPanel()
         {
             InitializeComponent();
-
+            FillLanguage();
             btnSaveContact.Click += new RoutedEventHandler(btnSaveContact_Click);
             DataServiceHelper.ListCountryAsync(null, ListCountryCompleted);
             uiCountry.SelectionChanged += new SelectionChangedEventHandler(uiCountry_SelectionChanged);
             cbbCity.SelectionChanged += new SelectionChangedEventHandler(cbbCity_SelectionChanged);
 
+        }
+
+        void FillLanguage()
+        {
+            txtContactInfo.Text = ResourceHelper.GetReourceValue("ContactInformationPanel_txtContactInfo");
+            lblFirstName.Text = ResourceHelper.GetReourceValue("ContactInformationPanel_lblFirstName");
+            lblLastName.Text = ResourceHelper.GetReourceValue("ContactInformationPanel_lblLastName");
+            lblAddress.Text = ResourceHelper.GetReourceValue("ContactInformationPanel_lblAddress");
+            lblAddress2.Text = ResourceHelper.GetReourceValue("ContactInformationPanel_lblAddress2");
+            lblDistrict.Text = ResourceHelper.GetReourceValue("ContactInformationPanel_lblDistrict");
+            lblCity.Text = ResourceHelper.GetReourceValue("ContactInformationPanel_lblCity");
+            lblState.Text = ResourceHelper.GetReourceValue("ContactInformationPanel_lblState");
+            lblCountry.Text = ResourceHelper.GetReourceValue("ContactInformationPanel_lblCountry");
+            lblPostCode.Text = ResourceHelper.GetReourceValue("ContactInformationPanel_lblPostCode");
+            lblPhone.Text = ResourceHelper.GetReourceValue("ContactInformationPanel_lblPhone");
+            lblFax.Text = ResourceHelper.GetReourceValue("ContactInformationPanel_lblFax");
+            lblEmail.Text = ResourceHelper.GetReourceValue("ContactInformationPanel_lblEmail");
+            lblDateOfBirth.Text = ResourceHelper.GetReourceValue("ContactInformationPanel_lblDateOfBirth");
+            lblVisa.Text = ResourceHelper.GetReourceValue("ContactInformationPanel_lblVisa");
+            lblVisaValid.Text = ResourceHelper.GetReourceValue("ContactInformationPanel_lblVisaValid");
+            lblFrom.Text = ResourceHelper.GetReourceValue("Common_From");
+            lblTo.Text = ResourceHelper.GetReourceValue("Common_To");
+            btnSaveContact.Content = ResourceHelper.GetReourceValue("Common_btnSave");
         }
 
         void ListCountryCompleted(List<Country> countryList)

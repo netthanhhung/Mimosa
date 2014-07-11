@@ -52,7 +52,7 @@
                             <ColumnDefinition Width="Auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock
+                        <TextBlock x:Name="lblFirstName"
                             Grid.Column="0" Grid.Row="0"
                             Margin="{StaticResource SmallContentMargin}"
                             HorizontalAlignment="Left" VerticalAlignment="Center"
@@ -64,7 +64,7 @@
                             HorizontalAlignment="Left" VerticalAlignment="Center"
                             Width="250" Height="24"
                             Text="{Binding FirstName, Mode=TwoWay}"/>
-                        <TextBlock
+                        <TextBlock x:Name="lblLastName"
                             Grid.Column="0" Grid.Row="1"
                             Margin="{StaticResource SmallContentMargin}"
                             HorizontalAlignment="Left" VerticalAlignment="Center"
@@ -77,7 +77,7 @@
                             Width="250" Height="24"
                             Text="{Binding LastName, Mode=TwoWay}"/>
                         
-                        <TextBlock
+                        <TextBlock x:Name="lblAge"
                             Grid.Column="0" Grid.Row="2"
                             Margin="{StaticResource SmallContentMargin}"
                             HorizontalAlignment="Left" VerticalAlignment="Center"
@@ -87,7 +87,7 @@
                             x:Name="uiAge" Grid.Column="1" Grid.Row="2"
                             HorizontalAlignment="Left" Value="{Binding Age, Mode=TwoWay}" NumberDecimalDigits="0" Height="25"
                             Minimum="0" Maximum="1000" Width="250"></telerikInput:RadNumericUpDown>
-                        <TextBlock
+                        <TextBlock x:Name="lblGender"
                             Grid.Column="0" Grid.Row="3"
                             Margin="{StaticResource SmallContentMargin}"
                             HorizontalAlignment="Left" VerticalAlignment="Center"

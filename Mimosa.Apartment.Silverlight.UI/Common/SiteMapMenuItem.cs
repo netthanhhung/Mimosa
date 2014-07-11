@@ -18,6 +18,7 @@ namespace Mimosa.Apartment.Silverlight.UI
         public string Target { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        public string ModuleType { get; set; }
         public bool IsEnabled { get; set; }
         public IEnumerable<SiteMapMenuItem> Items { get; set; }
     }

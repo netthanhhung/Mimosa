@@ -71,7 +71,7 @@
 
                     <!--<bg:TiledBGControl TiledImageSource="{StaticResource CarbonFiberImage}"/>-->
                     <telerikCommon:RadWrapPanel Orientation="Horizontal">
-                        <TextBlock
+                        <TextBlock x:Name="lblSite"
                                 Margin="10,10,5,5"
                                 VerticalAlignment="Center"
                                 Text="Site:">
@@ -81,7 +81,7 @@
                                     Grid.Row="0" Margin="5,10,5,5"
                                     DataListWidth="200" ShowInactiveCheck="True" InactiveMessage="Show Inactive" ShowAllSitesItem="False"
                                     Style="{StaticResource InputControlStyle}"></local:SitePicker>
-                        <TextBlock
+                        <TextBlock x:Name="lblFromDate"
                                     Margin="20,10,5,5"
                                     VerticalAlignment="Center"
                                     Text="From date:">
@@ -91,7 +91,7 @@
                                     Margin="5,10,5,5"
                                     Style="{StaticResource InputControlStyle}">
                         </telerikInput:RadDatePicker>
-                        <TextBlock
+                        <TextBlock x:Name="lblToDate"
                                     Margin="20,10,5,5"
                                     VerticalAlignment="Center"
                                     Text="To date:">
@@ -139,32 +139,32 @@
                                         Width="*">
                             </telerikGrid:GridViewDataColumn>
                             <telerikGrid:GridViewDataColumn
-                                        DataMemberBinding="{Binding DateStart}" IsReadOnly="True"
+                                        DataMemberBinding="{Binding DateStart}" IsReadOnly="True" UniqueName="FromDate"
                                         Width="80" ShowFieldFilters="False" HeaderTextAlignment="Center"
                                         Header="From Date" DataFormatString="{} {0:dd-MMM-yyyy}">
                             </telerikGrid:GridViewDataColumn>
                             <telerikGrid:GridViewDataColumn
-                                        DataMemberBinding="{Binding DateEnd}" IsReadOnly="True"
+                                        DataMemberBinding="{Binding DateEnd}" IsReadOnly="True" UniqueName="ToDate"
                                         Width="80" ShowFieldFilters="False" HeaderTextAlignment="Center"
                                         Header="To Date" DataFormatString="{} {0:dd-MMM-yyyy}">
                             </telerikGrid:GridViewDataColumn>
                             <telerikGrid:GridViewDataColumn
-                                        DataMemberBinding="{Binding RoomPrice}" IsReadOnly="True"
+                                        DataMemberBinding="{Binding RoomPrice}" IsReadOnly="True" UniqueName="RoomPrice"
                                         Width="100" HeaderTextAlignment="Center" ShowFieldFilters="False"
                                         DataFormatString="{} {0:C0}" TextAlignment="Right" Header="Room Price">
                             </telerikGrid:GridViewDataColumn>
                             <telerikGrid:GridViewDataColumn
-                                        DataMemberBinding="{Binding EquipmentPrice}" IsReadOnly="True"
+                                        DataMemberBinding="{Binding EquipmentPrice}" IsReadOnly="True" UniqueName="EquipmentPrice"
                                         Width="100" HeaderTextAlignment="Center" ShowFieldFilters="False"
                                         DataFormatString="{} {0:C0}" TextAlignment="Right" Header="Equipment Price">
                             </telerikGrid:GridViewDataColumn>
                             <telerikGrid:GridViewDataColumn
-                                        DataMemberBinding="{Binding ServicePrice}" IsReadOnly="True"
+                                        DataMemberBinding="{Binding ServicePrice}" IsReadOnly="True" UniqueName="ServicePrice"
                                         Width="100" HeaderTextAlignment="Center" ShowFieldFilters="False"
                                         DataFormatString="{} {0:C0}" TextAlignment="Right" Header="Service Price">
                             </telerikGrid:GridViewDataColumn>
                             <telerikGrid:GridViewDataColumn
-                                        DataMemberBinding="{Binding TotalPrice}" IsReadOnly="True"
+                                        DataMemberBinding="{Binding TotalPrice}" IsReadOnly="True" UniqueName="TotalPrice"
                                         Width="100" HeaderTextAlignment="Center" ShowFieldFilters="False"
                                         DataFormatString="{} {0:C0}" TextAlignment="Right" Header="Total Price">
                             </telerikGrid:GridViewDataColumn>
@@ -174,11 +174,11 @@
                                         DataFormatString="{} {0:C0}" TextAlignment="Right" Header="Customer Paid">
                             </telerikGrid:GridViewDataColumn>
                             <telerikGrid:GridViewDataColumn
-                                        DataMemberBinding="{Binding MoneyLeft}" IsReadOnly="True"
+                                        DataMemberBinding="{Binding MoneyLeft}" IsReadOnly="True" UniqueName="MoneyLeft"
                                         Width="100" HeaderTextAlignment="Center" ShowFieldFilters="False"
                                         DataFormatString="{} {0:C0}" TextAlignment="Right" Header="Total Left">
                             </telerikGrid:GridViewDataColumn>
-                            <telerikGrid:GridViewDataColumn Width="80" Header="Payment">
+                            <telerikGrid:GridViewDataColumn Width="80" Header="Payment" UniqueName="Payment">
                                 <telerikGrid:GridViewDataColumn.CellStyle>
                                     <Style TargetType="telerikGridView:GridViewCell">
                                         <Setter Property="Template">

@@ -78,7 +78,7 @@
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <TextBlock
+                            <TextBlock x:Name="lblRole"
                                VerticalAlignment="Center"
                                Margin="20,0,0,0"
                                Text="Role"></TextBlock>
@@ -91,7 +91,7 @@
                             </ComboBox>
 
                         </Grid>
-                        <TextBlock  Grid.Row="0" Grid.Column="1"
+                        <TextBlock  Grid.Row="0" Grid.Column="1" x:Name="lblUserHasRole"
                                 VerticalAlignment="Center"
                                 Margin="20,0,0,0"
                                 Text="Users that have this role :"></TextBlock>

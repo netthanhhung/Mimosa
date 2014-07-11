@@ -89,7 +89,7 @@
 
                                 <telerikCommon:RadWrapPanel Orientation="Horizontal" Grid.ColumnSpan="2" >
 
-                                    <TextBlock
+                                    <TextBlock x:Name="lblFirstName"
                                         Margin="20,10,5,5"
                                         VerticalAlignment="Center"
                                         Text="First name:">
@@ -98,7 +98,7 @@
                                         Margin="5,10,5,5" Width="100"
                                         VerticalAlignment="Center">
                                         </TextBox>
-                                        <TextBlock
+                                        <TextBlock x:Name="lblLastName"
                                         Margin="20,10,5,5"
                                         VerticalAlignment="Center"
                                         Text="Last name:">
@@ -121,7 +121,7 @@
                                             Grid.Row="0" Margin="5,10,5,5"
                                             DataListWidth="200" ShowAllSitesItem="True" 
                                             Style="{StaticResource InputControlStyle}"></local:SitePicker>
-                                        <TextBlock
+                                        <TextBlock x:Name="lblFromDate"
                                             Margin="10,10,5,5"
                                             VerticalAlignment="Center"
                                             Text="From date:">
@@ -131,7 +131,7 @@
                                             Margin="5,10,5,5"
                                             Style="{StaticResource InputControlStyle}">
                                         </telerikInput:RadDatePicker>
-                                        <TextBlock
+                                        <TextBlock x:Name="lblToDate"
                                             Margin="10,10,5,5"
                                             VerticalAlignment="Center"
                                             Text="To date:">
@@ -194,7 +194,7 @@
                                        Width="100">
                                         </telerikGrid:GridViewComboBoxColumn>
 
-                                        <telerikGrid:GridViewDataColumn Width="100" Header="Inactive">
+                                        <telerikGrid:GridViewDataColumn Width="100" Header="Inactive" UniqueName="Inactive">
                                             <telerikGrid:GridViewDataColumn.CellStyle>
                                                 <Style TargetType="telerikGridView:GridViewCell">
                                                     <Setter Property="Template">

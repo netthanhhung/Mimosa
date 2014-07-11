@@ -10,11 +10,19 @@
 
     <Grid x:Name="uiLayoutRoot" Margin="5">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Grid x:Name="gridList">
+        <TextBlock x:Name="lblTitle"
+            VerticalAlignment="Center" HorizontalAlignment="Left"
+            Margin="10,10,10,10"
+            Foreground="{StaticResource TitleForeground}"
+            Text="Images : "></TextBlock>
+
+
+        <Grid x:Name="gridList"  Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
@@ -31,7 +39,7 @@
             </ListBox>
         </Grid>
 
-        <Grid x:Name="gridBtnSave" Grid.Row="1" VerticalAlignment="Bottom">
+        <Grid x:Name="gridBtnSave" Grid.Row="2" VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="20"></ColumnDefinition>
@@ -65,7 +73,7 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock
+                    <TextBlock x:Name="lblPhoto"
                         Grid.Column="0" Grid.Row="0" Margin="5,5,5,5"
                         VerticalAlignment="Center"
                         Text="Photo:">

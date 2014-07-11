@@ -20,12 +20,7 @@ namespace Mimosa.Apartment.Silverlight.UI
         private List<Equipment> _originalItemSource = new List<Equipment>();
         
         public List<UserRoleAuth> UserRoleAuths { get; set; }
-
-        private static class UserMessages
-        {
-            internal const string NameErrorMessage2 = "The string may not exceed 128 characters in length.";
-        }
-
+        
         public EquipmentAdminPage()
         {
             InitializeComponent();
@@ -36,6 +31,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                 this.Content = SecurityHelper.GetNoPermissionInfoPanel();
                 return;
             }
+            FillLanguage();
             SecurityChecking();
             BeginRebindEquipment();
             
@@ -52,6 +48,20 @@ namespace Mimosa.Apartment.Silverlight.UI
             
             //Common
             UiHelper.ApplyMouseWheelScrollViewer(scrollViewerEquipment);
+        }
+
+        void FillLanguage()
+        {
+            uiTitle.Text = ResourceHelper.GetReourceValue("EquipmentAdminPage_uiTitle");
+            gvwEquipments.Columns["EquipmentName"].Header = ResourceHelper.GetReourceValue("EquipmentAdminPage_EquipmentName");
+            gvwEquipments.Columns["Description"].Header = ResourceHelper.GetReourceValue("EquipmentAdminPage_Description");
+            gvwEquipments.Columns["RealPrice"].Header = ResourceHelper.GetReourceValue("EquipmentAdminPage_RealPrice");
+            gvwEquipments.Columns["Unit"].Header = ResourceHelper.GetReourceValue("EquipmentAdminPage_Unit");
+            gvwEquipments.Columns["RentPrice"].Header = ResourceHelper.GetReourceValue("EquipmentAdminPage_RentPrice");
+            gvwEquipments.Columns["Inactive"].Header = ResourceHelper.GetReourceValue("EquipmentAdminPage_Inactive");
+
+            btnSaveEquipment.Content = ResourceHelper.GetReourceValue("Common_btnSave");
+            btnCancelEquipment.Content = ResourceHelper.GetReourceValue("Common_btnCancel");
         }
 
         void SecurityChecking()
@@ -95,12 +105,12 @@ namespace Mimosa.Apartment.Silverlight.UI
                 if (e.NewValue.ToString().Length < 1)
                 {
                     e.IsValid = false;
-                    e.ErrorMessage = Globals.UserMessages.RequiredFieldGeneric;
+                    e.ErrorMessage = ResourceHelper.GetReourceValue("Common_RequiredFieldGeneric");
                 }
                 else if (e.NewValue.ToString().Length > 128)
                 {
                     e.IsValid = false;
-                    e.ErrorMessage = UserMessages.NameErrorMessage2;
+                    e.ErrorMessage = ResourceHelper.GetReourceValue("Common_NameLengthErrorMessage");
                 }
             }
         }

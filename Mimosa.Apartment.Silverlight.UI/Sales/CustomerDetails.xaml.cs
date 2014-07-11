@@ -18,12 +18,6 @@ namespace Mimosa.Apartment.Silverlight.UI
 {
     public partial class CustomerDetails : UserControl
     {
-        private static class UserMessages
-        {
-            internal const string DateNotValid = "Date End must be greater than Date Start";
-            internal const string RoomNotValid = "Please choose a specific room";
-            internal const string CustomerNotValid = "Please input customer's name";
-        }
         /*  ======================================================================            
          *      EVENTS AND DELEGATES
          *  ====================================================================== */
@@ -79,9 +73,23 @@ namespace Mimosa.Apartment.Silverlight.UI
         public CustomerDetails()
         {
             InitializeComponent();
-            
+            FillLanguage();
             txtFirstName.LostFocus += new RoutedEventHandler(txtFirstName_LostFocus);
             txtLastName.LostFocus += new RoutedEventHandler(txtLastName_LostFocus);
+        }
+
+        void FillLanguage()
+        {
+            lblCustomerTitle.Text = ResourceHelper.GetReourceValue("CustomerDetails_lblCustomerTitle");
+            lblFirstName.Text = ResourceHelper.GetReourceValue("ContactInformationPanel_lblFirstName");
+            lblLastName.Text = ResourceHelper.GetReourceValue("ContactInformationPanel_lblLastName");
+            lblAge.Text = ResourceHelper.GetReourceValue("CustomerDetails_lblAge");
+            lblGender.Text = ResourceHelper.GetReourceValue("CustomerDetails_lblGender");
+            radMale.Content = ResourceHelper.GetReourceValue("CustomerDetails_radMale");
+            radFemale.Content = ResourceHelper.GetReourceValue("CustomerDetails_radFemale");
+
+            btnOK.Content = ResourceHelper.GetReourceValue("Common_btnSave");
+            btnCancel.Content = ResourceHelper.GetReourceValue("Common_btnCancel");
         }
 
         void txtLastName_LostFocus(object sender, RoutedEventArgs e)
@@ -107,7 +115,7 @@ namespace Mimosa.Apartment.Silverlight.UI
             if (string.IsNullOrEmpty(txtFirstName.Text) && string.IsNullOrEmpty(txtLastName.Text))
             {
                 result = false;
-                MessageBox.Show(UserMessages.CustomerNotValid, Globals.UserMessages.ValidationError, MessageBoxButton.OK);
+                MessageBox.Show(ResourceHelper.GetReourceValue("CustomerDetails_RoomNotValid"), ResourceHelper.GetReourceValue("Common_ValidationError"), MessageBoxButton.OK);
             }
             
             return result;

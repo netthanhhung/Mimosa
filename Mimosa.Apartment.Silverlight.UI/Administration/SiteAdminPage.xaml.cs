@@ -21,12 +21,6 @@ namespace Mimosa.Apartment.Silverlight.UI
         
         public List<UserRoleAuth> UserRoleAuths { get; set; }
 
-        private static class UserMessages
-        {
-            internal const string NameErrorMessage2 = "The string may not exceed 128 characters in length.";
-            internal const string ContactInfoFor = "Contact information for {0}";
-        }
-
         public SiteAdminPage()
         {
             InitializeComponent();
@@ -38,6 +32,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                 return;
             }
             SecurityChecking();
+            FillLanguage();
             BeginRebindSite();
             
             //Sites
@@ -54,6 +49,20 @@ namespace Mimosa.Apartment.Silverlight.UI
 
             //Common
             UiHelper.ApplyMouseWheelScrollViewer(scrollViewerSite);
+        }
+
+        void FillLanguage()
+        {
+            uiTitle.Text = ResourceHelper.GetReourceValue("SiteAdminPage_uiTitle");
+            gvwSites.Columns["Name"].Header = ResourceHelper.GetReourceValue("SiteAdminPage_Name");
+            gvwSites.Columns["AbbreviatedName"].Header = ResourceHelper.GetReourceValue("SiteAdminPage_AbbreviatedName");
+            gvwSites.Columns["LicenseKey"].Header = ResourceHelper.GetReourceValue("SiteAdminPage_LicenseKey");
+            gvwSites.Columns["StarRating"].Header = ResourceHelper.GetReourceValue("SiteAdminPage_StarRating");
+            gvwSites.Columns["DisplayIndex"].Header = ResourceHelper.GetReourceValue("SiteAdminPage_DisplayIndex");
+            gvwSites.Columns["Inactive"].Header = ResourceHelper.GetReourceValue("SiteAdminPage_Inactive");
+
+            btnSaveSite.Content = ResourceHelper.GetReourceValue("Common_btnSave");
+            btnCancelSite.Content = ResourceHelper.GetReourceValue("Common_btnCancel");
         }
 
         void SecurityChecking()
@@ -123,12 +132,12 @@ namespace Mimosa.Apartment.Silverlight.UI
                 if (e.NewValue.ToString().Length < 1)
                 {
                     e.IsValid = false;
-                    e.ErrorMessage = Globals.UserMessages.RequiredFieldGeneric;
+                    e.ErrorMessage = ResourceHelper.GetReourceValue("Common_RequiredFieldGeneric");
                 }
                 else if (e.NewValue.ToString().Length > 128)
                 {
                     e.IsValid = false;
-                    e.ErrorMessage = UserMessages.NameErrorMessage2;
+                    e.ErrorMessage = ResourceHelper.GetReourceValue("Common_NameLengthErrorMessage");
                 }
             }
             else if (e.Cell.Column.UniqueName == "DisplayIndex")
@@ -137,7 +146,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                  if (!int.TryParse(e.NewValue.ToString(), out displayindex))
                 {
                     e.IsValid = false;
-                    e.ErrorMessage = Globals.UserMessages.RequiredFieldGeneric;
+                    e.ErrorMessage = ResourceHelper.GetReourceValue("Common_RequiredFieldGeneric");
                 }                
             }
         }

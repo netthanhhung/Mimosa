@@ -59,6 +59,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                 {
                     Title = (string)siteMapNode.Attribute("title"),
                     Description = (string)siteMapNode.Attribute("description"),
+                    ModuleType = (string)siteMapNode.Attribute("moduleType"),
                     Url = (string)siteMapNode.Attribute("url"),
                     IsEnabled = isEnabled,
                     Target = (string)siteMapNode.Attribute("target"),
@@ -144,7 +145,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                     continue;
                 }
 
-                ModuleTypes moduleType = (ModuleTypes)Enum.Parse(typeof(ModuleTypes), parentItem.Description, true);
+                ModuleTypes moduleType = (ModuleTypes)Enum.Parse(typeof(ModuleTypes), parentItem.ModuleType, true);
                 bool isModuleEnable = true;
                 //if (moduleType == ModuleTypes.Employees)
                 //{
@@ -188,7 +189,7 @@ namespace Mimosa.Apartment.Silverlight.UI
             List<SiteMapMenuItem> modules = new List<SiteMapMenuItem>();
             foreach (SiteMapMenuItem parentItem in _siteMap)
             {
-                currentModuleType = (ModuleTypes)Enum.Parse(typeof(ModuleTypes), parentItem.Description, true);
+                currentModuleType = (ModuleTypes)Enum.Parse(typeof(ModuleTypes), parentItem.ModuleType, true);
 
                 // security filter
                 //if (!Globals.UserLogin.UserModuleTypes.Contains(currentModuleType))

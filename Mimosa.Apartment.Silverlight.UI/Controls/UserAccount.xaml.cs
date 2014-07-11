@@ -18,23 +18,7 @@ using Mimosa.Apartment.Common;
 namespace Mimosa.Apartment.Silverlight.UI
 {
     public partial class UserAccount : UserControl
-    {
-        private static class UserMessages
-        {
-            internal const string DefaultPasswordQuestion = "Not set yet";
-            internal const string DefaultPasswordAnswer = "Not set yet";
-            internal const string NewRecord = "New Record";
-            internal const string CreatedInfo = "Created {0}, last updated {1}.";
-            internal const string LockedOutMessage = "Account was locked out on {0}. Please uncheck box, and press Save to unlock account.";
-            internal const string OfflineTooltip = "User is currently offline";
-            internal const string OnlineTooltip = "User is currently online.";
-            internal const string UserUnlocked = "User has been unlocked.";
-            internal const string UserPasswordEmpty = "Username and Password should not be empty.";
-            internal const string NewGenPassword = "New password for user is '{0}', please advise user";
-            internal const string QuestionPasswordEmpty = "Please input password question and answer.";
-            internal const string InputPasswordEmpty = "Please input password to change password question and answer.";
-            internal const string InputPasswordIncorrect = "Cannot change password question and answer because the password is incorrect";
-        }
+    {        
         /*  ======================================================================            
          *      EVENTS AND DELEGATES
          *  ====================================================================== */
@@ -69,6 +53,7 @@ namespace Mimosa.Apartment.Silverlight.UI
         public UserAccount()
         {
             InitializeComponent();
+            FillLanguage();
 
             uiUsers.IsFilteringEnabled = true;
             uiUsers.KeyUp += new KeyEventHandler(uiUsers_KeyUp);
@@ -82,20 +67,35 @@ namespace Mimosa.Apartment.Silverlight.UI
             chkChangePasswordQuestionAnswer.Checked += new RoutedEventHandler(chkChangePasswordQuestionAnswer_Checked);
             chkChangePasswordQuestionAnswer.Unchecked += new RoutedEventHandler(chkChangePasswordQuestionAnswer_Checked);
         }
-        
+
+        void FillLanguage()
+        {
+            btnUnlock.Content = ResourceHelper.GetReourceValue("UserAccount_btnUnlock");
+            btnSave.Content = ResourceHelper.GetReourceValue("Common_btnSave");
+            chkAccountApproved.Content = ResourceHelper.GetReourceValue("UserAccount_chkAccountApproved");
+            chkChangePasswordQuestionAnswer.Content = ResourceHelper.GetReourceValue("UserAccount_chkChangePasswordQuestionAnswer");
+            chkResetPassword.Content = ResourceHelper.GetReourceValue("UserAccount_chkResetPassword");
+            lblEmail.Text = ResourceHelper.GetReourceValue("UserAccount_lblEmail");
+            lblPassword.Text = ResourceHelper.GetReourceValue("UserAccount_lblPassword");
+            lblUsername.Text = ResourceHelper.GetReourceValue("UserAccount_lblUsername");
+            lblInputPassword.Text = ResourceHelper.GetReourceValue("UserAccount_lblInputPassword");
+            txtPasswordAnswerLabel.Text = ResourceHelper.GetReourceValue("UserAccount_txtPasswordAnswerLabel");
+            txtPasswordQuestionLabel.Text = ResourceHelper.GetReourceValue("UserAccount_txtPasswordQuestionLabel");
+        }
+
         void chkChangePasswordQuestionAnswer_Checked(object sender, RoutedEventArgs e)
         {
             txtPasswordQuestion.Visibility = txtPasswordQuestionLabel.Visibility
                 = txtPasswordAnswer.Visibility = txtPasswordAnswerLabel.Visibility                
                 = chkChangePasswordQuestionAnswer.IsChecked == true ? Visibility.Visible : Visibility.Collapsed;
-            txtInputPasswordLbl.Visibility = txtInputPassword.Visibility = System.Windows.Visibility.Collapsed;
+            lblInputPassword.Visibility = txtInputPassword.Visibility = System.Windows.Visibility.Collapsed;
             if (uiUsers.SelectedValue != null && (Guid)uiUsers.SelectedValue != Guid.Empty)
             {
                 Guid userId = (Guid)uiUsers.SelectedValue;
                 AspUser aspUser = _aspUsers.FirstOrDefault(i => i.UserId == userId);
                 if (aspUser != null)
                 {
-                    txtInputPasswordLbl.Visibility = txtInputPassword.Visibility
+                    lblInputPassword.Visibility = txtInputPassword.Visibility
                         = chkChangePasswordQuestionAnswer.IsChecked == true ? Visibility.Visible : Visibility.Collapsed;
                 }
             }
@@ -110,13 +110,13 @@ namespace Mimosa.Apartment.Silverlight.UI
             txtPassword.IsEnabled = true;
             chkChangePasswordQuestionAnswer.IsChecked = false;
             //chkChangePasswordQuestionAnswer.Visibility = System.Windows.Visibility.Collapsed;
-            txtPasswordQuestion.Text = UserMessages.DefaultPasswordQuestion;
-            txtPasswordAnswer.Text = UserMessages.DefaultPasswordAnswer;
+            txtPasswordQuestion.Text = ResourceHelper.GetReourceValue("UserAccount_DefaultPasswordQuestion");
+            txtPasswordAnswer.Text = ResourceHelper.GetReourceValue("UserAccount_DefaultPasswordAnswer");
             txtInputPassword.Password = string.Empty;
             txtEmail.Text = string.Empty;
             chkChangePasswordQuestionAnswer_Checked(null, null);
             txtResetPasswordInfo.Text = string.Empty;
-            ucInformation.InfoMessage = UserMessages.NewRecord;            
+            ucInformation.InfoMessage = ResourceHelper.GetReourceValue("UserAccount_NewRecord");            
         }
 
         public void RebindData(int orgId)
@@ -124,7 +124,7 @@ namespace Mimosa.Apartment.Silverlight.UI
             Globals.IsBusy = true;
             _currentOrgId = orgId;
             ResetControlStatus();
-            ucInformation.InfoMessage = UserMessages.NewRecord;
+            ucInformation.InfoMessage = ResourceHelper.GetReourceValue("UserAccount_NewRecord");
             DataServiceHelper.ListOrgAdminAspUserAsync(orgId, SecurityHelper.OrganisationAdministratorRoleId, ListAllAspUserCompleted);
         }
 
@@ -133,7 +133,7 @@ namespace Mimosa.Apartment.Silverlight.UI
             Globals.IsBusy = true;
             _currentOrgId = Globals.UserLogin.UserOrganisationId;
             ResetControlStatus();
-            ucInformation.InfoMessage = UserMessages.NewRecord;
+            ucInformation.InfoMessage = ResourceHelper.GetReourceValue("UserAccount_NewRecord");
             DataServiceHelper.ListSiteGroupAsync(Globals.UserLogin.UserOrganisationId, null, ListSiteGroupCompleted);
         }
 
@@ -270,14 +270,14 @@ namespace Mimosa.Apartment.Silverlight.UI
                         chkResetPassword.IsEnabled = false;
                         chkAccountApproved.IsEnabled = false;
                         btnUnlock.IsEnabled = this.IsEditable;
-                        ucInformation.InfoMessage = string.Format(UserMessages.LockedOutMessage, aspUser.LastLockoutDate);
+                        ucInformation.InfoMessage = string.Format(ResourceHelper.GetReourceValue("UserAccount_LockedOutMessage"), aspUser.LastLockoutDate);
                     }
                     else
                     {
                         btnUnlock.IsEnabled = false;
                         chkAccountApproved.IsEnabled = true;
                         chkResetPassword.IsEnabled = true;
-                        ucInformation.InfoMessage = string.Format(UserMessages.CreatedInfo, aspUser.CreationDate.ToString(), aspUser.LastActivityDate.ToString());
+                        ucInformation.InfoMessage = string.Format(ResourceHelper.GetReourceValue("UserAccount_CreatedInfo"), aspUser.CreationDate.ToString(), aspUser.LastActivityDate.ToString());
                     }
                     if(!string.IsNullOrEmpty(aspUser.PasswordQuestion))
                         txtPasswordQuestion.Text = aspUser.PasswordQuestion;
@@ -293,7 +293,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                         {
                             DisplayTime = new Duration(TimeSpan.FromSeconds(10)),
                             InitialDelay = new Duration(TimeSpan.FromMilliseconds(0)),
-                            Content = UserMessages.OnlineTooltip
+                            Content = ResourceHelper.GetReourceValue("UserAccount_OnlineTooltip")
                         };
                         nsTooltips.ToolTipService.SetToolTip(uiImageOnline, tooltip);
                     }
@@ -304,7 +304,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                         {
                             DisplayTime = new Duration(TimeSpan.FromSeconds(10)),
                             InitialDelay = new Duration(TimeSpan.FromMilliseconds(0)),
-                            Content = UserMessages.OfflineTooltip
+                            Content = ResourceHelper.GetReourceValue("UserAccount_OfflineTooltip")
                         };
                         nsTooltips.ToolTipService.SetToolTip(uiImageOnline, tooltip);
                     }
@@ -339,7 +339,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                 {
                     _aspUsers[i] = aspUser;
                     RebindUserAccountData();
-                    MessageBox.Show(UserMessages.UserUnlocked);
+                    MessageBox.Show(ResourceHelper.GetReourceValue("UserAccount_UserUnlocked"));
                     break;
                 }
             }
@@ -351,7 +351,7 @@ namespace Mimosa.Apartment.Silverlight.UI
             if (chkChangePasswordQuestionAnswer.IsChecked == true
                  && (string.IsNullOrEmpty(txtPasswordQuestion.Text) || string.IsNullOrEmpty(txtPasswordAnswer.Text)))
             {
-                MessageBox.Show(UserMessages.QuestionPasswordEmpty, Globals.UserMessages.ValidationError, MessageBoxButton.OK);
+                MessageBox.Show(ResourceHelper.GetReourceValue("UserAccount_QuestionPasswordEmpty"), ResourceHelper.GetReourceValue("Common_ValidationError"), MessageBoxButton.OK);
                 return;
             }
 
@@ -368,7 +368,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                 if (chkChangePasswordQuestionAnswer.IsChecked == true
                     && string.IsNullOrEmpty(txtInputPassword.Password))
                 {
-                    MessageBox.Show(UserMessages.InputPasswordEmpty, Globals.UserMessages.ValidationError, MessageBoxButton.OK);
+                    MessageBox.Show(ResourceHelper.GetReourceValue("UserAccount_.InputPasswordEmpty"), ResourceHelper.GetReourceValue("Common_ValidationError"), MessageBoxButton.OK);
                     return;
                 }
             }
@@ -376,7 +376,7 @@ namespace Mimosa.Apartment.Silverlight.UI
             {
                 if (string.IsNullOrEmpty(uiUsers.Text) || string.IsNullOrEmpty(txtPassword.Password))
                 {
-                    MessageBox.Show(UserMessages.UserPasswordEmpty, Globals.UserMessages.ValidationError, MessageBoxButton.OK);
+                    MessageBox.Show(ResourceHelper.GetReourceValue("UserAccount_.UserPasswordEmpty"), ResourceHelper.GetReourceValue("Common_ValidationError"), MessageBoxButton.OK);
                     return;
                 }
                 AspUser newUser = new AspUser();
@@ -389,9 +389,9 @@ namespace Mimosa.Apartment.Silverlight.UI
                     newUser.OrganisationId = _currentOrgId;
                 }
                 if (string.IsNullOrEmpty(newUser.PasswordQuestion))
-                    newUser.PasswordQuestion = UserMessages.DefaultPasswordQuestion;
+                    newUser.PasswordQuestion = ResourceHelper.GetReourceValue("UserAccount_DefaultPasswordQuestion");
                 if (string.IsNullOrEmpty(newUser.PasswordAnswer))
-                    newUser.PasswordAnswer = UserMessages.DefaultPasswordAnswer;
+                    newUser.PasswordAnswer = ResourceHelper.GetReourceValue("UserAccount_DefaultPasswordAnswer");
                 Globals.IsBusy = true;
                 DataServiceHelper.SaveAspUserAsync(newUser, CreateAspUserCompleted);
             }
@@ -407,9 +407,9 @@ namespace Mimosa.Apartment.Silverlight.UI
                 aspUser.PasswordQuestion = txtPasswordQuestion.Text;
                 aspUser.PasswordAnswer = txtPasswordAnswer.Text;
                 if (string.IsNullOrEmpty(aspUser.PasswordQuestion))
-                    aspUser.PasswordQuestion = UserMessages.DefaultPasswordQuestion;
+                    aspUser.PasswordQuestion = ResourceHelper.GetReourceValue("UserAccount_DefaultPasswordQuestion");
                 if (string.IsNullOrEmpty(aspUser.PasswordAnswer))
-                    aspUser.PasswordAnswer = UserMessages.DefaultPasswordAnswer;
+                    aspUser.PasswordAnswer = ResourceHelper.GetReourceValue("UserAccount_DefaultPasswordAnswer");
                 aspUser.InputPassword = txtInputPassword.Password;
             }
             else
@@ -430,7 +430,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                 {
                     if (aspUser.IsSavedQAError)
                     {
-                        MessageBox.Show(UserMessages.InputPasswordIncorrect);
+                        MessageBox.Show(ResourceHelper.GetReourceValue("UserAccount_InputPasswordIncorrect"));
                     }
                     else if (!string.IsNullOrEmpty(aspUser.ErrorMessage))
                     {
@@ -447,7 +447,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                         RebindUserAccountData();
                         if (!string.IsNullOrEmpty(aspUser.NewGenPassword))
                         {
-                            txtResetPasswordInfo.Text = string.Format(UserMessages.NewGenPassword, aspUser.NewGenPassword);
+                            txtResetPasswordInfo.Text = string.Format(ResourceHelper.GetReourceValue("UserAccount_NewGenPassword"), aspUser.NewGenPassword);
                             txtResetPasswordInfo.Visibility = System.Windows.Visibility.Visible;
                         }
                         else

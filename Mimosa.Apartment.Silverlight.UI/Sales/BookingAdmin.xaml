@@ -34,7 +34,7 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBlock Text="Bookings / Contracts" Margin="5,5,5,5" ></TextBlock>
+                    <TextBlock x:Name="uiTitle" Text="Bookings / Contracts" Margin="5,5,5,5" ></TextBlock>
                     <telerikGrid:RadGridView
                                 x:Name="gvwBooking"
                                 Grid.Row="1" MaxHeight="300"
@@ -100,7 +100,7 @@
                             </telerikGrid:GridViewDataColumn>
 
                             <telerikGrid:GridViewDataColumn
-                                        DataMemberBinding="{Binding BookDate}"
+                                        DataMemberBinding="{Binding BookDate}" UniqueName="BookDate"
                                         Width="80" ShowFieldFilters="True" HeaderTextAlignment="Center"
                                         DataFormatString="{} {0:dd-MMM-yyyy}" Header="BookDate">
                             </telerikGrid:GridViewDataColumn>
@@ -109,15 +109,15 @@
                                        UniqueName="BookingStatus" Header="Status"
                                        SelectedValueMemberPath="Key" HeaderTextAlignment="Center"
                                        DisplayMemberPath="Value" ShowFieldFilters="True"
-                                       Width="80">
+                                       Width="100">
                             </telerikGrid:GridViewComboBoxColumn>
                             <telerikGrid:GridViewDataColumn
-                                        DataMemberBinding="{Binding Description}"
+                                        DataMemberBinding="{Binding Description}" UniqueName="Description"
                                         Width="*" ShowFieldFilters="False" HeaderTextAlignment="Center"
                                         Header="Description">
                             </telerikGrid:GridViewDataColumn>
                             <telerikGrid:GridViewDataColumn
-                                        DataMemberBinding="{Binding RoomPrice}"
+                                        DataMemberBinding="{Binding RoomPrice}" UniqueName="RoomPrice"
                                         Width="100" HeaderTextAlignment="Center" ShowFieldFilters="False"
                                         DataFormatString="{} {0:C0}" TextAlignment="Right" Header="Room Price">
                             </telerikGrid:GridViewDataColumn>
@@ -127,22 +127,22 @@
                                         DataFormatString="{} {0:C0}" TextAlignment="Right" Header="Total Price">
                             </telerikGrid:GridViewDataColumn>-->
                             <telerikGrid:GridViewDataColumn
-                                        DataMemberBinding="{Binding ContractDateStart}"
+                                        DataMemberBinding="{Binding ContractDateStart}" UniqueName="FromDate"
                                         Width="80" ShowFieldFilters="False" HeaderTextAlignment="Center"
                                         Header="From Date" DataFormatString="{} {0:dd-MMM-yyyy}">
                             </telerikGrid:GridViewDataColumn>
                             <telerikGrid:GridViewDataColumn
-                                        DataMemberBinding="{Binding ContractDateEnd}"
+                                        DataMemberBinding="{Binding ContractDateEnd}" UniqueName="ToDate"
                                         Width="80" ShowFieldFilters="False" HeaderTextAlignment="Center"
                                         Header="To Date" DataFormatString="{} {0:dd-MMM-yyyy}">
                             </telerikGrid:GridViewDataColumn>
                             <telerikGrid:GridViewDataColumn
-                                        DataMemberBinding="{Binding ContractDateSign}"
+                                        DataMemberBinding="{Binding ContractDateSign}" UniqueName="ContractDateSign"
                                         Width="80" ShowFieldFilters="False" HeaderTextAlignment="Center"
                                         Header="Contract Date" DataFormatString="{} {0:dd-MMM-yyyy}">
                             </telerikGrid:GridViewDataColumn>
                             <telerikGrid:GridViewDataColumn
-                                        DataMemberBinding="{Binding ContractTotalPrice}"
+                                        DataMemberBinding="{Binding ContractTotalPrice}" UniqueName="ContractTotalPrice"
                                         Width="120" HeaderTextAlignment="Center" ShowFieldFilters="False"
                                         DataFormatString="{} {0:C0}" Header="Contract Price">
                             </telerikGrid:GridViewDataColumn>
@@ -201,7 +201,7 @@
                         </telerikGrid:RadGridView.Resources>
                         <telerikGrid:RadGridView.Columns>
                             <telerikGrid:GridViewDataColumn
-                                        UniqueName="Equipment"
+                                        UniqueName="EquipmentName"
                                         DataMemberBinding="{Binding Equipment}"
                                         Header="Equipment" IsReadOnly="True"
                                         Width="200">
@@ -213,11 +213,11 @@
                                         Width="70">
                             </telerikGrid:GridViewDataColumn>
                             <telerikGrid:GridViewDataColumn
-                                        DataMemberBinding="{Binding Price}"
+                                        DataMemberBinding="{Binding Price}" UniqueName="RentPrice"
                                         Width="100" ShowFieldFilters="False" Header="Unit Price"
                                         DataFormatString="{} {0:C0}" TextAlignment="Right">
                             </telerikGrid:GridViewDataColumn>
-                            <telerikGrid:GridViewDataColumn Width="70" Header="Detail" UniqueName="Detail">
+                            <telerikGrid:GridViewDataColumn Width="70" Header="Detail" UniqueName="Details">
                                 <telerikGrid:GridViewDataColumn.CellStyle>
                                     <Style TargetType="telerikGridView:GridViewCell">
                                         <Setter Property="Template">
@@ -287,7 +287,7 @@
                         </telerikGrid:RadGridView.Resources>
                         <telerikGrid:RadGridView.Columns>
                             <telerikGrid:GridViewDataColumn
-                                        UniqueName="Service"
+                                        UniqueName="ServiceName"
                                         DataMemberBinding="{Binding Service}"
                                         Header="Service" IsReadOnly="True"
                                         Width="200">
@@ -299,11 +299,11 @@
                                         Width="70">
                             </telerikGrid:GridViewDataColumn>
                             <telerikGrid:GridViewDataColumn
-                                        DataMemberBinding="{Binding Price}"
+                                        DataMemberBinding="{Binding Price}" UniqueName="Price"
                                         Width="100" ShowFieldFilters="False" Header="Unit Price"
                                         DataFormatString="{} {0:C0}" TextAlignment="Right">
                             </telerikGrid:GridViewDataColumn>
-                            <telerikGrid:GridViewDataColumn Width="70" Header="Detail" UniqueName="Detail">
+                            <telerikGrid:GridViewDataColumn Width="70" Header="Detail" UniqueName="Details">
                                 <telerikGrid:GridViewDataColumn.CellStyle>
                                     <Style TargetType="telerikGridView:GridViewCell">
                                         <Setter Property="Template">
@@ -357,12 +357,6 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBlock 
-                               VerticalAlignment="Center" HorizontalAlignment="Left"
-                               Margin="10,10,10,10"
-                               Foreground="{StaticResource TitleForeground}"
-                               Text="Images : "></TextBlock>
-
                 <local:ImageUpload x:Name="ucImageUpload" IsReadOnly="True" Grid.Row="1" Margin="10,10,10,10"></local:ImageUpload>
             </Grid>
 
@@ -392,7 +386,7 @@
 
         <telerikNavigation:RadWindow x:Name="uiPopupEquipmentDetails"
                 WindowStartupLocation="CenterOwner"
-                Header="Customer Details" Width="1000" Height="600">
+                Header="Equipment Details" Width="1000" Height="600">
             <Grid>
                 <bg:TiledBGControl BorderThickness="0" TiledImageSource="{StaticResource CarbonFiberImage}"/>
                 <Grid>
@@ -403,7 +397,7 @@
 
         <telerikNavigation:RadWindow x:Name="uiPopupServiceDetails"
                 WindowStartupLocation="CenterOwner"
-                Header="Customer Details" Width="1000" Height="600">
+                Header="Service Details" Width="1000" Height="600">
             <Grid>
                 <bg:TiledBGControl BorderThickness="0" TiledImageSource="{StaticResource CarbonFiberImage}"/>
                 <Grid>

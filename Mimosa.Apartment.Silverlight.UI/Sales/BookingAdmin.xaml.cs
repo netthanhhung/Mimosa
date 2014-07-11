@@ -18,14 +18,6 @@ namespace Mimosa.Apartment.Silverlight.UI
 {
     public partial class BookingAdmin : UserControl
     {
-        private static class UserMessages
-        {
-            internal const string DateNotValid = "Date End must be greater than Date Start";
-            internal const string RoomNotValid = "Please choose a specific room";
-            internal const string CustomerNotValid = "Please input customer's name";
-            internal const string BookingExist = "This room was booked/rented in that period. Please choose other room or date range";
-        }
-
         internal event EventHandler RebindBookingList;
         /*  ======================================================================            
          *      EVENTS AND DELEGATES
@@ -42,6 +34,7 @@ namespace Mimosa.Apartment.Silverlight.UI
         public BookingAdmin()
         {
             InitializeComponent();
+            FillLanguage();
 
             gvwBooking.CellValidating += new EventHandler<GridViewCellValidatingEventArgs>(gvwBooking_CellValidating);
             gvwBooking.BeginningEdit += new EventHandler<GridViewBeginningEditRoutedEventArgs>(gvwBooking_BeginningEdit);
@@ -81,6 +74,53 @@ namespace Mimosa.Apartment.Silverlight.UI
             ucEquipmentDetails.btnCancel.Click += new RoutedEventHandler(Equipmentetails_btnCancel_Click);
             ucServiceDetails.btnSave.Click += new RoutedEventHandler(Serviceetails_btnSave_Click);
             ucServiceDetails.btnCancel.Click += new RoutedEventHandler(Serviceetails_btnCancel_Click);
+        }
+
+        void FillLanguage()
+        {
+            uiTitle.Text = ResourceHelper.GetReourceValue("BookingAdmin_uiTitle");
+            gvwBooking.Columns["RoomName"].Header = ResourceHelper.GetReourceValue("BookingAdmin_RoomName");
+            gvwBooking.Columns["CustomerName"].Header = ResourceHelper.GetReourceValue("BookingAdmin_CustomerName");
+            gvwBooking.Columns["Customer2Name"].Header = ResourceHelper.GetReourceValue("BookingAdmin_Customer2Name");
+            gvwBooking.Columns["BookDate"].Header = ResourceHelper.GetReourceValue("BookingAdmin_BookDate");
+            gvwBooking.Columns["BookingStatus"].Header = ResourceHelper.GetReourceValue("BookingAdminPage_lblBookingStatus");
+            gvwBooking.Columns["Description"].Header = ResourceHelper.GetReourceValue("Common_Description");
+            gvwBooking.Columns["RoomPrice"].Header = ResourceHelper.GetReourceValue("BookingAdmin_RoomPrice");
+            gvwBooking.Columns["FromDate"].Header = ResourceHelper.GetReourceValue("BookingAdminPage_lblFromDate");
+            gvwBooking.Columns["ToDate"].Header = ResourceHelper.GetReourceValue("BookingAdminPage_lblToDate");
+            gvwBooking.Columns["ContractDateSign"].Header = ResourceHelper.GetReourceValue("BookingAdmin_ContractDateSign");
+            gvwBooking.Columns["ContractTotalPrice"].Header = ResourceHelper.GetReourceValue("BookingAdmin_ContractTotalPrice");
+
+            uiPopupNewBooking.Header = ResourceHelper.GetReourceValue("BookingAdmin_uiPopupNewBooking");
+            uiPopupCustomer.Header = ResourceHelper.GetReourceValue("BookingAdmin_uiPopupCustomer");
+            uiPopupEquipmentDetails.Header = ResourceHelper.GetReourceValue("BookingAdmin_uiPopupEquipmentDetails");
+            uiPopupServiceDetails.Header = ResourceHelper.GetReourceValue("BookingAdmin_uiPopupServiceDetails");
+            
+            btnNewBooking.Content = ResourceHelper.GetReourceValue("Common_btnNew");
+            btnSaveBooking.Content = ResourceHelper.GetReourceValue("Common_btnSave");
+            btnCancelBooking.Content = ResourceHelper.GetReourceValue("Common_btnCancel");
+
+            //Equipment
+            gvwBookingEquipment.Columns["EquipmentName"].Header = ResourceHelper.GetReourceValue("EquipmentAdminPage_EquipmentName");
+            gvwBookingEquipment.Columns["Description"].Header = ResourceHelper.GetReourceValue("EquipmentAdminPage_Description");
+            gvwBookingEquipment.Columns["Unit"].Header = ResourceHelper.GetReourceValue("EquipmentAdminPage_Unit");
+            gvwBookingEquipment.Columns["RentPrice"].Header = ResourceHelper.GetReourceValue("EquipmentAdminPage_RentPrice");
+            gvwBookingEquipment.Columns["Details"].Header = ResourceHelper.GetReourceValue("Common_lblDetail");
+
+            btnSaveBookingEquipment.Content = ResourceHelper.GetReourceValue("Common_btnSave");
+            btnCancelBookingEquipment.Content = ResourceHelper.GetReourceValue("Common_btnCancel");
+            btnInsertBookingEquipment.Content = ResourceHelper.GetReourceValue("Common_btnInsert");
+
+            //Service
+            gvwBookingService.Columns["ServiceName"].Header = ResourceHelper.GetReourceValue("ServiceAdminPage_ServiceName");
+            gvwBookingService.Columns["Description"].Header = ResourceHelper.GetReourceValue("ServiceAdminPage_Description");
+            gvwBookingService.Columns["Price"].Header = ResourceHelper.GetReourceValue("ServiceAdminPage_Price");
+            gvwBookingService.Columns["Unit"].Header = ResourceHelper.GetReourceValue("ServiceAdminPage_Unit");
+            gvwBookingService.Columns["Details"].Header = ResourceHelper.GetReourceValue("Common_lblDetail");
+
+            btnSaveBookingService.Content = ResourceHelper.GetReourceValue("Common_btnSave");
+            btnCancelBookingService.Content = ResourceHelper.GetReourceValue("Common_btnCancel");
+            btnInsertBookingService.Content = ResourceHelper.GetReourceValue("Common_btnInsert");
         }
 
         #region Booking
@@ -248,8 +288,6 @@ namespace Mimosa.Apartment.Silverlight.UI
             }
             ucBookingNew.ucCustomerDetails.radMale.GroupName = ucBookingNew.ucCustomerDetails.radFemale.GroupName = "GenderGroup1";
 
-            ucBookingNew.ucCustomerDetails.lblCustomerTitle.Text = "Customer 1";
-            ucBookingNew.ucCustomerDetails2.lblCustomerTitle.Text = "Customer 2";
             uiPopupNewBooking.ShowDialog();
         }
 
@@ -273,7 +311,7 @@ namespace Mimosa.Apartment.Silverlight.UI
         {
             if (bookingExists)
             {
-                MessageBox.Show(UserMessages.BookingExist, Globals.UserMessages.ValidationError, MessageBoxButton.OK);
+                MessageBox.Show(ResourceHelper.GetReourceValue("BookingAdmin_BookingExist"), ResourceHelper.GetReourceValue("Common_ValidationError"), MessageBoxButton.OK);
             }
             else
             {
@@ -302,7 +340,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                 {
                     if (deleteItem.CanDelete)
                     {
-                        MessageBoxResult result = MessageBox.Show(Globals.UserMessages.ConfirmDeleteNoParam, Globals.UserMessages.ConfirmationRequired, MessageBoxButton.OKCancel);
+                        MessageBoxResult result = MessageBox.Show(ResourceHelper.GetReourceValue("Common_ConfirmDeleteNoParam"), ResourceHelper.GetReourceValue("Common_ConfirmationRequired"), MessageBoxButton.OKCancel);
                         if (result == MessageBoxResult.Cancel)
                         {
                             e.Cancel = true;
@@ -310,7 +348,8 @@ namespace Mimosa.Apartment.Silverlight.UI
                     }
                     else
                     {
-                        MessageBoxResult result = MessageBox.Show(string.Format(Globals.UserMessages.DeleteFailedBeingUsed, deleteItem.Equipment), Globals.UserMessages.OperationFailed, MessageBoxButton.OK);
+                        MessageBoxResult result = MessageBox.Show(string.Format(ResourceHelper.GetReourceValue("Common_DeleteFailedBeingUsed"), deleteItem.Equipment), 
+                            ResourceHelper.GetReourceValue("Common_OperationFailed"), MessageBoxButton.OK);
                         e.Cancel = true;
                     }
                 }
@@ -414,7 +453,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                 List<BookingRoomEquipment> list = (List<BookingRoomEquipment>)gvwBookingEquipment.ItemsSource;
                 if (list.Count(i => i.EquipmentId == equipment.EquipmentId) > 0)
                 {
-                    MessageBox.Show(Globals.UserMessages.ItemExist);
+                    MessageBox.Show(ResourceHelper.GetReourceValue("Common_ItemExist"));
                 }
                 else
                 {
@@ -475,7 +514,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                 {
                     if (deleteItem.CanDelete)
                     {
-                        MessageBoxResult result = MessageBox.Show(Globals.UserMessages.ConfirmDeleteNoParam, Globals.UserMessages.ConfirmationRequired, MessageBoxButton.OKCancel);
+                        MessageBoxResult result = MessageBox.Show(ResourceHelper.GetReourceValue("Common_ConfirmDeleteNoParam"), ResourceHelper.GetReourceValue("Common_ConfirmationRequired"), MessageBoxButton.OKCancel);
                         if (result == MessageBoxResult.Cancel)
                         {
                             e.Cancel = true;
@@ -483,7 +522,8 @@ namespace Mimosa.Apartment.Silverlight.UI
                     }
                     else
                     {
-                        MessageBoxResult result = MessageBox.Show(string.Format(Globals.UserMessages.DeleteFailedBeingUsed, deleteItem.Service), Globals.UserMessages.OperationFailed, MessageBoxButton.OK);
+                        MessageBoxResult result = MessageBox.Show(string.Format(ResourceHelper.GetReourceValue("Common_DeleteFailedBeingUsed"), deleteItem.Service), 
+                            ResourceHelper.GetReourceValue("Common_OperationFailed"), MessageBoxButton.OK);
                         e.Cancel = true;
                     }
                 }
@@ -586,7 +626,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                 List<BookingRoomService> list = (List<BookingRoomService>)gvwBookingService.ItemsSource;
                 if (list.Count(i => i.ServiceId == service.ServiceId) > 0)
                 {
-                    MessageBox.Show(Globals.UserMessages.ItemExist);
+                    MessageBox.Show(ResourceHelper.GetReourceValue("Common_ItemExist"));
                 }
                 else
                 {

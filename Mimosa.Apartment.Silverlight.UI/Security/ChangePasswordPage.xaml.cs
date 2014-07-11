@@ -18,8 +18,18 @@ namespace Mimosa.Apartment.Silverlight.UI
         public ChangePasswordPage()
         {
             InitializeComponent();
-
+            FillLanguage();
             uiSubmitButton.Click += new RoutedEventHandler(uiSubmitButton_Click);
+        }
+
+        void FillLanguage()
+        {
+            lblConfirmNewPassword.Text = ResourceHelper.GetReourceValue("ChangePasswordPage_lblConfirmNewPassword");
+            lblNewPassword.Text = ResourceHelper.GetReourceValue("ChangePasswordPage_lblNewPassword");
+            lblPassword.Text = ResourceHelper.GetReourceValue("ChangePasswordPage_lblPassword");
+            uiSubmitButton.Content = ResourceHelper.GetReourceValue("ChangePasswordPage_uiSubmitButton");
+            uiCancelButton.Content = ResourceHelper.GetReourceValue("Common_btnCancel");
+            uiTitle.Text = ResourceHelper.GetReourceValue("ChangePasswordPage_uiTitle");
         }
 
         void uiSubmitButton_Click(object sender, RoutedEventArgs e)

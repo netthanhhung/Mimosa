@@ -32,7 +32,8 @@ namespace Mimosa.Apartment.Silverlight.UI
             ucBookingAdmin.btnSaveBooking.IsEnabled = ucBookingAdmin.btnSaveBookingEquipment.IsEnabled = ucBookingAdmin.btnSaveBookingService.IsEnabled
                 = ucBookingAdmin.btnNewBooking.IsEnabled = ucBookingAdmin.btnInsertBookingEquipment.IsEnabled = ucBookingAdmin.btnInsertBookingService.IsEnabled
                 = this.UserRoleAuths.Count(i => i.WriteRight == true) > 0;
-            
+            FillLanguage();
+
             //ucSitePicker.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(ucSitePicker_SelectionChanged);
             ucSitePicker.Init();
             ucSitePicker.InitComplete += new EventHandler(ucSitePicker_InitComplete);
@@ -42,6 +43,19 @@ namespace Mimosa.Apartment.Silverlight.UI
             ucBookingAdmin.RebindBookingList += new EventHandler(ucBookingAdmin_RebindBookingList);
 
             UiHelper.ApplyMouseWheelScrollViewer(scrollViewerBookings);
+        }
+
+        void FillLanguage()
+        {
+            uiTitle.Text = ResourceHelper.GetReourceValue("BookingAdminPage_uiTitle");
+            lblSite.Text = ResourceHelper.GetReourceValue("Common_lblSite");
+            lblFromDate.Text = ResourceHelper.GetReourceValue("BookingAdminPage_lblFromDate");
+            lblToDate.Text = ResourceHelper.GetReourceValue("BookingAdminPage_lblToDate");
+            lblCustomer.Text = ResourceHelper.GetReourceValue("BookingAdminPage_lblCustomer");
+            lblBookingStatus.Text = ResourceHelper.GetReourceValue("BookingAdminPage_lblBookingStatus");
+            ucSitePicker.InactiveMessage = ResourceHelper.GetReourceValue("Common_chkShowLegacy");
+            btnSearch.Content = ResourceHelper.GetReourceValue("Common_btnSearch");
+
         }
 
         void ucSitePicker_InitComplete(object sender, EventArgs e)

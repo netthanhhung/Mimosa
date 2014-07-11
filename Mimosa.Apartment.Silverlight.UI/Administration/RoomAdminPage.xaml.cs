@@ -12,18 +12,12 @@ using System.Windows.Shapes;
 using Telerik.Windows.Controls;
 using Telerik.Windows.Controls.GridView;
 using Mimosa.Apartment.Common;
+using Mimosa.Apartment.Silverlight.UI.Resources;
 
 namespace Mimosa.Apartment.Silverlight.UI
 {
     public partial class RoomAdminPage : Page
     {
-        private static class UserMessages
-        {
-            internal const string DateNotValid = "Date End must be greater than Date Start";
-            internal const string DateIntersect = "There is an intersect between date ranges";
-
-        }
-
         private int _newId = -1;
         private int _selectedRoomId = -1;
         private List<Room> _originalItemSource = new List<Room>();
@@ -40,6 +34,8 @@ namespace Mimosa.Apartment.Silverlight.UI
                 this.Content = SecurityHelper.GetNoPermissionInfoPanel();
                 return;
             }
+            FillLanguage();
+
             btnSaveRoom.IsEnabled = btnSaveRoomEquipment.IsEnabled = btnSaveRoomService.IsEnabled = this.UserRoleAuths.Count(i => i.WriteRight == true) > 0;
             ucImageUpload.IsReadOnly = !btnSaveRoom.IsEnabled;
 
@@ -80,6 +76,54 @@ namespace Mimosa.Apartment.Silverlight.UI
 
             //Common
             UiHelper.ApplyMouseWheelScrollViewer(scrollViewerRooms);
+        }
+
+        void FillLanguage()
+        {
+            uiTitle.Text = ResourceHelper.GetReourceValue("RoomAdminPage_uiTitle");
+            lblSite.Text = ResourceHelper.GetReourceValue("Common_lblSite");
+            lblName.Text = ResourceHelper.GetReourceValue("RoomAdminPage_lblName");
+            lblFloor.Text = ResourceHelper.GetReourceValue("RoomAdminPage_lblFloor");
+            lblRoomStatus.Text = ResourceHelper.GetReourceValue("RoomAdminPage_lblRoomStatus");
+            chkAvailable.Content = ResourceHelper.GetReourceValue("RoomAdminPage_chkAvailable");
+            chkOccupied.Content = ResourceHelper.GetReourceValue("RoomAdminPage_chkOccupied");
+            lblRoomType.Text = ResourceHelper.GetReourceValue("RoomAdminPage_lblRoomType");
+            chkShowLegacy.Content = ucSitePicker.InactiveMessage = ResourceHelper.GetReourceValue("Common_chkShowLegacy");
+
+            gvwRoom.Columns["RoomName"].Header = ResourceHelper.GetReourceValue("RoomAdminPage_lblName");
+            gvwRoom.Columns["Description"].Header = ResourceHelper.GetReourceValue("Common_Description");
+            gvwRoom.Columns["Floor"].Header = ResourceHelper.GetReourceValue("RoomAdminPage_lblFloor");
+            gvwRoom.Columns["RoomStatus"].Header = ResourceHelper.GetReourceValue("RoomAdminPage_lblRoomStatus");
+            gvwRoom.Columns["RoomType"].Header = ResourceHelper.GetReourceValue("RoomAdminPage_lblRoomType");
+            gvwRoom.Columns["Width"].Header = ResourceHelper.GetReourceValue("RoomAdminPage_Width");
+            gvwRoom.Columns["Height"].Header = ResourceHelper.GetReourceValue("RoomAdminPage_Height");
+            gvwRoom.Columns["MeterSquare"].Header = ResourceHelper.GetReourceValue("RoomAdminPage_MeterSquare");
+            gvwRoom.Columns["BasePrice"].Header = ResourceHelper.GetReourceValue("RoomAdminPage_BasePrice");
+            gvwRoom.Columns["Inactive"].Header = ResourceHelper.GetReourceValue("RoomAdminPage_Inactive");
+
+            btnSaveRoom.Content = ResourceHelper.GetReourceValue("Common_btnSave");
+            btnCancelRoom.Content = ResourceHelper.GetReourceValue("Common_btnCancel");
+            btnSearch.Content = ResourceHelper.GetReourceValue("Common_btnSearch");
+
+            //Equipment
+            gvwRoomEquipment.Columns["EquipmentName"].Header = ResourceHelper.GetReourceValue("EquipmentAdminPage_EquipmentName");
+            gvwRoomEquipment.Columns["Description"].Header = ResourceHelper.GetReourceValue("EquipmentAdminPage_Description");
+            gvwRoomEquipment.Columns["Unit"].Header = ResourceHelper.GetReourceValue("EquipmentAdminPage_Unit");
+            gvwRoomEquipment.Columns["RentPrice"].Header = ResourceHelper.GetReourceValue("EquipmentAdminPage_RentPrice");
+
+            btnSaveRoomEquipment.Content = ResourceHelper.GetReourceValue("Common_btnSave");
+            btnCancelRoomEquipment.Content = ResourceHelper.GetReourceValue("Common_btnCancel");
+            btnInsertRoomEquipment.Content = ResourceHelper.GetReourceValue("Common_btnInsert");
+
+            //Service
+            gvwRoomService.Columns["ServiceName"].Header = ResourceHelper.GetReourceValue("ServiceAdminPage_ServiceName");
+            gvwRoomService.Columns["Description"].Header = ResourceHelper.GetReourceValue("ServiceAdminPage_Description");
+            gvwRoomService.Columns["Price"].Header = ResourceHelper.GetReourceValue("ServiceAdminPage_Price");
+            gvwRoomService.Columns["Unit"].Header = ResourceHelper.GetReourceValue("ServiceAdminPage_Unit");
+            
+            btnSaveRoomService.Content = ResourceHelper.GetReourceValue("Common_btnSave");
+            btnCancelRoomService.Content = ResourceHelper.GetReourceValue("Common_btnCancel");
+            btnInsertRoomService.Content = ResourceHelper.GetReourceValue("Common_btnInsert");
         }
 
         void ucSitePicker_InitComplete(object sender, EventArgs e)
@@ -239,13 +283,13 @@ namespace Mimosa.Apartment.Silverlight.UI
                 if (e.NewValue == null || string.IsNullOrEmpty(e.NewValue.ToString()))
                 {
                     e.IsValid = false;
-                    e.ErrorMessage = Globals.UserMessages.RequiredFieldGeneric;
+                    e.ErrorMessage = ResourceHelper.GetReourceValue("Common_RequiredFieldGeneric");
                 }
             }
         }
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show(Globals.UserMessages.ConfirmDeleteNoParam, Globals.UserMessages.ConfirmationRequired, MessageBoxButton.OKCancel);
+            MessageBoxResult result = MessageBox.Show(ResourceHelper.GetReourceValue("Common_ConfirmDeleteNoParam"), ResourceHelper.GetReourceValue("Common_ConfirmationRequired"), MessageBoxButton.OKCancel);
             if (result == MessageBoxResult.OK)
             {
                 int recordId = int.Parse((sender as Button).Tag.ToString());
@@ -259,7 +303,7 @@ namespace Mimosa.Apartment.Silverlight.UI
         
         void gvwRoom_Deleting(object sender, GridViewDeletingEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show(Globals.UserMessages.ConfirmDeleteNoParam, Globals.UserMessages.ConfirmationRequired, MessageBoxButton.OKCancel);
+            MessageBoxResult result = MessageBox.Show(ResourceHelper.GetReourceValue("Common_ConfirmDeleteNoParam"), ResourceHelper.GetReourceValue("Common_ConfirmationRequired"), MessageBoxButton.OKCancel);
             if (result == MessageBoxResult.Cancel)
             {
                 e.Cancel = true;
@@ -303,7 +347,7 @@ namespace Mimosa.Apartment.Silverlight.UI
         #region RoomEquipment
         void gvwRoomEquipment_Deleting(object sender, GridViewDeletingEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show(Globals.UserMessages.ConfirmDeleteNoParam, Globals.UserMessages.ConfirmationRequired, MessageBoxButton.OKCancel);
+            MessageBoxResult result = MessageBox.Show(ResourceHelper.GetReourceValue("Common_ConfirmDeleteNoParam"), ResourceHelper.GetReourceValue("Common_ConfirmationRequired"), MessageBoxButton.OKCancel);
             if (result == MessageBoxResult.Cancel)
             {
                 e.Cancel = true;
@@ -396,7 +440,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                 List<RoomEquipment> list = (List<RoomEquipment>)gvwRoomEquipment.ItemsSource;
                 if (list.Count(i => i.EquipmentId == equipment.EquipmentId) > 0)
                 {
-                    MessageBox.Show(Globals.UserMessages.ItemExist);
+                    MessageBox.Show(ResourceHelper.GetReourceValue("Common_ItemExist"));
                 }
                 else
                 {
@@ -419,7 +463,7 @@ namespace Mimosa.Apartment.Silverlight.UI
         #region RoomService
         void gvwRoomService_Deleting(object sender, GridViewDeletingEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show(Globals.UserMessages.ConfirmDeleteNoParam, Globals.UserMessages.ConfirmationRequired, MessageBoxButton.OKCancel);
+            MessageBoxResult result = MessageBox.Show(ResourceHelper.GetReourceValue("Common_ConfirmDeleteNoParam"), ResourceHelper.GetReourceValue("Common_ConfirmationRequired"), MessageBoxButton.OKCancel);
             if (result == MessageBoxResult.Cancel)
             {
                 e.Cancel = true;
@@ -512,7 +556,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                 List<RoomService> list = (List<RoomService>)gvwRoomService.ItemsSource;
                 if (list.Count(i => i.ServiceId == service.ServiceId) > 0)
                 {
-                    MessageBox.Show(Globals.UserMessages.ItemExist);
+                    MessageBox.Show(ResourceHelper.GetReourceValue("Common_ItemExist"));
                 }
                 else
                 {

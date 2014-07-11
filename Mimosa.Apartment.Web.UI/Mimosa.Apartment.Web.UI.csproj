@@ -156,6 +156,7 @@
     <Content Include="Scripts\SilverlightHelper.js" />
     <Content Include="crossdomain.xml" />
     <Content Include="Shared\SilverlightMinWidthResizer.ascx" />
+    <Content Include="SiteMaps\Web.sitemap_VN.txt" />
     <Content Include="SiteMaps\Web.sitemap.txt" />
     <Content Include="Services\ApartmentService.svc" />
     <Content Include="Web.config">

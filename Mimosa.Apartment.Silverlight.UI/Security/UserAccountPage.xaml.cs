@@ -19,7 +19,8 @@ namespace Mimosa.Apartment.Silverlight.UI
         public UserAccountPage()
         {            
             InitializeComponent();
-            
+
+            uiTitle.Text = ResourceHelper.GetReourceValue("UserAccountPage_uiTitle");
             ucUserAccount.IsEditable = true;
             ucUserAccount.RebindData();
         }

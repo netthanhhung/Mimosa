@@ -29,8 +29,26 @@ namespace Mimosa.Apartment.Silverlight.UI
         public BookingPaymentDetails()
         {
             InitializeComponent();
+            FillLanguage();
             btnExport.Click += new RoutedEventHandler(btnExport_Click);
             btnEmail.Click += new RoutedEventHandler(btnEmail_Click);
+        }
+
+        void FillLanguage()
+        {
+            lblRoom.Text = ResourceHelper.GetReourceValue("BookingAdmin_RoomName");
+            lblCustomer1.Text = ResourceHelper.GetReourceValue("BookingAdmin_CustomerName");
+            lblCustomer2.Text = ResourceHelper.GetReourceValue("BookingAdmin_Customer2Name");
+            lblRoomPrice.Text = ResourceHelper.GetReourceValue("BookingPaymentPage_RoomPrice");
+            lblEquipmentPrice.Text = ResourceHelper.GetReourceValue("BookingPaymentPage_EquipmentPrice");
+            lblServicePrice.Text = ResourceHelper.GetReourceValue("BookingPaymentPage_ServicePrice");
+            lblTotalPrice.Text = ResourceHelper.GetReourceValue("BookingPaymentPage_TotalPrice");
+            lblPaid.Text = ResourceHelper.GetReourceValue("BookingPaymentPage_CustomerPaid");
+            lblTotalLeft.Text = ResourceHelper.GetReourceValue("BookingPaymentPage_MoneyLeft");
+            lblPaid.Text = ResourceHelper.GetReourceValue("BookingPaymentPage_Payment");
+
+            btnExport.Content = ResourceHelper.GetReourceValue("Common_btnExport");
+            btnEmail.Content = ResourceHelper.GetReourceValue("Common_btnEmail");
         }
 
         void btnEmail_Click(object sender, RoutedEventArgs e)

@@ -42,13 +42,13 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <TextBlock
+            <TextBlock x:Name="uiTitle"
                     Margin="{StaticResource SmallContentMargin}" Grid.Column="0" Grid.Row="0"
                     VerticalAlignment="Center"
                     Text="Booking Info:">
             </TextBlock>
             
-            <TextBlock
+            <TextBlock x:Name="lblSite"
                     Margin="{StaticResource SmallContentMargin}" Grid.Column="0" Grid.Row="1"
                     VerticalAlignment="Center"
                     Text="Site:">
@@ -58,7 +58,7 @@
                     Grid.Column="1" Grid.Row="1"
                     DataListWidth="250" ShowInactiveCheck="False" ShowAllSitesItem="False"
                     ></local:SitePicker>
-            <TextBlock
+            <TextBlock x:Name="lblRoom"
                     Margin="{StaticResource SmallContentMargin}" Grid.Column="0" Grid.Row="2"
                     VerticalAlignment="Center"
                     Text="Room:">
@@ -69,7 +69,7 @@
                     DisplayMemberPath="RoomName"
                     SelectedValuePath="RoomId" />
 
-            <TextBlock
+            <TextBlock x:Name="lblRoomPrice"
                     Margin="{StaticResource SmallContentMargin}" Grid.Column="0" Grid.Row="3"
                     VerticalAlignment="Center"
                     Text="Room Price:">
@@ -78,7 +78,7 @@
                     x:Name="uiRoomPrice" Grid.Column="1" Grid.Row="3" Height="25"
                     HorizontalAlignment="Left" Value="0" NumberDecimalDigits="0"
                     Width="100"></telerikInput:RadNumericUpDown>
-            <TextBlock
+            <TextBlock x:Name="lblDateFrom"
                     Margin="{StaticResource SmallContentMargin}" Grid.Column="0" Grid.Row="4"
                     VerticalAlignment="Center"
                     Text="Date From:">
@@ -88,7 +88,7 @@
                     Width="100" HorizontalAlignment="Left" Margin="0"
                     Style="{StaticResource InputControlStyle}"></telerikInput:RadDatePicker>
             
-            <TextBlock
+            <TextBlock x:Name="lblDateTo"
                     Margin="{StaticResource SmallContentMargin}" Grid.Column="0" Grid.Row="5"
                     VerticalAlignment="Center"
                     Text="Date To:">
@@ -98,7 +98,7 @@
                     Width="100" HorizontalAlignment="Left"  Margin="0"
                     Style="{StaticResource InputControlStyle}"></telerikInput:RadDatePicker>
 
-            <TextBlock
+            <TextBlock x:Name="lblDescription"
                     Margin="{StaticResource SmallContentMargin}" Grid.Column="0" Grid.Row="6"
                     VerticalAlignment="Center"
                     Text="Description:">

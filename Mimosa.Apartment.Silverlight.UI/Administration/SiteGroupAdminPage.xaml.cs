@@ -15,13 +15,7 @@ using Mimosa.Apartment.Common;
 namespace Mimosa.Apartment.Silverlight.UI
 {
     public partial class SiteGroupAdminPage : Page
-    {
-        private static class UserMessages
-        {
-            internal const string SiteAlreadyExist = "This site is already added";
-            internal const string DuplicatedName = "There are duplicated name. Please check again.";
-        }
-
+    {        
         private List<SiteGroup> _originalItemSource = new List<SiteGroup>();
         private string _selectedSiteGroup = string.Empty;
         public List<UserRoleAuth> UserRoleAuths { get; set; }
@@ -36,6 +30,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                 return;
             }
             btnSave.IsEnabled = this.UserRoleAuths.Count(i => i.WriteRight == true) > 0;
+            FillLanguage();
 
             ucSitePicker.Init();
             RebindSiteGroups();
@@ -50,6 +45,16 @@ namespace Mimosa.Apartment.Silverlight.UI
             btnSave.Click += new RoutedEventHandler(btnSave_Click);
             btnCancel.Click += new RoutedEventHandler(btnCancel_Click);
             btnAddSite.Click += new RoutedEventHandler(btnAddSite_Click);
+        }
+
+        void FillLanguage()
+        {
+            uiTitle.Text = ResourceHelper.GetReourceValue("SiteGroupAdminPage_uiTitle");
+            gvwSiteGroup.Columns["GroupName"].Header = ResourceHelper.GetReourceValue("SiteGroupAdminPage_SiteGroup");
+            gvwSites.Columns["Name"].Header = ResourceHelper.GetReourceValue("SiteGroupAdminPage_Site");
+            btnSave.Content = ResourceHelper.GetReourceValue("Common_btnSave");
+            btnCancel.Content = ResourceHelper.GetReourceValue("Common_btnCancel");
+            btnAddSite.Content = ResourceHelper.GetReourceValue("Common_btnInsert");
         }
 
         void RebindSiteGroups()
@@ -105,7 +110,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                     }
                     else
                     {
-                        MessageBox.Show(UserMessages.SiteAlreadyExist, Globals.UserMessages.ValidationError, MessageBoxButton.OK);
+                        MessageBox.Show(ResourceHelper.GetReourceValue("SiteGroupAdminPage_SiteAlreadyExist"), ResourceHelper.GetReourceValue("Common_ValidationError"), MessageBoxButton.OK);
                     }
                 }
             }
@@ -113,7 +118,7 @@ namespace Mimosa.Apartment.Silverlight.UI
 
         void gvwSites_Deleting(object sender, GridViewDeletingEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show(Globals.UserMessages.ConfirmDeleteNoParam, Globals.UserMessages.ConfirmationRequired, MessageBoxButton.OKCancel);
+            MessageBoxResult result = MessageBox.Show(ResourceHelper.GetReourceValue("Common_ConfirmDeleteNoParam"), ResourceHelper.GetReourceValue("Common_ConfirmationRequired"), MessageBoxButton.OKCancel);
             if (result == MessageBoxResult.Cancel)
             {
                 e.Cancel = true;
@@ -158,7 +163,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                 if (e.NewValue == null || string.IsNullOrEmpty(e.NewValue.ToString()))
                 {
                     e.IsValid = false;
-                    e.ErrorMessage = Globals.UserMessages.RequiredFieldGeneric;
+                    e.ErrorMessage = ResourceHelper.GetReourceValue("Common_RequiredFieldGeneric");
                 }
             }
         }
@@ -172,7 +177,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                 {
                     if (siteGroup.CanDelete)
                     {
-                        MessageBoxResult result = MessageBox.Show(Globals.UserMessages.ConfirmDeleteNoParam, Globals.UserMessages.ConfirmationRequired, MessageBoxButton.OKCancel);
+                        MessageBoxResult result = MessageBox.Show(ResourceHelper.GetReourceValue("Common_ConfirmDeleteNoParam"), ResourceHelper.GetReourceValue("Common_ConfirmationRequired"), MessageBoxButton.OKCancel);
                         if (result == MessageBoxResult.Cancel)
                         {
                             e.Cancel = true;
@@ -180,7 +185,8 @@ namespace Mimosa.Apartment.Silverlight.UI
                     }
                     else
                     {
-                        MessageBoxResult result = MessageBox.Show(string.Format(Globals.UserMessages.DeleteFailed, siteGroup.GroupName), Globals.UserMessages.OperationFailed, MessageBoxButton.OK);
+                        MessageBoxResult result = MessageBox.Show(string.Format(ResourceHelper.GetReourceValue("Common_DeleteFailed"), 
+                            siteGroup.GroupName), ResourceHelper.GetReourceValue("Common_OperationFailed"), MessageBoxButton.OK);
                         e.Cancel = true;
                     }
                 }
@@ -221,7 +227,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                         SiteGroup secondItem = saveList[j];
                         if (firstItem.GroupName == secondItem.GroupName)
                         {
-                            MessageBox.Show(UserMessages.DuplicatedName, Globals.UserMessages.ValidationError, MessageBoxButton.OK);
+                            MessageBox.Show(ResourceHelper.GetReourceValue("SiteGroupAdminPage_DuplicatedName"), ResourceHelper.GetReourceValue("Common_ValidationError"), MessageBoxButton.OK);
                             return;
                         }
                     }

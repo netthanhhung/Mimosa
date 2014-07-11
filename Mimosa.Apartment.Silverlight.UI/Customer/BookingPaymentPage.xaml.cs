@@ -29,7 +29,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                 this.Content = SecurityHelper.GetNoPermissionInfoPanel();
                 return;
             }
-
+            FillLanguage();
             ucSitePicker.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(ucSitePicker_SelectionChanged);
             ucSitePicker.Init();
             ucSitePicker.InitComplete += new EventHandler(ucSitePicker_InitComplete);
@@ -43,6 +43,35 @@ namespace Mimosa.Apartment.Silverlight.UI
             btnCancelCancel.Click += new RoutedEventHandler(btnCancelCancel_Click);
 
             gvwBookingPayment.CellEditEnded += new EventHandler<GridViewCellEditEndedEventArgs>(gvwBookingPayment_CellEditEnded);
+        }
+
+        void FillLanguage()
+        {
+            uiTitle.Text = ResourceHelper.GetReourceValue("BookingPaymentPage_uiTitle");
+            lblSite.Text = ResourceHelper.GetReourceValue("Common_lblSite");
+            ucSitePicker.InactiveMessage = ResourceHelper.GetReourceValue("Common_chkShowLegacy");
+            lblFromDate.Text = ResourceHelper.GetReourceValue("BookingAdminPage_lblFromDate");
+            lblToDate.Text = ResourceHelper.GetReourceValue("BookingAdminPage_lblToDate");
+            radPaid.Content = ResourceHelper.GetReourceValue("BookingPaymentPage_radPaid");
+            radNotPaid.Content = ResourceHelper.GetReourceValue("BookingPaymentPage_radNotPaid");
+            radAll.Content = ResourceHelper.GetReourceValue("BookingPaymentPage_radAll");            
+
+            gvwBookingPayment.Columns["RoomName"].Header = ResourceHelper.GetReourceValue("BookingAdmin_RoomName");
+            gvwBookingPayment.Columns["CustomerName"].Header = ResourceHelper.GetReourceValue("BookingAdmin_CustomerName");
+            gvwBookingPayment.Columns["Customer2Name"].Header = ResourceHelper.GetReourceValue("BookingAdmin_Customer2Name");
+            gvwBookingPayment.Columns["FromDate"].Header = ResourceHelper.GetReourceValue("BookingAdminPage_lblFromDate");
+            gvwBookingPayment.Columns["ToDate"].Header = ResourceHelper.GetReourceValue("BookingAdminPage_lblToDate");
+            gvwBookingPayment.Columns["RoomPrice"].Header = ResourceHelper.GetReourceValue("BookingPaymentPage_RoomPrice");
+            gvwBookingPayment.Columns["EquipmentPrice"].Header = ResourceHelper.GetReourceValue("BookingPaymentPage_EquipmentPrice");
+            gvwBookingPayment.Columns["ServicePrice"].Header = ResourceHelper.GetReourceValue("BookingPaymentPage_ServicePrice");
+            gvwBookingPayment.Columns["TotalPrice"].Header = ResourceHelper.GetReourceValue("BookingPaymentPage_TotalPrice");
+            gvwBookingPayment.Columns["CustomerPaid"].Header = ResourceHelper.GetReourceValue("BookingPaymentPage_CustomerPaid");
+            gvwBookingPayment.Columns["MoneyLeft"].Header = ResourceHelper.GetReourceValue("BookingPaymentPage_MoneyLeft");
+            gvwBookingPayment.Columns["Payment"].Header = ResourceHelper.GetReourceValue("BookingPaymentPage_Payment");
+
+            btnSavePayment.Content = ResourceHelper.GetReourceValue("Common_btnSave");
+            btnCancelCancel.Content = ResourceHelper.GetReourceValue("Common_btnCancel");
+            btnSearch.Content = ResourceHelper.GetReourceValue("Common_btnSearch");
         }
 
         void gvwBookingPayment_CellEditEnded(object sender, GridViewCellEditEndedEventArgs e)
@@ -174,7 +203,9 @@ namespace Mimosa.Apartment.Silverlight.UI
                 if (bookingPayment != null)
                 {
                     ucPaymentDetails.BindData(bookingPayment);
-                    uiPopupPaymentDetails.Header = "Payment details, from " + DateHelper.DateToString(bookingPayment.DateStart) + " to " + DateHelper.DateToString(bookingPayment.DateEnd);
+                    uiPopupPaymentDetails.Header = string.Format(ResourceHelper.GetReourceValue("BookingPaymentPage_uiPopupPaymentDetails"),
+                                                                DateHelper.DateToString(bookingPayment.DateStart), 
+                                                                DateHelper.DateToString(bookingPayment.DateEnd));
                     uiPopupPaymentDetails.ShowDialog();
                 }
             }

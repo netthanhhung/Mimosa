@@ -76,7 +76,7 @@ namespace Mimosa.Apartment.Silverlight.UI
 
         void gvwServiceDetails_Deleting(object sender, Telerik.Windows.Controls.GridViewDeletingEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show(Globals.UserMessages.ConfirmDeleteNoParam, Globals.UserMessages.ConfirmationRequired, MessageBoxButton.OKCancel);
+            MessageBoxResult result = MessageBox.Show(ResourceHelper.GetReourceValue("Common_ConfirmDeleteNoParam"), ResourceHelper.GetReourceValue("Common_ConfirmationRequired"), MessageBoxButton.OKCancel);
             if (result == MessageBoxResult.Cancel)
             {
                 e.Cancel = true;

@@ -20,12 +20,7 @@ namespace Mimosa.Apartment.Silverlight.UI
 
         private int _seletedCustomerId;
         private List<Customer> _originalItemSource = new List<Customer>();
-                
-        private static class UserMessages
-        {
-            internal const string NameErrorMessage2 = "The string may not exceed 128 characters in length.";
-            
-        }
+         
         public List<UserRoleAuth> UserRoleAuths { get; set; }
 
         public CustomerAdminPage()
@@ -42,7 +37,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                 = ucBookingAdmin.btnSaveBooking.IsEnabled = ucBookingAdmin.btnSaveBookingEquipment.IsEnabled = ucBookingAdmin.btnSaveBookingService.IsEnabled
                 = ucBookingAdmin.btnNewBooking.IsEnabled = ucBookingAdmin.btnInsertBookingEquipment.IsEnabled = ucBookingAdmin.btnInsertBookingService.IsEnabled
                 = this.UserRoleAuths.Count(i => i.WriteRight == true) > 0;
-            
+            FillLanguage();
 
             ucSitePicker.Init();
             ucSitePicker.InitComplete += new EventHandler(ucSitePicker_InitComplete);
@@ -71,6 +66,29 @@ namespace Mimosa.Apartment.Silverlight.UI
             ucBookingAdmin.RebindBookingList +=new EventHandler(ucBookingAdmin_RebindBookingList);
 
             UiHelper.ApplyMouseWheelScrollViewer(scrollViewerCustomers);
+        }
+
+        void FillLanguage()
+        {
+            uiTitle.Text = ResourceHelper.GetReourceValue("CustomerAdminPage_uiTitle");
+            lblFirstName.Text = ResourceHelper.GetReourceValue("ContactInformationPanel_lblFirstName");
+            lblLastName.Text = ResourceHelper.GetReourceValue("ContactInformationPanel_lblLastName");
+            chkHasContract.Content = ResourceHelper.GetReourceValue("CustomerAdminPage_chkHasContract");
+            lblFromDate.Text = ResourceHelper.GetReourceValue("BookingAdminPage_lblFromDate");
+            lblToDate.Text = ResourceHelper.GetReourceValue("BookingAdminPage_lblToDate");
+            chkShowInactive.Content = ResourceHelper.GetReourceValue("Common_chkShowLegacy");
+
+            gvwCustomers.Columns["FirstName"].Header = ResourceHelper.GetReourceValue("ContactInformationPanel_lblFirstName");
+            gvwCustomers.Columns["LastName"].Header = ResourceHelper.GetReourceValue("ContactInformationPanel_lblLastName");
+            gvwCustomers.Columns["SiteName"].Header = ResourceHelper.GetReourceValue("Common_lblSite");
+            gvwCustomers.Columns["Age"].Header = ResourceHelper.GetReourceValue("CustomerDetails_lblAge");
+            gvwCustomers.Columns["Gender"].Header = ResourceHelper.GetReourceValue("CustomerDetails_lblGender");
+            gvwCustomers.Columns["Gender"].Header = ResourceHelper.GetReourceValue("CustomerDetails_lblGender");
+            gvwCustomers.Columns["Inactive"].Header = ResourceHelper.GetReourceValue("Common_Inactive");
+
+            btnSaveCustomer.Content = ResourceHelper.GetReourceValue("Common_btnSave");
+            btnCancelCustomer.Content = ResourceHelper.GetReourceValue("Common_btnCancel");
+            btnSearch.Content = ResourceHelper.GetReourceValue("Common_btnSearch");
         }
 
         void ucSitePicker_InitComplete(object sender, EventArgs e)
@@ -140,12 +158,12 @@ namespace Mimosa.Apartment.Silverlight.UI
                 if (e.NewValue.ToString().Length < 1)
                 {
                     e.IsValid = false;
-                    e.ErrorMessage = Globals.UserMessages.RequiredFieldGeneric;
+                    e.ErrorMessage = ResourceHelper.GetReourceValue("Common_RequiredFieldGeneric");
                 }
                 else if (e.NewValue.ToString().Length > 128)
                 {
                     e.IsValid = false;
-                    e.ErrorMessage = UserMessages.NameErrorMessage2;
+                    e.ErrorMessage = ResourceHelper.GetReourceValue("Common_NameLengthErrorMessage");
                 }
             }
             //else if (e.Cell.Column.UniqueName == "DisplayIndex")

@@ -19,10 +19,7 @@ namespace Mimosa.Apartment.Silverlight.UI
     public partial class RoleAdminPage : Page, IComponent
     {
         private List<AspRole> _originalItemSource = new List<AspRole>();
-        private static class UserMessages
-        {
-            internal const string DuplicatedName = "There are duplicated name. Please check again.";
-        }
+        
         public List<UserRoleAuth> UserRoleAuths { get; set; }
 
         public RoleAdminPage()
@@ -36,7 +33,7 @@ namespace Mimosa.Apartment.Silverlight.UI
             }
             btnSave.IsEnabled = Globals.UserLogin.IsUserOrganisationAdministrator
                             && this.UserRoleAuths.Count(i => i.WriteRight == true) > 0;
-            
+            FillLanguage();
             RebindRoleData();
 
             gvwRole.AddingNewDataItem += new EventHandler<Telerik.Windows.Controls.GridView.GridViewAddingNewEventArgs>(gvwRole_AddingNewDataItem);
@@ -45,6 +42,15 @@ namespace Mimosa.Apartment.Silverlight.UI
 
             btnSave.Click += new RoutedEventHandler(btnSave_Click);
             btnCancel.Click += new RoutedEventHandler(btnCancel_Click);
+        }
+
+        void FillLanguage()
+        {
+            uiTitle.Text = ResourceHelper.GetReourceValue("RoleAdminPage_uiTitle");
+            gvwRole.Columns["RoleName"].Header = ResourceHelper.GetReourceValue("RoleAdminPage_RoleName");
+            gvwRole.Columns["Description"].Header = ResourceHelper.GetReourceValue("Common_Description");
+            btnSave.Content = ResourceHelper.GetReourceValue("Common_btnSave");
+            btnCancel.Content = ResourceHelper.GetReourceValue("Common_btnCancel");
         }
 
         void RebindRoleData()
@@ -82,7 +88,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                 if (e.NewValue == null || string.IsNullOrEmpty(e.NewValue.ToString()))
                 {
                     e.IsValid = false;
-                    e.ErrorMessage = Globals.UserMessages.RequiredFieldGeneric;
+                    e.ErrorMessage = ResourceHelper.GetReourceValue("Common_RequiredFieldGeneric");
                 }
             }
         }
@@ -96,7 +102,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                 {                    
                     if (role.CanDelete && !SecurityHelper.IsBuildInRole(role.RoleId))
                     {
-                        MessageBoxResult result = MessageBox.Show(Globals.UserMessages.ConfirmDeleteNoParam, Globals.UserMessages.ConfirmationRequired, MessageBoxButton.OKCancel);
+                        MessageBoxResult result = MessageBox.Show(ResourceHelper.GetReourceValue("Common_ConfirmDeleteNoParam"), ResourceHelper.GetReourceValue("Common_ConfirmationRequired"), MessageBoxButton.OKCancel);
                         if (result == MessageBoxResult.Cancel)
                         {
                             e.Cancel = true;
@@ -104,7 +110,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                     }
                     else
                     {
-                        MessageBoxResult result = MessageBox.Show(string.Format(Globals.UserMessages.DeleteFailed, role.RoleName), Globals.UserMessages.OperationFailed, MessageBoxButton.OK);
+                        MessageBoxResult result = MessageBox.Show(string.Format(ResourceHelper.GetReourceValue("Common_DeleteFailed"), role.RoleName), ResourceHelper.GetReourceValue("Common_OperationFailed"), MessageBoxButton.OK);
                         e.Cancel = true;
                     }
                 }
@@ -134,7 +140,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                         AspRole secondItem = saveList[j];
                         if (firstItem.RoleName == secondItem.RoleName)
                         {
-                            MessageBox.Show(UserMessages.DuplicatedName, Globals.UserMessages.ValidationError, MessageBoxButton.OK);
+                            MessageBox.Show(ResourceHelper.GetReourceValue("RoleAdminPage_DuplicatedName"), ResourceHelper.GetReourceValue("Common_ValidationError"), MessageBoxButton.OK);
                             return;
                         }
                     }

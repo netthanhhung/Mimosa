@@ -45,7 +45,7 @@
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock
+                <TextBlock x:Name="lblFirstName"
                         Grid.Column="0" Grid.Row="0"
                         Margin="{StaticResource SmallContentMargin}"
                         HorizontalAlignment="Left" VerticalAlignment="Center"
@@ -57,7 +57,7 @@
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                         Width="250" Height="24" 
                         Text="{Binding FirstName, Mode=TwoWay}"/>
-                <TextBlock
+                <TextBlock x:Name="lblLastName"
                         Grid.Column="0" Grid.Row="1"
                         Margin="{StaticResource SmallContentMargin}"
                         HorizontalAlignment="Left" VerticalAlignment="Center"
@@ -69,7 +69,7 @@
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                         Width="250" Height="24" 
                         Text="{Binding LastName, Mode=TwoWay}"/>
-                <TextBlock
+                <TextBlock x:Name="lblAddress"
                         Grid.Column="0" Grid.Row="2"
                         Margin="{StaticResource SmallContentMargin}"
                         HorizontalAlignment="Left" VerticalAlignment="Center"
@@ -81,7 +81,7 @@
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                         Width="250" Height="24" 
                         Text="{Binding Address, Mode=TwoWay}"/>
-                <TextBlock
+                <TextBlock x:Name="lblAddress2"
                         Grid.Column="0" Grid.Row="3"
                         Margin="{StaticResource SmallContentMargin}"
                         HorizontalAlignment="Left" VerticalAlignment="Center"
@@ -93,7 +93,7 @@
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                         Width="250" Height="24" 
                         Text="{Binding Address2, Mode=TwoWay}"/>
-                <TextBlock
+                <TextBlock x:Name="lblDistrict"
                         Grid.Column="0" Grid.Row="4"
                         Margin="{StaticResource SmallContentMargin}"
                         HorizontalAlignment="Left" VerticalAlignment="Center"
@@ -114,7 +114,7 @@
                         SelectedValuePath="DistrictId" HorizontalAlignment="Left"
                         SelectedValue="{Binding DistrictId, Mode=TwoWay}">
                 </ComboBox>
-                <TextBlock
+                <TextBlock x:Name="lblCity"
                         Grid.Column="0" Grid.Row="5"
                         Margin="{StaticResource SmallContentMargin}"
                         HorizontalAlignment="Left" VerticalAlignment="Center"
@@ -135,7 +135,7 @@
                         SelectedValuePath="CityId" HorizontalAlignment="Left"
                         SelectedValue="{Binding CityId, Mode=TwoWay}">
                 </ComboBox>
-                <TextBlock
+                <TextBlock x:Name="lblState"
                         Grid.Column="0" Grid.Row="6"
                         Margin="{StaticResource SmallContentMargin}"
                         HorizontalAlignment="Left" VerticalAlignment="Center"
@@ -147,7 +147,7 @@
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                         Width="250" Height="24" 
                         Text="{Binding State, Mode=TwoWay}"/>
-                <TextBlock
+                <TextBlock x:Name="lblPostCode"
                         Grid.Column="0" Grid.Row="7"
                         Margin="{StaticResource SmallContentMargin}"
                         HorizontalAlignment="Left" VerticalAlignment="Center"
@@ -161,7 +161,7 @@
                         Text="{Binding Postcode, Mode=TwoWay}"/>
 
 
-                <TextBlock
+                <TextBlock x:Name="lblCountry"
                         Grid.Column="0" Grid.Row="8"
                         Margin="{StaticResource SmallContentMargin}"
                         HorizontalAlignment="Left" VerticalAlignment="Center"
@@ -177,7 +177,7 @@
                         SelectedValuePath="CountryId" HorizontalAlignment="Left"
                         SelectedValue="{Binding CountryId, Mode=TwoWay}">
                 </ComboBox>
-                <TextBlock
+                <TextBlock x:Name="lblPhone"
                         Grid.Column="0" Grid.Row="9"
                         Margin="{StaticResource SmallContentMargin}"
                         HorizontalAlignment="Left" VerticalAlignment="Center"
@@ -189,7 +189,7 @@
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                         Width="250" Height="24" MaxLength="20"
                         Text="{Binding PhoneNumber, Mode=TwoWay}"/>
-                <TextBlock
+                <TextBlock x:Name="lblFax"
                         Grid.Column="0" Grid.Row="10"
                         Margin="{StaticResource SmallContentMargin}"
                         HorizontalAlignment="Left" VerticalAlignment="Center"
@@ -201,7 +201,7 @@
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                         Width="250" Height="24" MaxLength="20"
                         Text="{Binding FaxNumber, Mode=TwoWay}"/>
-                <TextBlock
+                <TextBlock x:Name="lblEmail"
                         Grid.Column="0" Grid.Row="11"
                         Margin="{StaticResource SmallContentMargin}"
                         HorizontalAlignment="Left" VerticalAlignment="Center"
@@ -214,7 +214,7 @@
                         Width="250" Height="24" MaxLength="100"
                         Text="{Binding Email, Mode=TwoWay}"/>
 
-                <TextBlock
+                <TextBlock x:Name="lblDateOfBirth"
                         Grid.Column="0" Grid.Row="12"
                         Margin="{StaticResource SmallContentMargin}"
                         HorizontalAlignment="Left" VerticalAlignment="Center"
@@ -225,7 +225,7 @@
                         Margin="0" Width="100" HorizontalAlignment="Left"
                         SelectedDate="{Binding DoB, Mode=TwoWay}">
                 </telerikInput:RadDatePicker>
-                <TextBlock
+                <TextBlock x:Name="lblVisa"
                         Grid.Column="0" Grid.Row="13"
                         Margin="{StaticResource SmallContentMargin}"
                         HorizontalAlignment="Left" VerticalAlignment="Center"
@@ -237,14 +237,14 @@
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                         Width="250" Height="24" MaxLength="100"
                         Text="{Binding Visa, Mode=TwoWay}"/>
-                <TextBlock
+                <TextBlock x:Name="lblVisaValid"
                         Grid.Column="0" Grid.Row="14"
                         Margin="{StaticResource SmallContentMargin}"
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                         Text="Visa valid:">
                 </TextBlock>
                 <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="14">
-                    <TextBlock
+                    <TextBlock x:Name="lblFrom"
                         Margin="{StaticResource SmallContentMargin}"
                         VerticalAlignment="Center"
                         Text="From :">
@@ -255,7 +255,7 @@
                         SelectedDate="{Binding VisaValidFrom, Mode=TwoWay}"
                         Style="{StaticResource InputControlStyle}">
                     </telerikInput:RadDatePicker>
-                    <TextBlock
+                    <TextBlock x:Name="lblTo"
                         Margin="{StaticResource SmallContentMargin}"
                         VerticalAlignment="Center"
                         Text="To :">

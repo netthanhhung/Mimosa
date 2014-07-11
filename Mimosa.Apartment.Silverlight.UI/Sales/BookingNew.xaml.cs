@@ -18,12 +18,6 @@ namespace Mimosa.Apartment.Silverlight.UI
 {
     public partial class BookingNew : UserControl
     {
-        private static class UserMessages
-        {
-            internal const string DateNotValid = "Date End must be greater than Date Start";
-            internal const string RoomNotValid = "Please choose a specific room";
-            internal const string CustomerNotValid = "Please input customer's name";
-        }
         /*  ======================================================================            
          *      EVENTS AND DELEGATES
          *  ====================================================================== */
@@ -34,10 +28,28 @@ namespace Mimosa.Apartment.Silverlight.UI
         public BookingNew()
         {
             InitializeComponent();
+            FillLanguage();
             ucSitePicker.Init();
             ucSitePicker.InitComplete += new EventHandler(ucSitePicker_InitComplete);
             ucSitePicker.SelectionChanged += new SelectionChangedEventHandler(ucSitePicker_SelectionChanged);
             uiRoom.SelectionChanged += new SelectionChangedEventHandler(uiRoom_SelectionChanged);
+        }
+
+        void FillLanguage()
+        {
+            uiTitle.Text = ResourceHelper.GetReourceValue("BookingNew_uiTitle");
+            lblSite.Text = ResourceHelper.GetReourceValue("Common_lblSite");
+            lblRoom.Text = ResourceHelper.GetReourceValue("BookingAdmin_RoomName");
+            lblDateFrom.Text = ResourceHelper.GetReourceValue("BookingAdminPage_lblFromDate");
+            lblDateTo.Text = ResourceHelper.GetReourceValue("BookingAdminPage_lblToDate");
+            lblRoomPrice.Text = ResourceHelper.GetReourceValue("BookingAdmin_RoomPrice");
+            lblDescription.Text = ResourceHelper.GetReourceValue("Common_Description");
+
+            ucCustomerDetails.lblCustomerTitle.Text = ResourceHelper.GetReourceValue("BookingAdmin_CustomerName");
+            ucCustomerDetails2.lblCustomerTitle.Text = ResourceHelper.GetReourceValue("BookingAdmin_Customer2Name");
+
+            btnOK.Content = ResourceHelper.GetReourceValue("Common_btnSave");
+            btnCancel.Content = ResourceHelper.GetReourceValue("Common_btnCancel");
         }
 
         void uiRoom_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -86,12 +98,12 @@ namespace Mimosa.Apartment.Silverlight.UI
             if (uiRoom.SelectedItem == null)
             {
                 result = false;
-                MessageBox.Show(UserMessages.RoomNotValid, Globals.UserMessages.ValidationError, MessageBoxButton.OK);
+                MessageBox.Show(ResourceHelper.GetReourceValue("CustomerDetails_RoomNotValid"), ResourceHelper.GetReourceValue("Common_ValidationError"), MessageBoxButton.OK);
             }            
             if (uiDateFrom.SelectedDate.HasValue && uiDateTo.SelectedDate.HasValue && uiDateFrom.SelectedDate.Value > uiDateTo.SelectedDate.Value)
             {
                 result = false;
-                MessageBox.Show(UserMessages.DateNotValid, Globals.UserMessages.ValidationError, MessageBoxButton.OK);
+                MessageBox.Show(ResourceHelper.GetReourceValue("Common_DateNotValid"), ResourceHelper.GetReourceValue("Common_ValidationError"), MessageBoxButton.OK);
             }
 
             if (result)

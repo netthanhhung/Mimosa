@@ -19,14 +19,6 @@ namespace Mimosa.Apartment.Silverlight.UI
 {
     public partial class UserRoleAuthAdminPage : Page, IComponent
     {
-        private static class UserMessages
-        {
-            internal const string Users = "Users";
-            internal const string Roles = "Roles";
-            internal const string Role = "Role";
-            internal const string Username = "Username";
-        }
-
         private const int _nbrItemsShowed = 100;
 
         private List<UserRoleAuth> _deleteList = new List<UserRoleAuth>();
@@ -47,15 +39,13 @@ namespace Mimosa.Apartment.Silverlight.UI
                 return;
             }
             btnSave.IsEnabled = this.UserRoleAuths.Count(i => i.WriteRight == true) > 0;
-            
+            FillLanguage();
+
             btnSave.Click += new RoutedEventHandler(btnSave_Click);
             btnCancel.Click += new RoutedEventHandler(btnCancel_Click);
 
             //uiUsers.SelectionChanged += new Telerik.Windows.Controls.SelectionChangedEventHandler(uiUsers_SelectionChanged);
             btnNew.Click += new RoutedEventHandler(btnNew_Click);
-
-            radByUser.Checked += new RoutedEventHandler(radByUserRole_Checked);
-            radByRole.Checked += new RoutedEventHandler(radByUserRole_Checked);
 
             RebindUserList();
 
@@ -66,6 +56,19 @@ namespace Mimosa.Apartment.Silverlight.UI
             uiUsers.LostFocus += new RoutedEventHandler(uiUsers_LostFocus);
             
             DataServiceHelper.ListComponentAsync(null, ListComponentCompleted);
+        }
+
+        void FillLanguage()
+        {
+            lblSite.Text = ResourceHelper.GetReourceValue("Common_lblSite");
+            lblSiteGroup.Text = ResourceHelper.GetReourceValue("UserRoleAuthAdminPage_lblSiteGroup");
+            lblRole.Text = ResourceHelper.GetReourceValue("UserRoleAuthAdminPage_lblRole");
+            uiTabComponents.Header = ResourceHelper.GetReourceValue("UserRoleAuthAdminPage_uiTabComponents");
+            uiTabRoles.Header = ResourceHelper.GetReourceValue("UserRoleAuthAdminPage_uiTabRoles");
+            lblUser.Text = ResourceHelper.GetReourceValue("UserRoleAuthAdminPage_lblUser");
+            uiTitle.Text = ResourceHelper.GetReourceValue("UserRoleAuthAdminPage_uiTitle");
+            btnSave.Content = ResourceHelper.GetReourceValue("Common_btnSave");
+            btnCancel.Content = ResourceHelper.GetReourceValue("Common_btnCancel");
         }
 
         void ListComponentCompleted(List<Component> comptList)
@@ -92,26 +95,6 @@ namespace Mimosa.Apartment.Silverlight.UI
             RebindUserRoleAuthList();
         }
 
-
-        void radByUserRole_Checked(object sender, RoutedEventArgs e)
-        {
-            uiUserRoleAuthList.Items.Clear();
-            _deleteList.Clear();
-
-            uiTabRoles.IsSelected = true;
-            if (radByUser.IsChecked == true)
-            {
-                uiTabRoles.Header = UserMessages.Roles;
-                //uiTabComponents.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                uiTabRoles.Header = UserMessages.Users;
-                //uiTabComponents.Visibility = Visibility.Collapsed;
-            }
-            RebindUserList();
-        }
-        
         private void RebindUserList()
         {
             Globals.IsBusy = true;
@@ -151,24 +134,11 @@ namespace Mimosa.Apartment.Silverlight.UI
         void ListRoleCompleted(List<AspRole> roleList)
         {
             _aspRoles = SecurityHelper.FilterRoleList(roleList);
-            if (radByUser.IsChecked == true)
-            {
-                lblUser.Text = UserMessages.Username;
-                lblRole.Text = UserMessages.Role;
-                uiUsers.DisplayMemberPath = "DisplayName";
-                uiUsers.SelectedValuePath = "UserId";
-                uiUsers.ItemsSource = _aspUsers;
-            }
-            else
-            {
-                lblUser.Text = UserMessages.Role;
-                lblRole.Text = UserMessages.Username;
-                uiUsers.DisplayMemberPath = "RoleName";
-                uiUsers.SelectedValuePath = "RoleId";
-                uiUsers.ItemsSource = _aspRoles;                
-            }
+            uiUsers.DisplayMemberPath = "DisplayName";
+            uiUsers.SelectedValuePath = "UserId";
+            uiUsers.ItemsSource = _aspUsers;
             Globals.IsBusy = false;
-        }        
+        }
 
         void RebindUserRoleAuthList()
         {
@@ -176,16 +146,8 @@ namespace Mimosa.Apartment.Silverlight.UI
             if (uiUsers.SelectedValue != null && Guid.Parse(uiUsers.SelectedValue.ToString()) != Guid.Empty)
             {
                 Globals.IsBusy = true;
-                if (radByUser.IsChecked == true)
-                {
-                    Guid userId = Guid.Parse(uiUsers.SelectedValue.ToString());
-                    DataServiceHelper.ListUserRoleAuthAsync(Globals.UserLogin.UserOrganisationId, userId, null, ListUserRoleAuthCompleted);
-                }
-                else
-                {
-                    Guid roleId = Guid.Parse(uiUsers.SelectedValue.ToString());
-                    DataServiceHelper.ListUserRoleAuthAsync(Globals.UserLogin.UserOrganisationId, null, roleId, ListUserRoleAuthCompleted);
-                }
+                Guid userId = Guid.Parse(uiUsers.SelectedValue.ToString());
+                    DataServiceHelper.ListUserRoleAuthAsync(Globals.UserLogin.UserOrganisationId, userId, null, ListUserRoleAuthCompleted);                
             }            
         }
 
@@ -204,31 +166,21 @@ namespace Mimosa.Apartment.Silverlight.UI
                 control.AspRoles = _aspRoles;
                 control.AspUsers = _aspUsers;
                 control.SiteGroups = _siteGroup;
-                control.IsUserView = radByUser.IsChecked == true;
+                control.IsUserView = true;
                 control.RebindCombobox();
                 control.DeleteButtonClicked += new EventHandler(control_DeleteButtonClicked);
-                uiUserRoleAuthList.Items.Add(control);                
+                uiUserRoleAuthList.Items.Add(control);
             }
 
             _roleComponentItemSource.Clear();
-            if (radByUser.IsChecked == true)
-            {                
-                var roleList = (from i in userRoleAuthList
-                                select i.RoleId).Distinct();
-                _roleCount = roleList.Count();
-                foreach (Guid roleId in roleList)
-                {
-                    DataServiceHelper.ListRoleComponentPermissionAsync(roleId, null, ListRoleComponentCompleted);
-                }
-            }
-            else
+            var roleList = (from i in userRoleAuthList
+                            select i.RoleId).Distinct();
+            _roleCount = roleList.Count();
+            foreach (Guid roleId in roleList)
             {
-                _roleCount = 1;
-                Guid roleId = Guid.Parse(uiUsers.SelectedValue.ToString());
                 DataServiceHelper.ListRoleComponentPermissionAsync(roleId, null, ListRoleComponentCompleted);
-                
             }
-            
+
             Globals.IsBusy = false;
         }
 
@@ -261,7 +213,7 @@ namespace Mimosa.Apartment.Silverlight.UI
 
         void control_DeleteButtonClicked(object sender, EventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show(Globals.UserMessages.ConfirmDeleteNoParam, Globals.UserMessages.ConfirmationRequired, MessageBoxButton.OKCancel);
+            MessageBoxResult result = MessageBox.Show(ResourceHelper.GetReourceValue("Common_ConfirmDeleteNoParam"), ResourceHelper.GetReourceValue("Common_ConfirmationRequired"), MessageBoxButton.OKCancel);
             if (result == MessageBoxResult.OK)
             {
                 OneUserRoleAuth deletedItem = sender as OneUserRoleAuth;
@@ -283,20 +235,17 @@ namespace Mimosa.Apartment.Silverlight.UI
             {
                 OneUserRoleAuth control = new OneUserRoleAuth();
                 control.UserRoleAuthData = new UserRoleAuth();
-                if(radByUser.IsChecked == true) 
-                    control.UserRoleAuthData.UserId = Guid.Parse(uiUsers.SelectedValue.ToString());
-                else
-                    control.UserRoleAuthData.RoleId = Guid.Parse(uiUsers.SelectedValue.ToString());
+                control.UserRoleAuthData.UserId = Guid.Parse(uiUsers.SelectedValue.ToString());
                 control.AspRoles = _aspRoles;
                 control.AspUsers = _aspUsers;
                 control.SiteGroups = _siteGroup;
-                control.IsUserView = radByUser.IsChecked == true;
+                control.IsUserView = true;
 
                 control.RebindCombobox();
                 control.DeleteButtonClicked += new EventHandler(control_DeleteButtonClicked);
                 uiUserRoleAuthList.Items.Add(control);
             }
-            
+
         }
         
         void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -314,7 +263,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                     control.PrepareSaveData();
                     if (!string.IsNullOrEmpty(control.ValidationMessage))
                     {
-                        MessageBox.Show(control.ValidationMessage, Globals.UserMessages.ValidationError, MessageBoxButton.OK);
+                        MessageBox.Show(control.ValidationMessage, ResourceHelper.GetReourceValue("Common_ValidationError"), MessageBoxButton.OK);
                         return;
                     }
                     saveList.Add(control.UserRoleAuthData);

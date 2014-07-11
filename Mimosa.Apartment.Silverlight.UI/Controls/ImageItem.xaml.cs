@@ -29,9 +29,18 @@ namespace Mimosa.Apartment.Silverlight.UI
         public ImageItem(common.Image imageItem)
         {
             InitializeComponent();
+            FillLanguage();
             ImageDataItem = imageItem;
             ImageDataItem.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(ImageDataItem_PropertyChanged);
             DataBind();
+        }
+
+        void FillLanguage()
+        {
+            lblName.Text = ResourceHelper.GetReourceValue("ImageItem_lblName");
+            lblDescription.Text = ResourceHelper.GetReourceValue("ImageItem_lblDescription");
+            lblDisplayIndex.Text = ResourceHelper.GetReourceValue("ImageItem_lblDisplayIndex"); 
+            btnDelete.Content = ResourceHelper.GetReourceValue("Common_btnRemove");
         }
 
         void ImageDataItem_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

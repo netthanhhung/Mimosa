@@ -62,7 +62,7 @@ namespace Mimosa.Apartment.Web.UI.Controls
                     </a>
                 </object>
                 <iframe id=""_sl_historyFrame"" style=""visibility: hidden; height: 0px; width: 0px; border: 0px""></iframe>"
-                , ("/" + MimosaSettings.VirtualDirectory())                
+                , string.IsNullOrEmpty(MimosaSettings.VirtualDirectory()) ? string.Empty : ("/" + MimosaSettings.VirtualDirectory())                
                 , DeploymentInfo.XapGuid
                 , DeploymentInfo.MinRuntimeVersion
                 , TypeName

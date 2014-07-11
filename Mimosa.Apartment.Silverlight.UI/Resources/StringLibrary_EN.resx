@@ -1,0 +1,666 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ChangePasswordPage_lblConfirmNewPassword" xml:space="preserve">
+    <value>Confirm New Password</value>
+  </data>
+  <data name="ChangePasswordPage_lblNewPassword" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="ChangePasswordPage_lblPassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="ChangePasswordPage_uiSubmitButton" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="ChangePasswordPage_uiTitle" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="Common_btnCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Common_btnSave" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="UserAccountPage_uiTitle" xml:space="preserve">
+    <value>User Account</value>
+  </data>
+  <data name="UserAccount_btnUnlock" xml:space="preserve">
+    <value>Unlock</value>
+  </data>
+  <data name="UserAccount_chkAccountApproved" xml:space="preserve">
+    <value>Account Approved</value>
+  </data>
+  <data name="UserAccount_chkChangePasswordQuestionAnswer" xml:space="preserve">
+    <value>Change Password Q&amp;amp;A Info</value>
+  </data>
+  <data name="UserAccount_chkResetPassword" xml:space="preserve">
+    <value>Reset Password</value>
+  </data>
+  <data name="UserAccount_CreatedInfo" xml:space="preserve">
+    <value>Created {0}, last updated {1}.</value>
+  </data>
+  <data name="UserAccount_DefaultPasswordAnswer" xml:space="preserve">
+    <value>Not set yet</value>
+  </data>
+  <data name="UserAccount_DefaultPasswordQuestion" xml:space="preserve">
+    <value>Not set yet</value>
+  </data>
+  <data name="UserAccount_InputPasswordEmpty" xml:space="preserve">
+    <value>Please input password to change password question and answer.</value>
+  </data>
+  <data name="UserAccount_InputPasswordIncorrect" xml:space="preserve">
+    <value>Cannot change password question and answer because the password is incorrect</value>
+  </data>
+  <data name="UserAccount_lblEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="UserAccount_lblPassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="UserAccount_lblUsername" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="UserAccount_LockedOutMessage" xml:space="preserve">
+    <value>Account was locked out on {0}. Please uncheck box, and press Save to unlock account.</value>
+  </data>
+  <data name="UserAccount_NewGenPassword" xml:space="preserve">
+    <value>New password for user is '{0}', please advise user</value>
+  </data>
+  <data name="UserAccount_NewRecord" xml:space="preserve">
+    <value>New Record</value>
+  </data>
+  <data name="UserAccount_OfflineTooltip" xml:space="preserve">
+    <value>User is currently offline</value>
+  </data>
+  <data name="UserAccount_OnlineTooltip" xml:space="preserve">
+    <value>User is currently online.</value>
+  </data>
+  <data name="UserAccount_QuestionPasswordEmpty" xml:space="preserve">
+    <value>Please input password question and answer.</value>
+  </data>
+  <data name="UserAccount_lblInputPassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="UserAccount_txtPasswordAnswerLabel" xml:space="preserve">
+    <value>Password answer</value>
+  </data>
+  <data name="UserAccount_txtPasswordQuestionLabel" xml:space="preserve">
+    <value>Password question</value>
+  </data>
+  <data name="UserAccount_UserPasswordEmpty" xml:space="preserve">
+    <value>Username and Password should not be empty.</value>
+  </data>
+  <data name="UserAccount_UserUnlocked" xml:space="preserve">
+    <value>User has been unlocked.</value>
+  </data>
+  <data name="Common_btnAdd" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Common_btnInsert" xml:space="preserve">
+    <value>Insert</value>
+  </data>
+  <data name="Common_btnOK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Common_btnRemove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="Common_ChangesCancelled" xml:space="preserve">
+    <value>Changes cancelled:</value>
+  </data>
+  <data name="Common_ConfirmationRequired" xml:space="preserve">
+    <value>Confirmation Required</value>
+  </data>
+  <data name="Common_ConfirmDelete" xml:space="preserve">
+    <value>Are you sure you want to delete '{0}'?</value>
+  </data>
+  <data name="Common_ConfirmDeleteNoParam" xml:space="preserve">
+    <value>Are you sure you want to delete?</value>
+  </data>
+  <data name="Common_DataLoading" xml:space="preserve">
+    <value>Contacting server for data...</value>
+  </data>
+  <data name="Common_DataNotFound" xml:space="preserve">
+    <value>No data was found for the given options</value>
+  </data>
+  <data name="Common_DataNotLoaded" xml:space="preserve">
+    <value>Data is not loaded</value>
+  </data>
+  <data name="Common_DeleteFailed" xml:space="preserve">
+    <value>'{0}' could not be deleted.</value>
+  </data>
+  <data name="Common_DeleteFailedBeingUsed" xml:space="preserve">
+    <value>'{0}' could not be deleted. It is being used.</value>
+  </data>
+  <data name="Common_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Common_EmailSent" xml:space="preserve">
+    <value>Emails sent:</value>
+  </data>
+  <data name="Common_From" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="Common_ItemExist" xml:space="preserve">
+    <value>This item is already exist</value>
+  </data>
+  <data name="Common_NameLengthErrorMessage" xml:space="preserve">
+    <value>The string may not exceed 128 characters in length.</value>
+  </data>
+  <data name="Common_NewRecord" xml:space="preserve">
+    <value>New Record.</value>
+  </data>
+  <data name="Common_NoPermission" xml:space="preserve">
+    <value>You don't have permission to view this area</value>
+  </data>
+  <data name="Common_OperationFailed" xml:space="preserve">
+    <value>Operation Failed</value>
+  </data>
+  <data name="Common_RecordsSaved" xml:space="preserve">
+    <value>Changes saved:</value>
+  </data>
+  <data name="Common_RequiredField" xml:space="preserve">
+    <value>'{0}' is a required field.</value>
+  </data>
+  <data name="Common_RequiredFieldGeneric" xml:space="preserve">
+    <value>This is a required field.</value>
+  </data>
+  <data name="Common_SaveComplete" xml:space="preserve">
+    <value>'{0}' has been saved.</value>
+  </data>
+  <data name="Common_To" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="Common_ValidationError" xml:space="preserve">
+    <value>Validation Error</value>
+  </data>
+  <data name="ContactInformationPanel_lblAddress" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="ContactInformationPanel_lblAddress2" xml:space="preserve">
+    <value>Address 2</value>
+  </data>
+  <data name="ContactInformationPanel_lblCity" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="ContactInformationPanel_lblDateOfBirth" xml:space="preserve">
+    <value>Date of Birth</value>
+  </data>
+  <data name="ContactInformationPanel_lblDistrict" xml:space="preserve">
+    <value>District</value>
+  </data>
+  <data name="ContactInformationPanel_lblEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="ContactInformationPanel_lblFax" xml:space="preserve">
+    <value>Fax</value>
+  </data>
+  <data name="ContactInformationPanel_lblFirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="ContactInformationPanel_lblLastName" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="ContactInformationPanel_lblPhone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="ContactInformationPanel_lblPostCode" xml:space="preserve">
+    <value>Post Code</value>
+  </data>
+  <data name="ContactInformationPanel_lblState" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="ContactInformationPanel_lblVisa" xml:space="preserve">
+    <value>Visa</value>
+  </data>
+  <data name="ContactInformationPanel_lblVisaValid" xml:space="preserve">
+    <value>Visa Valid</value>
+  </data>
+  <data name="ContactInformationPanel_txtContactInfo" xml:space="preserve">
+    <value>Contact Information</value>
+  </data>
+  <data name="EquipmentAdminPage_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="EquipmentAdminPage_EquipmentName" xml:space="preserve">
+    <value>Equipment Name</value>
+  </data>
+  <data name="EquipmentAdminPage_Inactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="EquipmentAdminPage_RealPrice" xml:space="preserve">
+    <value>Cost</value>
+  </data>
+  <data name="EquipmentAdminPage_RentPrice" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="EquipmentAdminPage_uiTitle" xml:space="preserve">
+    <value>Equipment Administration</value>
+  </data>
+  <data name="EquipmentAdminPage_Unit" xml:space="preserve">
+    <value>Unit</value>
+  </data>
+  <data name="ImageItem_lblDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="ImageItem_lblDisplayIndex" xml:space="preserve">
+    <value>Display Index</value>
+  </data>
+  <data name="ImageItem_lblName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="ImageUpload_btnChooseImage" xml:space="preserve">
+    <value>Choose</value>
+  </data>
+  <data name="ImageUpload_lblPhoto" xml:space="preserve">
+    <value>Photo</value>
+  </data>
+  <data name="ImageUpload_lblTitle" xml:space="preserve">
+    <value>Images</value>
+  </data>
+  <data name="ImageUpload_uiPopupUpload" xml:space="preserve">
+    <value>Upload Images</value>
+  </data>
+  <data name="RoleAdminPage_DuplicatedName" xml:space="preserve">
+    <value>There are duplicated name. Please check again.</value>
+  </data>
+  <data name="RoleAdminPage_RoleName" xml:space="preserve">
+    <value>Role Name</value>
+  </data>
+  <data name="RoleAdminPage_uiTitle" xml:space="preserve">
+    <value>Role Administrattion</value>
+  </data>
+  <data name="RoleComponentAdminPage_lblRole" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="RoleComponentAdminPage_lblUserHasRole" xml:space="preserve">
+    <value>Users that have this role :</value>
+  </data>
+  <data name="RoleComponentAdminPage_uiTitle" xml:space="preserve">
+    <value>Role Component Permission</value>
+  </data>
+  <data name="ServiceAdminPage_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="ServiceAdminPage_Inactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="ServiceAdminPage_Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="ServiceAdminPage_ServiceName" xml:space="preserve">
+    <value>Service Name</value>
+  </data>
+  <data name="ServiceAdminPage_uiTitle" xml:space="preserve">
+    <value>Service Administration</value>
+  </data>
+  <data name="ServiceAdminPage_Unit" xml:space="preserve">
+    <value>Unit</value>
+  </data>
+  <data name="SiteAdminPage_AbbreviatedName" xml:space="preserve">
+    <value>Abbr. Name</value>
+  </data>
+  <data name="SiteAdminPage_DisplayIndex" xml:space="preserve">
+    <value>Display Index</value>
+  </data>
+  <data name="SiteAdminPage_Inactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="SiteAdminPage_LicenseKey" xml:space="preserve">
+    <value>License Key</value>
+  </data>
+  <data name="SiteAdminPage_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="SiteAdminPage_StarRating" xml:space="preserve">
+    <value>Star Rating</value>
+  </data>
+  <data name="SiteAdminPage_uiTitle" xml:space="preserve">
+    <value>Site Administration</value>
+  </data>
+  <data name="SiteGroupAdminPage_DuplicatedName" xml:space="preserve">
+    <value>There are duplicated name. Please check again.</value>
+  </data>
+  <data name="SiteGroupAdminPage_Site" xml:space="preserve">
+    <value>Site</value>
+  </data>
+  <data name="SiteGroupAdminPage_SiteAlreadyExist" xml:space="preserve">
+    <value>This site is already added</value>
+  </data>
+  <data name="SiteGroupAdminPage_SiteGroup" xml:space="preserve">
+    <value>Site Group</value>
+  </data>
+  <data name="SiteGroupAdminPage_uiTitle" xml:space="preserve">
+    <value>Site Group Administration</value>
+  </data>
+  <data name="UserRoleAuthAdminPage_lblRole" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="UserRoleAuthAdminPage_lblSiteGroup" xml:space="preserve">
+    <value>Site Group</value>
+  </data>
+  <data name="UserRoleAuthAdminPage_lblUser" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="UserRoleAuthAdminPage_uiTabComponents" xml:space="preserve">
+    <value>Components</value>
+  </data>
+  <data name="UserRoleAuthAdminPage_uiTabRoles" xml:space="preserve">
+    <value>Roles</value>
+  </data>
+  <data name="UserRoleAuthAdminPage_uiTitle" xml:space="preserve">
+    <value>User Role Auth Admin</value>
+  </data>
+  <data name="Common_btnSearch" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Common_DateIntersect" xml:space="preserve">
+    <value>There is an intersect between date ranges</value>
+  </data>
+  <data name="Common_DateNotValid" xml:space="preserve">
+    <value>Date End must be greater than Date Start</value>
+  </data>
+  <data name="Common_lblSite" xml:space="preserve">
+    <value>Site</value>
+  </data>
+  <data name="RoomAdminPage_BasePrice" xml:space="preserve">
+    <value>Room Price</value>
+  </data>
+  <data name="RoomAdminPage_chkAvailable" xml:space="preserve">
+    <value>Available</value>
+  </data>
+  <data name="RoomAdminPage_chkOccupied" xml:space="preserve">
+    <value>Occupied</value>
+  </data>
+  <data name="Common_chkShowLegacy" xml:space="preserve">
+    <value>Show Inactive</value>
+  </data>
+  <data name="RoomAdminPage_Height" xml:space="preserve">
+    <value>Height</value>
+  </data>
+  <data name="RoomAdminPage_Inactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="RoomAdminPage_lblFloor" xml:space="preserve">
+    <value>Floor</value>
+  </data>
+  <data name="RoomAdminPage_lblName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="RoomAdminPage_lblRoomStatus" xml:space="preserve">
+    <value>Room Status</value>
+  </data>
+  <data name="RoomAdminPage_lblRoomType" xml:space="preserve">
+    <value>Room Type</value>
+  </data>
+  <data name="RoomAdminPage_MeterSquare" xml:space="preserve">
+    <value>Meter Square</value>
+  </data>
+  <data name="RoomAdminPage_uiTitle" xml:space="preserve">
+    <value>Room Administration</value>
+  </data>
+  <data name="RoomAdminPage_Width" xml:space="preserve">
+    <value>Width</value>
+  </data>
+  <data name="BookingAdminPage_lblBookingStatus" xml:space="preserve">
+    <value>Booking Status</value>
+  </data>
+  <data name="BookingAdminPage_lblCustomer" xml:space="preserve">
+    <value>Customer</value>
+  </data>
+  <data name="BookingAdminPage_lblFromDate" xml:space="preserve">
+    <value>From Date</value>
+  </data>
+  <data name="BookingAdminPage_lblToDate" xml:space="preserve">
+    <value>To Date</value>
+  </data>
+  <data name="BookingAdminPage_uiTitle" xml:space="preserve">
+    <value>Booking Administration</value>
+  </data>
+  <data name="BookingAdmin_BookDate" xml:space="preserve">
+    <value>Book Date</value>
+  </data>
+  <data name="BookingAdmin_BookingExist" xml:space="preserve">
+    <value>This room was booked/rented in that period. Please choose other room or date range</value>
+  </data>
+  <data name="BookingAdmin_ContractDateSign" xml:space="preserve">
+    <value>Contract Date</value>
+  </data>
+  <data name="BookingAdmin_ContractTotalPrice" xml:space="preserve">
+    <value>Contract Price</value>
+  </data>
+  <data name="BookingAdmin_Customer2Name" xml:space="preserve">
+    <value>Customer 2</value>
+  </data>
+  <data name="BookingAdmin_CustomerName" xml:space="preserve">
+    <value>Customer</value>
+  </data>
+  <data name="BookingAdmin_CustomerNotValid" xml:space="preserve">
+    <value>Please input customer's name</value>
+  </data>
+  <data name="BookingAdmin_RoomName" xml:space="preserve">
+    <value>Room</value>
+  </data>
+  <data name="BookingAdmin_RoomNotValid" xml:space="preserve">
+    <value>Please choose a specific room</value>
+  </data>
+  <data name="BookingAdmin_RoomPrice" xml:space="preserve">
+    <value>Room Price</value>
+  </data>
+  <data name="BookingAdmin_uiPopupCustomer" xml:space="preserve">
+    <value>Customer Details</value>
+  </data>
+  <data name="BookingAdmin_uiPopupEquipmentDetails" xml:space="preserve">
+    <value>Equipment Details</value>
+  </data>
+  <data name="BookingAdmin_uiPopupNewBooking" xml:space="preserve">
+    <value>New Booking</value>
+  </data>
+  <data name="BookingAdmin_uiPopupServiceDetails" xml:space="preserve">
+    <value>Service Details</value>
+  </data>
+  <data name="BookingAdmin_uiTitle" xml:space="preserve">
+    <value>Bookings / Contracts</value>
+  </data>
+  <data name="BookingNew_uiTitle" xml:space="preserve">
+    <value>Booking Info :</value>
+  </data>
+  <data name="BookingPaymentPage_CustomerPaid" xml:space="preserve">
+    <value>Customer Paid</value>
+  </data>
+  <data name="BookingPaymentPage_EquipmentPrice" xml:space="preserve">
+    <value>Equipment Price</value>
+  </data>
+  <data name="BookingPaymentPage_MoneyLeft" xml:space="preserve">
+    <value>Money Left</value>
+  </data>
+  <data name="BookingPaymentPage_Payment" xml:space="preserve">
+    <value>Payment</value>
+  </data>
+  <data name="BookingPaymentPage_radAll" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="BookingPaymentPage_radNotPaid" xml:space="preserve">
+    <value>Not Paid</value>
+  </data>
+  <data name="BookingPaymentPage_radPaid" xml:space="preserve">
+    <value>Paid</value>
+  </data>
+  <data name="BookingPaymentPage_RoomPrice" xml:space="preserve">
+    <value>Room Price</value>
+  </data>
+  <data name="BookingPaymentPage_ServicePrice" xml:space="preserve">
+    <value>Service Price</value>
+  </data>
+  <data name="BookingPaymentPage_TotalPrice" xml:space="preserve">
+    <value>Total Price</value>
+  </data>
+  <data name="BookingPaymentPage_uiPopupPaymentDetails" xml:space="preserve">
+    <value>Payment Details, from {0} to {1}</value>
+  </data>
+  <data name="BookingPaymentPage_uiTitle" xml:space="preserve">
+    <value>Monthly Payment</value>
+  </data>
+  <data name="Common_btnEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Common_btnExport" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="Common_btnNew" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="Common_Inactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="Common_lblDetail" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="ContactInformationPanel_lblCountry" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="CustomerAdminPage_chkHasContract" xml:space="preserve">
+    <value>Has Contract in Site :</value>
+  </data>
+  <data name="CustomerAdminPage_uiTitle" xml:space="preserve">
+    <value>Customer Administration</value>
+  </data>
+  <data name="CustomerDetails_CustomerNotValid" xml:space="preserve">
+    <value>Please input customer's name</value>
+  </data>
+  <data name="CustomerDetails_lblAge" xml:space="preserve">
+    <value>Age</value>
+  </data>
+  <data name="CustomerDetails_lblCustomerTitle" xml:space="preserve">
+    <value>Customer</value>
+  </data>
+  <data name="CustomerDetails_lblGender" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="CustomerDetails_radFemale" xml:space="preserve">
+    <value>Female</value>
+  </data>
+  <data name="CustomerDetails_radMale" xml:space="preserve">
+    <value>Male</value>
+  </data>
+  <data name="CustomerDetails_RoomNotValid" xml:space="preserve">
+    <value>Please choose a specific room</value>
+  </data>
+</root>

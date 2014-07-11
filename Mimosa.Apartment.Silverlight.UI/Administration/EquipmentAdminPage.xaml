@@ -72,11 +72,9 @@
                                 <RowDefinition Height="*"></RowDefinition>
                                 <RowDefinition Height="Auto"></RowDefinition>
                             </Grid.RowDefinitions>
-
-                            <TextBlock Text="Equipment Administration" 
-                                       Margin="5,5,5,5" Height="25" FontSize="12" />
+                            
                             <telerikGrid:RadGridView
-                                Margin="10,5,10,10"
+                                Margin="10,15,10,10"
                                 x:Name="gvwEquipments"
                                 AutoGenerateColumns="False"
                                 ShowGroupPanel="False"
@@ -101,7 +99,7 @@
                                     </telerikGrid:GridViewDataColumn>
                                     <telerikGrid:GridViewDataColumn
                                         DataMemberBinding="{Binding RealPrice}"
-                                        Width="100" ShowFieldFilters="False"
+                                        Width="100" ShowFieldFilters="False" UniqueName="RealPrice"
                                         DataFormatString="{} {0:C0}" TextAlignment="Right">
                                         <telerikGrid:GridViewDataColumn.Header>
                                             <TextBlock TextWrapping="Wrap" Text="Cost" />
@@ -115,13 +113,10 @@
                                     </telerikGrid:GridViewDataColumn>
                                     <telerikGrid:GridViewDataColumn
                                         DataMemberBinding="{Binding RentPrice}"
-                                        Width="100" ShowFieldFilters="False"
+                                        Width="100" ShowFieldFilters="False" UniqueName="RentPrice" Header="Unit"
                                         DataFormatString="{} {0:C0}" TextAlignment="Right">
-                                        <telerikGrid:GridViewDataColumn.Header>
-                                            <TextBlock TextWrapping="Wrap" Text="Unit Price" />
-                                        </telerikGrid:GridViewDataColumn.Header>
                                     </telerikGrid:GridViewDataColumn>
-                                    <telerikGrid:GridViewDataColumn Width="70" Header="Inactive">
+                                    <telerikGrid:GridViewDataColumn Width="70" Header="Inactive" UniqueName="Inactive">
                                         <telerikGrid:GridViewDataColumn.CellStyle>
                                             <Style TargetType="telerikGridView:GridViewCell">
                                                 <Setter Property="Template">
@@ -164,11 +159,6 @@
                                     <RowDefinition Height="Auto"></RowDefinition>
                                     <RowDefinition Height="Auto"></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <TextBlock 
-                               VerticalAlignment="Center" HorizontalAlignment="Left"
-                               Margin="10,10,0,0"
-                               Foreground="{StaticResource TitleForeground}"
-                               Text="Images : "></TextBlock>
 
                                 <local:ImageUpload x:Name="ucImageUpload" Grid.Row="1" Margin="10,5,10,10"></local:ImageUpload>
                             </Grid>

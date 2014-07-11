@@ -73,7 +73,7 @@
 
                         <bg:TiledBGControl TiledImageSource="{StaticResource CarbonFiberImage}"/>
                         <telerikCommon:RadWrapPanel Orientation="Horizontal" AllowDrop="True">
-                            <TextBlock
+                            <TextBlock x:Name="lblSite"
                                 Margin="10,10,5,5"
                                 VerticalAlignment="Center"
                                 Text="Site:">
@@ -83,7 +83,7 @@
                                     Grid.Row="0" Margin="5,10,5,5"
                                     DataListWidth="200" ShowInactiveCheck="True" InactiveMessage="Show Inactive" ShowAllSitesItem="True"
                                     Style="{StaticResource InputControlStyle}"></local:SitePicker>
-                            <TextBlock
+                            <TextBlock x:Name="lblFromDate"
                                     Margin="20,10,5,5"
                                     VerticalAlignment="Center"
                                     Text="From date:">
@@ -93,7 +93,7 @@
                                     Margin="5,10,5,5"
                                     Style="{StaticResource InputControlStyle}">
                             </telerikInput:RadDatePicker>
-                            <TextBlock
+                            <TextBlock x:Name="lblToDate"
                                     Margin="20,10,5,5"
                                     VerticalAlignment="Center"
                                     Text="To date:">
@@ -102,7 +102,7 @@
                                     x:Name="uiDateTo"
                                     Margin="5,10,5,5"
                                     Style="{StaticResource InputControlStyle}"></telerikInput:RadDatePicker>
-                            <TextBlock
+                            <TextBlock x:Name="lblCustomer"
                                     Margin="20,10,5,5"
                                     VerticalAlignment="Center"
                                     Text="Customer:">
@@ -112,7 +112,7 @@
                                     VerticalAlignment="Center">
                             </TextBox>
 
-                            <TextBlock
+                            <TextBlock x:Name="lblBookingStatus"
                                     Margin="20,10,5,5"
                                     VerticalAlignment="Center"
                                     Text="Booking Status:">

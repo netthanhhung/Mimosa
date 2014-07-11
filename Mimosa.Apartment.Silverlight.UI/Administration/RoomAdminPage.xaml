@@ -36,7 +36,7 @@
                             <ColumnDefinition Width="Auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock x:Name="uiParamsDisplay"
+                        <TextBlock x:Name="uiTitle"
                                VerticalAlignment="Center"
                                Margin="20,0,0,0"
                                Foreground="{StaticResource TitleForeground}"
@@ -76,59 +76,59 @@
                             </Grid.RowDefinitions>
 
                             <StackPanel  Orientation="Horizontal">
-                                <TextBlock
-                                Margin="10,10,5,5"
-                                VerticalAlignment="Center"
-                                Text="Site:">
+                                <TextBlock x:Name="lblSite"
+                                    Margin="10,10,5,5"
+                                    VerticalAlignment="Center"
+                                    Text="Site:">
                                 </TextBlock>
                                 <local:SitePicker
-                                x:Name="ucSitePicker"
-                                Grid.Row="0" Margin="5,10,5,5"
-                                DataListWidth="200" ShowInactiveCheck="True" InactiveMessage="Show Inactive"
-                                Style="{StaticResource InputControlStyle}"></local:SitePicker>
-                                <TextBlock
-                                Margin="20,10,5,5"
-                                VerticalAlignment="Center"
-                                Text="Name:">
+                                    x:Name="ucSitePicker"
+                                    Grid.Row="0" Margin="5,10,5,5"
+                                    DataListWidth="200" ShowInactiveCheck="True" InactiveMessage="Show Inactive"
+                                    Style="{StaticResource InputControlStyle}"></local:SitePicker>
+                                <TextBlock x:Name="lblName"
+                                    Margin="20,10,5,5"
+                                    VerticalAlignment="Center"
+                                    Text="Name:">
                                 </TextBlock>
                                 <TextBox x:Name="txtName"
-                                Margin="5,10,5,5" Width="100"
-                                VerticalAlignment="Center">
+                                    Margin="5,10,5,5" Width="100"
+                                    VerticalAlignment="Center">
                                 </TextBox>
 
-                                <TextBlock
-                                Margin="20,10,5,5"
-                                VerticalAlignment="Center"
-                                Text="Floor:">
+                                <TextBlock x:Name="lblFloor"
+                                    Margin="20,10,5,5"
+                                    VerticalAlignment="Center"
+                                    Text="Floor:">
                                 </TextBlock>
                                 <TextBox x:Name="txtFloor"
-                                Margin="5,10,5,5" Width="50"
-                                VerticalAlignment="Center">
+                                    Margin="5,10,5,5" Width="50"
+                                    VerticalAlignment="Center">
                                 </TextBox>
 
-                                <TextBlock
-                                Margin="20,10,5,5"
-                                VerticalAlignment="Center"
-                                Text="Room Status:">
+                                <TextBlock x:Name="lblRoomStatus"
+                                    Margin="20,10,5,5"
+                                    VerticalAlignment="Center"
+                                    Text="Room Status:">
                                 </TextBlock>
                                 <CheckBox x:Name="chkAvailable"
-                                Margin="5,10,5,5"
-                                VerticalAlignment="Center" IsChecked="True"
-                                Content="Available">
+                                    Margin="5,10,5,5"
+                                    VerticalAlignment="Center" IsChecked="True"
+                                    Content="Available">
                                 </CheckBox>
                                 <CheckBox x:Name="chkOccupied"
-                                Margin="5,10,5,5"
-                                VerticalAlignment="Center" IsChecked="True" 
-                                Content="Occupied">
+                                    Margin="5,10,5,5"
+                                    VerticalAlignment="Center" IsChecked="True" 
+                                    Content="Occupied">
                                 </CheckBox>
 
-                                <TextBlock
-                                Margin="20,10,5,5"
-                                VerticalAlignment="Center"
-                                Text="RoomType:">
+                                <TextBlock x:Name="lblRoomType"
+                                    Margin="20,10,5,5"
+                                    VerticalAlignment="Center"
+                                    Text="RoomType:">
                                 </TextBlock>
                                 <local:MultiRoomTypePicker x:Name="ucRoomTypes" Width="100"
-                                 Margin="5,10,5,5">
+                                     Margin="5,10,5,5">
                                 </local:MultiRoomTypePicker>
 
 
@@ -167,7 +167,7 @@
                                         Width="*">
                                     </telerikGrid:GridViewDataColumn>
                                     <telerikGrid:GridViewDataColumn
-                                        DataMemberBinding="{Binding Floor}"
+                                        DataMemberBinding="{Binding Floor}" UniqueName="Floor"
                                         Width="70" ShowFieldFilters="False" HeaderTextAlignment="Center"
                                         DataFormatString="{} {0:0}" TextAlignment="Right" Header="Floor">
                                     </telerikGrid:GridViewDataColumn>
@@ -186,26 +186,26 @@
                                         Width="150">
                                     </telerikGrid:GridViewComboBoxColumn>
                                     <telerikGrid:GridViewDataColumn
-                                        DataMemberBinding="{Binding Width}"
+                                        DataMemberBinding="{Binding Width}" UniqueName="Width"
                                         Width="70" ShowFieldFilters="False" HeaderTextAlignment="Center"
                                         DataFormatString="{} {0:0.0}" TextAlignment="Right" Header="Width">
                                     </telerikGrid:GridViewDataColumn>
                                     <telerikGrid:GridViewDataColumn
-                                        DataMemberBinding="{Binding Height}"
+                                        DataMemberBinding="{Binding Height}" UniqueName="Height"
                                         Width="70" ShowFieldFilters="False" HeaderTextAlignment="Center"
                                         DataFormatString="{} {0:0.0}" TextAlignment="Right" Header="Height">
                                     </telerikGrid:GridViewDataColumn>
                                     <telerikGrid:GridViewDataColumn
-                                        DataMemberBinding="{Binding MeterSquare}"
+                                        DataMemberBinding="{Binding MeterSquare}" UniqueName="MeterSquare"
                                         Width="100" ShowFieldFilters="False" HeaderTextAlignment="Center"
                                         DataFormatString="{} {0:0.0}" TextAlignment="Right" Header="Meter Square">
                                     </telerikGrid:GridViewDataColumn>
                                     <telerikGrid:GridViewDataColumn
-                                        DataMemberBinding="{Binding BasePrice}"
+                                        DataMemberBinding="{Binding BasePrice}" UniqueName="BasePrice"
                                         Width="100" ShowFieldFilters="False" HeaderTextAlignment="Center"
                                         DataFormatString="{} {0:C0}" TextAlignment="Right" Header="Base Price">
                                     </telerikGrid:GridViewDataColumn>
-                                    <telerikGrid:GridViewDataColumn Width="70" Header="Inactive">
+                                    <telerikGrid:GridViewDataColumn Width="70" Header="Inactive" UniqueName="Inactive">
                                         <telerikGrid:GridViewDataColumn.CellStyle>
                                             <Style TargetType="telerikGridView:GridViewCell">
                                                 <Setter Property="Template">
@@ -272,7 +272,7 @@
                                 </telerikGrid:RadGridView.Resources>
                                 <telerikGrid:RadGridView.Columns>
                                     <telerikGrid:GridViewDataColumn
-                                        UniqueName="Equipment"
+                                        UniqueName="EquipmentName"
                                         DataMemberBinding="{Binding Equipment}"
                                         Header="Equipment" IsReadOnly="True"
                                         Width="200">
@@ -290,9 +290,9 @@
                                         Header="Unit"  ShowFieldFilters="False"
                                         Width="70">
                                     </telerikGrid:GridViewDataColumn>
-                                    
+
                                     <telerikGrid:GridViewDataColumn
-                                        DataMemberBinding="{Binding Price}"
+                                        DataMemberBinding="{Binding Price}" UniqueName="RentPrice"
                                         Width="100" ShowFieldFilters="False" Header="Unit Price"
                                         DataFormatString="{} {0:C0}">
                                     </telerikGrid:GridViewDataColumn>
@@ -344,7 +344,7 @@
                                 </telerikGrid:RadGridView.Resources>
                                 <telerikGrid:RadGridView.Columns>
                                     <telerikGrid:GridViewDataColumn
-                                        UniqueName="Service"
+                                        UniqueName="ServiceName"
                                         DataMemberBinding="{Binding Service}"
                                         Header="Service" IsReadOnly="True"
                                         Width="200">
@@ -363,7 +363,7 @@
                                         Width="70">
                                     </telerikGrid:GridViewDataColumn>
                                     <telerikGrid:GridViewDataColumn
-                                        DataMemberBinding="{Binding Price}"
+                                        DataMemberBinding="{Binding Price}" UniqueName="Price"
                                         Width="100" ShowFieldFilters="False" Header="Unit Price"
                                         DataFormatString="{} {0:C0}">
                                     </telerikGrid:GridViewDataColumn>
@@ -399,11 +399,6 @@
                             <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition Height="Auto"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <TextBlock 
-                               VerticalAlignment="Center" HorizontalAlignment="Left"
-                               Margin="10,10,10,10"
-                               Foreground="{StaticResource TitleForeground}"
-                               Text="Images : "></TextBlock>
 
                         <local:ImageUpload x:Name="ucImageUpload" IsReadOnly="False"  Grid.Row="1" Margin="10,10,10,10"></local:ImageUpload>
                     </Grid>

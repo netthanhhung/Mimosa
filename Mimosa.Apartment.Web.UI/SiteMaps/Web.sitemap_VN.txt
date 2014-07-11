@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode
+	title="[Q]uản Trị"
+	description="Quản Trị Hệ Thống"
+	moduleType="Administration">
+	<siteMapNode
+	  url="/HomePage.xaml"
+	  title="Trang Chủ"
+	  description="Trang Chủ"/>
+	<siteMapNode
+	  url="Logon.aspx?Logout=true"
+	  title="Thoát"
+	  description="Thoát"/>
+   <siteMapNode
+	  title="Bảo mật"
+	  description="Bảo mật">
+		<siteMapNode
+		  url="/Security/ChangePasswordPage.xaml"
+		  title="Thay đổi mật khẩu"
+		  description="Thay đổi mật khẩu"/>
+		<siteMapNode
+		  url="/Security/UserAccountPage.xaml"
+		  title="Quản trị tài khoản"
+		  description="Quản trị tài khoản"/>	
+		<siteMapNode
+		  url="/Security/RoleAdminPage.xaml"
+		  title="Quản trị quyền"
+		  description="Quản trị quyền"/>			  
+	    <siteMapNode
+			url="/Security/RoleComponentAdminPage.xaml"
+			title="Quyền truy xuất trang"
+			description="Quyền truy xuất trang"/>	
+		<siteMapNode
+		  url="/Security/UserRoleAuthAdminPage.xaml"
+		  title="Phần quyền người dùng"
+		  description="Phần quyền người dùng"/>	
+	</siteMapNode>
+    <siteMapNode
+	  title="Quản trị tổ chức"
+	  description="Quản trị tổ chức">
+
+		<siteMapNode
+		  url="/Administration/PortalAdminPage.xaml"
+		  title="Quản trị tổ chức"
+		  description="Quản trị tổ chức"/>
+		<siteMapNode
+		  url="/Administration/SiteGroupAdminPage.xaml"
+		  title="Quản trị nhóm tòa nhà"
+		  description="Quản trị nhóm tòa nhà"/>
+		<siteMapNode
+		  url="/Administration/SiteAdminPage.xaml"
+		  title="Quản trị tòa nhà"
+		  description="Quản trị tòa nhà"/>
+		<siteMapNode
+		  url="/Administration/EquipmentAdminPage.xaml"
+		  title="Quản trị thiết bị"
+		  description="Quản trị thiết bị"/>
+	   <siteMapNode
+		  url="/Administration/ServiceAdminPage.xaml"
+		  title="Quản trị dịch vụ"
+		  description="Quản trị dịch vụ"/>
+	  <siteMapNode
+		  url="/Administration/RoomAdminPage.xaml"
+		  title="Quản trị phòng"
+		  description="Quản trị phòng"/>
+     </siteMapNode>
+  </siteMapNode>
+
+  <siteMapNode
+	title="[B]án hàng"
+	description="Bán hàng"
+	moduleType="Sales">
+
+	<siteMapNode
+		url="/Sales/BookingAdminPage.xaml"
+		title="Quạn trị đặt phòng"
+		description="Quạn trị đặt phòng"/>
+  </siteMapNode>
+  <siteMapNode
+	title="[K]hách hàng"
+	description="Khách hàng"
+	moduleType="Customer">
+
+	<siteMapNode
+		url="/Customer/CustomerAdminPage.xaml"
+		title="Quản trị khách hàng"
+		description="Quản trị khách hàng"/>
+	<siteMapNode
+		url="/Customer/BookingPaymentPage.xaml"
+		title="Chi trả hàng tháng"
+		description="Chi trả hàng tháng"/>
+
+		
+  </siteMapNode>
+ 
+  
+</siteMap>

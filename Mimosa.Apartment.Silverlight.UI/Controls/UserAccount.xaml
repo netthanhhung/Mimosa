@@ -21,7 +21,7 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <TextBlock
+            <TextBlock x:Name="lblUsername"
                 Grid.Column="0"
                 Grid.Row="0"
                 Margin="{StaticResource SmallContentMargin}"
@@ -40,7 +40,7 @@
                 Style="{StaticResource InputControlStyle}">
             </telerik:RadComboBox>
             
-            <TextBlock
+            <TextBlock x:Name="lblPassword"
                 Grid.Column="0"
                 Grid.Row="1"
                 Margin="{StaticResource SmallContentMargin}"
@@ -54,7 +54,7 @@
                 Margin="{StaticResource SmallContentMargin}" HorizontalAlignment="Left"
                 Width="350" MaxLength="128">
             </PasswordBox >
-            <TextBlock x:Name="txtEmailLabel"
+            <TextBlock x:Name="lblEmail"
                     Grid.Column="0"
                     Grid.Row="3"
                     Margin="{StaticResource SmallContentMargin}"
@@ -130,7 +130,7 @@
                     Width="350" MaxLength="128">
                 </TextBox>
                 
-                <TextBlock x:Name="txtInputPasswordLbl"
+                <TextBlock x:Name="lblInputPassword"
                     Grid.Column="0"
                     Grid.Row="6"
                     Margin="{StaticResource SmallContentMargin}"

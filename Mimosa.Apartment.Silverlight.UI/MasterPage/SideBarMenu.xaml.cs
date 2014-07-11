@@ -59,6 +59,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                 {
                     Title = (string)siteMapNode.Attribute("title"),
                     Description = (string)siteMapNode.Attribute("description"),
+                    ModuleType = (string)siteMapNode.Attribute("moduleType"),
                     Url = (string)siteMapNode.Attribute("url"),
                     IsEnabled = CheckRoleAccess((string)siteMapNode.Attribute("roles")),
                     Target = (string)siteMapNode.Attribute("target"),

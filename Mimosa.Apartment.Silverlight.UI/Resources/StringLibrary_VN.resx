@@ -1,0 +1,666 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BookingAdminPage_lblBookingStatus" xml:space="preserve">
+    <value>Trạng thái phòng</value>
+  </data>
+  <data name="BookingAdminPage_lblCustomer" xml:space="preserve">
+    <value>Khách hàng</value>
+  </data>
+  <data name="BookingAdminPage_lblFromDate" xml:space="preserve">
+    <value>Từ ngày</value>
+  </data>
+  <data name="BookingAdminPage_lblToDate" xml:space="preserve">
+    <value>Đến ngày</value>
+  </data>
+  <data name="BookingAdminPage_uiTitle" xml:space="preserve">
+    <value>Quản trị đặt phòng</value>
+  </data>
+  <data name="BookingAdmin_BookDate" xml:space="preserve">
+    <value>Ngày Đặt</value>
+  </data>
+  <data name="BookingAdmin_BookingExist" xml:space="preserve">
+    <value>Phòng này đã được đặt hay thuê trong khoảng thời gian này. Hãy chọn phòng khác hay ngày khác.</value>
+  </data>
+  <data name="BookingAdmin_ContractDateSign" xml:space="preserve">
+    <value>Ngày hợp đồng</value>
+  </data>
+  <data name="BookingAdmin_ContractTotalPrice" xml:space="preserve">
+    <value>Giá hợp đồng</value>
+  </data>
+  <data name="BookingAdmin_Customer2Name" xml:space="preserve">
+    <value>Khách hàng 2</value>
+  </data>
+  <data name="BookingAdmin_CustomerName" xml:space="preserve">
+    <value>Khách hàng</value>
+  </data>
+  <data name="BookingAdmin_CustomerNotValid" xml:space="preserve">
+    <value>Xin hãy nhập tên khách hàng</value>
+  </data>
+  <data name="BookingAdmin_RoomName" xml:space="preserve">
+    <value>Phòng</value>
+  </data>
+  <data name="BookingAdmin_RoomNotValid" xml:space="preserve">
+    <value>Xin hãy chọn phòng</value>
+  </data>
+  <data name="BookingAdmin_RoomPrice" xml:space="preserve">
+    <value>Giá phòng</value>
+  </data>
+  <data name="BookingAdmin_uiPopupCustomer" xml:space="preserve">
+    <value>Chi tiết khách hàng</value>
+  </data>
+  <data name="BookingAdmin_uiPopupEquipmentDetails" xml:space="preserve">
+    <value>Chi tiết thiết bị</value>
+  </data>
+  <data name="BookingAdmin_uiPopupNewBooking" xml:space="preserve">
+    <value>Tạo đặt phòng</value>
+  </data>
+  <data name="BookingAdmin_uiPopupServiceDetails" xml:space="preserve">
+    <value>Chi tiết dịch vụ</value>
+  </data>
+  <data name="BookingAdmin_uiTitle" xml:space="preserve">
+    <value>Đặt phòng / Hợp đồng</value>
+  </data>
+  <data name="BookingNew_uiTitle" xml:space="preserve">
+    <value>Thông tin đặt phòng :</value>
+  </data>
+  <data name="BookingPaymentPage_CustomerPaid" xml:space="preserve">
+    <value>Số tiền đã thanh toán</value>
+  </data>
+  <data name="BookingPaymentPage_EquipmentPrice" xml:space="preserve">
+    <value>Giá thiết bị</value>
+  </data>
+  <data name="BookingPaymentPage_MoneyLeft" xml:space="preserve">
+    <value>Số tiền còn lại</value>
+  </data>
+  <data name="BookingPaymentPage_Payment" xml:space="preserve">
+    <value>Đã thanh toán</value>
+  </data>
+  <data name="BookingPaymentPage_radAll" xml:space="preserve">
+    <value>Tất cả</value>
+  </data>
+  <data name="BookingPaymentPage_radNotPaid" xml:space="preserve">
+    <value>Chưa thanh toán</value>
+  </data>
+  <data name="BookingPaymentPage_radPaid" xml:space="preserve">
+    <value>Đã thanh toán</value>
+  </data>
+  <data name="BookingPaymentPage_RoomPrice" xml:space="preserve">
+    <value>Giá phòng</value>
+  </data>
+  <data name="BookingPaymentPage_ServicePrice" xml:space="preserve">
+    <value>Giá dịch vụ</value>
+  </data>
+  <data name="BookingPaymentPage_TotalPrice" xml:space="preserve">
+    <value>Tổng sổ tiền</value>
+  </data>
+  <data name="BookingPaymentPage_uiPopupPaymentDetails" xml:space="preserve">
+    <value>Chi tiết thanh toán, từ ngày {0} đến ngày {1}</value>
+  </data>
+  <data name="BookingPaymentPage_uiTitle" xml:space="preserve">
+    <value>Thanh toán hàng tháng</value>
+  </data>
+  <data name="ChangePasswordPage_lblConfirmNewPassword" xml:space="preserve">
+    <value>Xác nhận mật khẩu</value>
+  </data>
+  <data name="ChangePasswordPage_lblNewPassword" xml:space="preserve">
+    <value>Mật khẩu mới</value>
+  </data>
+  <data name="ChangePasswordPage_lblPassword" xml:space="preserve">
+    <value>Mật khẩu</value>
+  </data>
+  <data name="ChangePasswordPage_uiSubmitButton" xml:space="preserve">
+    <value>Thay đổi mật khẩu</value>
+  </data>
+  <data name="ChangePasswordPage_uiTitle" xml:space="preserve">
+    <value>Thay đồi mật khẩu</value>
+  </data>
+  <data name="Common_btnAdd" xml:space="preserve">
+    <value>Thêm</value>
+  </data>
+  <data name="Common_btnCancel" xml:space="preserve">
+    <value>Hủy</value>
+  </data>
+  <data name="Common_btnEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Common_btnExport" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="Common_btnInsert" xml:space="preserve">
+    <value>Thêm</value>
+  </data>
+  <data name="Common_btnNew" xml:space="preserve">
+    <value>Tạo mới</value>
+  </data>
+  <data name="Common_btnOK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Common_btnRemove" xml:space="preserve">
+    <value>Xóa</value>
+  </data>
+  <data name="Common_btnSave" xml:space="preserve">
+    <value>Lưu</value>
+  </data>
+  <data name="Common_btnSearch" xml:space="preserve">
+    <value>Tìm kiếm</value>
+  </data>
+  <data name="Common_ChangesCancelled" xml:space="preserve">
+    <value>Hủy bỏ thay đổi</value>
+  </data>
+  <data name="Common_chkShowLegacy" xml:space="preserve">
+    <value>Hiển thị inactive</value>
+  </data>
+  <data name="Common_ConfirmationRequired" xml:space="preserve">
+    <value>Yêu cầu xác nhận</value>
+  </data>
+  <data name="Common_ConfirmDelete" xml:space="preserve">
+    <value>Bạn có chắc muốn xóa '{0}' không?</value>
+  </data>
+  <data name="Common_ConfirmDeleteNoParam" xml:space="preserve">
+    <value>Bạn có chắc muốn xóa không?</value>
+  </data>
+  <data name="Common_DataLoading" xml:space="preserve">
+    <value>Đang tải dữ liệu</value>
+  </data>
+  <data name="Common_DataNotFound" xml:space="preserve">
+    <value>Không tìm thấy dữ liệu cho những lựa chọn này</value>
+  </data>
+  <data name="Common_DataNotLoaded" xml:space="preserve">
+    <value>Dữ liệu không được tải</value>
+  </data>
+  <data name="Common_DateIntersect" xml:space="preserve">
+    <value>Có sự giao nhau giữa những khoảng thời gian</value>
+  </data>
+  <data name="Common_DateNotValid" xml:space="preserve">
+    <value>Ngày kết thúc phải lớn hơn ngày bắt đầu</value>
+  </data>
+  <data name="Common_DeleteFailed" xml:space="preserve">
+    <value>'{0}' không thể bị xóa</value>
+  </data>
+  <data name="Common_DeleteFailedBeingUsed" xml:space="preserve">
+    <value>'{0}' không thể bị xóa. Đang được sử dụng.</value>
+  </data>
+  <data name="Common_Description" xml:space="preserve">
+    <value>Mô tả</value>
+  </data>
+  <data name="Common_EmailSent" xml:space="preserve">
+    <value>Email đã được gửi.</value>
+  </data>
+  <data name="Common_From" xml:space="preserve">
+    <value>Từ</value>
+  </data>
+  <data name="Common_Inactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="Common_ItemExist" xml:space="preserve">
+    <value>Đơn vị này đã tồn tại</value>
+  </data>
+  <data name="Common_lblDetail" xml:space="preserve">
+    <value>Chi tiết</value>
+  </data>
+  <data name="Common_lblSite" xml:space="preserve">
+    <value>Tòa nhà</value>
+  </data>
+  <data name="Common_NameLengthErrorMessage" xml:space="preserve">
+    <value>Tên không được vượt quá 123 kí tự</value>
+  </data>
+  <data name="Common_NewRecord" xml:space="preserve">
+    <value>Tao mới</value>
+  </data>
+  <data name="Common_NoPermission" xml:space="preserve">
+    <value>Bạn không được phép xem trang này</value>
+  </data>
+  <data name="Common_OperationFailed" xml:space="preserve">
+    <value>Hành động không thành công</value>
+  </data>
+  <data name="Common_RecordsSaved" xml:space="preserve">
+    <value>Thay đổi đã được lưu</value>
+  </data>
+  <data name="Common_RequiredField" xml:space="preserve">
+    <value>'{0}' là dữ liệu bắt buộc.</value>
+  </data>
+  <data name="Common_RequiredFieldGeneric" xml:space="preserve">
+    <value>Đây là dữ liệu bắt buộc phải nhập.</value>
+  </data>
+  <data name="Common_SaveComplete" xml:space="preserve">
+    <value>'{0}' vừa được lưu..</value>
+  </data>
+  <data name="Common_To" xml:space="preserve">
+    <value>Tới</value>
+  </data>
+  <data name="Common_ValidationError" xml:space="preserve">
+    <value>Lỗi kiểm tra</value>
+  </data>
+  <data name="ContactInformationPanel_lblAddress" xml:space="preserve">
+    <value>Địa chỉ</value>
+  </data>
+  <data name="ContactInformationPanel_lblAddress2" xml:space="preserve">
+    <value>Địa chỉ 2</value>
+  </data>
+  <data name="ContactInformationPanel_lblCity" xml:space="preserve">
+    <value>Thành phố</value>
+  </data>
+  <data name="ContactInformationPanel_lblCountry" xml:space="preserve">
+    <value>Quốc gia</value>
+  </data>
+  <data name="ContactInformationPanel_lblDateOfBirth" xml:space="preserve">
+    <value>Ngày sinh</value>
+  </data>
+  <data name="ContactInformationPanel_lblDistrict" xml:space="preserve">
+    <value>Quận</value>
+  </data>
+  <data name="ContactInformationPanel_lblEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="ContactInformationPanel_lblFax" xml:space="preserve">
+    <value>Fax</value>
+  </data>
+  <data name="ContactInformationPanel_lblFirstName" xml:space="preserve">
+    <value>Tên</value>
+  </data>
+  <data name="ContactInformationPanel_lblLastName" xml:space="preserve">
+    <value>Họ</value>
+  </data>
+  <data name="ContactInformationPanel_lblPhone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="ContactInformationPanel_lblPostCode" xml:space="preserve">
+    <value>Mã vùng</value>
+  </data>
+  <data name="ContactInformationPanel_lblState" xml:space="preserve">
+    <value>Bang</value>
+  </data>
+  <data name="ContactInformationPanel_lblVisa" xml:space="preserve">
+    <value>Visa</value>
+  </data>
+  <data name="ContactInformationPanel_lblVisaValid" xml:space="preserve">
+    <value>Visa hợp lệ</value>
+  </data>
+  <data name="ContactInformationPanel_txtContactInfo" xml:space="preserve">
+    <value>Thông tin liên lạc</value>
+  </data>
+  <data name="CustomerAdminPage_chkHasContract" xml:space="preserve">
+    <value>Có hợp đồng tại tòa nhà :</value>
+  </data>
+  <data name="CustomerAdminPage_uiTitle" xml:space="preserve">
+    <value>Quản trị khách hàng</value>
+  </data>
+  <data name="CustomerDetails_CustomerNotValid" xml:space="preserve">
+    <value>Xin hãy nhập tên khách hàng</value>
+  </data>
+  <data name="CustomerDetails_lblAge" xml:space="preserve">
+    <value>Tuổi</value>
+  </data>
+  <data name="CustomerDetails_lblCustomerTitle" xml:space="preserve">
+    <value>Khách hàng</value>
+  </data>
+  <data name="CustomerDetails_lblGender" xml:space="preserve">
+    <value>Giời tính</value>
+  </data>
+  <data name="CustomerDetails_radFemale" xml:space="preserve">
+    <value>Nữ</value>
+  </data>
+  <data name="CustomerDetails_radMale" xml:space="preserve">
+    <value>Nam</value>
+  </data>
+  <data name="CustomerDetails_RoomNotValid" xml:space="preserve">
+    <value>Xin hãy chọn phòng</value>
+  </data>
+  <data name="EquipmentAdminPage_Description" xml:space="preserve">
+    <value>Mô tả</value>
+  </data>
+  <data name="EquipmentAdminPage_EquipmentName" xml:space="preserve">
+    <value>Tên thiết bị</value>
+  </data>
+  <data name="EquipmentAdminPage_Inactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="EquipmentAdminPage_RealPrice" xml:space="preserve">
+    <value>Chi phí</value>
+  </data>
+  <data name="EquipmentAdminPage_RentPrice" xml:space="preserve">
+    <value>Giá</value>
+  </data>
+  <data name="EquipmentAdminPage_uiTitle" xml:space="preserve">
+    <value>Quản trị thiết bị</value>
+  </data>
+  <data name="EquipmentAdminPage_Unit" xml:space="preserve">
+    <value>Đơn vị</value>
+  </data>
+  <data name="ImageItem_lblDescription" xml:space="preserve">
+    <value>Mô tả</value>
+  </data>
+  <data name="ImageItem_lblDisplayIndex" xml:space="preserve">
+    <value>Số thứ tự</value>
+  </data>
+  <data name="ImageItem_lblName" xml:space="preserve">
+    <value>Tên</value>
+  </data>
+  <data name="ImageUpload_btnChooseImage" xml:space="preserve">
+    <value>Chọn</value>
+  </data>
+  <data name="ImageUpload_lblPhoto" xml:space="preserve">
+    <value>Hình ảnh</value>
+  </data>
+  <data name="ImageUpload_lblTitle" xml:space="preserve">
+    <value>Hình ảnh</value>
+  </data>
+  <data name="ImageUpload_uiPopupUpload" xml:space="preserve">
+    <value>Tải hình</value>
+  </data>
+  <data name="RoleAdminPage_DuplicatedName" xml:space="preserve">
+    <value>Đã có tên trùng với tên nhập. Hãy nhập lại.</value>
+  </data>
+  <data name="RoleAdminPage_RoleName" xml:space="preserve">
+    <value>Tên quyền</value>
+  </data>
+  <data name="RoleAdminPage_uiTitle" xml:space="preserve">
+    <value>Quản trị quyền</value>
+  </data>
+  <data name="RoleComponentAdminPage_lblRole" xml:space="preserve">
+    <value>Quền</value>
+  </data>
+  <data name="RoleComponentAdminPage_lblUserHasRole" xml:space="preserve">
+    <value>Người có quyền này :</value>
+  </data>
+  <data name="RoleComponentAdminPage_uiTitle" xml:space="preserve">
+    <value>Quyền truy xuất trang</value>
+  </data>
+  <data name="RoomAdminPage_BasePrice" xml:space="preserve">
+    <value>Giá phòng</value>
+  </data>
+  <data name="RoomAdminPage_chkAvailable" xml:space="preserve">
+    <value>Available</value>
+  </data>
+  <data name="RoomAdminPage_chkOccupied" xml:space="preserve">
+    <value>Occupied</value>
+  </data>
+  <data name="RoomAdminPage_Height" xml:space="preserve">
+    <value>Chiều Dài</value>
+  </data>
+  <data name="RoomAdminPage_Inactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="RoomAdminPage_lblFloor" xml:space="preserve">
+    <value>Lầu</value>
+  </data>
+  <data name="RoomAdminPage_lblName" xml:space="preserve">
+    <value>Tên phòng</value>
+  </data>
+  <data name="RoomAdminPage_lblRoomStatus" xml:space="preserve">
+    <value>Trạng thái phòng</value>
+  </data>
+  <data name="RoomAdminPage_lblRoomType" xml:space="preserve">
+    <value>Kiểu phòng</value>
+  </data>
+  <data name="RoomAdminPage_MeterSquare" xml:space="preserve">
+    <value>Mét vuông</value>
+  </data>
+  <data name="RoomAdminPage_uiTitle" xml:space="preserve">
+    <value>Quản trị phòng</value>
+  </data>
+  <data name="RoomAdminPage_Width" xml:space="preserve">
+    <value>Chiều rộng</value>
+  </data>
+  <data name="ServiceAdminPage_Description" xml:space="preserve">
+    <value>Mô tả</value>
+  </data>
+  <data name="ServiceAdminPage_Inactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="ServiceAdminPage_Price" xml:space="preserve">
+    <value>Giá</value>
+  </data>
+  <data name="ServiceAdminPage_ServiceName" xml:space="preserve">
+    <value>Tên dịch vụ</value>
+  </data>
+  <data name="ServiceAdminPage_uiTitle" xml:space="preserve">
+    <value>Quản trị dịch vụ</value>
+  </data>
+  <data name="ServiceAdminPage_Unit" xml:space="preserve">
+    <value>Đơn vị</value>
+  </data>
+  <data name="SiteAdminPage_AbbreviatedName" xml:space="preserve">
+    <value>Tên tắt</value>
+  </data>
+  <data name="SiteAdminPage_DisplayIndex" xml:space="preserve">
+    <value>Số thứ tự</value>
+  </data>
+  <data name="SiteAdminPage_Inactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="SiteAdminPage_LicenseKey" xml:space="preserve">
+    <value>License Key</value>
+  </data>
+  <data name="SiteAdminPage_Name" xml:space="preserve">
+    <value>Tên</value>
+  </data>
+  <data name="SiteAdminPage_StarRating" xml:space="preserve">
+    <value>Số sao</value>
+  </data>
+  <data name="SiteAdminPage_uiTitle" xml:space="preserve">
+    <value>Quản trị tòa nhà</value>
+  </data>
+  <data name="SiteGroupAdminPage_DuplicatedName" xml:space="preserve">
+    <value>Đã có tên trùng với tên nhập. Hãy nhập lại.</value>
+  </data>
+  <data name="SiteGroupAdminPage_Site" xml:space="preserve">
+    <value>Toà nhà</value>
+  </data>
+  <data name="SiteGroupAdminPage_SiteAlreadyExist" xml:space="preserve">
+    <value>Tòa nhà đã tồn tại</value>
+  </data>
+  <data name="SiteGroupAdminPage_SiteGroup" xml:space="preserve">
+    <value>Nhóm tòa nhà</value>
+  </data>
+  <data name="SiteGroupAdminPage_uiTitle" xml:space="preserve">
+    <value>Quản trị nhóm tòa nhà</value>
+  </data>
+  <data name="UserAccountPage_uiTitle" xml:space="preserve">
+    <value>Tài khoản</value>
+  </data>
+  <data name="UserAccount_btnUnlock" xml:space="preserve">
+    <value>Mở khóa</value>
+  </data>
+  <data name="UserAccount_chkAccountApproved" xml:space="preserve">
+    <value>Tài khoản được duyệt</value>
+  </data>
+  <data name="UserAccount_chkChangePasswordQuestionAnswer" xml:space="preserve">
+    <value>Thay đổi câu hỏi và trả lời bảo mật</value>
+  </data>
+  <data name="UserAccount_chkResetPassword" xml:space="preserve">
+    <value>Reset mật khẩu</value>
+  </data>
+  <data name="UserAccount_CreatedInfo" xml:space="preserve">
+    <value>Đã tạo {0}, cập nhật gần nhất {1}.</value>
+  </data>
+  <data name="UserAccount_DefaultPasswordAnswer" xml:space="preserve">
+    <value>Chưa được nhập</value>
+  </data>
+  <data name="UserAccount_DefaultPasswordQuestion" xml:space="preserve">
+    <value>Chưa được nhập</value>
+  </data>
+  <data name="UserAccount_InputPasswordEmpty" xml:space="preserve">
+    <value>Hãy nhập mật khẩu để thay  đổi câu hỏi và trả lời bảo mật</value>
+  </data>
+  <data name="UserAccount_InputPasswordIncorrect" xml:space="preserve">
+    <value>Không thể thay  đổi câu hỏi và trả lời bảo mật vì mật khẩu không đúng</value>
+  </data>
+  <data name="UserAccount_lblEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="UserAccount_lblInputPassword" xml:space="preserve">
+    <value>Mật khẩu</value>
+  </data>
+  <data name="UserAccount_lblPassword" xml:space="preserve">
+    <value>Mật khẩu</value>
+  </data>
+  <data name="UserAccount_lblUsername" xml:space="preserve">
+    <value>Tên tài khoản</value>
+  </data>
+  <data name="UserAccount_LockedOutMessage" xml:space="preserve">
+    <value>Tài khoản bị khóa lúc {0}. Hãy xóa đánh dấu và ấn nút Lưu để mở khóa tài khoản.</value>
+  </data>
+  <data name="UserAccount_NewGenPassword" xml:space="preserve">
+    <value>Mật khẩu mới là '{0}', hãy thông báo cho người dùng</value>
+  </data>
+  <data name="UserAccount_NewRecord" xml:space="preserve">
+    <value>Tài khoản mới</value>
+  </data>
+  <data name="UserAccount_OfflineTooltip" xml:space="preserve">
+    <value>Người dùng hiện đang offline</value>
+  </data>
+  <data name="UserAccount_OnlineTooltip" xml:space="preserve">
+    <value>Người dùng hiện đang online.</value>
+  </data>
+  <data name="UserAccount_QuestionPasswordEmpty" xml:space="preserve">
+    <value>Hãy nhập câu hỏi và trả lời bảo mật</value>
+  </data>
+  <data name="UserAccount_txtPasswordAnswerLabel" xml:space="preserve">
+    <value>Câu trả lời bảo mật</value>
+  </data>
+  <data name="UserAccount_txtPasswordQuestionLabel" xml:space="preserve">
+    <value>Câu hỏi bảo mật</value>
+  </data>
+  <data name="UserAccount_UserPasswordEmpty" xml:space="preserve">
+    <value>Tên và mật khẩu không được trống</value>
+  </data>
+  <data name="UserAccount_UserUnlocked" xml:space="preserve">
+    <value>Tài khoản vừa được mở khóa</value>
+  </data>
+  <data name="UserRoleAuthAdminPage_lblRole" xml:space="preserve">
+    <value>Quyền</value>
+  </data>
+  <data name="UserRoleAuthAdminPage_lblSiteGroup" xml:space="preserve">
+    <value>Nhóm Tòa Nhà</value>
+  </data>
+  <data name="UserRoleAuthAdminPage_lblUser" xml:space="preserve">
+    <value>Người dùng</value>
+  </data>
+  <data name="UserRoleAuthAdminPage_uiTabComponents" xml:space="preserve">
+    <value>Trang</value>
+  </data>
+  <data name="UserRoleAuthAdminPage_uiTabRoles" xml:space="preserve">
+    <value>Quyền</value>
+  </data>
+  <data name="UserRoleAuthAdminPage_uiTitle" xml:space="preserve">
+    <value>Phân quyền người dùng</value>
+  </data>
+</root>

@@ -21,11 +21,6 @@ namespace Mimosa.Apartment.Silverlight.UI
         
         public List<UserRoleAuth> UserRoleAuths { get; set; }
 
-        private static class UserMessages
-        {
-            internal const string NameErrorMessage2 = "The string may not exceed 128 characters in length.";
-        }
-
         public ServiceAdminPage()
         {
             InitializeComponent();
@@ -36,6 +31,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                 this.Content = SecurityHelper.GetNoPermissionInfoPanel();
                 return;
             }
+            FillLanguage();
             SecurityChecking();
             BeginRebindService();
             
@@ -52,6 +48,20 @@ namespace Mimosa.Apartment.Silverlight.UI
             
             //Common
             UiHelper.ApplyMouseWheelScrollViewer(scrollViewerService);
+        }
+
+
+        void FillLanguage()
+        {
+            uiTitle.Text = ResourceHelper.GetReourceValue("ServiceAdminPage_uiTitle");
+            gvwServices.Columns["ServiceName"].Header = ResourceHelper.GetReourceValue("ServiceAdminPage_ServiceName");
+            gvwServices.Columns["Description"].Header = ResourceHelper.GetReourceValue("ServiceAdminPage_Description");
+            gvwServices.Columns["Price"].Header = ResourceHelper.GetReourceValue("ServiceAdminPage_Price");
+            gvwServices.Columns["Unit"].Header = ResourceHelper.GetReourceValue("ServiceAdminPage_Unit");
+            gvwServices.Columns["Inactive"].Header = ResourceHelper.GetReourceValue("ServiceAdminPage_Inactive");
+
+            btnSaveService.Content = ResourceHelper.GetReourceValue("Common_btnSave");
+            btnCancelService.Content = ResourceHelper.GetReourceValue("Common_btnCancel");
         }
 
 
@@ -96,12 +106,12 @@ namespace Mimosa.Apartment.Silverlight.UI
                 if (e.NewValue.ToString().Length < 1)
                 {
                     e.IsValid = false;
-                    e.ErrorMessage = Globals.UserMessages.RequiredFieldGeneric;
+                    e.ErrorMessage = ResourceHelper.GetReourceValue("Common_RequiredFieldGeneric");
                 }
                 else if (e.NewValue.ToString().Length > 128)
                 {
                     e.IsValid = false;
-                    e.ErrorMessage = UserMessages.NameErrorMessage2;
+                    e.ErrorMessage = ResourceHelper.GetReourceValue("Common_NameLengthErrorMessage");
                 }
             }
         }

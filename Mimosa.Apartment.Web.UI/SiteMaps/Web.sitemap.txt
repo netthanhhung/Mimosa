@@ -2,7 +2,8 @@
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
   <siteMapNode
 	title="[A]dmin"
-	description="Administration">
+	description="Administration"
+	moduleType="Administration">
 	<siteMapNode
 	  url="/HomePage.xaml"
 	  title="Home"
@@ -68,7 +69,8 @@
 
   <siteMapNode
 	title="[S]ales"
-	description="Sales">
+	description="Sales"
+	moduleType="Sales">
 
 	<siteMapNode
 		url="/Sales/BookingAdminPage.xaml"
@@ -77,7 +79,8 @@
   </siteMapNode>
   <siteMapNode
 	title="[C]ustomer"
-	description="Customer">
+	description="Customer"
+	moduleType="Customer">
 
 	<siteMapNode
 		url="/Customer/CustomerAdminPage.xaml"

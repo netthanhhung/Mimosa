@@ -94,7 +94,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                 if (e.NewValue.ToString().Length < 1)
                 {
                     e.IsValid = false;
-                    e.ErrorMessage = Globals.UserMessages.RequiredFieldGeneric;
+                    e.ErrorMessage = ResourceHelper.GetReourceValue("Common_RequiredFieldGeneric");
                 }
                 else if (e.NewValue.ToString().Length > 128)
                 {
@@ -108,7 +108,7 @@ namespace Mimosa.Apartment.Silverlight.UI
                  if (!int.TryParse(e.NewValue.ToString(), out displayindex))
                 {
                     e.IsValid = false;
-                    e.ErrorMessage = Globals.UserMessages.RequiredFieldGeneric;
+                    e.ErrorMessage = ResourceHelper.GetReourceValue("Common_RequiredFieldGeneric");
                 }                
             }
         }

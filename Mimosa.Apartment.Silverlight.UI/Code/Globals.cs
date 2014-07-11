@@ -21,16 +21,12 @@ namespace Mimosa.Apartment.Silverlight.UI
 
         internal static class UserMessages
         {
-            internal const string NoPermission = "You don't have permission to view this area";
-            internal const string DataLoading = "Contacting server for data...";
-            internal const string DataNotFound = "No data was found for the given options";
-            internal const string DataNotLoaded = "";
-
+            
             internal static string RecordsSaved
             {
                 get
                 {
-                    return "Changes saved: " + Globals.Now.ToShortTimeString();
+                    return ResourceHelper.GetReourceValue("Common_RecordsSaved") + Globals.Now.ToShortTimeString();
                 }
             }
 
@@ -38,7 +34,7 @@ namespace Mimosa.Apartment.Silverlight.UI
             {
                 get
                 {
-                    return "Changes cancelled: " + Globals.Now.ToShortTimeString();
+                    return ResourceHelper.GetReourceValue("Common_ChangesCancelled") + Globals.Now.ToShortTimeString();
                 }
             }
 
@@ -46,31 +42,10 @@ namespace Mimosa.Apartment.Silverlight.UI
             {
                 get
                 {
-                    return "Emails sent: " + Globals.Now.ToShortTimeString();
+                    return ResourceHelper.GetReourceValue("Common_EmailSent") + Globals.Now.ToShortTimeString();
                 }
             }
 
-
-            internal const string NewRecord = "New Record.";
-
-            internal const string OperationFailed = "Operation Failed";
-            internal const string ConfirmationRequired = "Confirmation Required";
-            internal const string ConfirmDropBefore = "Are you sure you want to move '{0}' before '{1}'?";
-            internal const string ConfirmDropAfter = "Are you sure you want to move '{0}' after '{1}'?";
-            internal const string ConfirmMerge = "Are you sure you want to merge '{0}' into '{1}'?";
-            internal const string ConfirmDelete = "Are you sure you want to delete '{0}'?";
-            internal const string ConfirmDeleteNoParam = "Are you sure you want to delete?";
-            internal const string ConfirmActivateNoParam = "Are you sure you want to activate this feature?";
-            internal const string ConfirmActivate = "Are you sure you want to activate this feature for {0}?";
-            internal const string ConfirmDeactivateNoParam = "Are you sure you want to deactivate this feature?";
-            internal const string ConfirmDeactivate = "Are you sure you want to deactivate this feature for {0}?";
-            internal const string RequiredField = "'{0}' is a required field.";
-            internal const string RequiredFieldGeneric = "This is a required field.";
-            internal const string ValidationError = "Validation Error";
-            internal const string SaveComplete = "'{0}' has been saved.";
-            internal const string DeleteFailed = "'{0}' could not be deleted.";
-            internal const string DeleteFailedBeingUsed = "'{0}' could not be deleted. It is being used.";
-            internal const string ItemExist = "This item is already exist";
         }
 
         internal static class ListConstants

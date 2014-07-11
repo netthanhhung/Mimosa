@@ -81,8 +81,6 @@
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Text="Site Administration" 
-                                       Margin="5,5,5,5" Height="25" FontSize="12" />
                             <telerikGrid:RadGridView
                                 Margin="10,5,10,10"
                                 x:Name="gvwSites"
@@ -116,21 +114,15 @@
                                     <telerikGrid:GridViewDataColumn
                                         DataMemberBinding="{Binding StarRating}"
                                         Width="90" ShowFieldFilters="False" TextAlignment="Right"
-                                        DataFormatString="{} {0:0.0}">
-                                        <telerikGrid:GridViewDataColumn.Header>
-                                            <TextBlock TextWrapping="Wrap" Text="Star Rating" />
-                                        </telerikGrid:GridViewDataColumn.Header>
+                                        DataFormatString="{} {0:0.0}" Header="Start Rating">
                                     </telerikGrid:GridViewDataColumn>
                                     <telerikGrid:GridViewDataColumn
                                         UniqueName="DisplayIndex"
                                         DataMemberBinding="{Binding DisplayIndex}"
-                                        Width="90" ShowFieldFilters="False"
+                                        Width="90" ShowFieldFilters="False" Header="Display Index"
                                         DataFormatString="{} {0:0}" TextAlignment="Right">
-                                        <telerikGrid:GridViewDataColumn.Header>
-                                            <TextBlock TextWrapping="Wrap" Text="Display Index" />
-                                        </telerikGrid:GridViewDataColumn.Header>
-                                    </telerikGrid:GridViewDataColumn> 
-                                    <telerikGrid:GridViewDataColumn Width="70" Header="Inactive">
+                                    </telerikGrid:GridViewDataColumn>
+                                    <telerikGrid:GridViewDataColumn Width="70" Header="Inactive" UniqueName="Inactive">
                                         <telerikGrid:GridViewDataColumn.CellStyle>
                                             <Style TargetType="telerikGridView:GridViewCell">
                                                 <Setter Property="Template">
@@ -178,11 +170,6 @@
                                 <RowDefinition Height="Auto"></RowDefinition>
                                 <RowDefinition Height="Auto"></RowDefinition>
                             </Grid.RowDefinitions>
-                            <TextBlock 
-                               VerticalAlignment="Center" HorizontalAlignment="Left"
-                               Margin="10,10,10,10"
-                               Foreground="{StaticResource TitleForeground}"
-                               Text="Images : "></TextBlock>
 
                             <local:ImageUpload x:Name="ucImageUpload" Grid.Row="1" Margin="10,10,10,10"></local:ImageUpload>
                         </Grid>

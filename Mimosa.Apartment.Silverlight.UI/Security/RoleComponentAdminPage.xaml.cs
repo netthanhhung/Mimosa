@@ -33,11 +33,21 @@ namespace Mimosa.Apartment.Silverlight.UI
             }
             btnSave.IsEnabled = Globals.UserLogin.IsUserOrganisationAdministrator 
                             && this.UserRoleAuths.Count(i => i.WriteRight == true) > 0;
+            FillLanguage();
 
             btnSave.Click += new RoutedEventHandler(btnSave_Click);
             btnCancel.Click += new RoutedEventHandler(btnCancel_Click);
             uiRoles.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(uiRoles_SelectionChanged);
             FillComboboxData();
+        }
+
+        void FillLanguage()
+        {
+            uiTitle.Text = ResourceHelper.GetReourceValue("RoleComponentAdminPage_uiTitle");
+            lblRole.Text = ResourceHelper.GetReourceValue("RoleComponentAdminPage_lblRole");
+            lblUserHasRole.Text = ResourceHelper.GetReourceValue("RoleComponentAdminPage_lblUserHasRole");
+            btnSave.Content = ResourceHelper.GetReourceValue("Common_btnSave");
+            btnCancel.Content = ResourceHelper.GetReourceValue("Common_btnCancel");
         }
 
         void FillComboboxData()

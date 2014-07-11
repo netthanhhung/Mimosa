@@ -42,7 +42,7 @@
                             x:Name="uiTitle"
                             VerticalAlignment="Center"
                             Foreground="{StaticResource TitleForeground}"
-                            Text="Site Administrattion"></TextBlock>
+                            Text="Role Administrattion"></TextBlock>
                         <TextBlock
                             x:Name="uiParamsDisplay"
                             VerticalAlignment="Center"
