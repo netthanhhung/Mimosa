@@ -663,4 +663,7 @@
   <data name="UserRoleAuthAdminPage_uiTitle" xml:space="preserve">
     <value>Phân quyền người dùng</value>
   </data>
+  <data name="HistoryPaymentPage_uiTitle" xml:space="preserve">
+    <value>Lịch sử thanh toán</value>
+  </data>
 </root>

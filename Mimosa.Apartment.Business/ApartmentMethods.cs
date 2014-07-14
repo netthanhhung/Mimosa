@@ -720,6 +720,13 @@ namespace Mimosa.Apartment.Business
             return firstList;
         }
 
+        public static List<BookingPayment> ListHistoryPayment(int? orgId, int? siteId, int? roomId, int? customerId,
+            DateTime dateStart, DateTime dateEnd, int payment)
+        {
+            return new DataLayer().ListBookingPayment(orgId, siteId, roomId, customerId, dateStart, dateEnd, payment);            
+        }
+
+
         public static void SaveBookingPayment(List<BookingPayment> saveList)
         {
             if (saveList != null)

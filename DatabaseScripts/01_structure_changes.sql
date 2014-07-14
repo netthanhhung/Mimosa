@@ -39,6 +39,7 @@ ContactInformation : add DoB, Visa, VisaValidFrom, VisaValidTo
 [procListBookingPayment] : new proc
 
 [procCheckExistBooking] : new proc
+[procListHistoryPayment] : new proc
 *************************************************************************************/
 
 
@@ -2085,6 +2086,57 @@ BEGIN
 
 	SELECT Concurrency FROM ContactInformation WHERE ContactInformationID = @ContactInformationID
 END
+
+GO
+
+
+
+/****** Object:  StoredProcedure [dbo].[procListHistoryPayment]    Script Date: 07/14/2014 11:05:52 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[procListHistoryPayment]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[procListHistoryPayment]
+GO
+
+
+CREATE PROCEDURE [dbo].[procListHistoryPayment]	
+@OrganisationId int = null,
+@SiteId int = null,
+@RoomId int = null,
+@CustomerId int = null,
+@DateStart smalldatetime,
+@DateEnd smalldatetime,
+@Payment int
+AS
+BEGIN
+	SET NOCOUNT ON
+	
+	SELECT	S.SiteId, S.Name as SiteName, B.BookingId, B.RoomId, R.RoomName, B.CustomerId, B.Customer2Id,
+			C1.FirstName + ' ' + C1.LastName as CustomerName,
+			C2.FirstName + ' ' + C2.LastName as Customer2Name,
+			BP.BookingPaymentId, 
+			BP.RoomPrice,
+			BP.EquipmentPrice,
+			BP.ServicePrice, 
+			BP.TotalPrice,				
+			BP.CustomerPaid,
+			BP.DateStart, 
+			BP.DateEnd, 
+			BP.Payment, 
+			BP.Concurrency, BP.DateCreated, BP.DateUpdated, BP.CreatedBy, BP.UpdatedBy
+	FROM	BookingPayment BP 
+	INNER JOIN Booking B on B.BookingId = BP.BookingId
+	INNER JOIN Room R on B.RoomId = R.RoomId
+	INNER JOIN Site S on S.SiteID = R.SiteId
+	INNER JOIN Customer C1 on B.CustomerId = C1.CustomerId
+	LEFT OUTER JOIN Customer C2 on B.Customer2Id = C2.CustomerId
+	WHERE (@OrganisationId IS NULL OR S.OrganisationID = @OrganisationId)
+	AND (@SiteId IS NULL OR S.SiteID = @SiteId)
+	AND (@RoomId IS NULL OR R.RoomId = @RoomId)
+	AND (@CustomerId IS NULL OR B.CustomerId = @CustomerId)
+	AND BP.DateStart >= @DateStart
+	AND BP.DateEnd <= @DateEnd 	
+	AND   (@Payment = 2 OR (@Payment = 1 AND BP.Payment = 1) OR (@Payment = 0 AND (BP.Payment IS NULL OR BP.Payment = 0)))
+END
+
 
 GO
 

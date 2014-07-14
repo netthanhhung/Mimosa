@@ -217,6 +217,9 @@
     <Compile Include="Customer\BookingPaymentPage.xaml.cs">
       <DependentUpon>BookingPaymentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Customer\HistoryPaymentPage.xaml.cs">
+      <DependentUpon>HistoryPaymentPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Customer\CustomerAdminPage.xaml.cs">
       <DependentUpon>CustomerAdminPage.xaml</DependentUpon>
     </Compile>
@@ -316,6 +319,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Customer\BookingPaymentDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Customer\HistoryPaymentPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

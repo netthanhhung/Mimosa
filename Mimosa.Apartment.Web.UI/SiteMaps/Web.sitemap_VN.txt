@@ -90,6 +90,10 @@
 		url="/Customer/BookingPaymentPage.xaml"
 		title="Chi trả hàng tháng"
 		description="Chi trả hàng tháng"/>
+	<siteMapNode
+		url="/Customer/HistoryPaymentPage.xaml"
+		title="Lịch sử thanh toán"
+		description="Lịch sử thanh toán"/>
 
 		
   </siteMapNode>

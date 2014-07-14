@@ -1,0 +1,260 @@
+﻿<navigation:Page x:Class="Mimosa.Apartment.Silverlight.UI.HistoryPaymentPage" Title="Ruby Home"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:local="clr-namespace:Mimosa.Apartment.Silverlight.UI"
+    xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"             
+    xmlns:bg="clr-namespace:TiledBG;assembly=TiledBG"
+    xmlns:telerik="clr-namespace:Telerik.Windows.Controls.Animation;assembly=Telerik.Windows.Controls"
+    xmlns:telerikCommon="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls"
+    xmlns:telerikInput="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input"
+    xmlns:telerikGrid="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.GridView"
+    xmlns:telerikGridView="clr-namespace:Telerik.Windows.Controls.GridView;assembly=Telerik.Windows.Controls.GridView"                 
+    xmlns:telerikChart="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Charting"
+    xmlns:telerikNavigation="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Navigation">
+
+    <Grid Style="{StaticResource LayoutRootGridStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="Auto"></RowDefinition>
+                <RowDefinition
+                    Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <local:ClippedGrid
+                Background="{StaticResource DefaultBackgroundGradientBrush}">
+                <local:Highlight
+                    HighlightBrush="{StaticResource CustomerBrush}"></local:Highlight>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="*"></ColumnDefinition>
+                        <ColumnDefinition
+                            Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Margin="20,0,0,0" Orientation="Horizontal">
+                        <TextBlock
+                            x:Name="uiTitle"
+                            VerticalAlignment="Center"
+                            Foreground="White"
+                            Text="Historical Payment"></TextBlock>
+                        <TextBlock
+                            x:Name="uiParamsDisplay"
+                            VerticalAlignment="Center"
+                            Foreground="White"
+                            Text=""></TextBlock>
+                    </StackPanel>
+
+                </Grid>
+            </local:ClippedGrid>
+            <local:ClippedGrid Background="{StaticResource EmployeeImageBrush}"
+                               Grid.Row="1" Grid.ColumnSpan="6"/>
+
+            <local:ClippedGrid
+                    Grid.Row="1" Grid.ColumnSpan="6"
+                    Margin="10" Opacity="0.9">
+                <bg:TiledBGControl BorderThickness="0" TiledImageSource="/Mimosa.Apartment.Silverlight.UI;component/Assets/Images/carbon-fiber-10x10.png"/>
+
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <!--<bg:TiledBGControl TiledImageSource="{StaticResource CarbonFiberImage}"/>-->
+                    <telerikCommon:RadWrapPanel Orientation="Horizontal">
+                        <TextBlock x:Name="lblSite"
+                                Margin="10,10,5,5"
+                                VerticalAlignment="Center"
+                                Text="Site:">
+                        </TextBlock>
+                        <local:SitePicker
+                                    x:Name="ucSitePicker"
+                                    Grid.Row="0" Margin="5,10,5,5"
+                                    DataListWidth="200" ShowInactiveCheck="True" InactiveMessage="Show Inactive" ShowAllSitesItem="False"
+                                    Style="{StaticResource InputControlStyle}"></local:SitePicker>
+                        <TextBlock x:Name="lblCustomer"
+                                Margin="10,10,5,5"
+                                VerticalAlignment="Center"
+                                Text="Customer:">
+                        </TextBlock>
+                        <ComboBox
+                            x:Name="uiCustomers" Width="250" Height="25" Margin="5,10,5,5"
+                            HorizontalAlignment="Left"                    
+                            DisplayMemberPath="FullName"
+                            SelectedValuePath="CustomerId" />
+                        
+                        <TextBlock x:Name="lblFromDate"
+                                    Margin="20,10,5,5"
+                                    VerticalAlignment="Center"
+                                    Text="From date:">
+                        </TextBlock>
+                        <telerikInput:RadDatePicker
+                                    x:Name="uiDateFrom"
+                                    Margin="5,10,5,5"
+                                    Style="{StaticResource InputControlStyle}">
+                        </telerikInput:RadDatePicker>
+                        <TextBlock x:Name="lblToDate"
+                                    Margin="20,10,5,5"
+                                    VerticalAlignment="Center"
+                                    Text="To date:">
+                        </TextBlock>
+                        <telerikInput:RadDatePicker
+                                    x:Name="uiDateTo" 
+                                    Margin="5,10,5,5"
+                                    Style="{StaticResource InputControlStyle}"></telerikInput:RadDatePicker>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="5">
+                            <RadioButton x:Name="radPaid" Content="Paid" IsChecked="False" GroupName="Payment" Foreground="White"></RadioButton>
+                            <RadioButton x:Name="radNotPaid" Content="Not Paid" IsChecked="False" GroupName="Payment"  Foreground="White"></RadioButton>
+                            <RadioButton x:Name="radAll" Content="All" IsChecked="True" GroupName="Payment"  Foreground="White"></RadioButton>
+                        </StackPanel>
+
+                        <Button x:Name="btnSearch" Width="70" Height="25" Margin="20,10,5,5"  Content="Search"></Button>
+                    </telerikCommon:RadWrapPanel>
+
+                    <telerikGrid:RadGridView
+                                x:Name="gvwBookingPayment"
+                                Grid.Row="1"
+                                AutoGenerateColumns="False" Margin="10,5,10,10" 
+                                VerticalAlignment="Top"
+                                ShowGroupPanel="False" 
+                                IsFilteringAllowed="False" 
+                                CanUserSortColumns="True" CanUserFreezeColumns="False"
+                                CanUserResizeColumns="False" CanUserInsertRows="False" ShowInsertRow="False"
+                                CanUserDeleteRows="False" CanUserReorderColumns="False">
+                        <telerikGrid:RadGridView.Resources>
+                            <Style TargetType="TextBlock" BasedOn="{x:Null}"/>
+                        </telerikGrid:RadGridView.Resources>
+                        <telerikGrid:RadGridView.Columns>
+                            <telerikGrid:GridViewDataColumn
+                                        DataMemberBinding="{Binding RoomName}" UniqueName="RoomName" IsReadOnly="True"
+                                        Header="Room" HeaderTextAlignment="Center" ShowFieldFilters="True"
+                                        Width="*">
+                            </telerikGrid:GridViewDataColumn>
+                            <telerikGrid:GridViewDataColumn
+                                        DataMemberBinding="{Binding CustomerName}" UniqueName="CustomerName" IsReadOnly="True"
+                                        Header="Customer" HeaderTextAlignment="Center" ShowFieldFilters="True"
+                                        Width="*">
+                            </telerikGrid:GridViewDataColumn>
+                            <telerikGrid:GridViewDataColumn
+                                        DataMemberBinding="{Binding Customer2Name}" UniqueName="Customer2Name" IsReadOnly="True"
+                                        Header="Customer2" HeaderTextAlignment="Center" ShowFieldFilters="True"
+                                        Width="*">
+                            </telerikGrid:GridViewDataColumn>
+                            <telerikGrid:GridViewDataColumn
+                                        DataMemberBinding="{Binding DateStart}" IsReadOnly="True" UniqueName="FromDate"
+                                        Width="80" ShowFieldFilters="False" HeaderTextAlignment="Center"
+                                        Header="From Date" DataFormatString="{} {0:dd-MMM-yyyy}">
+                            </telerikGrid:GridViewDataColumn>
+                            <telerikGrid:GridViewDataColumn
+                                        DataMemberBinding="{Binding DateEnd}" IsReadOnly="True" UniqueName="ToDate"
+                                        Width="80" ShowFieldFilters="False" HeaderTextAlignment="Center"
+                                        Header="To Date" DataFormatString="{} {0:dd-MMM-yyyy}">
+                            </telerikGrid:GridViewDataColumn>
+                            <telerikGrid:GridViewDataColumn
+                                        DataMemberBinding="{Binding RoomPrice}" IsReadOnly="True" UniqueName="RoomPrice"
+                                        Width="100" HeaderTextAlignment="Center" ShowFieldFilters="False"
+                                        DataFormatString="{} {0:C0}" TextAlignment="Right" Header="Room Price">
+                            </telerikGrid:GridViewDataColumn>
+                            <telerikGrid:GridViewDataColumn
+                                        DataMemberBinding="{Binding EquipmentPrice}" IsReadOnly="True" UniqueName="EquipmentPrice"
+                                        Width="100" HeaderTextAlignment="Center" ShowFieldFilters="False"
+                                        DataFormatString="{} {0:C0}" TextAlignment="Right" Header="Equipment Price">
+                            </telerikGrid:GridViewDataColumn>
+                            <telerikGrid:GridViewDataColumn
+                                        DataMemberBinding="{Binding ServicePrice}" IsReadOnly="True" UniqueName="ServicePrice"
+                                        Width="100" HeaderTextAlignment="Center" ShowFieldFilters="False"
+                                        DataFormatString="{} {0:C0}" TextAlignment="Right" Header="Service Price">
+                            </telerikGrid:GridViewDataColumn>
+                            <telerikGrid:GridViewDataColumn
+                                        DataMemberBinding="{Binding TotalPrice}" IsReadOnly="True" UniqueName="TotalPrice"
+                                        Width="100" HeaderTextAlignment="Center" ShowFieldFilters="False"
+                                        DataFormatString="{} {0:C0}" TextAlignment="Right" Header="Total Price">
+                            </telerikGrid:GridViewDataColumn>
+                            <telerikGrid:GridViewDataColumn
+                                        DataMemberBinding="{Binding CustomerPaid}" UniqueName="CustomerPaid"
+                                        Width="100" HeaderTextAlignment="Center" ShowFieldFilters="False"
+                                        DataFormatString="{} {0:C0}" TextAlignment="Right" Header="Customer Paid">
+                            </telerikGrid:GridViewDataColumn>
+                            <telerikGrid:GridViewDataColumn
+                                        DataMemberBinding="{Binding MoneyLeft}" IsReadOnly="True" UniqueName="MoneyLeft"
+                                        Width="100" HeaderTextAlignment="Center" ShowFieldFilters="False"
+                                        DataFormatString="{} {0:C0}" TextAlignment="Right" Header="Total Left">
+                            </telerikGrid:GridViewDataColumn>
+                            <telerikGrid:GridViewDataColumn Width="80" Header="Payment" UniqueName="Payment">
+                                <telerikGrid:GridViewDataColumn.CellStyle>
+                                    <Style TargetType="telerikGridView:GridViewCell">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="telerikGridView:GridViewCell">
+                                                    <StackPanel>
+                                                        <CheckBox Margin="5, 0, 0, 0"
+                                                                        VerticalAlignment="Center"
+                                                                        IsChecked="{Binding Payment, Mode=TwoWay}" />
+                                                    </StackPanel>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </telerikGrid:GridViewDataColumn.CellStyle>
+                            </telerikGrid:GridViewDataColumn>
+                            <telerikGrid:GridViewDataColumn Width="100" Header="" UniqueName="Details">
+                                <telerikGrid:GridViewDataColumn.CellStyle>
+                                    <Style TargetType="telerikGridView:GridViewCell">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="telerikGridView:GridViewCell">
+                                                    <StackPanel VerticalAlignment="Center">
+                                                        <HyperlinkButton Margin="5, 0, 0, 0" HorizontalAlignment="Left" VerticalAlignment="Center" 
+                                                                                 Content="Detail" Tag="{Binding BookingPaymentId}" Click="BookingPaymentDetail_Click" />
+                                                    </StackPanel>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </telerikGrid:GridViewDataColumn.CellStyle>
+                            </telerikGrid:GridViewDataColumn>
+
+                        </telerikGrid:RadGridView.Columns>
+                    </telerikGrid:RadGridView>
+
+                    <!--<Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <local:SingleClickButton x:Name="btnSavePayment" Height="25" Width="80" Grid.Column="2" Content="Save" 
+                                HorizontalAlignment="Right" Margin="10,10,5,10"/>
+                        <Button x:Name="btnCancelCancel" Height="25" Width="80" Grid.Column="3" Content="Cancel" 
+                                HorizontalAlignment="Left" Margin="10,10,5,10"/>
+                    </Grid>-->
+                </Grid>
+
+                <telerikNavigation:RadWindow x:Name="uiPopupPaymentDetails"
+                WindowStartupLocation="CenterOwner"
+                Header="Payment Details" Width="800" Height="500">
+                    <Grid>
+                        <bg:TiledBGControl BorderThickness="0" TiledImageSource="{StaticResource CarbonFiberImage}"/>
+                        <Grid>
+                            <local:BookingPaymentDetails x:Name="ucPaymentDetails"></local:BookingPaymentDetails>
+                        </Grid>
+                    </Grid>
+                </telerikNavigation:RadWindow>
+
+            </local:ClippedGrid>
+
+        </Grid>
+    </Grid>
+
+</navigation:Page>

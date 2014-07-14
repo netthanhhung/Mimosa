@@ -592,6 +592,13 @@ namespace Mimosa.Apartment.Web.UI
         }
 
         [OperationContract]
+        public List<BookingPayment> ListHistoryPayment(int? orgId, int? siteId, int? roomId, int? customerId,
+            DateTime dateStart, DateTime dateEnd, int payment)
+        {
+            return ApartmentMethods.ListHistoryPayment(orgId, siteId, roomId, customerId, dateStart, dateEnd, payment);
+        }
+
+        [OperationContract]
         public void SaveBookingPayment(List<BookingPayment> saveList)
         {
             ApartmentMethods.SaveBookingPayment(saveList);

@@ -1128,6 +1128,11 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         
         System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment> EndListBookingPayment(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:ApartmentService/ListHistoryPayment", ReplyAction="urn:ApartmentService/ListHistoryPaymentResponse")]
+        System.IAsyncResult BeginListHistoryPayment(System.Nullable<int> orgId, System.Nullable<int> siteId, System.Nullable<int> roomId, System.Nullable<int> customerId, System.DateTime dateStart, System.DateTime dateEnd, int payment, System.AsyncCallback callback, object asyncState);
+        
+        System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment> EndListHistoryPayment(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:ApartmentService/SaveBookingPayment", ReplyAction="urn:ApartmentService/SaveBookingPaymentResponse")]
         System.IAsyncResult BeginSaveBookingPayment(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment> saveList, System.AsyncCallback callback, object asyncState);
         
@@ -1941,6 +1946,25 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ListHistoryPaymentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public ListHistoryPaymentCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment>)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class ListBookingRoomEquipmentDetailCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
@@ -2381,6 +2405,12 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         
         private System.Threading.SendOrPostCallback onListBookingPaymentCompletedDelegate;
         
+        private BeginOperationDelegate onBeginListHistoryPaymentDelegate;
+        
+        private EndOperationDelegate onEndListHistoryPaymentDelegate;
+        
+        private System.Threading.SendOrPostCallback onListHistoryPaymentCompletedDelegate;
+        
         private BeginOperationDelegate onBeginSaveBookingPaymentDelegate;
         
         private EndOperationDelegate onEndSaveBookingPaymentDelegate;
@@ -2619,6 +2649,8 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> SaveBookingRoomEquipmentCompleted;
         
         public event System.EventHandler<ListBookingPaymentCompletedEventArgs> ListBookingPaymentCompleted;
+        
+        public event System.EventHandler<ListHistoryPaymentCompletedEventArgs> ListHistoryPaymentCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> SaveBookingPaymentCompleted;
         
@@ -5240,6 +5272,64 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService.BeginListHistoryPayment(System.Nullable<int> orgId, System.Nullable<int> siteId, System.Nullable<int> roomId, System.Nullable<int> customerId, System.DateTime dateStart, System.DateTime dateEnd, int payment, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginListHistoryPayment(orgId, siteId, roomId, customerId, dateStart, dateEnd, payment, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment> Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService.EndListHistoryPayment(System.IAsyncResult result) {
+            return base.Channel.EndListHistoryPayment(result);
+        }
+        
+        private System.IAsyncResult OnBeginListHistoryPayment(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            System.Nullable<int> orgId = ((System.Nullable<int>)(inValues[0]));
+            System.Nullable<int> siteId = ((System.Nullable<int>)(inValues[1]));
+            System.Nullable<int> roomId = ((System.Nullable<int>)(inValues[2]));
+            System.Nullable<int> customerId = ((System.Nullable<int>)(inValues[3]));
+            System.DateTime dateStart = ((System.DateTime)(inValues[4]));
+            System.DateTime dateEnd = ((System.DateTime)(inValues[5]));
+            int payment = ((int)(inValues[6]));
+            return ((Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService)(this)).BeginListHistoryPayment(orgId, siteId, roomId, customerId, dateStart, dateEnd, payment, callback, asyncState);
+        }
+        
+        private object[] OnEndListHistoryPayment(System.IAsyncResult result) {
+            System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment> retVal = ((Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService)(this)).EndListHistoryPayment(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnListHistoryPaymentCompleted(object state) {
+            if ((this.ListHistoryPaymentCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.ListHistoryPaymentCompleted(this, new ListHistoryPaymentCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void ListHistoryPaymentAsync(System.Nullable<int> orgId, System.Nullable<int> siteId, System.Nullable<int> roomId, System.Nullable<int> customerId, System.DateTime dateStart, System.DateTime dateEnd, int payment) {
+            this.ListHistoryPaymentAsync(orgId, siteId, roomId, customerId, dateStart, dateEnd, payment, null);
+        }
+        
+        public void ListHistoryPaymentAsync(System.Nullable<int> orgId, System.Nullable<int> siteId, System.Nullable<int> roomId, System.Nullable<int> customerId, System.DateTime dateStart, System.DateTime dateEnd, int payment, object userState) {
+            if ((this.onBeginListHistoryPaymentDelegate == null)) {
+                this.onBeginListHistoryPaymentDelegate = new BeginOperationDelegate(this.OnBeginListHistoryPayment);
+            }
+            if ((this.onEndListHistoryPaymentDelegate == null)) {
+                this.onEndListHistoryPaymentDelegate = new EndOperationDelegate(this.OnEndListHistoryPayment);
+            }
+            if ((this.onListHistoryPaymentCompletedDelegate == null)) {
+                this.onListHistoryPaymentCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnListHistoryPaymentCompleted);
+            }
+            base.InvokeAsync(this.onBeginListHistoryPaymentDelegate, new object[] {
+                        orgId,
+                        siteId,
+                        roomId,
+                        customerId,
+                        dateStart,
+                        dateEnd,
+                        payment}, this.onEndListHistoryPaymentDelegate, this.onListHistoryPaymentCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.IAsyncResult Mimosa.Apartment.Silverlight.UI.ApartmentService.ApartmentService.BeginSaveBookingPayment(System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment> saveList, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginSaveBookingPayment(saveList, callback, asyncState);
         }
@@ -6678,6 +6768,25 @@ namespace Mimosa.Apartment.Silverlight.UI.ApartmentService {
             public System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment> EndListBookingPayment(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment> _result = ((System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment>)(base.EndInvoke("ListBookingPayment", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginListHistoryPayment(System.Nullable<int> orgId, System.Nullable<int> siteId, System.Nullable<int> roomId, System.Nullable<int> customerId, System.DateTime dateStart, System.DateTime dateEnd, int payment, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[7];
+                _args[0] = orgId;
+                _args[1] = siteId;
+                _args[2] = roomId;
+                _args[3] = customerId;
+                _args[4] = dateStart;
+                _args[5] = dateEnd;
+                _args[6] = payment;
+                System.IAsyncResult _result = base.BeginInvoke("ListHistoryPayment", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment> EndListHistoryPayment(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment> _result = ((System.Collections.Generic.List<Mimosa.Apartment.Common.BookingPayment>)(base.EndInvoke("ListHistoryPayment", _args, result)));
                 return _result;
             }
             

@@ -663,4 +663,7 @@
   <data name="CustomerDetails_RoomNotValid" xml:space="preserve">
     <value>Please choose a specific room</value>
   </data>
+  <data name="HistoryPaymentPage_uiTitle" xml:space="preserve">
+    <value>Payment History</value>
+  </data>
 </root>

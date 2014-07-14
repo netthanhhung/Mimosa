@@ -333,6 +333,12 @@
   <wsdl:message name="ApartmentService_ListBookingPayment_OutputMessage">
     <wsdl:part name="parameters" element="ListBookingPaymentResponse" />
   </wsdl:message>
+  <wsdl:message name="ApartmentService_ListHistoryPayment_InputMessage">
+    <wsdl:part name="parameters" element="ListHistoryPayment" />
+  </wsdl:message>
+  <wsdl:message name="ApartmentService_ListHistoryPayment_OutputMessage">
+    <wsdl:part name="parameters" element="ListHistoryPaymentResponse" />
+  </wsdl:message>
   <wsdl:message name="ApartmentService_SaveBookingPayment_InputMessage">
     <wsdl:part name="parameters" element="SaveBookingPayment" />
   </wsdl:message>
@@ -627,6 +633,10 @@
     <wsdl:operation name="ListBookingPayment">
       <wsdl:input wsaw:Action="urn:ApartmentService/ListBookingPayment" message="ApartmentService_ListBookingPayment_InputMessage" />
       <wsdl:output wsaw:Action="urn:ApartmentService/ListBookingPaymentResponse" message="ApartmentService_ListBookingPayment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListHistoryPayment">
+      <wsdl:input wsaw:Action="urn:ApartmentService/ListHistoryPayment" message="ApartmentService_ListHistoryPayment_InputMessage" />
+      <wsdl:output wsaw:Action="urn:ApartmentService/ListHistoryPaymentResponse" message="ApartmentService_ListHistoryPayment_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SaveBookingPayment">
       <wsdl:input wsaw:Action="urn:ApartmentService/SaveBookingPayment" message="ApartmentService_SaveBookingPayment_InputMessage" />

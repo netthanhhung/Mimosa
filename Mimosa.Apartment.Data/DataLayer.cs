@@ -561,6 +561,17 @@ namespace Mimosa.Apartment.Data
             }
             return result;
         }
+
+        public List<BookingPayment> ListBookingPayment(int? orgId, int? siteId, int? roomId, int? customerId, DateTime dateStart, DateTime dateEnd, int payment)
+        {
+            List<BookingPayment> result = new List<BookingPayment>();
+
+            using (IDataReader reader = _db.ExecuteReader("procListHistoryPayment", orgId, siteId, roomId, customerId, dateStart, dateEnd, payment))
+            {
+                Factory.FillBookingPaymentList(result, reader);
+            }
+            return result;
+        }
         #endregion
 
         #region BookingRoomEquipment

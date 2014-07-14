@@ -865,6 +865,32 @@ namespace Mimosa.Apartment.Silverlight.UI
             }
         }
 
+        // ListHistoryPayment
+        internal delegate void ListHistoryPaymentCallBack(List<BookingPayment> itemSource);
+        internal static void ListHistoryPaymentAsync(int? orgId, int? siteId, int? roomId, int? customerId,
+            DateTime dateStart, DateTime dateEnd, int payment, ListHistoryPaymentCallBack callback)
+        {
+            Guid callerKey = Guid.NewGuid();
+
+            ApartmentServiceClient proxy = GetProxy(callerKey, callback);
+            proxy.ListHistoryPaymentCompleted += new EventHandler<ListHistoryPaymentCompletedEventArgs>(proxy_ListHistoryPaymentCompleted);
+            proxy.ListHistoryPaymentAsync(orgId, siteId, roomId, customerId, dateStart, dateEnd, payment, callerKey);
+        }
+
+        static void proxy_ListHistoryPaymentCompleted(object sender, ListHistoryPaymentCompletedEventArgs e)
+        {
+            Guid callerKey = (Guid)e.UserState;
+            if (_callbacks.ContainsKey(callerKey))
+            {
+                List<BookingPayment> itemSource = e.Result;
+                ((ListHistoryPaymentCallBack)_callbacks[callerKey]).Invoke(itemSource);
+
+                _callbacks.Remove(callerKey);
+            }
+        }
+
+
+
         //SaveBookingPayment
         internal static void SaveBookingPaymentAsync(List<BookingPayment> saveList, EmptyCallback callback)
         {

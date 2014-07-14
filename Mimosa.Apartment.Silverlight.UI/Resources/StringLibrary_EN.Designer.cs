@@ -1042,6 +1042,15 @@ namespace Mimosa.Apartment.Silverlight.UI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Payment History.
+        /// </summary>
+        internal static string HistoryPaymentPage_uiTitle {
+            get {
+                return ResourceManager.GetString("HistoryPaymentPage_uiTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         internal static string ImageItem_lblDescription {
